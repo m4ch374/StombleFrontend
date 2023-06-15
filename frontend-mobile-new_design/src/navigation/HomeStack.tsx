@@ -1,0 +1,61 @@
+import {AntDesign} from '@expo/vector-icons';
+import {useNavigationState} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { useTheme } from 'native-base';
+import { useEffect } from 'react';
+import Home from '../screens/tab/homeTab/HomeTab';
+import SignUp from '../screens/stack/register/SignUp';
+import PersonalInfo from '../screens/stack/commonStacks/PersonalInfo';
+import SignUpBusiness from '../screens/stack/register/SignUpBusiness';
+import LoginWithPhone from '../screens/stack/login/LoginWithPhone';
+import VerifyCode from '../screens/stack/password/VerifyCode';
+import LoginWithPassword from '../screens/stack/login/LoginWithPassword';
+import SetUpPassword from '../screens/stack/password/SetUpPassword';
+import ResetPassword from '../screens/stack/password/ResetPassword';
+import ForgetPassword from '../screens/stack/password/ForgetPassword';
+import ComingSoon from '../screens/comingSoon/ComingSoon';
+import { HomeStackList } from './Navigation.interface';
+
+const HomeStack = createNativeStackNavigator<HomeStackList>();
+interface Props {
+  navigation: any;
+}
+const HomeStackNavigator = ({navigation}: Props) => {
+ 
+
+  return (
+    <HomeStack.Navigator initialRouteName='HomeScreen'>
+      <HomeStack.Screen
+        name='HomeScreen'
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <HomeStack.Screen
+        name='PersonalInfo'
+        component={PersonalInfo}
+        options={{
+          headerTitle: 'Profile',
+        }}
+      />
+      <HomeStack.Screen name='SignUp' component={SignUp} />
+      <HomeStack.Screen name='SignUpBusiness' component={SignUpBusiness} />
+      <HomeStack.Screen name='LoginWithPhone' component={LoginWithPhone} />
+      <HomeStack.Screen
+        name='LoginWithPassword'
+        component={LoginWithPassword}
+      />
+      <HomeStack.Screen name='VerifyCode' component={VerifyCode} />
+      <HomeStack.Screen name='ForgetPassword' component={ForgetPassword} />
+      <HomeStack.Screen name='ResetPassword' component={ResetPassword} />
+      <HomeStack.Screen name='SetUpPassword' component={SetUpPassword} />
+      <HomeStack.Screen
+        name='ComingSoon'
+        component={ComingSoon}
+      />
+    </HomeStack.Navigator>
+  );
+};
+export default HomeStackNavigator;
