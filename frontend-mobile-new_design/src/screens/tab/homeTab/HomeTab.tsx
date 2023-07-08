@@ -15,6 +15,7 @@ import AccountFileCard from '../../../components/AccountFileCard'
 import SmallButton from '../../../style/SmallButton'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { HomeStackList } from '../../../navigation/Navigation.interface'
+import React from 'react'
 
 interface Props {
   navigation: NativeStackNavigationProp<HomeStackList, 'HomeScreen'>
@@ -160,7 +161,7 @@ const Home = ({ navigation }: Props) => {
                 {liked ? (
                   <AntDesign name='heart' size={24} color='#FC4646' />
                 ) : (
-                  <AntDesign name='hearto' size={24} color='white' />
+                  <AntDesign name = 'hearto' size={24} color='white' />
                 )}
               </TouchableOpacity>
 
@@ -168,7 +169,7 @@ const Home = ({ navigation }: Props) => {
                 className='mb-[37.5px] mt-[5px] text-white text-[14px]'
                 style={{ fontFamily: 'Lato-400' }}
               >
-                23.5K
+                 20.9k
               </Text>
             </View>
 

@@ -2,7 +2,7 @@ import {AntDesign} from '@expo/vector-icons';
 import {useNavigationState} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { useTheme } from 'native-base';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from '../screens/tab/homeTab/HomeTab';
 import SignUp from '../screens/stack/register/SignUp';
 import PersonalInfo from '../screens/stack/commonStacks/PersonalInfo';
@@ -15,6 +15,10 @@ import ResetPassword from '../screens/stack/password/ResetPassword';
 import ForgetPassword from '../screens/stack/password/ForgetPassword';
 import ComingSoon from '../screens/comingSoon/ComingSoon';
 import { HomeStackList } from './Navigation.interface';
+import VerifyPassword from '../screens/stack/password/VerifyPassword';
+import Setting from '../screens/tab/settingTab/Setting';
+import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
+
 
 const HomeStack = createNativeStackNavigator<HomeStackList>();
 interface Props {
@@ -51,6 +55,10 @@ const HomeStackNavigator = ({navigation}: Props) => {
       <HomeStack.Screen name='ForgetPassword' component={ForgetPassword} />
       <HomeStack.Screen name='ResetPassword' component={ResetPassword} />
       <HomeStack.Screen name='SetUpPassword' component={SetUpPassword} />
+      <HomeStack.Screen name='VerifyPassword' component={VerifyPassword} />
+      <HomeStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
+      <HomeStack.Screen name='Setting' component={Setting} />
+      
       <HomeStack.Screen
         name='ComingSoon'
         component={ComingSoon}

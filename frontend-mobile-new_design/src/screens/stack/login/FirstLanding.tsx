@@ -6,6 +6,7 @@ import FlatButton from '../../../style/FlatButton'
 import BackgroundColor from '../../../style/BackgroundColor'
 import Copyright from '../../../components/CopyRight'
 import { AuthStackList } from '../../../navigation/Navigation.interface'
+import React from 'react'
 
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, 'FirstLanding'>
@@ -32,9 +33,9 @@ export default function FirstLanding({ navigation }: Props) {
           </View>
           <Text
             className='text-white font-extrabold text-center text-[62px]'
-            style={{ fontFamily: 'AT' }}
+            
           >
-            STOMBLE
+            stomble
           </Text>
         </View>
 
@@ -42,7 +43,7 @@ export default function FirstLanding({ navigation }: Props) {
           <View className=' mb-4 '>
             <FlatButton
               text='LOGIN'
-              onPress={() => navigation.navigate('LoginWithPassword')}
+              onPress={() => navigation.navigate('LandingWithAccount')}
             />
           </View>
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Text } from 'react-native'
 
@@ -21,9 +22,9 @@ const SmallButton = ({
       onPress={onPress}
       className='rounded-md justify-center items-center'
       style={{
-        backgroundColor: bgColor ? bgColor : '#C7C7C7',
-        width: width ? width : 48,
-        height: height ? height : 29,
+        backgroundColor: bgColor ? bgColor : 'rgba(199, 199, 199, 0.5)',
+        width: width ? width : 52,
+        height: height ? height : 32,
       }}
     >
       <Text

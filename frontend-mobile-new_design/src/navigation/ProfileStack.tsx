@@ -5,6 +5,7 @@ import Profile from '../screens/tab/userTab/Profile';
 import UserTabs from './UserTabs';
 import Notifications from '../screens/stack/commonStacks/Notifications';
 import Setting from '../screens/tab/settingTab/Setting';
+import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
 
 const profileStack=createNativeStackNavigator<ProfileStackList>()
 
@@ -16,6 +17,8 @@ const ProfileStack = () => {
         <profileStack.Screen name='TopTabs' component={UserTabs}/>
         <profileStack.Screen name='Notice' component={Notifications}/>
         <profileStack.Screen name='Settings' component={Setting}/>
+        
+        <profileStack.Screen name='SaveLoginInfor' component={SaveLoginInfor}/>
     </profileStack.Navigator>
   )
 }

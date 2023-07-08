@@ -21,13 +21,14 @@ const img = [
   {
     id: 1,
     type: 'Business',
-    uri: require('../../../../assets/registerImage/businessImage.png'),
+    //uri: require('../../../../assets/registerImage/businessImage.png'),
   },
   {
     id: 2,
     type: 'Personal',
-    uri: require('../../../../assets/registerImage/personalImage.png'),
+    //uri: require('../../../../assets/registerImage/personalImage.png'),
   },
+  
 ];
 
 const ChooseAccountType = ({navigation}: Props) => {
@@ -53,7 +54,7 @@ const ChooseAccountType = ({navigation}: Props) => {
             {img.map((item) => (
               <AccountTypeCard
                 type={item.type}
-                sourceImage= {item.uri}
+                //sourceImage= {item.uri}
                 onPress={() => handelPress(item)}
                 selectedItem={selectedItem}
                 key={item.type}

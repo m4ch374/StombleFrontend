@@ -4,6 +4,7 @@ import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-na
 import { ProfileStackList } from '../navigation/Navigation.interface';
 import { useState } from 'react';
 import QRModal from './QRModal';
+import React from 'react';
 
 type Props = {
     setModalVisible:React.Dispatch<React.SetStateAction<boolean>>

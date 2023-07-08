@@ -1,6 +1,7 @@
 
 
-export interface UserResponse {
+export interface UserResponse 
+{
   hasError: boolean;
   message: string;
   data?: UserReducer;

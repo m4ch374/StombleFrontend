@@ -1,11 +1,12 @@
 import React, { useEffect,useRef } from 'react'
 
-// type Props={
-//   func: any
-//   deps: any
-// }
+type Props=
+{
+  func: any
+   deps: any
+}
 
-const UseEffectSkipInitial = (func,deps) => {
+const UseEffectSkipInitial = (func: () => boolean | undefined,deps: unknown) => {
   const didMount=useRef(false)
   useEffect(()=>{
     if(didMount.current){

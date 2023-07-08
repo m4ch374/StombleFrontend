@@ -7,6 +7,7 @@ import FlatButton from '../../../style/FlatButton'
 import { Ionicons } from '@expo/vector-icons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AuthStackList } from '../../../navigation/Navigation.interface'
+import React from 'react'
 
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, 'VerifyPassword'>;
@@ -56,7 +57,7 @@ const VerifyPassword = ({navigation}: Props) => {
       </View>
       <Text className='text-[16px] text-[#FFFFFF] mt-[16px]' 
           style={{fontFamily:'Lato-700'}}>
-          <Link to={'ForgetPassword'}>
+          <Link to={'/ForgetPassword'}>
            Forgot Your Password?
           </Link>
       </Text>
@@ -91,7 +92,10 @@ const VerifyPassword = ({navigation}: Props) => {
             <FlatButton
               text="LOG IN"
               disabled={disabled}
-              onPress={handleSubmit}
+              //onPress={handleSubmit}
+              onPress={() => navigation.navigate('HomeScreen')}
+              
+              
             />
         </View>
         <View className='flex-row justify-center items-center align-middle mb-[94px]'>

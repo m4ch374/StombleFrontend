@@ -7,6 +7,7 @@ import AccountFileCard from './AccountFileCard';
 import { AntDesign } from '@expo/vector-icons';
 import AddAccountModal from './AddAccountModal';
 import { AuthStackList, HomeStackList } from '../navigation/Navigation.interface';
+import React from 'react';
 
 
 type Props = {

@@ -27,7 +27,7 @@ const ForgetPassword = ({navigation}: Props) => {
 
   const handleSubmit=()=>{
     //provide phone number value here
-    !disabled && navigation.navigate('VerifyCode')
+    !disabled && navigation.navigate('SetUpPassword')
     setError(false)
     setDisabled(true)
   }
@@ -64,7 +64,7 @@ const ForgetPassword = ({navigation}: Props) => {
             </Text>
         </View>}
 
-        <View className='flex-row justify-center items-center mb-[16px]'>
+        <View className='flex-row justify-center items-center mb-4 mt-[378px]'>
           <Text className='text-[#C1C1C1] text-[10px]'>
             By continuing you agree to the
           </Text>    
@@ -92,13 +92,14 @@ const ForgetPassword = ({navigation}: Props) => {
 
         <View className=" mb-[16px] ">
             <FlatButton
-              text="SEND CODE"
+              text="CONTINUE"
               disabled={disabled}
+              
               onPress={handleSubmit}
             />
         </View>
-        <View className='flex-row justify-center items-center align-middle mb-[94px]'>
-          <Text className='text-[14px] text-white'>
+        <View className='flex-row justify-center items-center align-middle mb-5'>
+          <Text className='text-sm text-white'>
               Don't have an account? 
           </Text>
         <View className='ml-[2px]'>

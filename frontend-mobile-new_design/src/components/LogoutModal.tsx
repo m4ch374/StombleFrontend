@@ -13,7 +13,7 @@ type Props = {
 const RemoveAccountModal = ({setLogoutModal,navigation}: Props) => {
     const handleLogout=()=>{
       setLogoutModal(false)
-      navigation.navigate('SaveLoginInfo')
+      navigation.navigate('SaveLoginInfor')
     }
   return (
     <View className='h-[214px] w-[290px] bg-[#252525] rounded-[10px]'>

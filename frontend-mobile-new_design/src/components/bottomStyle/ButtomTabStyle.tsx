@@ -1,7 +1,8 @@
 import { Box, Text, useTheme } from "native-base";
 import React from "react";
 
-interface Props {
+interface Props 
+{
   navColorState: string;
   navName: string;
   icon: JSX.Element;

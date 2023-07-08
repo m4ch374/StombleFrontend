@@ -5,8 +5,10 @@ import FlatButton from '../../../style/FlatButton'
 import LogoutModal from '../../../components/LogoutModal'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ProfileStackList } from '../../../navigation/Navigation.interface'
+import React from 'react'
 
-interface Props {
+interface Props 
+{
   navigation: NativeStackNavigationProp<ProfileStackList, 'PersonalInfo'>;
 }
 

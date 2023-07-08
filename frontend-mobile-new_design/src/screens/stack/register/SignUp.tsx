@@ -51,7 +51,8 @@ const SignUp = ({navigation}:Props) => {
               DOB: convertDate(new Date()),
               phone: phone,
             }}
-            onSubmit={(values, action) => {
+            onSubmit={(values, action) => 
+            {
               navigation.navigate('VerifyCode');
               sendValues(values);
               action.resetForm();
@@ -135,7 +136,7 @@ const SignUp = ({navigation}:Props) => {
                     Already have an account?
                   </Text>
                   <View className='ml-[4px]'>
-                    <Link to={'/LoginWithPhone'}>
+                    <Link to={'/LandingWithAccount'}>
                       <Text className='text-[#326FCB] font-semibold'>
                         Log In
                       </Text>

@@ -195,7 +195,7 @@ const VerifyCode = ({navigation}: Props) => {
                 </Text>}
               </View>
 
-              <View className='flex-row justify-center items-center mb-[16px]'>
+              <View className='flex-row justify-center items-center mb-[16px]  mt-[180px]'>
                 <Text className='text-[#C1C1C1] text-[10px]'>
                   By continuing you agree to the
                 </Text>    
@@ -214,9 +214,9 @@ const VerifyCode = ({navigation}: Props) => {
 
                 <View className='pl-[4px]'>
                 <Text className='text-[#326FCB] text-[10px]'>
-                <Link to={'TermsAndPrivacy'}>
-                  Privacy Policies
-                </Link>
+                  <Link to={'TermsAndPrivacy'}>
+                    Privacy Policies
+                  </Link>
                 </Text>
                 </View>
               </View>
@@ -225,10 +225,11 @@ const VerifyCode = ({navigation}: Props) => {
                   <FlatButton
                     text="VERIFY CODE"
                     disabled={Object.keys(props.errors).length!==0 || initialValues.code1===''}
-                    onPress={props.handleSubmit}
+                    //onPress={() => navigation.navigate('SaveLoginInfor')}
+                    onPress={() => navigation.navigate('ChooseAccountType')}
                   />
               </View>
-              </>
+              </> 
            )}
         </Formik>
       </View>

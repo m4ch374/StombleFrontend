@@ -20,8 +20,10 @@ const passwordReg=Yup.object({
   .required()
   .matches(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
-    'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-  ),
+    'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+  )
+  
+  ,
   confirmPW:Yup.string()
   .required('Confirm password is required')
   .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
@@ -29,14 +31,15 @@ const passwordReg=Yup.object({
 
 const SetUpPassword = ({navigation}:Props ) => {
   const [secureTextEntry, setSecureTextEntry] = useState(false)
-
+  //const password = "MyPassword123!"; // Replace this with the actual password value
+  //const isValidPassword = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/);
   return (
     <LoginScreenLayout>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className='p-[16px]'>
         <View className='mb-[24px]'>
           <Text className='text-white text-[16px]' style={{fontFamily:'Lato-400'}}>
-          Set up a password for extra security.
+            Set up a password for extra security.
           </Text>
         </View>
 
@@ -58,7 +61,7 @@ const SetUpPassword = ({navigation}:Props ) => {
                 <View className='flex-row h-[42px] bg-[#4F4F4F] mb-[24px] rounded-[5px] items-center justify-between px-[12px]'>
                 <TextInput className='text-white text-[16px] h-full'
                   style={{fontFamily:'Lato-700'}}
-                  placeholder='Add New Password'
+                  placeholder ='Add New Password'
                   placeholderTextColor="#ABABAB"
                   onChangeText={props.handleChange('newPassword')}
                   value={props.values.newPassword}
@@ -86,15 +89,48 @@ const SetUpPassword = ({navigation}:Props ) => {
                   :
                   <View className=''
                   style={{marginBottom:props.errors.newPassword? 15:0}}>
+                    <Text className='text-[#ABABAB] text-[14px] pr-[20px]' style={{ marginBottom:7 }}>
+                       Password must contain:
+                    </Text>
                     {props.errors.newPassword && 
-                      <View className='flex-row gap-[5px]'>
+                      <View className='flex-row gap-[6px]'>
                       <EvilIcons name="exclamation" size={24} color="#F4222F" />
                       
-                      <Text className='text-[#F4222F] text-[14px] pr-[20px]'>
+                      <Text className='text-[#F4222F] text-[14px] pr-[22px]' style={{ marginBottom:10 }} >
                         {props.errors.newPassword}
                       </Text>
                     </View>}
-                  </View>
+                      <Text
+                        className={`text-[#ABABAB] text-[14px] pr-[20px]`}
+                        style={{ marginBottom: 5}}
+                      >
+                        At least 8 characters
+                      </Text>
+                      <Text
+                        className={`text-[#ABABAB] text-[14px] pr-[20px]`}
+                        style={{ marginBottom: 5}}
+                      >
+                        An uppercase character
+                      </Text>
+                      <Text
+                        className={`text-[#ABABAB] text-[14px] pr-[20px]`}
+                        style={{ marginBottom: 5}}
+                      >
+                        A lowercase character
+                      </Text>
+                      <Text
+                        className={`text-[#ABABAB] text-[14px] pr-[20px]`}
+                        style={{ marginBottom: 5}}
+                      >
+                        A number
+                      </Text>
+                      <Text
+                        className={`text-[#ABABAB] text-[14px] pr-[20px]`}
+                        style={{ marginBottom: 5}}
+                      >
+                        A special character
+                      </Text>
+                    </View>
                 }
                 
                 <View className='mb-[8px]'>
@@ -119,7 +155,14 @@ const SetUpPassword = ({navigation}:Props ) => {
                           size={20} 
                           color="#C1C1C1" />   
                       </TouchableWithoutFeedback>
+                     
                 </View>
+                      <Text
+                        className={`text-[#ABABAB] text-[14px] pr-[20px]`}
+                        style={{ marginBottom: 5}}
+                      >
+                       Password match
+                      </Text>
 
                 {props.initialTouched.confirmPW ? null
                   // <View className='flex-row gap-[5px]'
@@ -168,9 +211,10 @@ const SetUpPassword = ({navigation}:Props ) => {
                 </View>
                     
                 <FlatButton 
-                    text='CONFIRM'
+                    text='SEND CODE'
                       disabled={Object.keys(props.errors).length!==0 }
-                    onPress={props.handleSubmit}
+                      onPress={() => navigation.navigate('VerifyCode')}
+                    
                 />
                 </>
                     )}

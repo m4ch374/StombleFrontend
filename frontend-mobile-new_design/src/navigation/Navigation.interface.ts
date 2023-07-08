@@ -49,12 +49,14 @@ export type AuthStackList = {
   SignUpBusiness: undefined
   ForgetPassword: undefined
   ResetPassword: undefined
+  Setting:undefined
+  
   SetUpPassword: {
     password?: string
     token?: string
   }
   AddAccountModal: undefined
-  SaveLoginInfo: undefined
+  SaveLoginInfor: undefined
 }
 
 export type HomeStackList = {
@@ -66,6 +68,8 @@ export type HomeStackList = {
   LoginWithPhone: undefined
   PersonalInfo: undefined
   ComingSoon: undefined
+  Setting:undefined
+  SaveLoginInfor: undefined
   VerifyCode: {
     email: string
   }
@@ -93,9 +97,11 @@ export type ProfileStackList = {
   Follower: undefined
   Following: undefined
   Liked: undefined
+  
   History: undefined
   TopTabs: undefined
   Settings: undefined
+  SaveLoginInfor:undefined
   Notice: undefined
   AddAccountModal: { setModalVisible: any }
   LoginWithPassword: undefined

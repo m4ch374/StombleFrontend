@@ -6,6 +6,7 @@ import FlatButton from '../../../style/FlatButton'
 import { Link } from '@react-navigation/native'
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack'
 import { AuthStackList } from '../../../navigation/Navigation.interface'
+import React from 'react'
 
 type Props = {
     navigation:NativeStackNavigationProp<AuthStackList,'VerifyPhone'>

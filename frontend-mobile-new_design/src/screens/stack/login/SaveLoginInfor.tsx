@@ -5,8 +5,9 @@ import FlatButton from '../../../style/FlatButton'
 import { AuthStackList } from '../../../navigation/Navigation.interface'
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack'
 
+
 interface Props {
-  navigation: NativeStackNavigationProp<AuthStackList, "SaveLoginInfo">
+  navigation: NativeStackNavigationProp<AuthStackList, "SaveLoginInfor">
 
 }
 
@@ -20,7 +21,7 @@ const data={
 
 const SaveLoginInfor = ({navigation}: Props) => {
   const width = Dimensions.get('window').width;
-  const handleSave = () => {};
+  const handleSave = () => {};    // Save the login details 
   return (
     <BackgroundColor>
       <View className='flex-1 p-[16px] justify-center items-center'>

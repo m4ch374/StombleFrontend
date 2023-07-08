@@ -8,6 +8,7 @@ import SearchStack from './SearchStack'
 import ProfileStack from './ProfileStack'
 import ProfessionalStack from './ProfessionalStack'
 import TabBar from '../components/TabBar'
+import React from 'react'
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>()
 

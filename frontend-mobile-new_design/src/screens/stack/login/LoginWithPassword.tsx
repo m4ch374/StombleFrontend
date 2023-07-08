@@ -18,7 +18,8 @@ import FlatButton from '../../../style/FlatButton'
 import PhoneNumberInput from '../../../components/PhoneNumberInput'
 import { AuthStackList } from '../../../navigation/Navigation.interface'
 
-interface Props {
+interface Props 
+{
   navigation: NativeStackNavigationProp<AuthStackList, 'LoginWithPassword'>
 }
 const LoginWithPassword = ({ navigation }: Props) => {
@@ -46,7 +47,7 @@ const LoginWithPassword = ({ navigation }: Props) => {
       Alert.alert('Login Successful!', '.', [
         { text: 'OK', onPress: () => console.log('alert closed!') },
       ])
-      // navigation.navigate('HomeScreen')
+      navigation.navigate('HomeScreen')
       setError(false)
       setDisabled(true)
     } else {
@@ -115,14 +116,14 @@ const LoginWithPassword = ({ navigation }: Props) => {
                 className='text-4 text-[#FFFFFF]'
                 style={{ fontFamily: 'Lato-700' }}
               >
-                <Link to={'ForgetPassword'}>Forgot Your Password?</Link>
+                <Link to={'/ForgetPassword'}>Forgot Your Password?</Link>
               </Text>
             </View>
 
             {error && (
               <View className='flex-row mt-7'>
                 <View>
-                  <EvilIcons name='exclamation' size={28} color='#F4222F' />
+                  <EvilIcons name='exclamation' size={24} color='#F4222F' />
                 </View>
                 <Text className='text-sm text-[#F4222F]'>
                   The mobile number you entered is invalid.
@@ -139,7 +140,7 @@ const LoginWithPassword = ({ navigation }: Props) => {
 
               <View className='px-[4px]'>
                 <Text className='text-[#326FCB] text-[10px]'>
-                  <Link to={'TermsAndPrivacy'}>Terms of Service</Link>
+                  <Link to={'/TermsAndPrivacy'}>Terms of Service</Link>
                 </Text>
               </View>
 
@@ -147,12 +148,12 @@ const LoginWithPassword = ({ navigation }: Props) => {
 
               <View className='pl-[4px]'>
                 <Text className='text-[#326FCB] text-[10px]'>
-                  <Link to={'TermsAndPrivacy'}>Privacy Policies</Link>
+                  <Link to={'/TermsAndPrivacy'}>Privacy Policies</Link>
                 </Text>
               </View>
             </View>
 
-            <View className='mb-4 '>
+            <View className='mb-[16px]'>
               <FlatButton
                 text='LOG IN'
                 disabled={disabled}
@@ -162,7 +163,7 @@ const LoginWithPassword = ({ navigation }: Props) => {
             <View className='flex-row justify-center items-center align-middle mb-5'>
               <Text className='text-sm text-white'>Don't have an account?</Text>
               <View className='ml-[2px]'>
-                <Link to={'/ChooseAccountType'}>
+                <Link to={'/SignUp'}>
                   <Text className='text-[#326FCB] font-semibold'>Register</Text>
                 </Link>
               </View>

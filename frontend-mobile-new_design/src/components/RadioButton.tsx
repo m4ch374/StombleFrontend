@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, View } from 'react-native'
 import {useState} from 'react'
+import React from 'react'
 
 type Props = {
     value:string
