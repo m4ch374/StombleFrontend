@@ -54,7 +54,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
       defaultCode='AU'
       layout='first'
       codeTextStyle={{ color: 'white', height: 20 }}
-      autoFocus
+      //autoFocus
       //when blur set the value as the input text
       onChangeText={(text: string) => setValue(text)}
       onChangeCountry={(country) => setCountryObj(country)}
