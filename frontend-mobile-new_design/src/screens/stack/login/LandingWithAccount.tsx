@@ -158,7 +158,6 @@ const LandingWithAccount = ({navigation}: Props) =>
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => setModalVisible(false)}>
-
           
             <View className='flex-1 items-center h-[210px] w-full justify-end '>
               {<AddAccountModal setModalVisible={setModalVisible} navigation = {navigation}/>}

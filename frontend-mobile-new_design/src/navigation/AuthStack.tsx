@@ -23,6 +23,7 @@ import VerifyPassword from '../screens/stack/password/VerifyPassword';
 import HomeTab from '../screens/tab/homeTab/HomeTab';
 import Setting from '../screens/tab/settingTab/Setting';
 import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
+import SignupBusinessName from '../screens/stack/register/SignupBusinessName';
 
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
@@ -83,6 +84,7 @@ const AuthStackNavigator = () => {
             headerLeft: () => <LeftHeader />,
           }}
         />
+        
         <AuthStack.Screen name='SignUpBusiness' component={SignUpBusiness} />
         <AuthStack.Screen name='LoginWithPhone' component={LoginWithPhone} />
         <AuthStack.Screen
@@ -98,6 +100,17 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='VerifyPassword' component={VerifyPassword} />
         <AuthStack.Screen name='Setting' component={Setting} />
         <AuthStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
+        <AuthStack.Screen
+          name='SignupBusinessName'
+          component={SignupBusinessName}
+          options={{
+            title: 'Sign Up',
+            headerTitleAlign: 'center',
+            headerLeft: () => <LeftHeader />,
+          }}
+        />
+
+
 
         
 
@@ -192,6 +205,16 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='Setting' component={Setting} />
         <AuthStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
         { <AuthStack.Screen name='HomeScreen' component={Home} /> }
+
+        <AuthStack.Screen
+          name='SignupBusinessName'
+          component={SignupBusinessName}
+          options={{
+            title: 'Sign Up',
+            headerTitleAlign: 'center',
+            headerLeft: () => <LeftHeader />,
+          }}
+        />
       </AuthStack.Navigator>
     )
   }

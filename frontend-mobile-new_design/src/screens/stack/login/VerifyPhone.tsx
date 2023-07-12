@@ -14,8 +14,6 @@ type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, 'VerifyPhone'>
 }
 
-console.log("123456")
-
 const VerifyPhone = ({ navigation }: Props) => {
   const [disabled, setDisabled] = useState(true)
   const [error, setError] = useState(null as unknown as boolean)
@@ -25,7 +23,7 @@ const VerifyPhone = ({ navigation }: Props) => {
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
   }
-  
+
   function checkPhoneValidation() { }
   return (
     <BackgroundColor>
@@ -77,8 +75,8 @@ const VerifyPhone = ({ navigation }: Props) => {
             <FlatButton
               text="SEND CODE"
               disabled={disabled}
-              // onPress={() => navigation.navigate('VerifyCode')}
-              onPress={togglePopup}
+              onPress={() => navigation.navigate('VerifyCode')}
+              // onPress={togglePopup}
 
             />
           </View>
@@ -109,15 +107,14 @@ const VerifyPhone = ({ navigation }: Props) => {
                 <Text style={[styles.popupsmallText, { textAlign: 'center' }]}>You already have an account with this contact info.
                   Do you want to create another account with the same mobile number?</Text>
 
-                <View style={styles.containerdivider}>
+                <View style={styles.containerdivider}>  
                   <Divider />
                 </View>
 
                 <TouchableOpacity onPress={() => {
                   togglePopup
-                  navigation.navigate('VerifyCode')
+                  navigation.navigate('SignupBusinessName')
                 }}>
-
                   <Text style={[styles.popupsblueText, { textAlign: 'center' }]}>Yes, use same mobile number</Text>
                 </TouchableOpacity>
 

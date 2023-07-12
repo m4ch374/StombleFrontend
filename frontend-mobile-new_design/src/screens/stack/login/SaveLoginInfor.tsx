@@ -5,7 +5,6 @@ import FlatButton from '../../../style/FlatButton'
 import { AuthStackList } from '../../../navigation/Navigation.interface'
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack'
 
-
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, "SaveLoginInfor">
 

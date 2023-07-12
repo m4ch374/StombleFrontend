@@ -32,7 +32,6 @@ const SignUpDate = ({ navigation }: Props) => {
     hideDatePicker();
   };
 
-
   return (
     <BackgroundColor>
       <View className='flex-1 px-[16px] mt-[34px]'>
@@ -56,49 +55,55 @@ const SignUpDate = ({ navigation }: Props) => {
           //and navigate to next page
           navigation.navigate('SignUpGender'))}>
           {(props: any) => (
-            <View className='flex-1'>
-              <View className='flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] '>
-                <View>
-                  <TextInput className='text-[16px] text-white'
-                    editable={false}
-                    selectTextOnFocus={false}
-                    onChangeText={props.handleChange('body')}
-                    value={selectedDate}
-                    placeholder='01 January 2000'
-                    placeholderTextColor='#ffffff' />
+            <View className='flex-1 p-[16px]' style={{ flexDirection: 'column', height: '100%' }}>
+
+              <View className='flex-1'>
+                <View className='flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] '>
+                  <View>
+                    <TextInput className='text-[16px] text-white'
+                      editable={false}
+                      selectTextOnFocus={false}
+                      onChangeText={props.handleChange('body')}
+                      value={selectedDate}
+                      placeholder='01 January 2000'
+                      placeholderTextColor='#ffffff' />
+                  </View>
+
+                  <Pressable onPress={showDatePicker}>
+                    <View>
+                      <MaterialIcons name="keyboard-arrow-down" size={24} color="white" />
+                    </View>
+                  </Pressable>
+
                 </View>
 
-                <Pressable onPress={showDatePicker}>
-                  <View>
-                    <MaterialIcons name="keyboard-arrow-down" size={24} color="white" />
-                  </View>
-                </Pressable>
-
-              </View>
-
-              <View>
-                <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode="date"
-                  onConfirm={handleConfirm}
-                  onCancel={hideDatePicker}
-                />
-              </View>
-              <View className='flex-2 justify-end'>
-                <FlatButton text='NEXT' disabled={props.values.body === '' ? true : false}
-                  onPress={props.handleSubmit} />
-              </View>
-              <Modal animationType='slide' transparent={true} visible={dateModal}>
-                <View className='flex-1 w-full justify-end'>
-                  <DateModal setModalVisable={setDateModal} dateDOB={props.values.body} />
+                <View>
                   <DateTimePickerModal
                     isVisible={isDatePickerVisible}
                     mode="date"
                     onConfirm={handleConfirm}
-                    onCancel={hideDatePicker}
-                  />
+                    onCancel={hideDatePicker} />
                 </View>
-              </Modal>
+
+
+              </View>
+              <View className='flex-2 justify-end mb-10'>
+              <FlatButton text='NEXT' disabled={props.values.body === '' ? true : false}
+                onPress={props.handleSubmit} />
+
+                <Modal animationType='slide' transparent={true} visible={dateModal}>
+                  <View className='flex-1 w-full justify-end'>
+                    <DateModal setModalVisable={setDateModal} dateDOB={props.values.body} />
+                    <DateTimePickerModal
+                      isVisible={isDatePickerVisible}
+                      mode="date"
+                      onConfirm={handleConfirm}
+                      onCancel={hideDatePicker} />
+                  </View>
+                </Modal>
+
+              </View>
+             
             </View>
           )}
 

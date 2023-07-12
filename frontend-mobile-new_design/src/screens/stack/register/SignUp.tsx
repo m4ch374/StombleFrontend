@@ -16,7 +16,7 @@ type items={
   DOB:string,
   phone:string
 }
-
+console.log("123456")
 const SignUp = ({navigation}:Props) => {
   const [disabled, setDisabled] = useState(true)
   const [error, setError] = useState(false)

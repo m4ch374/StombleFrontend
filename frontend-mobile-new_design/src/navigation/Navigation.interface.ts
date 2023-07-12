@@ -49,6 +49,7 @@ export type AuthStackList = {
   SignUpBusiness: undefined
   ForgetPassword: undefined
   ResetPassword: undefined
+  SignupBusinessName : undefined
   Setting:undefined
   
   SetUpPassword: {
@@ -70,6 +71,7 @@ export type HomeStackList = {
   ComingSoon: undefined
   Setting:undefined
   SaveLoginInfor: undefined
+  SignupBusinessName : undefined
   VerifyCode: {
     email: string
   }
@@ -96,8 +98,7 @@ export type ProfileStackList = {
   ManageProfile: undefined
   Follower: undefined
   Following: undefined
-  Liked: undefined
-  
+  Liked: undefined  
   History: undefined
   TopTabs: undefined
   Settings: undefined

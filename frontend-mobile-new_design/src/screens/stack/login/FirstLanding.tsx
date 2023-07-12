@@ -33,8 +33,7 @@ export default function FirstLanding({ navigation }: Props) {
           </View>
           <Text
             className='text-white font-extrabold text-center text-[62px]'
-            
-          >
+            >
             stomble
           </Text>
         </View>
@@ -46,7 +45,6 @@ export default function FirstLanding({ navigation }: Props) {
               onPress={() => navigation.navigate('LandingWithAccount')}
             />
           </View>
-
           <View className='flex-row justify-center items-center align-middle mb-24'>
             <Text className='text-sm text-white'>Don't have an account?</Text>
             <View className='ml-0.5'>
