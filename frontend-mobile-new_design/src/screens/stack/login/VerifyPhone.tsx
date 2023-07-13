@@ -75,8 +75,8 @@ const VerifyPhone = ({ navigation }: Props) => {
             <FlatButton
               text="SEND CODE"
               disabled={disabled}
-              onPress={() => navigation.navigate('VerifyCode')}
-              // onPress={togglePopup}
+              //onPress={() => navigation.navigate('VerifyCode')}
+              onPress={togglePopup}
 
             />
           </View>
@@ -111,12 +111,16 @@ const VerifyPhone = ({ navigation }: Props) => {
                   <Divider />
                 </View>
 
-                <TouchableOpacity onPress={() => {
-                  togglePopup
-                  navigation.navigate('SignupBusinessName')
-                }}>
-                  <Text style={[styles.popupsblueText, { textAlign: 'center' }]}>Yes, use same mobile number</Text>
-                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    togglePopup(); // Close the popup
+                    navigation.navigate('SignupBusinessName'); // Navigate to the next page
+                  }}
+                  >
+                    <Text style={[styles.popupsblueText, { textAlign: 'center' }]}>
+                      Yes, use the same mobile number
+                    </Text>
+                  </TouchableOpacity>
 
                 <View style={styles.containerdivider}>
                   <Divider />

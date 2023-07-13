@@ -74,7 +74,7 @@ const ChooseAccountType = ({navigation}: Props) => {
               disabled={disabled}
               onPress={() =>
                 navigation.navigate(
-                  selectedItem == 'Business' ? 'SignUpBusiness' : 'SignUp'
+                  selectedItem == 'Business' ? 'SignupBusinessName' : 'SaveLoginInfor'
                 )
               }
             />

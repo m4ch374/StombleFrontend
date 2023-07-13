@@ -8,6 +8,10 @@ import { AuthStackList } from '../../../navigation/Navigation.interface'
 import { MaterialIcons } from '@expo/vector-icons';
 import DateModal from '../../../components/DateModal'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Alert } from 'react-native';
+
+
+
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, 'SignUpDOB'>
@@ -17,6 +21,9 @@ const SignUpDate = ({ navigation }: Props) => {
   const [dateModal, setDateModal] = useState(false)
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState('');
+
+  
+  
 
 
   const showDatePicker = () => {
@@ -28,15 +35,27 @@ const SignUpDate = ({ navigation }: Props) => {
   };
 
   const handleConfirm = (date: any) => {
-    setSelectedDate(new Date(date).toLocaleDateString());
+    const selected = new Date(date);
+    const today = new Date();
+    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  
+    if (selected > eighteenYearsAgo) {
+      Alert.alert('Invalid Date', 'You must be 18 years or older to sign up.');
+      return;
+    }
+    
+    setSelectedDate(selected.toLocaleDateString());
     hideDatePicker();
   };
+  
 
   return (
     <BackgroundColor>
       <View className='flex-1 px-[16px] mt-[34px]'>
-        <View className='h-[8px] w-full bg-white rounded-[5px]'>
-          <View className='h-[8px] w-2/3 bg-[#0B52BC] rounded-[5px]'></View>
+      <View className=' h-[8px] w-FULL bg-white rounded-[5px]'>
+          <View className='h-[8px] w-2/3 bg-[#0B52BC] rounded-[5px] '>
+            <View className='h-full w-1 bg-black absolute right-0 top-0 straight-r-[5px]'></View>
+          </View>
         </View>
 
         <View className='mt-[34px]'>

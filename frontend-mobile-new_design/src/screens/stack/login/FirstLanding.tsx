@@ -26,7 +26,7 @@ export default function FirstLanding({ navigation }: Props) {
                 height: 32,
               }}
             >
-              <Link to={'/SignUp'}>
+              <Link to={'/HomeScreen'}>
                 <Text className='text-white font-semibold'>Skip</Text>
               </Link>
             </View>

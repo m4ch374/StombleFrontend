@@ -47,7 +47,7 @@ const LoginWithPassword = ({ navigation }: Props) => {
       Alert.alert('Login Successful!', '.', [
         { text: 'OK', onPress: () => console.log('alert closed!') },
       ])
-      navigation.navigate('HomeScreen')
+      navigation.navigate('SaveLoginInfor')
       setError(false)
       setDisabled(true)
     } else {

@@ -142,6 +142,11 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen
           name='LandingWithAccount'
           component={LandingWithAccount}
+          options={{
+            title: 'Log In',
+            headerTitleAlign: 'center',
+            headerLeft: () => <LeftHeader />,
+          }}
         />
         <AuthStack.Screen
           name='ChooseAccountType'

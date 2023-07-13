@@ -27,7 +27,7 @@ const SignUpGender = ({ navigation }: Props) => {
         <View className='flex-1'>
           <View className='flex-1 px-[16px] mt-[34px]'>
             <View className='h-[8px] w-full bg-white rounded-[5px]'>
-              <View className='h-[8px] w-2/3 bg-[#0B52BC] rounded-[5px]'></View>
+              <View className='h-[8px] w-full bg-[#0B52BC] rounded-[5px]'></View>
             </View>
 
             <View className='mt-[34px]'>
@@ -75,7 +75,7 @@ const SignUpGender = ({ navigation }: Props) => {
         <View className='flex-2 justify-end mb-10'>
           <FlatButton
             text="PROCEED"
-            onPress={undefined} />
+            onPress={() => navigation.navigate('SetUpPassword')} />
         </View>
       </View>
     </BackgroundColor>

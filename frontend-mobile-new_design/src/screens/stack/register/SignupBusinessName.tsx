@@ -40,7 +40,7 @@ const SignupBusinessName = ({ navigation }: Props) => {
                     <FlatButton
                         text="SIGN UP"
                         disabled={disabled}
-                        onPress={undefined} />
+                        onPress={() => navigation.navigate('SaveLoginInfor')} />
                 </View>
             </View>
         </BackgroundColor>

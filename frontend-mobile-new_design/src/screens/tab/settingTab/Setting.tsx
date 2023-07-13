@@ -5,6 +5,7 @@ import FlatButton from '../../../style/FlatButton'
 import LogoutModal from '../../../components/LogoutModal'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ProfileStackList } from '../../../navigation/Navigation.interface'
+
 import React from 'react'
 
 interface Props 
@@ -12,8 +13,8 @@ interface Props
   navigation: NativeStackNavigationProp<ProfileStackList, 'PersonalInfo'>;
 }
 
-const AccountData=['Personal Information','Account Management','Notifications']
-const ActionData=['Switch Account Type','Add Account']
+const AccountData=['Account Information','Manage Profile','Security']
+const ActionData=['Switch Account Type','Add Account', 'Manage Account']
 const SupportData=['Contact Us','Terms and Conditions']
 
 const Setting = ({navigation}: Props) => {
@@ -35,15 +36,18 @@ const Setting = ({navigation}: Props) => {
           </View>
         ))}
         </View>
-          
-        <View className='flex mb-[32px]'>
+        
+        {/* <View className='flex mb-[32px]'>
         <Text className='text-[14px] pl-[12px] text-[#ADADAD] mb-[8px]' style={{fontFamily:'Lato-400'}}>Actions</Text>
         {ActionData.map((action,index)=>(
           <View className='bg-[#10102C]'>
-          <SettingButton text={action} key={action+index} />
+            <SettingButton text={action} 
+            key={action+index}  
+            />
+            
           </View>
         ))}
-        </View>
+        </View> */}
 
         <View className='flex mb-[32px]'>
         <Text className='text-[14px] pl-[12px] text-[#ADADAD]  mb-[8px]' style={{fontFamily:'Lato-400'}}>Support</Text>
