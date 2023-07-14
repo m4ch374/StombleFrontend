@@ -5,6 +5,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ImageBackground,
+  Modal,
 } from 'react-native'
 import { useState } from 'react'
 import { FontAwesome } from '@expo/vector-icons'
@@ -16,6 +17,8 @@ import SmallButton from '../../../style/SmallButton'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { HomeStackList } from '../../../navigation/Navigation.interface'
 import React from 'react'
+import AddAccountModal from '../../../components/AddAccountModal'
+import AddSocialMediaModal from '../../../components/AddSocialMediaModal'
 
 interface Props {
   navigation: NativeStackNavigationProp<HomeStackList, 'HomeScreen'>
@@ -37,19 +40,19 @@ const Home = ({ navigation }: Props) => {
   const { height, width } = Dimensions.get('window')
   const [shareModal, setShareModal] = useState(false)
   const [openModal, setOpenModal] = useState(false)
-
+  const [modalVisible, setModalVisible] = useState(false);
   const handleLike = () => {
     if (login) {
       setLiked(!liked)
     } else {
-      navigation.navigate('SignUp')
+      //navigation.navigate('SignUp')
     }
   }
   const handleShare = () => {
     if (login) {
       setShareModal(true)
     } else {
-      navigation.navigate('ComingSoon')
+      //navigation.navigate('ComingSoon')
     }
   }
   const openMore = () => {
@@ -80,15 +83,16 @@ const Home = ({ navigation }: Props) => {
         className='flex-1 p-[12px] relative'
       >
         {/* //scroll up component */}
-        {/* <View className='flex-1 justify-end items-center'>
+        <View className='flex-1 justify-end items-center' style={{ marginTop: '1%' }}>
         <FontAwesome name="hand-pointer-o" size={28} color="white" />
         <Text className='text-[24px] text-white'>
           Scroll up for more
         </Text>
-        </View> */}
+        </View>
+        
 
         <View className='flex-1 px-[12px] flex-row justify-around'>
-          <View className='flex' style={{ marginTop: height - 250 }}>
+          <View className='flex' style={{ marginTop: height - 350 }}>
             <View className='flex-row justify-start items-center'>
               {/* get the data from backend randomly */}
               <View>
@@ -151,17 +155,67 @@ const Home = ({ navigation }: Props) => {
             </View>
           </View>
 
-          {/* icons */}
+          <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                height: 70,
+                width :400,
+                backgroundColor: '#020235',
+                borderTopWidth: 1,
+                borderTopColor: '#ccc',
+                position: 'absolute',
+                bottom: -66,
+                left: -14,
+                right: 0,
+                
+              }}
+            >
+              
+              <TouchableOpacity >
+                <View>
+                  <View style={{ alignItems: 'center' }}>
+                    <AntDesign name="home" size={24} color='#ffffff80'  />
+                    <Text style={{  color: '#ffffff80' }}>Home</Text>
+                  </View>
+                </View>
+                
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <View style={{ alignItems: 'center' }}>
+                  <Ionicons name="md-search" size={24} color="#ffffff80"  />
+                  <Text style={{  color: "#ffffff80"  }}>Search</Text>
+
+                </View>
+                
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <View style={{ alignItems: 'center' }}>
+                  <FontAwesome name="bell" size={24} color="#ffffff80"  />
+                  <Text style={{  color: "#ffffff80"  }}>Notifications</Text>
+
+                </View>
+                
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <View style={{ alignItems: 'center' }}>
+                  <Entypo name="user" size={24} color="#ffffff80" />
+                  <Text style={{ color: "#ffffff80"  }}>Profile</Text>
+                </View>
+                
+              </TouchableOpacity>
+            </View>
           <View
             className='fixed gap-[5px]'
-            style={{ marginTop: height / 2 - 100 }}
+            style={{ marginTop: height / 2 - 170 }}
           >
             <View>
               <TouchableOpacity onPress={handleLike}>
                 {liked ? (
                   <AntDesign name='heart' size={24} color='#FC4646' />
                 ) : (
-                  <AntDesign name = 'hearto' size={24} color='white' />
+                  <AntDesign name = 'heart' size={24} color='red' />
                 )}
               </TouchableOpacity>
 
@@ -172,18 +226,45 @@ const Home = ({ navigation }: Props) => {
                  20.9k
               </Text>
             </View>
+            
 
             <View className='fixed'>
               <TouchableOpacity onPress={handleShare}>
-                <Ionicons name='arrow-redo-sharp' size={24} color='white' />
+                <Ionicons name='bookmark' size={24} color='white' />
               </TouchableOpacity>
+              <Text
+                className='mb-[37.5px] mt-[5.5px] text-white text-[14px]'
+                style={{ fontFamily: 'Lato-400' }}
+              >
+                Save
+              </Text>
+            </View>
+            <View className='fixed'>
+              <TouchableOpacity onPress={() => setModalVisible(true)}>
+                <Ionicons name='arrow-redo-sharp' size={24} color='white' />
+              </TouchableOpacity >
               <Text
                 className='mb-[37.5px] mt-[5.5px] text-white text-[14px]'
                 style={{ fontFamily: 'Lato-400' }}
               >
                 Share
               </Text>
+              <Modal
+                animationType='slide'
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}>
+              
+                <View className='flex-1 items-center h-[210px] w-full justify-end '>
+                  {<AddAccountModal setModalVisible={setModalVisible} navigation = {navigation}/>}
+                  
+                </View>
+            
+            
+              </Modal>
             </View>
+
+            
 
             <View className='fixed'>
               <TouchableOpacity onPress={openMore}>

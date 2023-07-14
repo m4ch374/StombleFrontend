@@ -4,8 +4,15 @@ import { Entypo } from '@expo/vector-icons';
 import BackgroundColor from '../../../style/BackgroundColor'
 import AccountFileCard from '../../../components/AccountFileCard';
 import RemoveAccountModal from '../../../components/RemoveAccountModal';
+import React from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { ProfileStackList } from '../../../navigation/Navigation.interface'
 
-type Props = {}
+type Props = 
+{
+  navigation: NativeStackNavigationProp<ProfileStackList, 'ManageProfile'>;
+}
 const existedAccounts=[
   {
     key:1, 
@@ -32,7 +39,7 @@ const existedAccounts=[
     img:"https://s3-alpha-sig.figma.com/img/3d5d/1e68/a4da79b862c4929aeac99391dffed1ff?Expires=1678665600&Signature=bQR7qQz42XLxlOxXjwXOxHAeiQAy6aVrtMFeG~y9RAceaU~RI2IyUvFbzpymhqJuDUyV2NqnQIpJRQ5HP8-EnYtU05oo-~~OM3VV4d8ARoiuPlFZ0SkUZ8sRtbDTrBPzsKZk606fxQRwmmc4s8YJRPX0AwG6vG7dU2Zj40HIsVtmifSGa~Ir42knULqTP4KwgB17Cdv4SX9lAmI-o0-zBwTLdK4fsaOTp7SLe7QUVnC7p6irXujJn8Nf9k5aRYufBljz1r4InETK200tnZH0PTfeAWUydP9~C~u8~ZmI2YmXU6HDo0XLWOEYFj4DaYkHyJQyNJQ2wFfN7cPeuNPVtQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
   }
 ]
-const ManageProfile = (props: Props) => {
+const ManageProfile = ({navigation}: Props) => {
   const [modalVisible, setModalVisible] = useState(false)
   const handleDelete=()=>{
     setModalVisible(true)
@@ -45,17 +52,19 @@ const ManageProfile = (props: Props) => {
           <View className='flex-1 flex-row justify-between' key={account.key}>
             <AccountFileCard text={account.name} uri={account.img} height={48} width={48} borderRadius={50} category={account.category}/>
           </View>
-        <Pressable onPress={handleDelete}>
-          <Entypo name="cross" size={20} color="white" />
+        <Pressable onPress={() => navigation.navigate("RemoveProfile")}>
+          {/* <Entypo name="cross" size={20} color="white"  */}
+          <MaterialIcons name="keyboard-arrow-right" size={25} color="white" />
+          
         </Pressable>
         </View>
         ))}
 
-        <Modal animationType='slide' transparent={true} visible={modalVisible}>
+        {/* <Modal animationType='slide' transparent={true} visible={modalVisible}>
           <View className='w-full h-full bg-[#00000070] justify-center items-center'>
            <RemoveAccountModal setModalVisible={setModalVisible} />
           </View>
-        </Modal>
+        </Modal> */}
 
       </View>
     </BackgroundColor>

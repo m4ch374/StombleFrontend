@@ -35,7 +35,9 @@ export type RootTabParamList = {
 export type AuthStackList = {
   HomeScreen: undefined
   LandingWithAccount: undefined
+  RemoveProfile: undefined
   FirstLanding: undefined
+  ManageProfile:undefined
   SignUp: undefined
   SignUpName: undefined
   SignUpDOB: undefined
@@ -44,12 +46,14 @@ export type AuthStackList = {
   LoginWithPassword: undefined
   LoginWithPhone: undefined
   VerifyCode: undefined
+  LogoutModal : undefined
   VerifyPassword: undefined
   ChooseAccountType: undefined
   SignUpBusiness: undefined
   ForgetPassword: undefined
   ResetPassword: undefined
   SignupBusinessName : undefined
+  AddSocialMediaModal:undefined
   Setting:undefined
   
   SetUpPassword: {
@@ -64,12 +68,14 @@ export type HomeStackList = {
   HomeScreen: undefined
   More: undefined
   SignUp: undefined
+  ManageProfile:undefined
   SignUpBusiness: undefined
   LoginWithPassword: undefined
   LoginWithPhone: undefined
   PersonalInfo: undefined
   ComingSoon: undefined
   Setting:undefined
+  RemoveProfile: undefined
   SaveLoginInfor: undefined
   SignupBusinessName : undefined
   VerifyCode: {
@@ -95,11 +101,15 @@ export type ProfileStackList = {
   PersonalInfo: undefined
   AccountManagement: undefined
   UserFileSetting: undefined
+  SettingButton:undefined
+  RemoveProfile: undefined
   ManageProfile: undefined
   Follower: undefined
   Following: undefined
   Liked: undefined  
   History: undefined
+  LogoutModal: undefined
+  
   TopTabs: undefined
   Settings: undefined
   SaveLoginInfor:undefined
@@ -107,6 +117,7 @@ export type ProfileStackList = {
   AddAccountModal: { setModalVisible: any }
   LoginWithPassword: undefined
   SignUpBusiness: undefined
+
 }
 export type SearchStackList = {
   SearchScreen: undefined

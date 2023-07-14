@@ -24,6 +24,8 @@ import HomeTab from '../screens/tab/homeTab/HomeTab';
 import Setting from '../screens/tab/settingTab/Setting';
 import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
 import SignupBusinessName from '../screens/stack/register/SignupBusinessName';
+import ManageProfile from '../screens/stack/user/ManageProfile';
+import RemoveProfile from '../screens/stack/user/RemoveProfile';
 
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
@@ -79,7 +81,7 @@ const AuthStackNavigator = () => {
           name='SignUp'
           component={VerifyCode}
           options={{
-            title: 'Sign Up',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}
@@ -99,12 +101,13 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='HomeScreen' component={Home} />
         <AuthStack.Screen name='VerifyPassword' component={VerifyPassword} />
         <AuthStack.Screen name='Setting' component={Setting} />
+        <AuthStack.Screen name='ManageProfile' component={ManageProfile} />
         <AuthStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
         <AuthStack.Screen
           name='SignupBusinessName'
           component={SignupBusinessName}
           options={{
-            title: 'Sign Up',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}
@@ -143,7 +146,7 @@ const AuthStackNavigator = () => {
           name='LandingWithAccount'
           component={LandingWithAccount}
           options={{
-            title: 'Log In',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}
@@ -156,7 +159,7 @@ const AuthStackNavigator = () => {
           name='SignUp'
           component={VerifyPhone}
           options={{
-            title: 'Sign Up',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}
@@ -165,7 +168,7 @@ const AuthStackNavigator = () => {
           name='SignUpName'
           component={SignUpName}
           options={{
-            title: 'Sign Up',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}
@@ -174,7 +177,7 @@ const AuthStackNavigator = () => {
           name='SignUpDOB'
           component={SignUpDOB}
           options={{
-            title: 'Sign Up',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}
@@ -183,7 +186,7 @@ const AuthStackNavigator = () => {
           name='SignUpGender'
           component={SignUpGender}
           options={{
-            title: 'Sign Up',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}
@@ -198,7 +201,7 @@ const AuthStackNavigator = () => {
           name='VerifyCode'
           component={VerifyCode}
           options={{
-            title: 'Verify Code',
+            title: '',
             headerLeft: () => <LeftHeader />,
             headerTitleAlign: 'center',
           }}
@@ -209,13 +212,16 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='VerifyPassword' component={VerifyPassword} />
         <AuthStack.Screen name='Setting' component={Setting} />
         <AuthStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
+        <AuthStack.Screen name='ManageProfile' component={ManageProfile} />
+        <AuthStack.Screen name='RemoveProfile' component={RemoveProfile} />
+
         { <AuthStack.Screen name='HomeScreen' component={Home} /> }
 
         <AuthStack.Screen
           name='SignupBusinessName'
           component={SignupBusinessName}
           options={{
-            title: 'Sign Up',
+            title: '',
             headerTitleAlign: 'center',
             headerLeft: () => <LeftHeader />,
           }}

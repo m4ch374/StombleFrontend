@@ -55,7 +55,7 @@ const ChooseAccountType = ({navigation}: Props) => {
               <AccountTypeCard
                 type={item.type}
                 //sourceImage= {item.uri}
-                onPress={() => handelPress(item)}
+                //onPress={() => handelPress(item)}
                 selectedItem={selectedItem}
                 key={item.type}
               />

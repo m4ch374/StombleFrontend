@@ -15,19 +15,19 @@ import { AuthStackList } from '../../../navigation/Navigation.interface';
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, 'SetUpPassword'>;
 }
-const passwordReg=Yup.object({
-  newPassword:Yup.string()
-  .required()
-  .matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
-    'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
-  )
+// const passwordReg=Yup.object({
+//   newPassword:Yup.string()
+//   .required()
+//   .matches(
+//     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
+//     'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+//   )
   
-  ,
-  confirmPW:Yup.string()
-  .required('Confirm password is required')
-  .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
-})
+//   ,
+//   confirmPW:Yup.string()
+//   .required('Confirm password is required')
+//   .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
+// })
 
 const SetUpPassword = ({navigation}:Props ) => {
   const [secureTextEntry, setSecureTextEntry] = useState(false)
@@ -46,7 +46,7 @@ const SetUpPassword = ({navigation}:Props ) => {
         <View>
           <Formik 
               initialValues={{newPassword:'',confirmPW:''}}
-              validationSchema={passwordReg}
+              //validationSchema={passwordReg}
               onSubmit={value=>console.log(value)}>
 
               {(props)=>(

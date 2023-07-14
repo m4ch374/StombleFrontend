@@ -40,7 +40,7 @@ const SignUpDate = ({ navigation }: Props) => {
     const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   
     if (selected > eighteenYearsAgo) {
-      Alert.alert('Invalid Date', 'You must be 18 years or older to sign up.');
+      Alert.alert("Sorry, can't create an Account ", 'To create a Stomble account , your minimum age must be 13 years or over.');
       return;
     }
     

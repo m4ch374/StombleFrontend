@@ -225,8 +225,8 @@ const VerifyCode = ({navigation}: Props) => {
                   <FlatButton
                     text="VERIFY CODE"
                     disabled={Object.keys(props.errors).length!==0 || initialValues.code1===''}
-                    //onPress={() => navigation.navigate('SaveLoginInfor')}
-                    onPress={() => navigation.navigate('ChooseAccountType')}
+                    onPress={() => navigation.navigate('SaveLoginInfor')}
+                    //onPress={() => navigation.navigate('ChooseAccountType')}
                   />
               </View>
               </> 

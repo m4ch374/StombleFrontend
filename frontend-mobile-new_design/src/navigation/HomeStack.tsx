@@ -19,6 +19,8 @@ import VerifyPassword from '../screens/stack/password/VerifyPassword';
 import Setting from '../screens/tab/settingTab/Setting';
 import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
 import SignupBusinessName from '../screens/stack/register/SignupBusinessName';
+import ManageProfile from '../screens/stack/user/ManageProfile';
+import RemoveProfile from '../screens/stack/user/RemoveProfile';
 
 
 const HomeStack = createNativeStackNavigator<HomeStackList>();
@@ -59,6 +61,8 @@ const HomeStackNavigator = ({navigation}: Props) => {
       <HomeStack.Screen name='VerifyPassword' component={VerifyPassword} />
       <HomeStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
       <HomeStack.Screen name='Setting' component={Setting} />
+      <HomeStack.Screen name='ManageProfile' component={ManageProfile} />
+      <HomeStack.Screen name='RemoveProfile' component={RemoveProfile} />
       <HomeStack.Screen name='SignupBusinessName' component={SignupBusinessName} />
       
       <HomeStack.Screen

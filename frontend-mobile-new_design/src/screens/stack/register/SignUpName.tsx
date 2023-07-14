@@ -45,7 +45,7 @@ const SignUpName = ({ navigation }: Props) => {
                   placeholderTextColor='#ffffff80' />
               </View>
 
-              <View className='flex-2 justify-end'>
+              <View className='flex-2 justify-end mb-10'>
                 <FlatButton text='NEXT' disabled={props.values.body === '' ? true : false}
                   onPress={props.handleSubmit} />
               </View>
