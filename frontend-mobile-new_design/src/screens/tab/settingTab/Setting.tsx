@@ -16,7 +16,7 @@ interface Props
 }
 
 const AccountData=['Account Information','Manage Profile','Security']
-const ActionData=['Switch Account Type','Add Account', 'Manage Account']
+const ActionData=['Notifications']
 const SupportData=['Contact Us','Terms and Conditions']
 
 const Setting = ({navigation}: Props) => {
@@ -25,12 +25,15 @@ const Setting = ({navigation}: Props) => {
   const switchMode=()=>{
     
   }
-  const handleSettingButtonPress = (buttonText: string) => {
+  const handleSettingButtonPress = (buttonText: string) => 
+  {
     if (buttonText === 'Manage Profile') {
       navigation.navigate('ManageProfile'); 
     }
-    
-   
+    else if (buttonText === 'Account Information')
+    {
+      navigation.navigate('AccountManagement');
+    }
   };
   return (
     <ScrollView contentContainerStyle={{justifyContent:'center',alignItems:'center'}} 
@@ -51,17 +54,18 @@ const Setting = ({navigation}: Props) => {
         ))}
         </View>
         
-        {/* <View className='flex mb-[32px]'>
-        <Text className='text-[14px] pl-[12px] text-[#ADADAD] mb-[8px]' style={{fontFamily:'Lato-400'}}>Actions</Text>
+        <View className='flex mb-[32px]'>
+        <Text className='text-[14px] pl-[12px] text-[#ADADAD] mb-[8px]' style={{fontFamily:'Lato-400'}}>Alerts</Text>
         {ActionData.map((action,index)=>(
           <View className='bg-[#10102C]'>
-            <SettingButton text={action} 
+            <SettingButton 
+            text={action} 
             key={action+index}  
             />
             
           </View>
         ))}
-        </View> */}
+        </View>
 
         <View className='flex mb-[32px]'>
         <Text className='text-[14px] pl-[12px] text-[#ADADAD]  mb-[8px]' style={{fontFamily:'Lato-400'}}>Support</Text>
@@ -73,7 +77,7 @@ const Setting = ({navigation}: Props) => {
         </View>
 
         <View className='mb-[11px]'>
-          <FlatButton text='Become a Bussiness'   onPress={() => navigation.navigate('SetUpPassword')} />
+          <FlatButton text='Become a Bussiness'   onPress={() => navigation.navigate('AccountManagement')} />
         </View>
 
         <View className='mb-[20px]'>

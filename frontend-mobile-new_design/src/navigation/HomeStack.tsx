@@ -21,6 +21,10 @@ import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
 import SignupBusinessName from '../screens/stack/register/SignupBusinessName';
 import ManageProfile from '../screens/stack/user/ManageProfile';
 import RemoveProfile from '../screens/stack/user/RemoveProfile';
+import Professional from '../screens/Professional/Professional';
+import Search from '../screens/tab/searchTab/Search';
+import AccountManagement from '../screens/stack/commonStacks/AccountManagement';
+import EditName from '../screens/stack/commonStacks/EditName';
 
 
 const HomeStack = createNativeStackNavigator<HomeStackList>();
@@ -61,10 +65,13 @@ const HomeStackNavigator = ({navigation}: Props) => {
       <HomeStack.Screen name='VerifyPassword' component={VerifyPassword} />
       <HomeStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
       <HomeStack.Screen name='Setting' component={Setting} />
-      <HomeStack.Screen name='ManageProfile' component={ManageProfile} />
-      <HomeStack.Screen name='RemoveProfile' component={RemoveProfile} />
-      <HomeStack.Screen name='SignupBusinessName' component={SignupBusinessName} />
-      
+      <HomeStack.Screen name='ManageProfile' component={ManageProfile}/>
+      <HomeStack.Screen name='RemoveProfile' component={RemoveProfile}/>
+      <HomeStack.Screen name='SignupBusinessName' component={SignupBusinessName}/>
+      <HomeStack.Screen name='Professional' component={Professional} />
+      <HomeStack.Screen name='Search' component={Search} />
+      <HomeStack.Screen name='AccountManagement' component={AccountManagement} />
+      <HomeStack.Screen name='EditName' component={EditName} />
       <HomeStack.Screen
         name='ComingSoon'
         component={ComingSoon}

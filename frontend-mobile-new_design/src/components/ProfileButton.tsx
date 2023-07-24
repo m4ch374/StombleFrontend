@@ -1,3 +1,4 @@
+import React from 'react'
 import {useState} from 'react'
 import { Pressable, Text } from 'react-native'
 
@@ -7,12 +8,13 @@ type profileButtonProps={
     bgColor?: string
     text:string,
     onPress?:()=>void
+    
 }
 const ProfileButton = ({height=24,width=163,bgColor='#3D3D5D',onPress,text}:profileButtonProps) => {
-//   const [press, setPress] = useState(false)
-//   if(press){
-//     bgColor==='#326FCB'
-//   }
+  // const [press, setPress] = useState(false)
+  // if(press){
+  //   bgColor==='#326FCB'
+  // }
   return (
     <Pressable 
         onPress={onPress} 

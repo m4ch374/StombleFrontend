@@ -51,12 +51,12 @@ const UserTabs = ({navigation}: Props) => {
       screenOptions={() => ({
         tabBarItemStyle: {
           width: Layout.deviceWidth / 2,
-          // backgroundColor: 'transparent',
+          backgroundColor: 'transparent',
           paddingBottom: 8,
         },
         tabBarContentContainerStyle: {
           width: Layout.deviceWidth,
-          // height: 100,
+          //height: 100,
           backgroundColor: '#02022F',
           justifyContent: 'space-around',
           alignItems: 'flex-start',
@@ -69,29 +69,31 @@ const UserTabs = ({navigation}: Props) => {
         },
       })}>
       <Profile.Screen
-        name='History'
-        component={History}
+        name='Following'
+        component={Following}
         options={{
-          tabBarLabel: ({focused}) => {
-            return (
-              <View className='flex-row gap-[8px] justify-center items-center'
-                style={
-                  focused
-                    ? {
-                        borderWidth: 2,
-                        width: 100,
-                        height: 35,
-                        borderColor: 'transparent',
-                        borderBottomColor: 'white',
-                        // paddingLeft: 20,
-                      }
-                    : {paddingLeft: 20}
-                }>
-                <MaterialIcons name="history" size={24} color={focused?'white':'rgba(255, 255, 255, 0.4)'}/>
-                <Text className='text-[14px] text-white'>History</Text>
-              </View>
-            );
-          },
+          tabBarLabel: ({focused}) => (
+            <View className='flex-row gap-[8px] justify-center items-center'
+              style={
+                focused
+                  ? {
+                      borderWidth: 2,
+                      width: 100,
+                      height: 35,
+                      borderColor: 'transparent',
+                      borderBottomColor: 'white',
+                      // paddingLeft: 20,
+                    }
+                  : {paddingLeft: 20}
+              }>
+              <Feather
+                name='home'
+                size={20}
+                color={focused ? 'white' : 'rgba(255, 255, 255, 0.4)'}
+              />
+                <Text className='text-[14px] text-white'>Following</Text>
+            </View>
+          ),
         }}
       />
       <Profile.Screen
@@ -125,33 +127,34 @@ const UserTabs = ({navigation}: Props) => {
         }}
       />
       <Profile.Screen
-        name='Following'
-        component={Following}
+        name='Liked Vedios'
+        component={History}
         options={{
-          tabBarLabel: ({focused}) => (
-            <View className='flex-row gap-[8px] justify-center items-center'
-              style={
-                focused
-                  ? {
-                      borderWidth: 2,
-                      width: 100,
-                      height: 35,
-                      borderColor: 'transparent',
-                      borderBottomColor: 'white',
-                      // paddingLeft: 20,
-                    }
-                  : {paddingLeft: 20}
-              }>
-              <Feather
-                name='menu'
-                size={20}
-                color={focused ? 'white' : 'rgba(255, 255, 255, 0.4)'}
-              />
-                <Text className='text-[14px] text-white'>Following</Text>
-            </View>
-          ),
+          tabBarLabel: ({focused}) => {
+            return (
+              <View className='flex-row gap-[8px] justify-center items-center'
+                style={
+                  focused
+                    ? {
+                        borderWidth: 2,
+                        width: 100,
+                        height: 35,
+                        borderColor: 'transparent',
+                        borderBottomColor: 'white',
+                        //paddingLeft: 20,
+                      }
+                    : {paddingLeft: 20}
+                }>
+                
+                <MaterialIcons name="bookmark" size={24} color={focused?'white':'rgba(255, 255, 255, 0.4)'}/>
+                <Text className='text-[14px] text-white'>Liked Vedios</Text>
+              </View>
+            );
+          },
         }}
       />
+      
+      
     </Profile.Navigator>
   );
 };

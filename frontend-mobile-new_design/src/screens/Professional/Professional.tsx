@@ -15,10 +15,10 @@ interface Props {
 const profileData=
   {
     key:1, 
-    name:'Monica',
-    job:'Personal Account',
+    name:'Johan',
+    //job:'Personal Account',
     img: "https://s3-alpha-sig.figma.com/img/7dff/f6fb/b01176436ce7505dcf14095cff81bf58?Expires=1678665600&Signature=U8~SPE0AR~bvnKNxFN4I3G3OBgqEJ7nT6hlrOAbV1vjvuKMqkjMLZi89w2ctmMQAr7lHZuJaBotMJhPwnmJRCagMHVLhv-0qQEzvGsmkXIjocmC9S5gMwGSE9e2uD2QHVyEkmA0rwJP-q5Sw4-cJBi~Zi2jsYugDlPphd2C82g3byEpP9o10p44GiDMgnXJtMSN0WMZxhuOYOqV45YxT2WILMshirx6TEWAIFoAVrNxpK~bZyo7cEvyuxuKI7ljczoGudKuGP-rj9wtGnVNbwGnDBxGt5B-a475in4lASZqOvtioVi4SZLe6DM3yOvCoGfc~-bFh7CukAfaIVBbSaA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
-    email:'johanuxdesign.com'
+    //email:'johanuxdesign.com'
   }
 
 const Professional = ({navigation}: Props)=> {
@@ -58,7 +58,7 @@ const Professional = ({navigation}: Props)=> {
             <View className='relative'>
               <FontAwesome5 name='bell' size={20} color='white' />
               <View className='h-3 w-3  bg-[#ff0000d9] flex justify-center items-center absolute top-[1px] left-[-4px]'>
-                <Text className='text-white text-[8px]'>4</Text>
+                <Text className='text-white text-[8px]'>1</Text>
               </View>
             </View>
             <Entypo name='dots-three-vertical' size={20} color='white' />
@@ -70,7 +70,7 @@ const Professional = ({navigation}: Props)=> {
             <AccountFileCard borderRadius={50} height={80} width={80} uri={profileData.img} />
           </View>
 
-          <View className='flex justify-center items-center mr-[14px]'>
+          {/* <View className='flex justify-center items-center mr-[14px]'>
             <Text
               className='text-white text-[17px]'
               style={{fontFamily: 'Roboto-400'}}>
@@ -107,7 +107,7 @@ const Professional = ({navigation}: Props)=> {
               style={{fontFamily: 'Roboto-400'}}>
               Following
             </Text>
-          </View>
+          </View> */}
         </View>
 
         <View className='flex'>
@@ -119,21 +119,21 @@ const Professional = ({navigation}: Props)=> {
           <Text
             className='text-[#A3A3A3] text-[12px] mb-[4px]'
             style={{fontFamily: 'Lato-400'}}>
-            {profileData.job}
+            {/* {profileData.job} */}
           </Text>
           <Text
             className='text-[#44A1DB] text-[12px] mb-[24px]'
             style={{fontFamily: 'Lato-400'}}>
-            {profileData.email}
+            {/* {profileData.email} */}
           </Text>
         </View>
 
         <View className='flex-row justify-between mb-[34px]'>
-          <ProfileButton text='Share Profile' onPress={handleShare} />
-          <ProfileButton text='Edit Profile' onPress={handleEditProfile} />
+          {/* <ProfileButton text='Share Profile' onPress={handleShare} />
+          <ProfileButton text='Edit Profile' onPress={handleEditProfile} /> */}
         </View>
 
-        <View className='flex-1 h-[500px]'>
+        <View className='flex-2 h-[700px]'>
           <UserTabs navigation={undefined} />
         </View>
 
@@ -141,7 +141,7 @@ const Professional = ({navigation}: Props)=> {
           <Pressable
             onPress={() => setModalVisible(false)}
             className='flex-1 w-full bg-[#00000070] justify-end'>
-            {/* <ProfileModal navigation={navigation} setModalVisible={setModalVisible} /> */}
+            {/* { <ProfileModal navigation={navigation} setModalVisible={setModalVisible} />} */}
           </Pressable>
         </Modal>
       </ScrollView>

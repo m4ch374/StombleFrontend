@@ -1,4 +1,6 @@
-import {
+
+import 
+{
   StyleSheet,
   ScrollView,
   View,
@@ -7,12 +9,16 @@ import {
   FlatList,
   TextInput,
   Dimensions,
-} from "react-native";
+} 
+from "react-native";
 import React, { useEffect, useState } from "react";
 import { SearchBar } from "react-native-elements";
+import { HomeStackList } from "../../../navigation/Navigation.interface";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface ISearchBarProps {
   onSearch?: (searchTerm: string) => void;
+  navigation: NativeStackNavigationProp<HomeStackList, 'Search'>
 }
 
 interface User {
@@ -28,12 +34,13 @@ interface User {
   };
 }
 
-const Search = ({onSearch}: ISearchBarProps) => {
+const Search = ({onSearch, navigation}: ISearchBarProps) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
+  useEffect(() => 
+  {
     fetchData('https://randomuser.me/api/?results=10');
   }, []);
 
@@ -44,7 +51,9 @@ const Search = ({onSearch}: ISearchBarProps) => {
       setData(json.results);
       setFilteredData(json.results);
       console.log(json.results);
-    } catch (error) {
+    } 
+    catch (error) 
+    {
       console.error(error);
     }
   };
@@ -67,7 +76,6 @@ const Search = ({onSearch}: ISearchBarProps) => {
 
 
   return (
-    
     <View className='flex-1 py-6' style={{height: height, width: width}}>
       <TextInput
         inlineImageLeft='search_icon'

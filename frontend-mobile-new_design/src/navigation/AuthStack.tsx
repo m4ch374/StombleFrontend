@@ -26,6 +26,10 @@ import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
 import SignupBusinessName from '../screens/stack/register/SignupBusinessName';
 import ManageProfile from '../screens/stack/user/ManageProfile';
 import RemoveProfile from '../screens/stack/user/RemoveProfile';
+import Professional from '../screens/Professional/Professional';
+import Search from '../screens/tab/searchTab/Search';
+import AccountManagement from '../screens/stack/commonStacks/AccountManagement';
+import EditName from '../screens/stack/commonStacks/EditName';
 
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
@@ -103,6 +107,11 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='Setting' component={Setting} />
         <AuthStack.Screen name='ManageProfile' component={ManageProfile} />
         <AuthStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
+        <AuthStack.Screen name='Professional' component={Professional} />
+        <AuthStack.Screen name='Search' component={Search} />
+        <AuthStack.Screen name='AccountManagement' component={AccountManagement} />
+        <AuthStack.Screen name='EditName' component={EditName} />
+
         <AuthStack.Screen
           name='SignupBusinessName'
           component={SignupBusinessName}
@@ -214,8 +223,11 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='SaveLoginInfor' component={SaveLoginInfor} />
         <AuthStack.Screen name='ManageProfile' component={ManageProfile} />
         <AuthStack.Screen name='RemoveProfile' component={RemoveProfile} />
-
-        { <AuthStack.Screen name='HomeScreen' component={Home} /> }
+        <AuthStack.Screen name='Professional' component={Professional} />
+        <AuthStack.Screen name='Search' component={Search} />
+        <AuthStack.Screen name='AccountManagement' component={AccountManagement} />
+        <AuthStack.Screen name='EditName' component={EditName} />
+        <AuthStack.Screen name='HomeScreen' component={Home} />  
 
         <AuthStack.Screen
           name='SignupBusinessName'

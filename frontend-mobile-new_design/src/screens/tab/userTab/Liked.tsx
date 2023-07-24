@@ -7,7 +7,7 @@ type Props = {}
 const Liked = (props: Props) => {
   return (
     <BackgroundColor>
-    <View className='p-10 flex-1'>
+    <View className='p-11 flex-2'>
       <Text className='text-white'>Sorry! No Videos yet</Text>
       <Text></Text>
     </View>

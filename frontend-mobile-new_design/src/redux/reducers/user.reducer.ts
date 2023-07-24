@@ -2,8 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { UserReducer } from "../types";
 
-export const USER_INITIAL_STATE: UserReducer = {
-  user: {
+export const USER_INITIAL_STATE: UserReducer = 
+{
+  user: 
+  {
     fullName: "",
     phoneNumber: "",
     accessToken: "",

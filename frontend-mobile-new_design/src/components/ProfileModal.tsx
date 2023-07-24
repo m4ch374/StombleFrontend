@@ -8,7 +8,6 @@ import { AntDesign } from '@expo/vector-icons';
 import AddAccountModal from './AddAccountModal';
 import { AuthStackList, HomeStackList } from '../navigation/Navigation.interface';
 import React from 'react';
-import AddSocialMediaModal from './AddSocialMediaModal';
 
 
 type Props = {
@@ -75,7 +74,7 @@ const ProfileModal = ({navigation,setModalVisible}: Props) => {
                 visible={addAccountModalVisible}>
                 <ImageBackground style={{flex:1}} source={require('../../assets/nike_joyride.png')}>
                 <View className='flex-1 items-center h-[210px] w-full justify-end bg-[#00000070] '>
-                    <AddSocialMediaModal navigation={navigation} setModalVisible={setAddAccountModalVisible} />
+                    <AddAccountModal navigation={navigation} setModalVisible={setAddAccountModalVisible} />
                 </View>
                 </ImageBackground>
         </Modal>

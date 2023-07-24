@@ -36,6 +36,7 @@ export type AuthStackList = {
   HomeScreen: undefined
   LandingWithAccount: undefined
   RemoveProfile: undefined
+  EditName:undefined
   FirstLanding: undefined
   ManageProfile:undefined
   SignUp: undefined
@@ -54,6 +55,9 @@ export type AuthStackList = {
   ResetPassword: undefined
   SignupBusinessName : undefined
   AddSocialMediaModal:undefined
+  Professional:undefined
+  AccountManagement:undefined
+  Search:undefined
   Setting:undefined
   
   SetUpPassword: {
@@ -61,23 +65,28 @@ export type AuthStackList = {
     token?: string
   }
   AddAccountModal: undefined
+  
   SaveLoginInfor: undefined
 }
 
 export type HomeStackList = {
   HomeScreen: undefined
   More: undefined
+  Professional:undefined
   SignUp: undefined
   ManageProfile:undefined
   SignUpBusiness: undefined
   LoginWithPassword: undefined
+  EditName:undefined
   LoginWithPhone: undefined
   PersonalInfo: undefined
   ComingSoon: undefined
+  Search:undefined
   Setting:undefined
   RemoveProfile: undefined
   SaveLoginInfor: undefined
   SignupBusinessName : undefined
+  AccountManagement: undefined
   VerifyCode: {
     email: string
   }
@@ -95,7 +104,8 @@ export type HomeStackList = {
   }
 }
 
-export type ProfileStackList = {
+export type ProfileStackList = 
+{
   Profile: undefined
   AccountHome: undefined
   PersonalInfo: undefined
@@ -104,12 +114,15 @@ export type ProfileStackList = {
   SettingButton:undefined
   RemoveProfile: undefined
   ManageProfile: undefined
+  Professional:undefined
+  EditName:undefined
+  Search:undefined
   Follower: undefined
   Following: undefined
   Liked: undefined  
   History: undefined
   LogoutModal: undefined
-  
+  AddSocialMediaModal:undefined
   TopTabs: undefined
   Settings: undefined
   SaveLoginInfor:undefined
@@ -117,8 +130,8 @@ export type ProfileStackList = {
   AddAccountModal: { setModalVisible: any }
   LoginWithPassword: undefined
   SignUpBusiness: undefined
-
 }
+
 export type SearchStackList = {
   SearchScreen: undefined
   Following: undefined

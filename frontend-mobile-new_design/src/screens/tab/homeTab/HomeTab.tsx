@@ -182,7 +182,7 @@ const Home = ({ navigation }: Props) => {
                 </View>
                 
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('Search')}>
                 <View style={{ alignItems: 'center' }}>
                   <Ionicons name="md-search" size={24} color="#ffffff80"  />
                   <Text style={{  color: "#ffffff80"  }}>Search</Text>
@@ -198,7 +198,7 @@ const Home = ({ navigation }: Props) => {
                 </View>
                 
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity  onPress={() => navigation.navigate('Professional')}>
                 <View style={{ alignItems: 'center' }}>
                   <Entypo name="user" size={24} color="#ffffff80" />
                   <Text style={{ color: "#ffffff80"  }}>Profile</Text>

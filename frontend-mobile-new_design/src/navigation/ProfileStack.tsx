@@ -8,6 +8,9 @@ import Setting from '../screens/tab/settingTab/Setting';
 import SaveLoginInfor from '../screens/stack/login/SaveLoginInfor';
 import ManageProfile from '../screens/stack/user/ManageProfile';
 import RemoveProfile from '../screens/stack/user/RemoveProfile';
+import Professional from '../screens/Professional/Professional';
+import AccountManagement from '../screens/stack/commonStacks/AccountManagement';
+import EditName from '../screens/stack/commonStacks/EditName';
 
 const profileStack=createNativeStackNavigator<ProfileStackList>()
 
@@ -22,6 +25,10 @@ const ProfileStack = () => {
         <profileStack.Screen name='ManageProfile' component={ManageProfile}/>
         <profileStack.Screen name='RemoveProfile' component={RemoveProfile}/>
         <profileStack.Screen name='SaveLoginInfor' component={SaveLoginInfor}/>
+        <profileStack.Screen name='Professional' component={Professional}/>
+        <profileStack.Screen name='AccountManagement' component={AccountManagement}/>
+        <profileStack.Screen name='EditName' component={EditName} />
+
     </profileStack.Navigator>
   )
 }
