@@ -148,7 +148,7 @@ const LandingWithAccount = ({navigation}: Props) =>
           <TouchableOpacity
             onPress={() => setModalVisible(true)}
             //onPress={() => navigation.navigate('LoginWithPassword')}
-            className='flex h-[48px] w-[48px] rounded-[50%] border-[0.75px] border-[#4F4F4F] justify-center items-center'>
+            className='flex h-[48px] rounded-full w-[48px] border border-[#4F4F4F] justify-center items-center'>
             <AntDesign name ='plus' size={20} color='#ffffff' ></AntDesign>
             
           </TouchableOpacity>
