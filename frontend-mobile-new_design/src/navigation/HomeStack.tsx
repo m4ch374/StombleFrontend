@@ -25,6 +25,7 @@ import Professional from '../screens/Professional/Professional';
 import Search from '../screens/tab/searchTab/Search';
 import AccountManagement from '../screens/stack/commonStacks/AccountManagement';
 import EditName from '../screens/stack/commonStacks/EditName';
+import AuthStack from './AuthStack';
 
 
 const HomeStack = createNativeStackNavigator<HomeStackList>();
@@ -72,11 +73,13 @@ const HomeStackNavigator = ({navigation}: Props) => {
       <HomeStack.Screen name='Search' component={Search} />
       <HomeStack.Screen name='AccountManagement' component={AccountManagement} />
       <HomeStack.Screen name='EditName' component={EditName} />
+
       <HomeStack.Screen
         name='ComingSoon'
         component={ComingSoon}
       />
     </HomeStack.Navigator>
+    
   );
 };
 export default HomeStackNavigator;

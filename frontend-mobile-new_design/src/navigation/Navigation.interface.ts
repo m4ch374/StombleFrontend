@@ -59,6 +59,7 @@ export type AuthStackList = {
   AccountManagement:undefined
   Search:undefined
   Setting:undefined
+  MyTabs : undefined
   
   SetUpPassword: {
     password?: string
@@ -83,6 +84,7 @@ export type HomeStackList = {
   ComingSoon: undefined
   Search:undefined
   Setting:undefined
+  MyTabs : undefined
   RemoveProfile: undefined
   SaveLoginInfor: undefined
   SignupBusinessName : undefined
@@ -130,6 +132,8 @@ export type ProfileStackList =
   AddAccountModal: { setModalVisible: any }
   LoginWithPassword: undefined
   SignUpBusiness: undefined
+  MyTabs : undefined
+
 }
 
 export type SearchStackList = {

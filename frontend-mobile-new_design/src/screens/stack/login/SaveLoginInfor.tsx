@@ -59,7 +59,7 @@ const SaveLoginInfor = ({navigation}: Props) => {
           <FlatButton
             text='Not Now'
             bgColor='transparent'
-            onPress={() => navigation.navigate('HomeScreen')}
+            onPress={() => navigation.navigate('MyTabs')}
           />
         </View>
       </View>

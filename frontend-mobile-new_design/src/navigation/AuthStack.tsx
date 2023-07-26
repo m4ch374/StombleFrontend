@@ -30,6 +30,7 @@ import Professional from '../screens/Professional/Professional';
 import Search from '../screens/tab/searchTab/Search';
 import AccountManagement from '../screens/stack/commonStacks/AccountManagement';
 import EditName from '../screens/stack/commonStacks/EditName';
+import MyTabs from '../screens/stack/commonStacks/MyTabs';
 
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
@@ -72,10 +73,10 @@ const AuthStackNavigator = () => {
         {/* <AuthStack.Screen name='LoginWithPhone' component={LoginWithPhone} /> */}
 
         <AuthStack.Screen
-        
+
           name='LandingWithAccount'
           component={LandingWithAccount}
-          options = {{ headerShown: false }}
+          options={{ headerShown: false }}
         />
         <AuthStack.Screen
           name='ChooseAccountType'
@@ -90,7 +91,7 @@ const AuthStackNavigator = () => {
             headerLeft: () => <LeftHeader />,
           }}
         />
-        
+
         <AuthStack.Screen name='SignUpBusiness' component={SignUpBusiness} />
         <AuthStack.Screen name='LoginWithPhone' component={LoginWithPhone} />
         <AuthStack.Screen
@@ -111,6 +112,7 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='Search' component={Search} />
         <AuthStack.Screen name='AccountManagement' component={AccountManagement} />
         <AuthStack.Screen name='EditName' component={EditName} />
+        <AuthStack.Screen name='MyTabs' component={MyTabs} />
 
         <AuthStack.Screen
           name='SignupBusinessName'
@@ -121,11 +123,6 @@ const AuthStackNavigator = () => {
             headerLeft: () => <LeftHeader />,
           }}
         />
-
-
-
-        
-
       </AuthStack.Navigator>
     )
   } else {
@@ -135,7 +132,7 @@ const AuthStackNavigator = () => {
           headerTintColor: '#FFFFFF',
           headerStyle: { backgroundColor: '#020235' },
         }}
-        // initialRouteName={"VerifyEmail"}
+      // initialRouteName={"VerifyEmail"}
       >
         <AuthStack.Screen
           name='LoginWithPassword'
@@ -148,7 +145,7 @@ const AuthStackNavigator = () => {
           component={FirstLanding}
           options={{ headerShown: false }}
         />
-        
+
         {/* <AuthStack.Screen name='LoginWithPhone' component={LoginWithPhone} /> */}
 
         <AuthStack.Screen
@@ -227,7 +224,8 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen name='Search' component={Search} />
         <AuthStack.Screen name='AccountManagement' component={AccountManagement} />
         <AuthStack.Screen name='EditName' component={EditName} />
-        <AuthStack.Screen name='HomeScreen' component={Home} />  
+        <AuthStack.Screen name='HomeScreen' component={Home} />
+        <AuthStack.Screen name='MyTabs' component={MyTabs} />
 
         <AuthStack.Screen
           name='SignupBusinessName'
