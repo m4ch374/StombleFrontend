@@ -36,8 +36,18 @@ const CustomIcon = ({color, size}) => (
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                         // <MaterialCommunityIcons name="home" color={color} size={size} />
-                        //<CustomIcon color={color} size={size} />
                         <Image source={require('../../../../assets/ic_home.png')} style={{ width: 30, height:30 }} />
+                    ),
+                }}
+            />
+             <Tab.Screen
+                name="Search"
+                component={Home}
+                options={{
+                    tabBarLabel: 'Search',
+                    tabBarIcon: ({ color, size }) => (
+                        // <MaterialCommunityIcons name="home" color={color} size={size} />
+                        <Image source={require('../../../../assets/ic_search.png')} style={{ width: 30, height:30 }} />
                     ),
                 }}
             />
