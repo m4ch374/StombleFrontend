@@ -1,0 +1,12 @@
+node_modules/
+/**/node_modules/*
+babel.config.js
+
+# To be removed when we finished all the carry over tasks
+# Refer to JIRA board for more info on carry overs
+src/_shadow_realm
+
+# just in case lol
+dist/
+build/
+out/
