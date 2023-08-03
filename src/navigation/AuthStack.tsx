@@ -43,7 +43,7 @@ const AuthStackNavigator = () => {
           component={SignUpDOB}
         />
 
-<AuthStack.Screen 
+        <AuthStack.Screen 
           name="ChooseAccountType"
           component={ChooseAccountType}
         />

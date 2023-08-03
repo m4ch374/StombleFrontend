@@ -4,7 +4,8 @@ import FlatButton from '../../../components/styled_components/FlatButton'
 import { Link } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AuthStackList } from '../../../types/Navigation'
-import LoginScreenLayout from 'components/styled_components/LoginScreenLayout'
+import BackgroundColour from '../../../components/styled_components/BackgroundColour'
+
 
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, 'ChooseAccountType'>;
@@ -25,61 +26,70 @@ const img = [
     type: 'Personal',
     //uri: require('../../../../assets/registerImage/personalImage.png'),
   },
-  
 ]
-
 const ChooseAccountType = ({ navigation }: Props) => {
   const [disabled, setDisabled] = useState(true)
-  const [selectedItem, setSelectedItem] = useState('')
 
-  const handelPress = (item:item)=>{
-    setSelectedItem(item.type)
+  const handelPress = (item: item) => {
     setDisabled(false)
-    console.log(selectedItem)
   }
   return (
-    <LoginScreenLayout>
-      <View className='flex-1 p-[16px]'>
-        <View className='h-[200px]'>
-          <Text
-            className='text-[18px] text-[#FFFFFF] font-semibold w-full text-center'
-            style={{ fontFamily: 'Lato-700' }}>
-            Choose Account Type
-          </Text>
-         </View>
+    <BackgroundColour>
+      <View className='flex-1 p-[16px]' style={{ flexDirection: 'column', height: '100%' }}>
+        <Text className='text-white text-[16px]' style={{ fontFamily: 'Lato-700' }}>
+          Choose Account type
+        </Text>
 
-        {/* <View className='h-[300px] '>
-          {selectedItem == 'Business' && <BusinessTypeIntro />}
-        </View> */}
-
-        <View className='h-300 pt-8'>
-          <View className=' mb-[16px] '>
-            <FlatButton
-              text='PROCEED'
-              disabled={disabled} onPress={undefined}              // onPress={() =>
-              //   navigation.navigate(
-              //     selectedItem == 'Business' ? 'SignupBusinessName' : 'SaveLoginInfor',
-              //   )
-              // }
-            />
-          </View>
-
-          <View className='flex-row justify-center items-center align-middle'>
-            <Text
-              className='text-[16px] text-white'
-              style={{ fontFamily: 'Lato-700' }}>
-              Already have an account?
+        <View className='flex-row justify-between items-center px-[10px] h-[48px] 
+        w-full rounded-[5px] border-[#ffffff70] border-[1px] mt-[24px]'>
+          <View>
+            <Text className='text-[18px] text-[#ffffff]' style={{ fontFamily: 'Lato-700' }}>
+              Business
             </Text>
-            <View className='ml-[4px]'>
-              <Link to={'/LoginWithPhone'}>
-                <Text className='text-[#326FCB] font-semibold'>Log In</Text>
-              </Link>
-            </View>
+          
           </View>
         </View>
       </View>
-    </LoginScreenLayout>
+
+      <View className='flex-2 justify-end'>
+        <View className='flex-row justify-center items-center mb-[16px]'>
+          <Text className='text-[#C1C1C1] text-[10px]'>
+            By continuing you agree to the
+          </Text>
+
+          <View className='px-[4px]'>
+            <Text className='text-[#326FCB] text-[10px]'>
+              <Link to={'TermsAndPrivacy'} >
+                Terms of Service
+              </Link>
+            </Text>
+          </View>
+
+          <Text className='text-[#C1C1C1] text-[10px]'>
+            and
+          </Text>
+
+          <View className='pl-[4px]'>
+            <Text className='text-[#326FCB] text-[10px]'>
+              <Link to={'TermsAndPrivacy'}>
+                Privacy Policies
+              </Link>
+            </Text>
+          </View>
+        </View>
+
+        {/* TODO: Logic based nav & popup */}
+        <View className="mb-[36px] style={{ marginLeft: '20px', marginRight: '20px' }}">
+          <FlatButton
+            text="SIGN UP"
+            disabled={disabled}
+            onPress={() => navigation.navigate('SignUpName')}
+          // onPress={togglePopup} // haha found you
+          />
+        </View>
+      </View>
+
+    </BackgroundColour>
   )
 }
-
 export default ChooseAccountType

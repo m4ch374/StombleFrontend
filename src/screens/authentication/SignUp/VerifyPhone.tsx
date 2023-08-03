@@ -1,6 +1,6 @@
 // Code copied from the shadow realm
 
-import { Text, View, TouchableOpacity, Modal, StyleSheet,TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { Text, View, TouchableOpacity, Modal, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { useState } from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import BackgroundColour from '../../../components/styled_components/BackgroundColour'
@@ -79,7 +79,7 @@ const VerifyPhone = ({ navigation }: Props) => {
               text="SEND CODE"
               disabled={disabled}
               onPress={() => navigation.navigate('SignUpName')}
-              // onPress={togglePopup} // haha found you
+            // onPress={togglePopup} // haha found you
             />
           </View>
 
@@ -111,7 +111,7 @@ const VerifyPhone = ({ navigation }: Props) => {
                 <Text style={[styles.popupsmallText, { textAlign: 'center' }]}>You already have an account with this contact info.
                   Do you want to create another account with the same mobile number?</Text>
 
-                <View style={styles.containerdivider}>  
+                <View style={styles.containerdivider}>
                   <Divider />
                 </View>
 
@@ -120,11 +120,11 @@ const VerifyPhone = ({ navigation }: Props) => {
                     togglePopup() // Close the popup
                     navigation.navigate('SignUpBusinessName') // Navigate to the next page
                   }}
-                  >
-                    <Text style={[styles.popupsblueText, { textAlign: 'center' }]}>
-                      Yes, use the same mobile number
-                    </Text>
-                  </TouchableOpacity>
+                >
+                  <Text style={[styles.popupsblueText, { textAlign: 'center' }]}>
+                    Yes, use the same mobile number
+                  </Text>
+                </TouchableOpacity>
 
                 <View style={styles.containerdivider}>
                   <Divider />
