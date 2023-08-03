@@ -72,7 +72,7 @@ const SignUpDOB = ({ navigation }: Props) => {
           //and navigate to next page
           navigation.dispatch(
             CommonActions.navigate({
-              name: 'LoginRoot',
+              name: 'ChooseAccountType',
             }),
           ))}>
             {/* Bruh what is that */}

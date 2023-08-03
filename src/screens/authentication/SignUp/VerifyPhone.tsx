@@ -1,6 +1,6 @@
 // Code copied from the shadow realm
 
-import { Text, View, TouchableOpacity, Modal, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, Modal, StyleSheet,TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { useState } from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import BackgroundColour from '../../../components/styled_components/BackgroundColour'
@@ -80,15 +80,14 @@ const VerifyPhone = ({ navigation }: Props) => {
               disabled={disabled}
               onPress={() => navigation.navigate('SignUpName')}
               // onPress={togglePopup} // haha found you
-
             />
           </View>
 
           <View className='flex-row justify-center items-center align-middle'>
-            <Text className='text-[16px] text-white' style={{ fontFamily: 'Lato-700' }}>
+            <Text className='text-[16px] text-white mb-[40px]' style={{ fontFamily: 'Lato-700' }}>
               Already have an account?
             </Text>
-            <View className='ml-[2px]'>
+            <View className='ml-[2px] mb-[40px]'>
               <Link to={'/ChooseAccountType'}>
                 <Text className='text-[#326FCB] font-semibold'> Log In</Text>
               </Link>
@@ -197,5 +196,4 @@ const styles = StyleSheet.create({
   },
 
 })
-
 export default VerifyPhone
