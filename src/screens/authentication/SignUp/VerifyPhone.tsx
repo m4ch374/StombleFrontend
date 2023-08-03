@@ -29,115 +29,115 @@ const VerifyPhone = ({ navigation }: Props) => {
   function checkPhoneValidation() { }
   return (
     <BackgroundColour>
-      <View className='flex-1 px-[16px] pt-[28px] gap-[24px]'>
-        <Text className='text-white text-[16px]' style={{ fontFamily: 'Lato-700' }}>
-          Verify your mobile number to get started
-        </Text>
-
-        <View className='flex-1'>
-          <Text className='text-[#ffffff80] text-[14px] leading-[22px] text-start mb-[8px]'>
-            Mobile Number
-          </Text>
-          <PhoneNumberInput
-            setError={setError}
-            setDisabled={setDisabled}
-            setPhone={setPhone}
-            checkValid={checkPhoneValidation}
-          />
-        </View>
-
-        <View className='flex-2 justify-end'>
-          <View className='flex-row justify-center items-center mb-[16px]'>
-            <Text className='text-[#C1C1C1] text-[10px]'>
-              By continuing you agree to the
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View className='flex-1 gap-6 px-4'>
+            <Text className='text-white text-[16px]' style={{ fontFamily: 'Lato-700' }}>
+              Verify your mobile number to get started
             </Text>
 
-            <View className='px-[4px]'>
-              <Text className='text-[#326FCB] text-[10px]'>
-                <Link to={'TermsAndPrivacy'} >
-                  Terms of Service
-                </Link>
+            <View className='flex-1'>
+              <Text className='text-[#ffffff80] text-[14px] leading-[22px] text-start mb-[8px]'>
+                Mobile Number
               </Text>
+              <PhoneNumberInput
+                setError={setError}
+                setDisabled={setDisabled}
+                setPhone={setPhone}
+                checkValid={checkPhoneValidation}
+              />
             </View>
 
-            <Text className='text-[#C1C1C1] text-[10px]'>
-              and
-            </Text>
+            <View className='flex-2 justify-end'>
+              <View className='flex-row justify-center items-center mb-[16px]'>
+                <Text className='text-[#C1C1C1] text-[10px]'>
+                  By continuing you agree to the
+                </Text>
 
-            <View className='pl-[4px]'>
-              <Text className='text-[#326FCB] text-[10px]'>
-                <Link to={'TermsAndPrivacy'}>
-                  Privacy Policies
-                </Link>
-              </Text>
-            </View>
-          </View>
-
-          {/* TODO: Logic based nav & popup */}
-          <View className=" mb-[16px] ">
-            <FlatButton
-              text="SEND CODE"
-              disabled={disabled}
-              onPress={() => navigation.navigate('SignUpName')}
-            // onPress={togglePopup} // haha found you
-            />
-          </View>
-
-          <View className='flex-row justify-center items-center align-middle'>
-            <Text className='text-[16px] text-white mb-[40px]' style={{ fontFamily: 'Lato-700' }}>
-              Already have an account?
-            </Text>
-            <View className='ml-[2px] mb-[40px]'>
-              <Link to={'/ChooseAccountType'}>
-                <Text className='text-[#326FCB] font-semibold'> Log In</Text>
-              </Link>
-            </View>
-          </View>
-        </View>
-
-        {/* TODO: Migrate stylesheet to tailwind */}
-        {/* TODO: Seperate into its own component */}
-        <View style={styles.container}>
-
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={isPopupVisible}
-            onRequestClose={togglePopup}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.popup}>
-                <Text style={[styles.popupText, { textAlign: 'center' }]}>This mobile number matches your existing account!</Text>
-                <Text style={[styles.popupsmallText, { textAlign: 'center' }]}>You already have an account with this contact info.
-                  Do you want to create another account with the same mobile number?</Text>
-
-                <View style={styles.containerdivider}>
-                  <Divider />
-                </View>
-
-                <TouchableOpacity
-                  onPress={() => {
-                    togglePopup() // Close the popup
-                    navigation.navigate('SignUpBusinessName') // Navigate to the next page
-                  }}
-                >
-                  <Text style={[styles.popupsblueText, { textAlign: 'center' }]}>
-                    Yes, use the same mobile number
+                <View className='px-[4px]'>
+                  <Text className='text-[#326FCB] text-[10px]'>
+                    <Link to={'TermsAndPrivacy'} >
+                      Terms of Service
+                    </Link>
                   </Text>
-                </TouchableOpacity>
-
-                <View style={styles.containerdivider}>
-                  <Divider />
                 </View>
 
-                <TouchableOpacity onPress={togglePopup}>
-                  <Text style={[styles.popupdiffText, { textAlign: 'center' }]}>No, use a different number</Text>
-                </TouchableOpacity>
+                <Text className='text-[#C1C1C1] text-[10px]'>
+                  and
+                </Text>
+
+                <View className='pl-[4px]'>
+                  <Text className='text-[#326FCB] text-[10px]'>
+                    <Link to={'TermsAndPrivacy'}>
+                      Privacy Policies
+                    </Link>
+                  </Text>
+                </View>
+              </View>
+
+              {/* TODO: Logic based nav & popup */}
+              <View className=" mb-[16px] ">
+                <FlatButton
+                  text="SEND CODE"
+                  disabled={disabled}
+                  onPress={() => navigation.navigate('SignUpName')}
+                // onPress={togglePopup} // haha found you
+                />
+              </View>
+
+              <View className='flex-row justify-center items-center align-middle'>
+                <Text className='text-[16px] text-white mb-[40px]' style={{ fontFamily: 'Lato-700' }}>
+                  Already have an account?
+                </Text>
+                <View className='ml-[2px] mb-[40px]'>
+                  <Link to={'/ChooseAccountType'}>
+                    <Text className='text-[#326FCB] font-semibold'> Log In</Text>
+                  </Link>
+                </View>
               </View>
             </View>
-          </Modal>
-        </View>
-      </View>
+
+            <View style={styles.container}>
+
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isPopupVisible}
+                onRequestClose={togglePopup}
+              >
+                <View style={styles.modalContainer}>
+                  <View style={styles.popup}>
+                    <Text style={[styles.popupText, { textAlign: 'center' }]}>This mobile number matches your existing account!</Text>
+                    <Text style={[styles.popupsmallText, { textAlign: 'center' }]}>You already have an account with this contact info.
+                      Do you want to create another account with the same mobile number?</Text>
+
+                    <View style={styles.containerdivider}>
+                      <Divider />
+                    </View>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        togglePopup() // Close the popup
+                        navigation.navigate('SignUpBusinessName') // Navigate to the next page
+                      }}
+                    >
+                      <Text style={[styles.popupsblueText, { textAlign: 'center' }]}>
+                        Yes, use the same mobile number
+                      </Text>
+                    </TouchableOpacity>
+
+                    <View style={styles.containerdivider}>
+                      <Divider />
+                    </View>
+
+                    <TouchableOpacity onPress={togglePopup}>
+                      <Text style={[styles.popupdiffText, { textAlign: 'center' }]}>No, use a different number</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
     </BackgroundColour>
   )
 }
