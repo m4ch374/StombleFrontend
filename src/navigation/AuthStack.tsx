@@ -6,6 +6,7 @@ import { AuthStackList } from '../types/Navigation'
 import VerifyPhone from '../screens/authentication/SignUp/VerifyPhone'
 import SignUpName from '../screens/authentication/SignUp/SignUpName'
 import SignUpDOB from '../screens/authentication/SignUp/SignUpDOB'
+import ChooseAccountType from '../screens/authentication/SignUp/ChooseAccountType'
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
 
@@ -41,6 +42,12 @@ const AuthStackNavigator = () => {
           name="SignUpDOB"
           component={SignUpDOB}
         />
+
+        <AuthStack.Screen 
+          name="ChooseAccountType"
+          component={ChooseAccountType}
+        />
+
       </AuthStack.Group>
     </AuthStack.Navigator>
   )

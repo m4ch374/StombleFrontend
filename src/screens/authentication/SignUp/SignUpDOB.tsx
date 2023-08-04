@@ -37,20 +37,20 @@ const SignUpDOB = ({ navigation }: Props) => {
     const selected = new Date(date)
     const today = new Date()
     const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate())
-  
+
     if (selected > eighteenYearsAgo) {
       Alert.alert("Sorry, can't create an Account ", 'To create a Stomble account , your minimum age must be 13 years or over.')
       return
     }
-    
+
     setSelectedDate(selected.toLocaleDateString())
     hideDatePicker()
   }
-  
+
   return (
     <BackgroundColour>
       <View className='flex-1 px-[16px] mt-[34px]'>
-      <View className=' h-[8px] w-FULL bg-white rounded-[5px]'>
+        <View className=' h-[8px] w-FULL bg-white rounded-[5px]'>
           <View className='h-[8px] w-2/3 bg-[#0B52BC] rounded-[5px] '>
             <View className='h-full w-1 bg-black absolute right-0 top-0 straight-r-[5px]'></View>
           </View>
@@ -72,11 +72,11 @@ const SignUpDOB = ({ navigation }: Props) => {
           //and navigate to next page
           navigation.dispatch(
             CommonActions.navigate({
-              name: 'LoginRoot',
+              name: 'ChooseAccountType',
             }),
           ))}>
-            {/* Bruh what is that */}
-            {/* eslint-disable */}
+          {/* Bruh what is that */}
+          {/* eslint-disable */}
           {(props: any) => (
             <View className='flex-1 p-[16px]' style={{ flexDirection: 'column', height: '100%' }}>
 
@@ -91,15 +91,12 @@ const SignUpDOB = ({ navigation }: Props) => {
                       placeholder='01 January 2000'
                       placeholderTextColor='#ffffff' />
                   </View>
-
                   <Pressable onPress={showDatePicker}>
                     <View>
                       <MaterialIcons name="keyboard-arrow-down" size={24} color="white" />
                     </View>
                   </Pressable>
-
                 </View>
-
                 <View>
                   <DateTimePickerModal
                     isVisible={isDatePickerVisible}
@@ -107,12 +104,10 @@ const SignUpDOB = ({ navigation }: Props) => {
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker} />
                 </View>
-
-
               </View>
               <View className='flex-2 justify-end mb-10'>
-              <FlatButton text='NEXT' disabled={props.values.body === '' ? true : false}
-                onPress={props.handleSubmit} />
+                <FlatButton text='NEXT' disabled={props.values.body === '' ? true : false}
+                  onPress={props.handleSubmit} />
 
                 <Modal animationType='slide' transparent={true} visible={dateModal}>
                   <View className='flex-1 w-full justify-end'>
@@ -124,17 +119,12 @@ const SignUpDOB = ({ navigation }: Props) => {
                       onCancel={hideDatePicker} />
                   </View>
                 </Modal>
-
               </View>
-             
             </View>
           )}
-
         </Formik>
-
       </View>
     </BackgroundColour>
   )
 }
-
 export default SignUpDOB

@@ -42,6 +42,8 @@ export type AuthStackList = {
   SignUpDOB: undefined
   SignUpGender: undefined
   ChooseAccount: undefined
+  
+  ChooseAccountType : undefined
 }
 // ===============================================
 
