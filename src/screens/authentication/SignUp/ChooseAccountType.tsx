@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React, { useState } from 'react'
 import FlatButton from '../../../components/styled_components/FlatButton'
 import { Link } from '@react-navigation/native'
@@ -39,18 +39,47 @@ const ChooseAccountType = ({ navigation }: Props) => {
         <Text className='text-white text-[16px]' style={{ fontFamily: 'Lato-700' }}>
           Choose Account type
         </Text>
-
-        <View className='flex-row justify-between items-center px-[10px] h-[48px] 
+        <View className='flex-column items-center px-[10px] h-[90px] 
         w-full rounded-[5px] border-[#ffffff70] border-[1px] mt-[24px]'>
-          <View>
-            <Text className='text-[18px] text-[#ffffff]' style={{ fontFamily: 'Lato-700' }}>
-              Business
-            </Text>
-          
+          <View className='flex-row justify-between items-center mt-[4px]' >
+            <View className='flex-row items-center justify-between'>
+              <Text className='text-[18px] text-[#ffffff]' style={{ fontFamily: 'Lato-700' }}>
+                Business
+              </Text>
+              <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                <Image
+                  source={require('../../../../assets/ic_radio_unfill.png')} // Replace this with the actual path to your image
+                  style={{ width: 18, height: 18 }} // Adjust the width and height as needed
+                />
+              </View>
+            </View>
           </View>
+          <Text className='text-[13px] text-[#C1C1C1] justify-start mt-[10px]' style={{ fontFamily: 'Lato-700' }}>
+            Best for local businesses, brands, organizations,startups and influencers.
+          </Text>
         </View>
-      </View>
 
+        <View className='flex-column items-center px-[10px] h-[90px] 
+        w-full rounded-[5px] border-[#ffffff70] border-[1px] mt-[24px]'>
+          <View className='flex-row justify-between items-center mt-[4px]' >
+            <View className='flex-row items-center justify-between'>
+              <Text className='text-[18px] text-[#ffffff]' style={{ fontFamily: 'Lato-700' }}>
+                Personal
+              </Text>
+              <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                <Image
+                  source={require('../../../../assets/ic_radio_unfill.png')} // Replace this with the actual path to your image
+                  style={{ width: 18, height: 18 }} // Adjust the width and height as needed
+                />
+              </View>
+            </View>
+          </View>
+          <Text className='text-[13px] text-[#C1C1C1] justify-start mt-[10px]' style={{ fontFamily: 'Lato-700' }}>
+            Best for exploring new trends in business and following your favorite accounts.
+          </Text>
+        </View>
+
+      </View>
       <View className='flex-2 justify-end'>
         <View className='flex-row justify-center items-center mb-[16px]'>
           <Text className='text-[#C1C1C1] text-[10px]'>
