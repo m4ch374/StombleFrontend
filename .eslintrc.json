@@ -25,7 +25,8 @@
         "@typescript-eslint",
         "react", 
         "react-hooks",
-        "react-native"
+        "react-native",
+        "header"
     ],
     "settings": {
         "react": {
@@ -42,5 +43,13 @@
         "@typescript-eslint/quotes": "off",
         "@typescript-eslint/semi": ["error", "never"],
         "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }]
-    }
+    },
+    "overrides": [{
+        "files": ["src/screens/**/*.tsx"],
+        "rules": {
+            "header/header": [2, "line", [
+                {"pattern": "^ ?REFERENCE: .+", "template": " REFERENCE: <your screen ref on figma>"}
+            ], 2]
+        }
+    }]
 }

@@ -1,3 +1,5 @@
+// REFERENCE: PLACEHOLDER
+
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { LoginRootTabList } from '../types/Navigation'
 import { useEffect } from 'react'

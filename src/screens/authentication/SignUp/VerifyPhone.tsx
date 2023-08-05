@@ -1,4 +1,6 @@
-// Code copied from the shadow realm
+// REFERENCE: REGISTER-47
+
+// Code copied from shadow-realm
 
 import { Text, View, TouchableOpacity, Modal, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { useState } from 'react'

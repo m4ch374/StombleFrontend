@@ -1,3 +1,5 @@
+// REFERENCE: REGISTER-48
+
 import { View, Text, Image } from 'react-native'
 import React, { useState } from 'react'
 import FlatButton from '../../../components/styled_components/FlatButton'
