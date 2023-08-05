@@ -6,6 +6,7 @@ import { AuthStackList } from '../types/Navigation'
 import VerifyPhone from '../screens/authentication/SignUp/VerifyPhone'
 import SignUpName from '../screens/authentication/SignUp/SignUpName'
 import SignUpDOB from '../screens/authentication/SignUp/SignUpDOB'
+import LoginWithAccount from '../screens/authentication/LoginWithAccount'
 import ChooseAccountType from '../screens/authentication/SignUp/ChooseAccountType'
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
@@ -25,6 +26,7 @@ const AuthStackNavigator = () => {
         options={{ headerShown: false }}
       />
 
+      {/* Sign up Group */}
       <AuthStack.Group
         screenOptions={{ title: "Sign Up" }}
       >
@@ -49,6 +51,11 @@ const AuthStackNavigator = () => {
         />
 
       </AuthStack.Group>
+
+      <AuthStack.Screen
+        name='LoginWithAccount'
+        component={LoginWithAccount} 
+      />
     </AuthStack.Navigator>
   )
 }

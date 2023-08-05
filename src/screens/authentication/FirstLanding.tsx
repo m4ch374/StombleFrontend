@@ -46,7 +46,7 @@ const FirstLanding = ({ navigation }: Props) => {
             */}
             <FlatButton
               text='LOGIN'
-               onPress={() => navigation.navigate('VerifyPhone')}
+               onPress={() => navigation.navigate('LoginWithAccount')}
             />
           </View>
           <View className='flex-row justify-center items-center align-middle mb-24'>
