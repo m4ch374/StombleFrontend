@@ -6,10 +6,8 @@
 // Ok.... here we go.... here comes the refactor bomb... --Henry
 
 // Code copied elsewhere
-import {
-  NavigatorScreenParams,
-} from '@react-navigation/native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { NavigatorScreenParams } from "@react-navigation/native"
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
 
 declare global {
   // TODO: use ES2015 module syntax instead
@@ -28,13 +26,17 @@ export type RootStackList = {
 export type RootStackScreenProps<Screen extends keyof RootStackList> =
   NativeStackScreenProps<RootStackList, Screen>
 
-
 // ===============================================
 // Authentication
 export type AuthStackList = {
   FirstLanding: undefined
 
+  Login: undefined
+
+  ForgetPassword: undefined
+
   VerifyPhone: undefined
+  VerifyCode: undefined
 
   SignUpName: undefined
   SignUpBusinessName: undefined
@@ -44,8 +46,8 @@ export type AuthStackList = {
   ChooseAccount: undefined
 
   LoginWithAccount: undefined
-  
-  ChooseAccountType : undefined
+
+  ChooseAccountType: undefined
 }
 // ===============================================
 
