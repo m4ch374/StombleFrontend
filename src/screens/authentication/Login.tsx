@@ -26,6 +26,7 @@ const Login = ({ navigation }: Props) => {
     setDisabled(!(phone.number.length > 0 && password.length > 0))
   }, [password, phone.number])
 
+  // TODO: integrate endpoint then navigate (VerifyCode)
   const handleOnPress = () => {}
 
   return (
