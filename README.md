@@ -4,16 +4,13 @@ This is a temporary documentation written in haste, would be updated and maintai
 
 ## :robot: 1. Setting up the repo
 
-**:warning: The current state of the frontend is kinda messy, but we do have plans to change it in the next week or two**
+**:warning: There's a lot of peer dependency issues which are carried over by the legacy code that we are working with.**
 
 As per usual, clone and install deps
 ```sh 
-# You might be asking why do we have a folder wrapped insode all code
-# Idk, its here ever since i joined Stomble
-
 $ git clone https://github.com/StombleOfficial/StombleFrontend.git
-$ cd StombleFrontend/frontend-mobile-new_design 
-$ yarn # if you're having issues add '--legacy-peer-deps'
+$ cd StombleFrontend/
+$ yarn # or npm install --legacy-peer-deps
 ```
 
 ### Setting up Android emulator and iOS Simulator
@@ -22,28 +19,90 @@ $ yarn # if you're having issues add '--legacy-peer-deps'
 
 ### Note: 
 ```
-Henry is dirt poor and could only afford Apple juice as his only 
+1. Henry is dirt poor and could only afford Apple juice as his only 
 Apple product. If you're like me you need a vm to run iOS simulators.
-
 It's a canon event ಥ‿ಥ
+
+2. If you're using WSL2, hooking up your android AVD in Windows to
+the expo cli in terminal is kinda tricky, I would suggest not to.
 ```
 
-## :runner: 2. Running your code
-
-FYI: We are using React Native and Expo (full stack comes later i have no time as of writing this lol)
+## :runner: 2. Useful scripts
 
 ```sh
-# Assuming you're in ./StombleFrontend/frontend-mobile-new_design
-# Damn, thats a mouthful
+# Running the expo application
+$ npm start
+$ npm run tunnel # if the first one does not work
 
-$ npx expo start
-# or 
-$ npx expo start --tunnel # depending on your router configuration
+# Linting
+$ npm run lint
+$ npm run lint:fix # if they could be fixed automatically
 ```
 
-## :eyes: 3. The code is messy, where should I start
-Don't, we're refactoring them soon
+## :eyes: 3. Style guide and protocols
 
-----
+### 3.1. Eslint
 
-**WILL BE UPDATED SOON AFTER THE END OF MY TERM IN UNI :muscle:**
+> If you are using `vscode`, it is recommended to install [this extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) from the marketplace.
+
+We are using a modification of the `airbnb` style guide.
+
+I won't be listing all rules, but here are the modifications that were made:
+```
+String Quotations:
+    * No limit 
+    * Both single and double quotes are fine
+
+Semi-colon:
+    * No semicolons (enjoyer)
+
+Floating Promises:
+    * No floating promises allowed
+    * Except for IIFE
+```
+
+### 3.2. File headers 
+
+**FYI:** By file headers we meant a comment at the start of a file
+
+It is ***required*** to include a figma design reference for all `.tsx` files in `./src/screens`
+
+```tsx
+// Reference REGISTER-47
+
+const MyScreen: React.FC = () => {
+    // ..... your code
+}
+
+export default MyScreen
+```
+
+The actual pattern in `regex` if you're interested: `^// ?REFERENCE: .*$`
+
+### 3.3. Commit message guideline
+
+In order to make commit messages as clear as possible, you're highly recommended to follow this format: `category(title): description`
+
+```
+// Examples
+fix(menu bar): fixed overflow issues on smaller screens
+dev(login): integrated with backend
+chore(deps): added new dependencies 
+```
+
+### 3.4. Develop and merge code
+
+When we work on a new feature we open a new branch with the following format:  
+`FMD-<ticket_number>-[optional description]`
+
+After you've finished a feature, make a `Pull Request`.
+
+> :warning: There is currently no branch protection on main, it is down to your own moral compass to not merge your own code by yourself.
+
+---
+
+This is the end of the documentation.  
+I might pull a classic Henry move and just forgor:tm: something.  
+Let me know if there's anything unclear.  
+
+More updates coming soon.
