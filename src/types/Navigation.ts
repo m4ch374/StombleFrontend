@@ -49,7 +49,6 @@ export type AuthStackList = {
 
   ChooseAccountType: undefined
 }
-// ===============================================
 
 export type LoginRootTabList = {
   Home: undefined

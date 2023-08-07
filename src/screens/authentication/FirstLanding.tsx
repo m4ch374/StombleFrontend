@@ -52,7 +52,7 @@ const FirstLanding = ({ navigation }: Props) => {
               Don&apos;t have an account?
             </Text>
             <View className="ml-0.5">
-              <Link to={"/SignUp"}>
+              <Link to={"/SignUpName"}>
                 <Text className="text-white font-semibold"> Register Now</Text>
               </Link>
             </View>

@@ -74,7 +74,7 @@ const SignUpDOB = ({ navigation }: Props) => {
           //and navigate to next page
           navigation.dispatch(
             CommonActions.navigate({
-              name: 'ChooseAccountType',
+              name: '/ChooseAccountType',
             }),
           ))}>
           {/* Bruh what is that */}

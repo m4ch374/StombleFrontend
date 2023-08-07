@@ -8,7 +8,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AuthStackList } from '../../../types/Navigation'
 import BackgroundColour from '../../../components/styled_components/BackgroundColour'
 
-
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, 'ChooseAccountType'>;
 }
@@ -110,16 +109,15 @@ const ChooseAccountType = ({ navigation }: Props) => {
         </View>
 
         {/* TODO: Logic based nav & popup */}
-        <View className="mb-[36px] style={{ marginLeft: '20px', marginRight: '20px' }}">
+        <View className='flex-2 justify-end mb-10'>
           <FlatButton
             text="SIGN UP"
             disabled={disabled}
-            onPress={() => navigation.navigate('SignUpName')}
+            onPress={() => navigation.navigate('SignUpGender')}
           // onPress={togglePopup} // haha found you
           />
         </View>
-      </View>
-
+      </View> 
     </BackgroundColour>
   )
 }
