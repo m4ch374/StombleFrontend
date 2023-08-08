@@ -42,7 +42,10 @@ const FirstLanding = ({ navigation }: Props) => {
   }, [tmpStore.fullName])
 
   useEffect(() => {
-    dispatch(tmpStoreAction.setFullName("another name"))
+    dispatch(tmpStoreAction.setItem({
+      key: "fullName",
+      item: "another name",
+    }))
   }, [dispatch])
 
   return (
