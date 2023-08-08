@@ -10,7 +10,7 @@ type TTmpStore = {
   birthday: string,
   gender: string,
 
-  isForgotPassword: boolean,
+  verifyWithPassword: boolean,
 }
 
 const init: TTmpStore = {
@@ -20,7 +20,7 @@ const init: TTmpStore = {
   fullName: "",
   birthday: "",
   gender: "",
-  isForgotPassword: false,
+  verifyWithPassword: false,
 }
 
 const tmpStoreSlice = createSlice({
@@ -31,7 +31,7 @@ const tmpStoreSlice = createSlice({
     setItem: (state, action: PayloadAction<{ key: keyof TTmpStore, item: TTmpStore[keyof TTmpStore] }>) => {
       const { key, item } = action.payload
 
-      state = {
+      return {
         ...state,
         [key]: item,
       }
