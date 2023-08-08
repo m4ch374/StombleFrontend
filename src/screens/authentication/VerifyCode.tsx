@@ -9,6 +9,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   SafeAreaView,
+  Platform,
 } from "react-native"
 import {
   CodeField,
@@ -17,6 +18,10 @@ import {
   useClearByFocusCell,
 } from "react-native-confirmation-code-field"
 import FlatButton from "../../components/styled_components/FlatButton"
+import { useAppSlector } from "../../redux/hooks"
+import Fetcher from "../../utils/Fetcher"
+import { TConfirm } from "../../types/endpoints"
+import { useNavigation } from "@react-navigation/native"
 
 const VerifyCode = () => {
   const CELL_COUNT = 6
@@ -29,6 +34,9 @@ const VerifyCode = () => {
     value,
     setValue,
   })
+
+  const tmp = useAppSlector(state => state.tmpStore)
+  const navigate = useNavigation()
 
   useEffect(() => {
     setDisabled(value.length !== CELL_COUNT)
@@ -47,80 +55,100 @@ const VerifyCode = () => {
   }, [sendCode, timer])
 
   const handleOnPress = useCallback(() => {
+    const { phone, verifyWithPassword } = tmp
+
+    // Should we move endpoint to a constant file?
+    let result = undefined
+    const endpoint = verifyWithPassword ? "/confirm-code" : "/confirm-pre-sign-up";
+    (async () => {
+      result = await Fetcher.init<TConfirm>("POST", endpoint)
+        .withJsonPaylad({
+          code: value,
+          phone,
+          ...(verifyWithPassword && { password: tmp.password }),
+        })
+        .fetchData()
+    })()
     console.log("code, phone:", value)
-  }, [value])
+
+    // Unresolved promises will be undefined
+    if (typeof result === 'undefined') return
+
+    verifyWithPassword 
+      ? navigate.navigate("LoginRoot", { screen: "Home" }) 
+      : navigate.navigate("Auth", { screen: "ChooseAccountType" })
+  }, [navigate, tmp, value])
 
   return (
     <BackgroundColour>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-        <SafeAreaView>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View className="p-12 flex justify-between h-full">
-              <View className="h-[140px] flex justify-between">
-                <CodeField
-                  ref={ref}
-                  {...props}
-                  value={value}
-                  onChangeText={setValue}
-                  cellCount={CELL_COUNT}
-                  rootStyle={{}}
-                  keyboardType="number-pad"
-                  keyboardAppearance="dark"
-                  textContentType="oneTimeCode"
-                  renderCell={({ index, symbol, isFocused }) => (
-                    <View
-                      key={index}
-                      className={`w-[40] h-[42] flex justify-center rounded border-[0.6px] border-solid border-white`}
-                    >
-                      <Text
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView className="flex-1" behavior={Platform.OS == "ios" ? "padding" : "height"}>
+          <SafeAreaView>
+              <View className="p-12 flex justify-between h-full">
+                <View className="h-[140px] flex justify-between">
+                  <CodeField
+                    ref={ref}
+                    {...props}
+                    value={value}
+                    onChangeText={setValue}
+                    cellCount={CELL_COUNT}
+                    keyboardType="number-pad"
+                    keyboardAppearance="dark"
+                    textContentType="oneTimeCode"
+                    renderCell={({ index, symbol, isFocused }) => (
+                      <View
                         key={index}
-                        className={` text-center text-24 text-white text-[16px]`}
-                        style={{ fontFamily: "Lato-700" }}
-                        onLayout={getCellOnLayoutHandler(index)}
+                        className="w-[40px] h-[42px] flex justify-center rounded border border-solid border-white"
                       >
-                        {symbol || (isFocused ? <Cursor /> : null)}
+                        <Text
+                          key={index}
+                          className={` text-center text-24 text-white text-[16px]`}
+                          style={{ fontFamily: "Lato-700" }}
+                          onLayout={getCellOnLayoutHandler(index)}
+                        >
+                          {symbol || (isFocused ? <Cursor /> : null)}
+                        </Text>
+                      </View>
+                    )}
+                  />
+
+                  <View className="my-4">
+                    <Text className="text-14 text-white text-center mb-1">
+                      Enter the 6 digit code we send to
+                    </Text>
+                    <Text className="text-14 text-white text-center">
+                      +61*****23
+                    </Text>
+                  </View>
+                  <View>
+                    {!sendCode ? (
+                      <Text className="text-16 text-white text-center font">
+                        Resend code in {timer} seconds
                       </Text>
-                    </View>
-                  )}
+                    ) : (
+                      <Text
+                        className="text-16 text-white text-center font-bold"
+                        onPress={() => {
+                          setSendCode(false)
+                          setTimer(60)
+                          console.log("resend code")
+                        }}
+                      >
+                        Resend code
+                      </Text>
+                    )}
+                  </View>
+                </View>
+
+                <FlatButton
+                  text={"VERIFY CODE"}
+                  disabled={disable}
+                  onPress={handleOnPress}
                 />
-
-                <View className="my-4">
-                  <Text className="text-14 text-white text-center mb-1">
-                    Enter the 6 digit code we send to
-                  </Text>
-                  <Text className="text-14 text-white text-center">
-                    +61*****23
-                  </Text>
-                </View>
-                <View>
-                  {!sendCode ? (
-                    <Text className="text-16 text-white text-center font">
-                      Resend code in {timer} seconds
-                    </Text>
-                  ) : (
-                    <Text
-                      className="text-16 text-white text-center font-bold"
-                      onPress={() => {
-                        setSendCode(false)
-                        setTimer(60)
-                        console.log("resend code")
-                      }}
-                    >
-                      Resend code
-                    </Text>
-                  )}
-                </View>
               </View>
-
-              <FlatButton
-                text={"VERIFY CODE"}
-                disabled={disable}
-                onPress={handleOnPress}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        </SafeAreaView>
-      </KeyboardAvoidingView>
+          </SafeAreaView>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     </BackgroundColour>
   )
 }

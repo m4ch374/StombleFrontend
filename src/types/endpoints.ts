@@ -4,8 +4,25 @@ export type TEndpoint<Req, Res> = {
   responseType: Res
 }
 
+// ###################################################
+// # Your own types                                  #
+// ###################################################
+
 // ===================================================
-// Your own types
+// /confirm-code && /confirm-pre-sign-up
+// ===================================================
+type ConfirmReq = {
+  code: string,
+  phone: string,
+  password?: string,
+}
+
+export type TConfirm = TEndpoint<ConfirmReq, void>
+// ===================================================
+
+// ===================================================
+// /check-number
+// ===================================================
 type CheckNumReq = {
   phone: string,
 }
@@ -16,3 +33,4 @@ type CheckNumRes = {
 }
 
 export type TCheckNum = TEndpoint<CheckNumReq, CheckNumRes>
+// ===================================================

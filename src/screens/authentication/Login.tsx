@@ -1,19 +1,18 @@
 // REFERENCE: Log in - Login with Mobile Number and Password
 
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { useEffect, useState } from "react"
 import { TouchableWithoutFeedback, View, Text, Keyboard } from "react-native"
-import { AuthStackList } from "../../types/Navigation"
 import BackgroundColour from "../../components/styled_components/BackgroundColour"
 import PhoneNumberInput from "../../components/PhoneNumberInput"
 import BtnWithLoginRegister from "../../components/BtnWithLoginRegister"
 import PasswordInput from "../../components/passwordInput"
+import { useNavigation } from "@react-navigation/native"
 
-interface Props {
-  navigation: NativeStackNavigationProp<AuthStackList, "ForgetPassword">
-}
+// This is the new way of navigating
+// We dont need to type as much hahahahahhahhahahha
+const Login = () => {
+  const navigate = useNavigation()
 
-const Login = ({ navigation }: Props) => {
   const [isValid, setIsValid] = useState(true)
   const [disabled, setDisabled] = useState(true)
   const [phone, setPhone] = useState({
@@ -27,7 +26,11 @@ const Login = ({ navigation }: Props) => {
   }, [password, phone.number])
 
   // TODO: integrate endpoint then navigate (VerifyCode)
-  const handleOnPress = () => {}
+  const handleOnPress = () => {
+    navigate.navigate("Auth", {
+      screen: "VerifyCode",
+    })
+  }
 
   return (
     <BackgroundColour>
@@ -50,7 +53,9 @@ const Login = ({ navigation }: Props) => {
             <PasswordInput password={password} setPassword={setPassword} />
             <Text
               className="text-4 text-[#FFFFFF]"
-              onPress={() => navigation.navigate("ForgetPassword")}
+              onPress={() => navigate.navigate("Auth", {
+                screen: "ForgetPassword",
+              })}
             >
               Forgot Your Password?
             </Text>

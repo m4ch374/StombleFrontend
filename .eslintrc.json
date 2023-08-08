@@ -42,7 +42,8 @@
         ],
         "@typescript-eslint/quotes": "off",
         "@typescript-eslint/semi": ["error", "never"],
-        "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }]
+        "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }],
+        "@typescript-eslint/no-unused-expressions": ["error", { "allowTernary": true }]
     },
     "overrides": [{
         "files": ["src/screens/**/*.tsx"],
