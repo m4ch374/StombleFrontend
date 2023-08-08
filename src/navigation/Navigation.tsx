@@ -8,7 +8,7 @@ const RootStack = createNativeStackNavigator<RootStackList>()
 export default function Navigation() {
   return (
     <RootStack.Navigator
-      initialRouteName='Auth' // Raising concerns after user obtains token
+      initialRouteName='Auth'
       screenOptions={{ headerShown: false }}
     >
       {/* TODO: implement auth logic */}

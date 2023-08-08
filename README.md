@@ -99,10 +99,87 @@ After you've finished a feature, make a `Pull Request`.
 
 > :warning: There is currently no branch protection on main, it is down to your own moral compass to not merge your own code by yourself.
 
+## 4. :notebook: Good to knows
+
+### 4.1. Storage and Redux scheme
+
+Async Storage:
+```json
+{
+    "token": "<string>",
+    "stomble": redux_storage
+}
+```
+
+Redux layout:
+```json
+{
+    "tmpStore": {
+        "phone": "<string>",
+        "password": "<string>",
+        "businessName": "<string>",
+        "isBusiness": boolean,
+        "fullName": "<string>",
+        "birthday": "<string>",
+        "gender": "<string>",
+    },
+    "tokens": { 
+        "currToken": "<string>",
+        // expanding soon to accomodate more features...
+    }
+}
+```
+
+> :thinking: But wait theres token on both the async storage and the redux layout.  
+Yeah, thats why I don't like using redux, it gets goofy when you try to use it outside React Components.
+
+### 4.2. Fetcher
+
+Fetcher is a class wrapped around `axios` in hopes of providing an easier experience calling APIs.
+
+> :warning: The base url includes "/dev"
+
+**Usage: Getting Promises**
+```tsx
+type MyType = TEndpoint<MyRequestType, MyResponseType>
+
+useEffect(() => {
+    const payload: MyType['requestType'] = {
+        phone: "fake number"
+    }
+
+    const my_promise = 
+        Fetcher.init<MyType>("POST", "/check-number")
+          .withJsonPayload(data)
+          .fetchPromise()
+
+    my_promise
+      .then(resp => console.log(resp.data.exists))
+      .catch(e => console.log(e))
+}, [])
+```
+
+**Usage: Getting Data with current Token**
+```tsx
+useEffect(() => {
+    // Use IIFE to prevent loose promises
+    (async () => {
+        const my_data = Fetcher.init<MyType>("POST", "/sign-up")
+                          .withJsonPayload(payload)
+                          .withCurrentToken()
+                          .fetchData()
+
+        console.log(my_data)
+    })()
+}, [])
+```
+
+> :alien: You could chain the methods in any order you want. The 2 terminating methods are `fetchData()` and `fetchPromise()`
+
 ---
 
 This is the end of the documentation.  
-I might pull a classic Henry move and just forgor:tm: something.  
+I might pull a classic Henry move and just forgor :tm: something.  
 Let me know if there's anything unclear.  
 
 More updates coming soon.

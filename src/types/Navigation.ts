@@ -9,8 +9,9 @@
 import { NavigatorScreenParams } from "@react-navigation/native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 
+// Default types for useNavigation, link, ref
+// Refer to react navigation
 declare global {
-  // TODO: use ES2015 module syntax instead
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
     interface RootParamList extends RootStackList {}
