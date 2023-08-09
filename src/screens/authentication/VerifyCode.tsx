@@ -35,7 +35,7 @@ const VerifyCode = () => {
     setValue,
   })
 
-  const tmp = useAppSlector(state => state.tmpStore)
+  const tmp = useAppSlector((state) => state.tmpStore)
   const navigate = useNavigation()
 
   useEffect(() => {
@@ -58,94 +58,99 @@ const VerifyCode = () => {
     const { phone, verifyWithPassword } = tmp
 
     // Should we move endpoint to a constant file?
-    let result = undefined
-    const endpoint = verifyWithPassword ? "/confirm-code" : "/confirm-pre-sign-up";
-    (async () => {
-      result = await Fetcher.init<TConfirm>("POST", endpoint)
+    const endpoint = verifyWithPassword
+      ? "/confirm-code"
+      : "/confirm-pre-sign-up"
+    ;(async () => {
+      const result = await Fetcher.init<TConfirm>("POST", endpoint)
         .withJsonPaylad({
           code: value,
           phone,
           ...(verifyWithPassword && { password: tmp.password }),
         })
         .fetchData()
+
+      console.log("result:", result)
+
+      // Unresolved promises will be undefined
+      if (typeof result === "undefined") return
+
+      verifyWithPassword
+        ? navigate.navigate("LoginRoot", { screen: "Home" })
+        : navigate.navigate("Auth", { screen: "ChooseAccountType" })
     })()
-    console.log("code, phone:", value)
-
-    // Unresolved promises will be undefined
-    if (typeof result === 'undefined') return
-
-    verifyWithPassword 
-      ? navigate.navigate("LoginRoot", { screen: "Home" }) 
-      : navigate.navigate("Auth", { screen: "ChooseAccountType" })
   }, [navigate, tmp, value])
 
   return (
     <BackgroundColour>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView className="flex-1" behavior={Platform.OS == "ios" ? "padding" : "height"}>
+        <KeyboardAvoidingView
+          className="flex-1"
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
           <SafeAreaView>
-              <View className="p-12 flex justify-between h-full">
-                <View className="h-[140px] flex justify-between">
-                  <CodeField
-                    ref={ref}
-                    {...props}
-                    value={value}
-                    onChangeText={setValue}
-                    cellCount={CELL_COUNT}
-                    keyboardType="number-pad"
-                    keyboardAppearance="dark"
-                    textContentType="oneTimeCode"
-                    renderCell={({ index, symbol, isFocused }) => (
-                      <View
-                        key={index}
-                        className="w-[40px] h-[42px] flex justify-center rounded border border-solid border-white"
-                      >
-                        <Text
-                          key={index}
-                          className={` text-center text-24 text-white text-[16px]`}
-                          style={{ fontFamily: "Lato-700" }}
-                          onLayout={getCellOnLayoutHandler(index)}
-                        >
-                          {symbol || (isFocused ? <Cursor /> : null)}
-                        </Text>
-                      </View>
-                    )}
-                  />
-
-                  <View className="my-4">
-                    <Text className="text-14 text-white text-center mb-1">
-                      Enter the 6 digit code we send to
-                    </Text>
-                    <Text className="text-14 text-white text-center">
-                      +61*****23
-                    </Text>
-                  </View>
-                  <View>
-                    {!sendCode ? (
-                      <Text className="text-16 text-white text-center font">
-                        Resend code in {timer} seconds
-                      </Text>
-                    ) : (
+            <View className="p-12 flex justify-between h-full">
+              <View className="h-[140px] flex justify-between">
+                <CodeField
+                  ref={ref}
+                  {...props}
+                  value={value}
+                  onChangeText={setValue}
+                  cellCount={CELL_COUNT}
+                  keyboardType="number-pad"
+                  keyboardAppearance="dark"
+                  textContentType="oneTimeCode"
+                  renderCell={({ index, symbol, isFocused }) => (
+                    <View
+                      key={index}
+                      className="w-[40px] h-[42px] flex justify-center rounded border border-solid border-white"
+                    >
                       <Text
-                        className="text-16 text-white text-center font-bold"
-                        onPress={() => {
-                          setSendCode(false)
-                          setTimer(60)
-                          console.log("resend code")
-                        }}
+                        key={index}
+                        className={` text-center text-24 text-white text-[16px]`}
+                        style={{ fontFamily: "Lato-700" }}
+                        onLayout={getCellOnLayoutHandler(index)}
                       >
-                        Resend code
+                        {symbol || (isFocused ? <Cursor /> : null)}
                       </Text>
-                    )}
-                  </View>
-                </View>
-
-                <FlatButton
-                  text={"VERIFY CODE"}
-                  disabled={disable}
-                  onPress={handleOnPress}
+                    </View>
+                  )}
                 />
+
+                <View className="my-4">
+                  <Text className="text-14 text-white text-center mb-1">
+                    Enter the 6 digit code we send to
+                  </Text>
+                  <Text className="text-14 text-white text-center">
+                    +61*****23
+                  </Text>
+                </View>
+                <View>
+                  {!sendCode ? (
+                    <Text className="text-16 text-white text-center font">
+                      Resend code in {timer} seconds
+                    </Text>
+                  ) : (
+                    <Text
+                      className="text-16 text-white text-center font-bold"
+                      onPress={() => {
+                        setSendCode(false)
+                        setTimer(60)
+                        console.log("resend code")
+                      }}
+                    >
+                      Resend code
+                    </Text>
+                  )}
+                </View>
               </View>
+
+              <FlatButton
+                text={"VERIFY CODE"}
+                disabled={disable}
+                onPress={handleOnPress}
+              />
+            </View>
           </SafeAreaView>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>

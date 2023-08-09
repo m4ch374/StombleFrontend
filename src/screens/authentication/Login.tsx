@@ -7,14 +7,22 @@ import PhoneNumberInput from "../../components/PhoneNumberInput"
 import BtnWithLoginRegister from "../../components/BtnWithLoginRegister"
 import PasswordInput from "../../components/passwordInput"
 import { useNavigation } from "@react-navigation/native"
+import Fetcher from "../../utils/Fetcher"
+import { TSignIn } from "../../types/endpoints"
+import { useAppDispatch } from "../../redux/hooks"
+import { tokenAction } from "../../redux/reducers/tokens.reducer"
+import { tmpStoreAction } from "../../redux/reducers/tmpStore.reducer"
 
 // This is the new way of navigating
 // We dont need to type as much hahahahahhahhahahha
 const Login = () => {
   const navigate = useNavigation()
 
+  const dispatch = useAppDispatch()
+
   const [isValid, setIsValid] = useState(true)
   const [disabled, setDisabled] = useState(true)
+  const [loginError, setLoginError] = useState(false)
   const [phone, setPhone] = useState({
     number: "",
     countryCode: "+61",
@@ -25,11 +33,40 @@ const Login = () => {
     setDisabled(!(phone.number.length > 0 && password.length > 0))
   }, [password, phone.number])
 
-  // TODO: integrate endpoint then navigate (VerifyCode)
-  const handleOnPress = () => {
-    navigate.navigate("Auth", {
-      screen: "VerifyCode",
-    })
+  // TODO LATER: integrate endpoint then navigate (VerifyCode)
+  const handleLogin = () => {
+    // Either this or wrap the whole thing in IIFE
+
+    (async () => {
+      const resp = await Fetcher.init<TSignIn>("POST", "/sign-in")
+        .withJsonPaylad({
+          phone: phone.countryCode + phone.number,
+          password: password,
+        })
+        .fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+
+      if (typeof resp === "undefined") {
+        setLoginError(true)
+        return
+      }
+
+      console.log("resp:", resp)
+
+      dispatch(tokenAction.setToken(resp.AccessToken))
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "phone",
+          item: phone.countryCode + phone.number,
+        }),
+      )
+      dispatch(tmpStoreAction.setItem({ key: "password", item: password }))
+      dispatch(
+        tmpStoreAction.setItem({ key: "verifyWithPassword", item: true }),
+      )
+
+      // Temporary navigate to Home screen directly (verifyCode not working yet)
+      navigate.navigate("LoginRoot", { screen: "Home" })
+    })()
   }
 
   return (
@@ -53,12 +90,20 @@ const Login = () => {
             <PasswordInput password={password} setPassword={setPassword} />
             <Text
               className="text-4 text-[#FFFFFF]"
-              onPress={() => navigate.navigate("Auth", {
-                screen: "ForgetPassword",
-              })}
+              onPress={() =>
+                navigate.navigate("Auth", {
+                  screen: "ForgetPassword",
+                })
+              }
             >
               Forgot Your Password?
             </Text>
+            {/* temporarily put here to indicate wrong login on screen, develop later */}
+            {loginError && (
+              <Text className="text-4 text-red-500">
+                Wrong phone number or password
+              </Text>
+            )}
           </View>
 
           <BtnWithLoginRegister
@@ -66,7 +111,7 @@ const Login = () => {
             ableToLogin={false}
             disabled={disabled}
             setDisabled={setDisabled}
-            onPress={handleOnPress}
+            onPress={handleLogin}
           />
         </View>
       </TouchableWithoutFeedback>

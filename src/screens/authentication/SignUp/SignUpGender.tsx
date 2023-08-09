@@ -1,3 +1,5 @@
+// REFERENCE: <your screen ref on figma>
+
 import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'

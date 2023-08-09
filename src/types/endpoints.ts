@@ -1,6 +1,6 @@
 // Generic Type
 export type TEndpoint<Req, Res> = {
-  requestType: Req,
+  requestType: Req
   responseType: Res
 }
 
@@ -9,12 +9,28 @@ export type TEndpoint<Req, Res> = {
 // ###################################################
 
 // ===================================================
+// /sign-in
+// ===================================================
+type SignInReq = {
+  phone: string
+  password: string
+}
+
+type SignInRes = {
+  AccessToken: string
+  RefreshToken: string
+}
+
+export type TSignIn = TEndpoint<SignInReq, SignInRes>
+// ===================================================
+
+// ===================================================
 // /confirm-code && /confirm-pre-sign-up
 // ===================================================
 type ConfirmReq = {
-  code: string,
-  phone: string,
-  password?: string,
+  code: string
+  phone: string
+  password?: string
 }
 
 export type TConfirm = TEndpoint<ConfirmReq, void>
@@ -24,12 +40,12 @@ export type TConfirm = TEndpoint<ConfirmReq, void>
 // /check-number
 // ===================================================
 type CheckNumReq = {
-  phone: string,
+  phone: string
 }
 
 type CheckNumRes = {
-  exists: boolean,
-  msg: string,
+  exists: boolean
+  msg: string
 }
 
 export type TCheckNum = TEndpoint<CheckNumReq, CheckNumRes>
