@@ -45,10 +45,10 @@ export type AuthStackList = {
   SignUpDOB: undefined
   SignUpGender: undefined
   ChooseAccount: undefined
-
   LoginWithAccount: undefined
-
   ChooseAccountType: undefined
+  
+  SetUpPassword: undefined
 }
 
 export type LoginRootTabList = {

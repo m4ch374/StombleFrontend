@@ -74,7 +74,7 @@ const SignUpGender = ({ navigation }: Props) => {
         <View className='flex-2 justify-end mb-10'>
           <FlatButton
             text="PROCEED"
-            onPress={() => navigation.navigate('ChooseAccountType')} />
+            onPress={() => navigation.navigate('SetUpPassword')} />
         </View>
       </View>
     </BackgroundColour>

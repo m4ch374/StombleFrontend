@@ -68,20 +68,20 @@ const SignUpDOB = ({ navigation }: Props) => {
           </Text>
         </View>
 
-        <Formik initialValues={{ body: '' }} onSubmit={() => (
+        <Formik initialValues={{ body: '' }} 
+        onSubmit={(values) => (
           //send the body date to the backend
 
           //and navigate to next page
           navigation.dispatch(
             CommonActions.navigate({
-              name: '/ChooseAccountType',
+              name: 'SignUpGender',
             }),
           ))}>
           {/* Bruh what is that */}
           {/* eslint-disable */}
           {(props: any) => (
             <View className='flex-1 p-[16px]' style={{ flexDirection: 'column', height: '100%' }}>
-
               <View className='flex-1'>
                 <View className='flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] '>
                   <View>
@@ -100,11 +100,11 @@ const SignUpDOB = ({ navigation }: Props) => {
                   </Pressable>
                 </View>
                 <View>
-                  <DateTimePickerModal
-                    isVisible={isDatePickerVisible}
-                    mode="date"
-                    onConfirm={handleConfirm}
-                    onCancel={hideDatePicker} />
+                <DateTimePickerModal
+                  isVisible={isDatePickerVisible}
+                  mode="date"
+                  onConfirm={d => {handleConfirm(d); props.setFieldValue('body', d)}}
+                  onCancel={hideDatePicker} />
                 </View>
               </View>
               <View className='flex-2 justify-end mb-10'>

@@ -1,14 +1,14 @@
-
 import { View, Text, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
-import LoginScreenLayout from '../../../style/LoginScreenLayout'
 import { Formik } from 'formik'
 import { Ionicons, EvilIcons } from '@expo/vector-icons'
-import FlatButton from '../../../style/FlatButton'
 import * as Yup from 'yup'
 import { Link } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { AuthStackList } from '../../../navigation/Navigation.interface'
+import FlatButton from '../../../components/styled_components/FlatButton'
+import LoginScreenLayout from '../../../components/styled_components/LoginScreenLayout'
+import { AuthStackList } from '../../../types/Navigation'
+import BackgroundColour from '../../../components/styled_components/BackgroundColour'
 
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, 'SetUpPassword'>;
@@ -32,21 +32,20 @@ const SetUpPassword = ({ navigation }: Props) => {
   //const password = "MyPassword123!"; // Replace this with the actual password value
   //const isValidPassword = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/);
   return (
-    <LoginScreenLayout>
+    <BackgroundColour> 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className='p-[16px]'>
+
+      <View className='p-[16px]'>
           <View className='mb-[24px]'>
             <Text className='text-white text-[16px]' style={{ fontFamily: 'Lato-400' }}>
               Set up a password for extra security.
             </Text>
           </View>
-
           <View>
             <Formik
               initialValues={{ newPassword: '', confirmPW: '' }}
               //validationSchema={passwordReg}
               onSubmit={value => console.log(value)}>
-
               {(props) => (
                 <>
                   <View className='mb-[8px]'>
@@ -54,8 +53,7 @@ const SetUpPassword = ({ navigation }: Props) => {
                       style={{ fontFamily: 'Lato-400' }}>
                       New Password
                     </Text>
-                  </View>
-
+                  </View> 
                   <View className='flex-row h-[42px] bg-[#4F4F4F] mb-[24px] rounded-[5px] items-center justify-between px-[12px]'>
                     <TextInput className='text-white text-[16px] h-full'
                       style={{ fontFamily: 'Lato-700' }}
@@ -93,27 +91,23 @@ const SetUpPassword = ({ navigation }: Props) => {
                       {props.errors.newPassword &&
                         <View className='flex-row gap-[6px]'>
                           <EvilIcons name="exclamation" size={24} color="#F4222F" />
-
                           <Text className='text-[#F4222F] text-[14px] pr-[22px]' style={{ marginBottom: 10 }} >
                             {props.errors.newPassword}
                           </Text>
                         </View>}
                       <Text
                         className={`text-[#ABABAB] text-[14px] pr-[20px]`}
-                        style={{ marginBottom: 5 }}
-                      >
+                        style={{ marginBottom: 5 }}>
                         At least 8 characters
                       </Text>
                       <Text
                         className={`text-[#ABABAB] text-[14px] pr-[20px]`}
-                        style={{ marginBottom: 5 }}
-                      >
+                        style={{ marginBottom: 5 }}>
                         An uppercase character
                       </Text>
                       <Text
                         className={`text-[#ABABAB] text-[14px] pr-[20px]`}
-                        style={{ marginBottom: 5 }}
-                      >
+                        style={{ marginBottom: 5 }}>
                         A lowercase character
                       </Text>
                       <Text
@@ -124,8 +118,7 @@ const SetUpPassword = ({ navigation }: Props) => {
                       </Text>
                       <Text
                         className={`text-[#ABABAB] text-[14px] pr-[20px]`}
-                        style={{ marginBottom: 5 }}
-                      >
+                        style={{ marginBottom: 5 }}>
                         A special character
                       </Text>
                     </View>
@@ -157,8 +150,7 @@ const SetUpPassword = ({ navigation }: Props) => {
                   </View>
                   <Text
                     className={`text-[#ABABAB] text-[14px] pr-[20px]`}
-                    style={{ marginBottom: 5 }}
-                  >
+                    style={{ marginBottom: 5 }}>
                     Password match
                   </Text>
 
@@ -182,7 +174,7 @@ const SetUpPassword = ({ navigation }: Props) => {
                     </View>
                   }
 
-                  <View className='flex-row justify-center items-center mb-[16px] mt-[180px]'>
+                 <View className='flex-row justify-center items-center mb-[16px] mt-[20px]'>
                     <Text className='text-[#C1C1C1] text-[10px]'>
                       By continuing you agree to the
                     </Text>
@@ -212,7 +204,6 @@ const SetUpPassword = ({ navigation }: Props) => {
                     text='SEND CODE'
                     disabled={Object.keys(props.errors).length !== 0}
                     onPress={() => navigation.navigate('VerifyCode')}
-
                   />
                 </>
               )}
@@ -220,7 +211,7 @@ const SetUpPassword = ({ navigation }: Props) => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </LoginScreenLayout>
+    </BackgroundColour>
   )
 }
 
