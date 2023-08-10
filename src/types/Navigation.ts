@@ -47,7 +47,7 @@ export type AuthStackList = {
   ChooseAccount: undefined
   LoginWithAccount: undefined
   ChooseAccountType: undefined
-  
+
   SetUpPassword: undefined
 }
 

@@ -3,16 +3,15 @@
 import { View, Text, Keyboard, TouchableWithoutFeedback } from "react-native"
 import { useEffect, useState } from "react"
 import PhoneNumberInput from "../../components/PhoneNumberInput"
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import BackgroundColour from "../../components/styled_components/BackgroundColour"
 import BtnWithLoginRegister from "../../components/BtnWithLoginRegister"
-import { AuthStackList } from "../../types/Navigation"
+import { useNavigation } from "@react-navigation/native"
+import { tmpStoreAction } from "../../redux/reducers/tmpStore.reducer"
+import { useAppDispatch } from "../../redux/hooks"
 
-interface Props {
-  navigation: NativeStackNavigationProp<AuthStackList>
-}
-
-const ForgetPassword = ({ navigation }: Props) => {
+const ForgetPassword = () => {
+  const navigation = useNavigation()
+  const dispatch = useAppDispatch()
   const [isValid, setIsValid] = useState(true)
   const [disable, setDisabled] = useState(true)
   const [phone, setPhone] = useState({
@@ -25,8 +24,13 @@ const ForgetPassword = ({ navigation }: Props) => {
   }, [isValid])
 
   const handleOnPress = () => {
-    console.log("phone:", phone)
-    navigation.navigate("VerifyCode")
+    dispatch(
+      tmpStoreAction.setItem({
+        key: "phone",
+        item: phone.countryCode + phone.number,
+      }),
+    )
+    navigation.navigate("Auth", { screen: "SetUpPassword" })
   }
 
   return (

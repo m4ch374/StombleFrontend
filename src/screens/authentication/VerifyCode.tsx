@@ -7,8 +7,8 @@ import {
   Text,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
   SafeAreaView,
+  KeyboardAvoidingView,
   Platform,
 } from "react-native"
 import {
@@ -57,9 +57,12 @@ const VerifyCode = () => {
   const handleOnPress = useCallback(() => {
     const { phone, verifyWithPassword } = tmp
 
+    console.log(tmp, value)
+
     // Should we move endpoint to a constant file?
+    // Yes -- Yume
     const endpoint = verifyWithPassword
-      ? "/confirm-code"
+      ? "/confirm-code" // CANNOT DO: /confirm-code endpoint not working currently
       : "/confirm-pre-sign-up"
     ;(async () => {
       const result = await Fetcher.init<TConfirm>("POST", endpoint)
@@ -69,9 +72,7 @@ const VerifyCode = () => {
           ...(verifyWithPassword && { password: tmp.password }),
         })
         .fetchData()
-
-      console.log("result:", result)
-
+      console.log(tmp.password)
       // Unresolved promises will be undefined
       if (typeof result === "undefined") return
 
@@ -80,6 +81,12 @@ const VerifyCode = () => {
         : navigate.navigate("Auth", { screen: "ChooseAccountType" })
     })()
   }, [navigate, tmp, value])
+
+  const handleSendCode = () => {
+    setSendCode(false)
+    setTimer(60)
+    console.log("resend code") // CANNOT DO: /resend-code endpoint not working currently
+  }
 
   return (
     <BackgroundColour>
@@ -122,7 +129,7 @@ const VerifyCode = () => {
                     Enter the 6 digit code we send to
                   </Text>
                   <Text className="text-14 text-white text-center">
-                    +61*****23
+                    {tmp.phone}
                   </Text>
                 </View>
                 <View>
@@ -133,11 +140,7 @@ const VerifyCode = () => {
                   ) : (
                     <Text
                       className="text-16 text-white text-center font-bold"
-                      onPress={() => {
-                        setSendCode(false)
-                        setTimer(60)
-                        console.log("resend code")
-                      }}
+                      onPress={handleSendCode}
                     >
                       Resend code
                     </Text>

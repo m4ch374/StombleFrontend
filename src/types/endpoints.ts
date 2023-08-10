@@ -25,6 +25,16 @@ export type TSignIn = TEndpoint<SignInReq, SignInRes>
 // ===================================================
 
 // ===================================================
+// /forgot-password
+// ===================================================
+type ForgotPasswordReq = {
+  phone: string
+}
+
+export type TForgotPassword = TEndpoint<ForgotPasswordReq, void>
+// ===================================================
+
+// ===================================================
 // /confirm-code && /confirm-pre-sign-up
 // ===================================================
 type ConfirmReq = {
