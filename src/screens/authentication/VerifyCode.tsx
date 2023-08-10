@@ -62,9 +62,9 @@ const VerifyCode = () => {
     // Should we move endpoint to a constant file?
     // Yes -- Yume
     const endpoint = verifyWithPassword
-      ? "/confirm-code" // CANNOT DO: /confirm-code endpoint not working currently
-      : "/confirm-pre-sign-up"
-    ;(async () => {
+      ? "/confirm-code"
+      : "/confirm-pre-sign-up";
+    (async () => {
       const result = await Fetcher.init<TConfirm>("POST", endpoint)
         .withJsonPaylad({
           code: value,

@@ -7,37 +7,61 @@ import {
   View,
   TouchableOpacity,
   Modal,
-  StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native"
-import { useState } from "react"
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import React, { useState } from "react"
 import BackgroundColour from "../../../components/styled_components/BackgroundColour"
-import { Link } from "@react-navigation/native"
+import { Link, useNavigation } from "@react-navigation/native"
 import FlatButton from "../../../components/styled_components/FlatButton"
 import PhoneNumberInput from "../../../components/PhoneNumberInput"
-import Divider from "../../../components/Divider"
-import { AuthStackList } from "../../../types/Navigation"
+import { useAppDispatch } from "../../../redux/hooks"
+import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
+import Fetcher from "../../../utils/Fetcher"
+import { TCheckNum } from "../../../types/endpoints"
 
-type Props = {
-  navigation: NativeStackNavigationProp<AuthStackList, "VerifyPhone">
+// Breaking the rules a bit here again
+const Divider: React.FC = () => {
+  return (
+    <View className="border-t border-gray-300/10" />
+  )
 }
 
-// TODO: lint code
-/* eslint-disable */
-const VerifyPhone = ({ navigation }: Props) => {
+const VerifyPhone: React.FC = () => {
+  const navigation = useNavigation()
+  const dispatch = useAppDispatch()
+
   const [isValid, setIsValid] = useState(true)
-  const [disabled, setDisabled] = useState(true)
-  const [error, setError] = useState(null as unknown as boolean) // <- Type assertion hall of fame
+  const [isPopupVisible, setPopupVisible] = useState(false)
   const [phone, setPhone] = useState({
     number: "",
     countryCode: "+61",
   })
-  const [isPopupVisible, setPopupVisible] = useState(false)
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible)
+  }
+
+  const handleBtnPress = () => {
+    (async () => {
+      const resp = await Fetcher.init<TCheckNum>("POST", "/check-number")
+        .withJsonPaylad({ phone: phone.countryCode + phone.number })
+        .fetchData()
+
+      // Ebic leetcode syntax right here
+      if (typeof resp === 'undefined') return
+
+      if (resp.exists) {
+        togglePopup()
+        return
+      }
+
+      dispatch(tmpStoreAction.setItem({ 
+        key: "phone", 
+        item: phone.countryCode + phone.number, 
+      }))
+      navigation.navigate("Auth", { screen: "SignUpName" })
+    })()
   }
 
   return (
@@ -83,13 +107,11 @@ const VerifyPhone = ({ navigation }: Props) => {
               </View>
             </View>
 
-            {/* TODO: Logic based nav & popup */}
             <View className=" mb-[16px] ">
               <FlatButton
-                text="SEND CODE"
-                disabled={disabled}
-                onPress={() => navigation.navigate("SignUpName")}
-                // onPress={togglePopup} // haha found you
+                text="CONTINUE"
+                disabled={phone.number === '' || !isValid}
+                onPress={handleBtnPress}
               />
             </View>
 
@@ -108,114 +130,53 @@ const VerifyPhone = ({ navigation }: Props) => {
             </View>
           </View>
 
-          <View style={styles.container}>
-            <Modal
-              animationType="fade"
-              transparent={true}
-              visible={isPopupVisible}
-              onRequestClose={togglePopup}
-            >
-              <View style={styles.modalContainer}>
-                <View style={styles.popup}>
-                  <Text style={[styles.popupText, { textAlign: "center" }]}>
-                    This mobile number matches your existing account!
-                  </Text>
-                  <Text
-                    style={[styles.popupsmallText, { textAlign: "center" }]}
-                  >
-                    You already have an account with this contact info. Do you
-                    want to create another account with the same mobile number?
-                  </Text>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={isPopupVisible}
+            onRequestClose={togglePopup}
+          >
+            <TouchableWithoutFeedback onPress={() => togglePopup()}>
+              <View className="flex-1 justify-center items-center bg-black/30">
+                <View className="bg-[#2c2c2c] mx-2 rounded-md">
 
-                  <View style={styles.containerdivider}>
-                    <Divider />
+                  <View className="p-4 flex gap-2">
+                    <Text className="text-xl text-white text-center" style={{ fontFamily: 'Lato-700' }}>
+                      This mobile number matches your existing account!
+                    </Text>
+                    <Text className="text-md text-white text-center" style={{ fontFamily: 'Lato-700' }}>
+                      You already have an account with this contact info. Do you
+                      want to create another account with the same mobile number?
+                    </Text>
                   </View>
 
+                  <Divider />
+
                   <TouchableOpacity
-                    onPress={() => {
-                      togglePopup() // Close the popup
-                      navigation.navigate("SignUpBusinessName") // Navigate to the next page
-                    }}
+                    className="py-3"
+                    onPress={togglePopup}
                   >
-                    <Text
-                      style={[styles.popupsblueText, { textAlign: "center" }]}
-                    >
+                    <Text className="text-center text-blue-500 text-[16px]" style={{ fontFamily: 'Lato-700' }}>
                       Yes, use the same mobile number
                     </Text>
                   </TouchableOpacity>
 
-                  <View style={styles.containerdivider}>
-                    <Divider />
-                  </View>
+                  <Divider />
 
-                  <TouchableOpacity onPress={togglePopup}>
-                    <Text
-                      style={[styles.popupdiffText, { textAlign: "center" }]}
-                    >
+                  <TouchableOpacity className="py-3" onPress={togglePopup}>
+                    <Text className="text-center text-[16px] text-white" style={{ fontFamily: 'Lato-700' }}>
                       No, use a different number
                     </Text>
                   </TouchableOpacity>
                 </View>
               </View>
-            </Modal>
-          </View>
+            </TouchableWithoutFeedback>
+          </Modal>
+
         </View>
       </TouchableWithoutFeedback>
     </BackgroundColour>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  openButton: {
-    fontSize: 18,
-    color: "blue",
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  popup: {
-    backgroundColor: "rgba(37, 37, 37, 1)",
-    padding: 20,
-    borderRadius: 8,
-    elevation: 5,
-    marginLeft: "5%",
-    marginRight: "5%",
-  },
-  popupText: {
-    fontSize: 20,
-    marginBottom: 10,
-    fontFamily: "Lato-700",
-    color: "white",
-  },
-  popupsmallText: {
-    fontSize: 16,
-    marginBottom: 10,
-    color: "rgba(255, 255, 255, 1)",
-    fontFamily: "Lato-700",
-  },
-  popupdiffText: {
-    fontSize: 16,
-    marginTop: 10,
-    color: "white",
-    fontFamily: "Lato-700",
-  },
-  popupsblueText: {
-    fontSize: 16,
-    marginTop: 2,
-    marginBottom: 2,
-    color: "rgba(50, 111, 203, 1)",
-    fontFamily: "Lato-700",
-  },
-  containerdivider: {
-    marginTop: 2,
-    padding: 8,
-  },
-})
 export default VerifyPhone

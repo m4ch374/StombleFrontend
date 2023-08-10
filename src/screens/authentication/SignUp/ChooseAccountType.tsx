@@ -1,87 +1,107 @@
 // REFERENCE: REGISTER-48
 
-import { View, Text, Image } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Pressable } from 'react-native'
+import { useState } from 'react'
 import FlatButton from '../../../components/styled_components/FlatButton'
-import { Link } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { AuthStackList } from '../../../types/Navigation'
+import { Link, useNavigation } from '@react-navigation/native'
 import BackgroundColour from '../../../components/styled_components/BackgroundColour'
+import Fetcher from '../../../utils/Fetcher'
+import { TSignUp } from '../../../types/endpoints'
+import { useAppDispatch, useAppSlector } from '../../../redux/hooks'
+import { tokenAction } from '../../../redux/reducers/tokens.reducer'
+import { tmpStoreAction } from '../../../redux/reducers/tmpStore.reducer'
 
-interface Props {
-  navigation: NativeStackNavigationProp<AuthStackList, 'ChooseAccountType'>;
-}
-type item = {
-  id: number;
-  type: string;
-  uri: string;
-}
-const img = [
-  {
-    id: 1,
-    type: 'Business',
-    //uri: require('../../../../assets/registerImage/businessImage.png'),
-  },
-  {
-    id: 2,
-    type: 'Personal',
-    //uri: require('../../../../assets/registerImage/personalImage.png'),
-  },
-]
-const ChooseAccountType = ({ navigation }: Props) => {
-  const [disabled, setDisabled] = useState(true)
 
-  const handelPress = (item: item) => {
-    setDisabled(false)
+type TSelection = "" | "business" | "personal"
+
+const ChooseAccountType = () => {
+  const navigation = useNavigation()
+  const tmp = useAppSlector(state => state.tmpStore)
+  const dispatch = useAppDispatch()
+
+  const [selected, setSelected] = useState<TSelection>('') // ugly hack but works
+
+  const handlePress = () => {
+    if (selected === 'business') {
+      navigation.navigate("Auth", { screen: "SignUpBusinessName" })
+      return
+    }
+
+    (async () => {
+      const resp = await Fetcher.init<TSignUp>("POST", "/sign-up")
+        .withJsonPaylad({
+          phone: tmp.phone,
+          password: tmp.password,
+          businessName: "",
+          isBusiness: false,
+        })
+        .fetchData()
+
+      if (typeof resp === 'undefined') return
+
+      dispatch(tokenAction.setToken(resp.AccessToken))
+      dispatch(tmpStoreAction.clearState())
+      navigation.navigate("LoginRoot", { screen: "Home" })
+    })()
   }
+
   return (
     <BackgroundColour>
-      <View className='flex-1 p-[16px]' style={{ flexDirection: 'column', height: '100%' }}>
+      <View className='flex-1 p-[16px] flex-col h-full gap-8'>
         <Text className='text-white text-[16px]' style={{ fontFamily: 'Lato-700' }}>
           Choose Account type
         </Text>
-        <View className='flex-column items-center px-[10px] h-[90px] 
-        w-full rounded-[5px] border-[#ffffff70] border-[1px] mt-[24px]'>
-          <View className='flex-row justify-between items-center mt-[4px]' >
-            <View className='flex-row items-center justify-between'>
-              <Text className='text-[18px] text-[#ffffff]' style={{ fontFamily: 'Lato-700' }}>
-                Business
-              </Text>
-              <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                <Image
-                  source={require('../../../../assets/ic_radio_unfill.png')} // Replace this with the actual path to your image
-                  style={{ width: 18, height: 18 }} // Adjust the width and height as needed
-                />
-              </View>
-            </View>
+
+        <Pressable 
+          onPress={() => setSelected('business')} 
+          className={`border p-3 rounded-md ${selected === 'business' ? "border-white" : "border-white/50"}`}
+        >
+          <View className='flex-row justify-between'>
+            <Text className='text-[18px] text-white' style={{ fontFamily: 'Lato-700' }}>
+              Business
+            </Text>
+            <View className={`
+              flex
+              items-center
+              justify-center
+              rounded-full 
+              border aspect-square 
+              ${selected === 'business' ? "border-white" : "border-white/50"}
+            `}>
+              {selected === "business" && <View className='w-[60%] h-[60%] bg-white rounded-full' />}
+            </View> 
           </View>
           <Text className='text-[13px] text-[#C1C1C1] justify-start mt-[10px]' style={{ fontFamily: 'Lato-700' }}>
             Best for local businesses, brands, organizations,startups and influencers.
           </Text>
-        </View>
+        </Pressable>
 
-        <View className='flex-column items-center px-[10px] h-[90px] 
-        w-full rounded-[5px] border-[#ffffff70] border-[1px] mt-[24px]'>
-          <View className='flex-row justify-between items-center mt-[4px]' >
-            <View className='flex-row items-center justify-between'>
-              <Text className='text-[18px] text-[#ffffff]' style={{ fontFamily: 'Lato-700' }}>
-                Personal
-              </Text>
-              <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                <Image
-                  source={require('../../../../assets/ic_radio_unfill.png')} // Replace this with the actual path to your image
-                  style={{ width: 18, height: 18 }} // Adjust the width and height as needed
-                />
-              </View>
-            </View>
+        <Pressable 
+          onPress={() => setSelected('personal')} 
+          className={`border p-3 rounded-md ${selected === 'personal' ? "border-white" : "border-white/50"}`}
+        >
+          <View className='flex-row justify-between'>
+            <Text className='text-[18px] text-white' style={{ fontFamily: 'Lato-700' }}>
+              Personal
+            </Text>
+            <View className={`
+              flex
+              items-center
+              justify-center
+              rounded-full 
+              border aspect-square 
+              ${selected === 'personal' ? "border-white" : "border-white/50"}
+            `}>
+              {selected === "personal" && <View className='w-[60%] h-[60%] bg-white rounded-full' />}
+            </View> 
           </View>
           <Text className='text-[13px] text-[#C1C1C1] justify-start mt-[10px]' style={{ fontFamily: 'Lato-700' }}>
-            Best for exploring new trends in business and following your favorite accounts.
+            Best for exploring new trends in business and following your favourite accounts.
           </Text>
-        </View>
-
+        </Pressable>
       </View>
-      <View className='flex-2 justify-end'>
+
+      <View className='mb-16 mx-4'>
         <View className='flex-row justify-center items-center mb-[16px]'>
           <Text className='text-[#C1C1C1] text-[10px]'>
             By continuing you agree to the
@@ -108,15 +128,11 @@ const ChooseAccountType = ({ navigation }: Props) => {
           </View>
         </View>
 
-        {/* TODO: Logic based nav & popup */}
-        <View className='flex-2 justify-end mb-10'>
-          <FlatButton
-            text="SIGN UP"
-            disabled={disabled}
-            onPress={() => navigation.navigate('SignUpGender')}
-          // onPress={togglePopup} // haha found you
-          />
-        </View>
+        <FlatButton
+          text="SIGN UP"
+          disabled={selected === ''}
+          onPress={handlePress}
+        />
       </View> 
     </BackgroundColour>
   )

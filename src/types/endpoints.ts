@@ -25,6 +25,19 @@ export type TSignIn = TEndpoint<SignInReq, SignInRes>
 // ===================================================
 
 // ===================================================
+// /sign-up
+// ===================================================
+type SignUpReq = {
+  phone: string
+  password: string
+  businessName: string
+  isBusiness: boolean
+}
+
+export type TSignUp = TEndpoint<SignUpReq, SignInRes>
+// ===================================================
+
+// ===================================================
 // /forgot-password
 // ===================================================
 type ForgotPasswordReq = {
@@ -59,4 +72,19 @@ type CheckNumRes = {
 }
 
 export type TCheckNum = TEndpoint<CheckNumReq, CheckNumRes>
+// ===================================================
+
+
+// ===================================================
+// /pre-sign-up
+// ===================================================
+type PreSignUpReq = {
+  phone: string,
+  password: string,
+  fullName: string,
+  birthday: string,
+  gender: string
+}
+
+export type TPreSignUp = TEndpoint<PreSignUpReq, void>
 // ===================================================

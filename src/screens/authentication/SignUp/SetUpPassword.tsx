@@ -9,7 +9,7 @@ import PasswordInput from "../../../components/passwordInput"
 import { useAppDispatch, useAppSlector } from "../../../redux/hooks"
 import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
 import Fetcher from "../../../utils/Fetcher"
-import { TForgotPassword } from "../../../types/endpoints"
+import { TForgotPassword, TPreSignUp } from "../../../types/endpoints"
 
 // Breaking the rules here a bit
 type TPasswordCheck = {
@@ -32,8 +32,8 @@ const PasswordCheck: React.FC<TPasswordCheck> = ({ children, criteria }) => {
 
 const SetUpPassword = () => {
   const navigation = useNavigation()
-  const phoneNum = useAppSlector((state) => state.tmpStore.phone)
   const dispatch = useAppDispatch()
+  const tmpVars = useAppSlector(state => state.tmpStore)
 
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
@@ -52,32 +52,33 @@ const SetUpPassword = () => {
     return Object.values(regexpCollection).reduce((prev, curr) => {
       return prev && testRegexp(curr) //some funny brain stuff
     }, true)
-  }, [password])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [testRegexp])
 
   const handleSetPassword = () => {
     // TODO: i guess the pre-sign-up thing if i remember correctly? idk
 
     (async () => {
-      const resp = await Fetcher.init<TForgotPassword>(
-        "POST",
-        "/forgot-password",
-      )
-        .withJsonPaylad({
-          phone: phoneNum,
-        })
-        .fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+      const fetcherInstance: Fetcher<TForgotPassword | TPreSignUp> = tmpVars.verifyWithPassword 
+        ? Fetcher.init<TForgotPassword>("POST", "/forgot-password")
+        : Fetcher.init<TPreSignUp>("POST", "/pre-sign-up")
 
-      if (typeof resp === "undefined") {
-        return
-      }
+      const resp = await fetcherInstance.withJsonPaylad({
+        phone: tmpVars.phone,
+        ...(!tmpVars.verifyWithPassword && {
+          password: tmpVars.password,
+          fullName: tmpVars.fullName,
+          birthday: tmpVars.birthday,
+          gender: tmpVars.gender,
+        }),
+      }).fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+
+      // Another ebic leetcode syntax
+      if (typeof resp === "undefined") return
 
       console.log("resp:", resp)
 
-      dispatch(tmpStoreAction.setItem({ key: "phone", item: phoneNum }))
       dispatch(tmpStoreAction.setItem({ key: "password", item: confirm }))
-      dispatch(
-        tmpStoreAction.setItem({ key: "verifyWithPassword", item: true }),
-      )
       navigation.navigate("Auth", { screen: "VerifyCode" })
     })()
   }
@@ -165,7 +166,7 @@ const SetUpPassword = () => {
 
             <PasswordInput password={confirm} setPassword={setConfirm} />
 
-            {password === confirm && (
+            {password === confirm && allMatches && (
               <Text className="text-[#ABABAB] text-[14px] text-green-500/90">
                 ✔ Password match
               </Text>

@@ -3,9 +3,16 @@
 // From shadow realm
 // TODO: Lint
 
-import { Text, TextInput, View, Pressable, Modal, Alert } from 'react-native'
+import { 
+  Text, 
+  TextInput, 
+  View, 
+  Pressable, 
+  Modal, 
+  TouchableOpacity,
+  TouchableWithoutFeedback, 
+} from 'react-native'
 import { useState } from 'react'
-import { Formik } from 'formik'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { MaterialIcons } from '@expo/vector-icons'
 import FlatButton from '../../../components/styled_components/FlatButton'
@@ -14,18 +21,24 @@ import { AuthStackList } from '../../../types/Navigation'
 // Issues with the library itself
 // eslint-disable-next-line import/no-named-as-default
 import DateTimePickerModal from "react-native-modal-datetime-picker"
-import DateModal from '../../../components/DateModel'
 import BackgroundColour from '../../../components/styled_components/BackgroundColour'
-import { CommonActions } from '@react-navigation/native'
+import { useAppDispatch, useAppSlector } from '../../../redux/hooks'
+import { tmpStoreAction } from '../../../redux/reducers/tmpStore.reducer'
+
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, 'SignUpDOB'>
 }
 
 const SignUpDOB = ({ navigation }: Props) => {
-  const [dateModal, setDateModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
   const [selectedDate, setSelectedDate] = useState('')
+
+  // We are using whatever name saved in our redux storage as default
+  const dispatch = useAppDispatch()
+  const dob = useAppSlector(state => state.tmpStore.birthday)
+  const [dateofbirth, setDOB] = useState(dob)
 
   const showDatePicker = () => {
     setDatePickerVisibility(true)
@@ -38,14 +51,18 @@ const SignUpDOB = ({ navigation }: Props) => {
   const handleConfirm = (date: Date) => {
     const selected = new Date(date)
     const today = new Date()
-    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate())
+    const threashold = new Date(today.getFullYear() - 13, today.getMonth(), today.getDate())
 
-    if (selected > eighteenYearsAgo) {
-      Alert.alert("Sorry, can't create an Account ", 'To create a Stomble account , your minimum age must be 13 years or over.')
+    if (selected > threashold) {
+      hideDatePicker()
+      setShowModal(true)
       return
     }
 
     setSelectedDate(selected.toLocaleDateString())
+
+    setDOB(selected.toLocaleDateString())
+
     hideDatePicker()
   }
 
@@ -67,64 +84,68 @@ const SignUpDOB = ({ navigation }: Props) => {
             When is your date of birth?
           </Text>
         </View>
+        <View className='flex-1 p-[16px] flex-col h-full'>
+          <Pressable 
+            onPress={showDatePicker}
+            className='flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] '>
+            <TextInput className='text-[16px] text-white'
+              editable={false}
+              selectTextOnFocus={false}
+              value={selectedDate}
+              placeholder={"1/1/2023"}
+              placeholderTextColor='#ffffff' />
+            <View>
+              <MaterialIcons name="keyboard-arrow-down" size={24} color="white" />
+            </View>
+          </Pressable>
+          <View>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker} />
+          </View>
+        </View>
+        <View className='flex-2 justify-end mb-10'>
+          <FlatButton 
+            text='NEXT' 
+            disabled={selectedDate === '' ? true : false}
+            onPress={() => {
+              dispatch(tmpStoreAction.setItem({ key: "birthday", item: dateofbirth }))
+              navigation.navigate("SignUpGender")
+            }}
+          />
+        </View>
 
-        <Formik initialValues={{ body: '' }} 
-        onSubmit={(values) => (
-          //send the body date to the backend
-
-          //and navigate to next page
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'SignUpGender',
-            }),
-          ))}>
-          {/* Bruh what is that */}
-          {/* eslint-disable */}
-          {(props: any) => (
-            <View className='flex-1 p-[16px]' style={{ flexDirection: 'column', height: '100%' }}>
-              <View className='flex-1'>
-                <View className='flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] '>
-                  <View>
-                    <TextInput className='text-[16px] text-white'
-                      editable={false}
-                      selectTextOnFocus={false}
-                      onChangeText={props.handleChange('body')}
-                      value={selectedDate}
-                      placeholder='01 January 2000'
-                      placeholderTextColor='#ffffff' />
-                  </View>
-                  <Pressable onPress={showDatePicker}>
-                    <View>
-                      <MaterialIcons name="keyboard-arrow-down" size={24} color="white" />
-                    </View>
-                  </Pressable>
+        <Modal
+          animationType="fade"
+          visible={showModal}
+          transparent={true}
+        >
+          <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
+            <View className='bg-black/30 w-full h-full flex justify-center items-center'>
+              <View className='bg-[#2c2c2c] rounded-md flex items-center justify-center w-[90%]'>
+                <View className='p-5 flex gap-2'>
+                  <Text className='text-white text-xl text-center' style={{ fontFamily: 'Lato-700' }}>
+                    Sorry can&apos;t create an account
+                  </Text>
+                  <Text className='text-gray-300/60 text-lg text-center' style={{ fontFamily: 'Lato-700' }}>
+                    To create a Stomble account your minimum age must be 13 years or over
+                  </Text>
                 </View>
-                <View>
-                <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode="date"
-                  onConfirm={d => {handleConfirm(d); props.setFieldValue('body', d)}}
-                  onCancel={hideDatePicker} />
-                </View>
-              </View>
-              <View className='flex-2 justify-end mb-10'>
-                <FlatButton text='NEXT' disabled={props.values.body === '' ? true : false}
-                  onPress={props.handleSubmit} />
 
-                <Modal animationType='slide' transparent={true} visible={dateModal}>
-                  <View className='flex-1 w-full justify-end'>
-                    <DateModal setModalVisable={setDateModal} dateDOB={props.values.body} />
-                    <DateTimePickerModal
-                      isVisible={isDatePickerVisible}
-                      mode="date"
-                      onConfirm={handleConfirm}
-                      onCancel={hideDatePicker} />
-                  </View>
-                </Modal>
+                <TouchableOpacity 
+                  onPress={() => { setShowModal(false) }}
+                  className='py-2 border-t border-gray-300/10 w-full flex items-center justify-center'
+                >
+                  <Text className='text-white text-xl' style={{ fontFamily: 'Lato-700' }}>
+                    OK
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
-          )}
-        </Formik>
+          </TouchableWithoutFeedback>
+        </Modal>
       </View>
     </BackgroundColour>
   )

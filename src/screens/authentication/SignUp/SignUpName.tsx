@@ -1,11 +1,13 @@
 // REFERENCE: REGISTER-43
 
 import { TextInput, Text, View } from 'react-native'
-import { Formik } from 'formik'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import BackgroundColour from '../../../components/styled_components/BackgroundColour'
 import FlatButton from '../../../components/styled_components/FlatButton'
 import { AuthStackList } from '../../../types/Navigation'
+import { useAppDispatch, useAppSlector } from '../../../redux/hooks'
+import { useState } from 'react'
+import { tmpStoreAction } from '../../../redux/reducers/tmpStore.reducer'
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, 'SignUpName'>
@@ -14,6 +16,13 @@ type Props = {
 // TODO: Lint 
 /* eslint-disable */
 const SignUpName = ({ navigation }: Props) => {
+  const dispatch = useAppDispatch()
+
+  // We are using whatever name saved in our redux storage as default
+  const name = useAppSlector(state => state.tmpStore.fullName)
+
+  const [fullname, setFullname] = useState(name)
+
   return (
     <BackgroundColour>
       <View className='flex-1 px-[16px] mt-[34px]'>
@@ -31,28 +40,26 @@ const SignUpName = ({ navigation }: Props) => {
           <Text className='text-[14px] text-[#ffffff80]' style={{ fontFamily: 'Lato-400' }}>What's your Full Name?</Text>
         </View>
 
-        <Formik initialValues={{ body: '' }} onSubmit={() => (
-          //send the name date to the backend
+        <View className='flex-1 justify-between'>
+          <View className='flex h-[48px] w-full pl-[12px] justify-center rounded-[5px] border-[1px] border-gray-500 '>
+            <TextInput className='text-[16px] text-white '
+              onChangeText={setFullname}
+              value={fullname}
+              placeholder={fullname}
+              placeholderTextColor='#ffffff80' />
+          </View>
 
-          //and navigate to the next page
-          navigation.navigate('SignUpDOB'))}>
-          {(props: any) => (
-            <View className='flex-1 justify-between'>
-              <View className='flex h-[48px] w-full pl-[12px] justify-center rounded-[5px] border-[1px] border-gray-500 '>
-                <TextInput className='text-[16px] text-white '
-                  onChangeText={props.handleChange('body')}
-                  value={props.values.body}
-                  placeholder='Johan'
-                  placeholderTextColor='#ffffff80' />
-              </View>
-
-              <View className='flex-2 justify-end mb-10'>
-                <FlatButton text='NEXT' disabled={props.values.body === '' ? true : false}
-                  onPress={props.handleSubmit} />
-              </View>
-            </View>
-          )}
-        </Formik>
+          <View className='flex-2 justify-end mb-10'>
+            <FlatButton 
+              text='NEXT' 
+              disabled={fullname === '' ? true : false}
+              onPress={() => {
+                dispatch(tmpStoreAction.setItem({ key: "fullName", item: fullname }))
+                navigation.navigate("SignUpDOB")
+              }} 
+            />
+          </View>
+        </View>
       </View>
     </BackgroundColour>
   )

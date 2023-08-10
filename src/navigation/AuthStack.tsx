@@ -13,6 +13,7 @@ import VerifyPhone from "../screens/authentication/SignUp/VerifyPhone"
 import LoginWithAccount from "../screens/authentication/LoginWithAccount"
 import SignUpGender from "../screens/authentication/SignUp/SignUpGender"
 import SetUpPassword from "../screens/authentication/SignUp/SetUpPassword"
+import SignupBusinessName from "../screens/authentication/SignUp/SignUpBusinessName"
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
 
@@ -71,6 +72,11 @@ const AuthStackNavigator = () => {
         <AuthStack.Screen
           name="SetUpPassword"
           component={SetUpPassword}
+        />
+
+        <AuthStack.Screen
+          name="SignUpBusinessName"
+          component={SignupBusinessName}
         />
 
       </AuthStack.Group>

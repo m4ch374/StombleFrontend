@@ -1,11 +1,10 @@
 // Note: Phone Input Component
-
 /* eslint-disable */
-import { View, Text, Dimensions, Alert, Button } from "react-native"
+
+import { View, Text, Dimensions } from "react-native"
 import React, { FC, useEffect, useRef, useState } from "react"
 import PhoneInput from "react-native-phone-number-input"
 import { Ionicons } from "@expo/vector-icons"
-import { isString } from "formik"
 
 type Phone = {
   number: string

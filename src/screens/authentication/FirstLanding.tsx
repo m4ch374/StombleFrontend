@@ -7,47 +7,12 @@ import BackgroundColour from "../../components/styled_components/BackgroundColou
 import FlatButton from "../../components/styled_components/FlatButton"
 import Copyright from "../../components/CopyRight"
 import { AuthStackList } from "../../types/Navigation"
-import { useEffect } from "react"
-import Fetcher from "../../utils/Fetcher"
-import { TCheckNum } from "../../types/endpoints"
-import { useAppDispatch, useAppSlector } from "../../redux/hooks"
-import { tmpStoreAction } from "../../redux/reducers/tmpStore.reducer"
 
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, "FirstLanding">
 }
 
 const FirstLanding = ({ navigation }: Props) => {
-
-  // Example of using the Fetcher class
-  const tmpStore = useAppSlector(state => state.tmpStore)
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    (async () => {
-      const resp = await Fetcher.init<TCheckNum>("POST", "/check-number")
-        .withJsonPaylad({
-          phone: "+610466376139",
-        })
-        .withCurrentToken()
-        .fetchData()
-
-      console.log(resp?.msg)
-      console.log(resp?.exists)
-    })()
-  }, [])
-  
-  // Example of using redux
-  useEffect(() => {
-    console.log(tmpStore.fullName)
-  }, [tmpStore.fullName])
-
-  useEffect(() => {
-    dispatch(tmpStoreAction.setItem({
-      key: "fullName",
-      item: "another name",
-    }))
-  }, [dispatch])
-
   return (
     <BackgroundColour>
       <View className="flex-1 px-4 relative mt-7">
@@ -73,10 +38,6 @@ const FirstLanding = ({ navigation }: Props) => {
 
         <View className="flex-1 justify-end">
           <View className=" mb-4 ">
-            {/* 
-              TODO: Nav based on state, refer to figma design for more details 
-              We'd be using the "defaut path" for now (signup) 
-            */}
             <FlatButton
               text="LOGIN"
               onPress={() => navigation.navigate("Login")}
@@ -87,7 +48,7 @@ const FirstLanding = ({ navigation }: Props) => {
               Don&apos;t have an account?
             </Text>
             <View className="ml-0.5">
-              <Link to={"/SignUpName"}>
+              <Link to={"/VerifyPhone"}>
                 <Text className="text-white font-semibold"> Register Now</Text>
               </Link>
             </View>

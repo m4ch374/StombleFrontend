@@ -1,13 +1,15 @@
-// REFERENCE: <your screen ref on figma>
+// REFERENCE: REGISTER-54
 
-import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import { Text, View } from 'react-native'
+import React from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AuthStackList } from '../../../types/Navigation'
 import FlatButton from '../../../components/styled_components/FlatButton'
 import { SelectList } from 'react-native-dropdown-select-list'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { FontAwesome } from '@expo/vector-icons'
 import BackgroundColour from '../../../components/styled_components/BackgroundColour'
+import { useAppDispatch } from '../../../redux/hooks'
+import { tmpStoreAction } from '../../../redux/reducers/tmpStore.reducer'
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, 'SignUpGender'>
@@ -16,12 +18,19 @@ type Props = {
 const SignUpGender = ({ navigation }: Props) => {
   const [selected, setSelected] = React.useState("")
 
+  // We are using whatever dob saved in our redux storage as default
+  const dispatch = useAppDispatch()
+
   const data = [
     { key: '1', value: 'Male' },
     { key: '2', value: 'Female' },
     { key: '3', value: 'Others' },
     { key: '4', value: 'Prefer not to say' },
   ]
+
+  const getValueFromKey = (key: string) => {
+    return data.filter(d => d.key === key)[0].value
+  }
   return (
     <BackgroundColour>
       <View className='flex-1 p-[16px]' style={{ flexDirection: 'column', height: '100%' }}>
@@ -42,7 +51,6 @@ const SignUpGender = ({ navigation }: Props) => {
             </View>
 
             <SelectList
-              // onSelect={() => alert(selected)}
               setSelected={setSelected}
               data={data}
               arrowicon={<FontAwesome name="chevron-down" size={12} color={'white'} />}
@@ -50,22 +58,11 @@ const SignUpGender = ({ navigation }: Props) => {
               search={false}
               placeholder='Select Gender'
               inputStyles={{ color: 'white' }}
-              boxStyles={{
-                borderColor: '#808080',
-
-              }}
+              boxStyles={{ borderColor: '#808080' }}
               dropdownStyles={{ borderColor: 'white' }}
-              //default selected option
               dropdownTextStyles={{ color: 'white' }}
             />
 
-            {/* <View className='flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] '>
-               <Pressable>
-                <View>
-                  <MaterialIcons name="keyboard-arrow-down" size={24} color="white" />
-                </View>
-              </Pressable>
-            </View> */}
             <View className='mt-[10px] mb-[16px]'>
               <Text className='text-[14px] text-[#C1C1C1]' style={{ fontFamily: 'Lato-400' }}>
                 This will help us tailor your experience
@@ -76,11 +73,17 @@ const SignUpGender = ({ navigation }: Props) => {
         <View className='flex-2 justify-end mb-10'>
           <FlatButton
             text="PROCEED"
-            onPress={() => navigation.navigate('SetUpPassword')} />
+            disabled={selected === ''}
+            onPress={() => {
+              dispatch(tmpStoreAction.setItem({ key: "gender", item: getValueFromKey(selected) }))
+              dispatch(tmpStoreAction.setItem({ key: "verifyWithPassword", item: false }))
+              navigation.navigate('SetUpPassword')
+            }} 
+          />
         </View>
       </View>
     </BackgroundColour>
   )
 }
+
 export default SignUpGender
-const styles = StyleSheet.create({})
