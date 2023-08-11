@@ -59,6 +59,9 @@ Semi-colon:
 Floating Promises:
     * No floating promises allowed
     * Except for IIFE
+
+No unused expressions:
+    * Allow Ternaries (inline conditionals)
 ```
 
 ### 3.2. File headers 
@@ -115,13 +118,7 @@ Redux layout:
 ```json
 {
     "tmpStore": {
-        "phone": "<string>",
-        "password": "<string>",
-        "businessName": "<string>",
-        "isBusiness": boolean,
-        "fullName": "<string>",
-        "birthday": "<string>",
-        "gender": "<string>",
+        // Literally a landfill of temp vars
     },
     "tokens": { 
         "currToken": "<string>",
@@ -176,10 +173,41 @@ useEffect(() => {
 
 > :alien: You could chain the methods in any order you want. The 2 terminating methods are `fetchData()` and `fetchPromise()`
 
+### 4.3. Navigating screens
+
+You might see code like:
+```tsx
+interface Props {
+  navigation: NativeStackNavigationProp<AuthStackList, 'LoginWithAccount'>
+}
+
+const LoginWithAccount: React.FC<Props> = ({ navigation }) {
+    navigation.navigate("FirstLanding")
+    // ........
+}
+```
+
+These are legacy shit code, don't use it, use this instead:
+```tsx
+const LoginWithAccount: React.FC = () => {
+    const navigation = useNavigation()
+    navigation.navigate("Auth", { screen: "FirstLanding" })
+}
+```
+
+This allows for navigating across nested navigators with type safety, and less boilerplate.
+
+### 4.4. Using backend
+
+We unfortunately cannot connect our expo application to localhost, even with `10.0.2.2` on AVD and `10.0.2.3` on iOS simulators.
+
+So we are currently using the dev server by the backend people instead: `https://9uq6c9v3ab.execute-api.ap-southeast-2.amazonaws.com/dev`
+
+Issue is pakaged up in branch `FMD-71-BACKEND-INSPECT` for backend people's inspection.
+
+> :warning: For database url, we use ~~bitwarden~~ a very secure way called asking the devs. So you might want to consult us, or the lead backend dev Johnathan for that.
+
 ---
 
-This is the end of the documentation.  
-I might pull a classic Henry move and just forgor :tm: something.  
+I might pull a classic Henry move and just forgor™ something.  
 Let me know if there's anything unclear.  
-
-More updates coming soon.
