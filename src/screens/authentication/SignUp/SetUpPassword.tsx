@@ -63,15 +63,19 @@ const SetUpPassword = () => {
         ? Fetcher.init<TForgotPassword>("POST", "/forgot-password")
         : Fetcher.init<TPreSignUp>("POST", "/pre-sign-up")
 
-      const resp = await fetcherInstance.withJsonPaylad({
+      const payload = {
         phone: tmpVars.phone,
         ...(!tmpVars.verifyWithPassword && {
-          password: tmpVars.password,
+          password: confirm,
           fullName: tmpVars.fullName,
           birthday: tmpVars.birthday,
           gender: tmpVars.gender,
         }),
-      }).fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+      }
+
+      console.log(payload)
+
+      const resp = await fetcherInstance.withJsonPaylad(payload).fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
 
       // Another ebic leetcode syntax
       if (typeof resp === "undefined") return

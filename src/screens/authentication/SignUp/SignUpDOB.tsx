@@ -33,7 +33,6 @@ type Props = {
 const SignUpDOB = ({ navigation }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
-  const [selectedDate, setSelectedDate] = useState('')
 
   // We are using whatever name saved in our redux storage as default
   const dispatch = useAppDispatch()
@@ -59,9 +58,7 @@ const SignUpDOB = ({ navigation }: Props) => {
       return
     }
 
-    setSelectedDate(selected.toLocaleDateString())
-
-    setDOB(selected.toLocaleDateString())
+    setDOB(selected.toISOString().split('T')[0])
 
     hideDatePicker()
   }
@@ -91,7 +88,7 @@ const SignUpDOB = ({ navigation }: Props) => {
             <TextInput className='text-[16px] text-white'
               editable={false}
               selectTextOnFocus={false}
-              value={selectedDate}
+              value={dateofbirth}
               placeholder={"1/1/2023"}
               placeholderTextColor='#ffffff' />
             <View>
@@ -109,7 +106,7 @@ const SignUpDOB = ({ navigation }: Props) => {
         <View className='flex-2 justify-end mb-10'>
           <FlatButton 
             text='NEXT' 
-            disabled={selectedDate === '' ? true : false}
+            disabled={dateofbirth === '' ? true : false}
             onPress={() => {
               dispatch(tmpStoreAction.setItem({ key: "birthday", item: dateofbirth }))
               navigation.navigate("SignUpGender")

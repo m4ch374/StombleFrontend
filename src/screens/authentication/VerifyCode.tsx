@@ -57,8 +57,6 @@ const VerifyCode = () => {
   const handleOnPress = useCallback(() => {
     const { phone, verifyWithPassword } = tmp
 
-    console.log(tmp, value)
-
     // Should we move endpoint to a constant file?
     // Yes -- Yume
     const endpoint = verifyWithPassword
@@ -72,7 +70,6 @@ const VerifyCode = () => {
           ...(verifyWithPassword && { password: tmp.password }),
         })
         .fetchData()
-      console.log(tmp.password)
       // Unresolved promises will be undefined
       if (typeof result === "undefined") return
 

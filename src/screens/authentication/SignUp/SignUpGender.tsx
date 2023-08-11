@@ -29,7 +29,7 @@ const SignUpGender = ({ navigation }: Props) => {
   ]
 
   const getValueFromKey = (key: string) => {
-    return data.filter(d => d.key === key)[0].value
+    return data.filter(d => d.key === key)[0].value.toLocaleLowerCase()
   }
   return (
     <BackgroundColour>
