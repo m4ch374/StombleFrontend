@@ -1,0 +1,30 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+
+-   repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.47.0
+    hooks:
+    -   id: eslint
+        files: \.tsx?$
+        types: [file]
+        additional_dependencies:
+          # generated with:
+          # npm list | sed -nE "s/^(├──|└──) (.*eslint.*$)/- \"\2\"/p"
+          - "@typescript-eslint/eslint-plugin@6.2.0"
+          - "@typescript-eslint/parser@6.2.0"
+          - "eslint-config-airbnb-typescript@17.1.0"
+          - "eslint-config-standard-with-typescript@37.0.0"
+          - "eslint-plugin-header@3.1.1"
+          - "eslint-plugin-import@2.28.0"
+          - "eslint-plugin-n@16.0.1"
+          - "eslint-plugin-promise@6.1.1"
+          - "eslint-plugin-react-hooks@4.6.0"
+          - "eslint-plugin-react-native@4.0.0"
+          - "eslint-plugin-react@7.33.0"
+          - "eslint@8.46.0"

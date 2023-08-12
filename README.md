@@ -7,19 +7,25 @@ This is a temporary documentation written in haste, would be updated and maintai
 **:warning: There's a lot of peer dependency issues which are carried over by the legacy code that we are working with.**
 
 As per usual, clone and install deps
-```sh 
+```sh
 $ git clone https://github.com/StombleOfficial/StombleFrontend.git
 $ cd StombleFrontend/
 $ yarn # or npm install --legacy-peer-deps
 ```
 
+Then install pre-commit
+```sh
+pip install pre-commit
+pre-commit install
+```
+
 ### Setting up Android emulator and iOS Simulator
-* :point_right: Follow [this guide](https://docs.expo.dev/workflow/android-studio-emulator/) for Android emulators 
+* :point_right: Follow [this guide](https://docs.expo.dev/workflow/android-studio-emulator/) for Android emulators
 * :point_right: And [this guide](https://docs.expo.dev/workflow/ios-simulator/) for iOS simulators
 
-### Note: 
+### Note:
 ```
-1. Henry is dirt poor and could only afford Apple juice as his only 
+1. Henry is dirt poor and could only afford Apple juice as his only
 Apple product. If you're like me you need a vm to run iOS simulators.
 It's a canon event ಥ‿ಥ
 
@@ -50,7 +56,7 @@ We are using a modification of the `airbnb` style guide.
 I won't be listing all rules, but here are the modifications that were made:
 ```
 String Quotations:
-    * No limit 
+    * No limit
     * Both single and double quotes are fine
 
 Semi-colon:
@@ -64,7 +70,7 @@ No unused expressions:
     * Allow Ternaries (inline conditionals)
 ```
 
-### 3.2. File headers 
+### 3.2. File headers
 
 **FYI:** By file headers we meant a comment at the start of a file
 
@@ -90,12 +96,12 @@ In order to make commit messages as clear as possible, you're highly recommended
 // Examples
 fix(menu bar): fixed overflow issues on smaller screens
 dev(login): integrated with backend
-chore(deps): added new dependencies 
+chore(deps): added new dependencies
 ```
 
 ### 3.4. Develop and merge code
 
-When we work on a new feature we open a new branch with the following format:  
+When we work on a new feature we open a new branch with the following format:
 `FMD-<ticket_number>-[optional description]`
 
 After you've finished a feature, make a `Pull Request`.
@@ -120,14 +126,14 @@ Redux layout:
     "tmpStore": {
         // Literally a landfill of temp vars
     },
-    "tokens": { 
+    "tokens": {
         "currToken": "<string>",
         // expanding soon to accomodate more features...
     }
 }
 ```
 
-> :thinking: But wait theres token on both the async storage and the redux layout.  
+> :thinking: But wait theres token on both the async storage and the redux layout.
 Yeah, thats why I don't like using redux, it gets goofy when you try to use it outside React Components.
 
 ### 4.2. Fetcher
@@ -145,7 +151,7 @@ useEffect(() => {
         phone: "fake number"
     }
 
-    const my_promise = 
+    const my_promise =
         Fetcher.init<MyType>("POST", "/check-number")
           .withJsonPayload(data)
           .fetchPromise()
@@ -209,5 +215,5 @@ Issue is pakaged up in branch `FMD-71-BACKEND-INSPECT` for backend people's insp
 
 ---
 
-I might pull a classic Henry move and just forgor™ something.  
-Let me know if there's anything unclear.  
+I might pull a classic Henry move and just forgor™ something.
+Let me know if there's anything unclear.
