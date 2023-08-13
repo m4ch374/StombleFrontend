@@ -1,11 +1,11 @@
-// Currently only store one single token, will expand in 
+// Currently only store one single token, will expand in
 // the future to accommodate multiple tokens
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 type TTokens = {
-  currentToken: string,
+  currentToken: string
 }
 
 const init: TTokens = {
@@ -17,7 +17,7 @@ const tokenSlice = createSlice({
   initialState: init,
   reducers: {
     setToken: (state, action: PayloadAction<string>) => {
-      (async () => {
+      ;(async () => {
         await AsyncStorage.setItem("token", action.payload)
       })()
 

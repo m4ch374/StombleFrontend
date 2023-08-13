@@ -37,7 +37,7 @@ const Login = () => {
   const handleLogin = () => {
     // Either this or wrap the whole thing in IIFE
 
-    (async () => {
+    ;(async () => {
       const resp = await Fetcher.init<TSignIn>("POST", "/sign-in")
         .withJsonPaylad({
           phone: phone.countryCode + phone.number,

@@ -1,19 +1,19 @@
 // REFERENCE: REGISTER-43
 
-import { TextInput, Text, View } from 'react-native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import BackgroundColour from '../../../components/styled_components/BackgroundColour'
-import FlatButton from '../../../components/styled_components/FlatButton'
-import { AuthStackList } from '../../../types/Navigation'
-import { useAppDispatch, useAppSlector } from '../../../redux/hooks'
-import { useState } from 'react'
-import { tmpStoreAction } from '../../../redux/reducers/tmpStore.reducer'
+import { TextInput, Text, View } from "react-native"
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import BackgroundColour from "../../../components/styled_components/BackgroundColour"
+import FlatButton from "../../../components/styled_components/FlatButton"
+import { AuthStackList } from "../../../types/Navigation"
+import { useAppDispatch, useAppSlector } from "../../../redux/hooks"
+import { useState } from "react"
+import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
 
 type Props = {
-  navigation: NativeStackNavigationProp<AuthStackList, 'SignUpName'>
+  navigation: NativeStackNavigationProp<AuthStackList, "SignUpName">
 }
 
-// TODO: Lint 
+// TODO: Lint
 /* eslint-disable */
 const SignUpName = ({ navigation }: Props) => {
   const dispatch = useAppDispatch()
@@ -50,13 +50,13 @@ const SignUpName = ({ navigation }: Props) => {
           </View>
 
           <View className='flex-2 justify-end mb-10'>
-            <FlatButton 
-              text='NEXT' 
+            <FlatButton
+              text='NEXT'
               disabled={fullname === '' ? true : false}
               onPress={() => {
                 dispatch(tmpStoreAction.setItem({ key: "fullName", item: fullname }))
                 navigation.navigate("SignUpDOB")
-              }} 
+              }}
             />
           </View>
         </View>

@@ -1,6 +1,6 @@
-import { SafeAreaView } from 'react-native'
-import React from 'react'
-import BackgroundColour from './BackgroundColour'
+import { SafeAreaView } from "react-native"
+import React from "react"
+import BackgroundColour from "./BackgroundColour"
 
 type Props = {
   children: React.ReactNode
@@ -9,7 +9,7 @@ type Props = {
 const LoginScreenLayout = ({ children }: Props) => {
   return (
     <BackgroundColour>
-      <SafeAreaView className='flex-1 h-screen pt-20'>{children}</SafeAreaView>
+      <SafeAreaView className="flex-1 h-screen pt-20">{children}</SafeAreaView>
     </BackgroundColour>
   )
 }

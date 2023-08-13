@@ -1,8 +1,8 @@
 // From shadow realm
 // What the fuck is this shit
 
-import { Pressable, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { Pressable, Text, View } from "react-native"
+import React, { useState } from "react"
 
 // TODO: Lint
 /* eslint-disable */

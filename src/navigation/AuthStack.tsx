@@ -51,34 +51,24 @@ const AuthStackNavigator = () => {
       />
       {/* Sign up Group */}
       <AuthStack.Group screenOptions={{ title: "Sign Up" }}>
-        <AuthStack.Screen name="VerifyPhone"
-          component={VerifyPhone} />
+        <AuthStack.Screen name="VerifyPhone" component={VerifyPhone} />
 
-        <AuthStack.Screen name="SignUpName"
-          component={SignUpName} />
+        <AuthStack.Screen name="SignUpName" component={SignUpName} />
 
-        <AuthStack.Screen name="SignUpDOB"
-          component={SignUpDOB} />
+        <AuthStack.Screen name="SignUpDOB" component={SignUpDOB} />
 
-        <AuthStack.Screen
-          name="SignUpGender"
-          component={SignUpGender}
-        />
+        <AuthStack.Screen name="SignUpGender" component={SignUpGender} />
         <AuthStack.Screen
           name="ChooseAccountType"
           component={ChooseAccountType}
         />
 
-        <AuthStack.Screen
-          name="SetUpPassword"
-          component={SetUpPassword}
-        />
+        <AuthStack.Screen name="SetUpPassword" component={SetUpPassword} />
 
         <AuthStack.Screen
           name="SignUpBusinessName"
           component={SignupBusinessName}
         />
-
       </AuthStack.Group>
 
       <AuthStack.Screen name="LoginWithAccount" component={LoginWithAccount} />

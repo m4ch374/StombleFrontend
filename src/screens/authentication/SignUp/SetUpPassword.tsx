@@ -52,16 +52,17 @@ const SetUpPassword = () => {
     return Object.values(regexpCollection).reduce((prev, curr) => {
       return prev && testRegexp(curr) //some funny brain stuff
     }, true)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testRegexp])
 
   const handleSetPassword = () => {
     // TODO: i guess the pre-sign-up thing if i remember correctly? idk
 
-    (async () => {
-      const fetcherInstance: Fetcher<TForgotPassword | TPreSignUp> = tmpVars.verifyWithPassword 
-        ? Fetcher.init<TForgotPassword>("POST", "/forgot-password")
-        : Fetcher.init<TPreSignUp>("POST", "/pre-sign-up")
+    ;(async () => {
+      const fetcherInstance: Fetcher<TForgotPassword | TPreSignUp> =
+        tmpVars.verifyWithPassword
+          ? Fetcher.init<TForgotPassword>("POST", "/forgot-password")
+          : Fetcher.init<TPreSignUp>("POST", "/pre-sign-up")
 
       const payload = {
         phone: tmpVars.phone,
@@ -116,7 +117,7 @@ const SetUpPassword = () => {
               Password must contain:
             </Text>
 
-            {/* 
+            {/*
               Uhhhhhh...... in hindsight i shouldve just mapped them with an array or something
               But im too lazy for that now im in the middle of developing it
               We could always go back and fix right..... ? - time capsule (9/8/2023)

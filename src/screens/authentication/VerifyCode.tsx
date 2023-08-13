@@ -35,7 +35,7 @@ const VerifyCode = () => {
     setValue,
   })
 
-  const tmp = useAppSlector((state) => state.tmpStore)
+  const tmp = useAppSlector(state => state.tmpStore)
   const navigate = useNavigation()
 
   useEffect(() => {
@@ -61,8 +61,8 @@ const VerifyCode = () => {
     // Yes -- Yume
     const endpoint = verifyWithPassword
       ? "/confirm-code"
-      : "/confirm-pre-sign-up";
-    (async () => {
+      : "/confirm-pre-sign-up"
+    ;(async () => {
       const result = await Fetcher.init<TConfirm>("POST", endpoint)
         .withJsonPaylad({
           code: value,

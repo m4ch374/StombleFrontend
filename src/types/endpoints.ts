@@ -74,15 +74,14 @@ type CheckNumRes = {
 export type TCheckNum = TEndpoint<CheckNumReq, CheckNumRes>
 // ===================================================
 
-
 // ===================================================
 // /pre-sign-up
 // ===================================================
 type PreSignUpReq = {
-  phone: string,
-  password: string,
-  fullName: string,
-  birthday: string,
+  phone: string
+  password: string
+  fullName: string
+  birthday: string
   gender: string
 }
 

@@ -3,14 +3,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 type TTmpStore = {
-  phone: string,
-  password: string,
-  businessName: string,
-  fullName: string,
-  birthday: string,
-  gender: string,
+  phone: string
+  password: string
+  businessName: string
+  fullName: string
+  birthday: string
+  gender: string
 
-  verifyWithPassword: boolean,
+  verifyWithPassword: boolean
 }
 
 const init: TTmpStore = {
@@ -24,11 +24,17 @@ const init: TTmpStore = {
 }
 
 const tmpStoreSlice = createSlice({
-  name: 'tmpStore',
+  name: "tmpStore",
   initialState: init,
   reducers: {
     clearState: () => init,
-    setItem: (state, action: PayloadAction<{ key: keyof TTmpStore, item: TTmpStore[keyof TTmpStore] }>) => {
+    setItem: (
+      state,
+      action: PayloadAction<{
+        key: keyof TTmpStore
+        item: TTmpStore[keyof TTmpStore]
+      }>,
+    ) => {
       const { key, item } = action.payload
 
       return {

@@ -2,7 +2,7 @@ import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios"
 import { TEndpoint } from "../types/endpoints"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-/* 
+/*
   Currently resort to the link given by the backend people
   Will figure out a way to connect to localhost
 
@@ -19,19 +19,19 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private endpoint: string | undefined
 
-  private payload: T['requestType'] | undefined
+  private payload: T["requestType"] | undefined
 
   private constructor(method: Method) {
-    let axiosConf: CreateAxiosDefaults = { 
+    let axiosConf: CreateAxiosDefaults = {
       baseURL: base,
-      method: method, 
+      method: method,
     }
 
     if (method != "GET") {
       axiosConf = {
         ...axiosConf,
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
       }
@@ -41,14 +41,17 @@ class Fetcher<T extends TEndpoint<any, any>> {
     return this
   }
 
-  static init<T extends TEndpoint<any, any> = TEndpoint<void, void>>(method: Method, endpoint: string) {
+  static init<T extends TEndpoint<any, any> = TEndpoint<void, void>>(
+    method: Method,
+    endpoint: string,
+  ) {
     const fetcher = new Fetcher<T>(method)
     fetcher.endpoint = endpoint
 
     return fetcher
   }
 
-  withJsonPaylad(payload: T['requestType']) {
+  withJsonPaylad(payload: T["requestType"]) {
     this.payload = payload
     return this
   }
@@ -59,14 +62,14 @@ class Fetcher<T extends TEndpoint<any, any>> {
   }
 
   withCurrentToken() {
-    (async () => {
+    ;(async () => {
       const token = await AsyncStorage.getItem("token")
       this.withToken(token as string)
     })()
     return this
   }
 
-  fetchPromise(): Promise<T['requestType']> {
+  fetchPromise(): Promise<T["requestType"]> {
     return this.instance.request({
       data: this.payload,
       url: this.endpoint,
@@ -75,13 +78,13 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   // Fuck it we ball bro
   // No error checking lets go
-  async fetchData(): Promise<T['responseType'] | undefined> {
+  async fetchData(): Promise<T["responseType"] | undefined> {
     try {
       const resp = await this.instance.request({
         data: this.payload,
         url: this.endpoint,
       })
-  
+
       // Its either my skill issue or its just really hard to type it out
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return resp.data
@@ -97,14 +100,14 @@ class Fetcher<T extends TEndpoint<any, any>> {
         errorMeta.code = e.code as string // ew, type casting
         errorMeta.message = e.message
       }
-      
+
       console.log()
       // Adding newline fucks up the formatting from expo
       console.log("====================================================")
       console.log("An error has occurred!")
       console.log(`\tName:    ${errorMeta.name}`) // I dont think js provides us anything w/ alligning stuff
       console.log(`\tCode:    ${errorMeta.code}`)
-      console.log(`\tMessage: ${errorMeta.message}`) 
+      console.log(`\tMessage: ${errorMeta.message}`)
       console.log("====================================================")
     }
 

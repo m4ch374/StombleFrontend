@@ -20,7 +20,7 @@ const PasswordInput = ({ password, setPassword }: PasswordInputProps) => {
           placeholderTextColor="#ABABAB"
           secureTextEntry={secureTextEntry}
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={text => setPassword(text)}
         />
 
         <TouchableWithoutFeedback

@@ -1,17 +1,17 @@
-import { 
-  DarkTheme, 
-  DefaultTheme, 
+import {
+  DarkTheme,
+  DefaultTheme,
   NavigationContainer,
-} from '@react-navigation/native'
+} from "@react-navigation/native"
 
-import { ColorSchemeName } from 'react-native'
+import { ColorSchemeName } from "react-native"
 
-import Navigation from './Navigation'
+import Navigation from "./Navigation"
 
 const MainNavigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
   return (
     <NavigationContainer
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
       <Navigation />
     </NavigationContainer>

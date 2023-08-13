@@ -13,7 +13,8 @@
         "airbnb-typescript",
         "plugin:import/recommended",
         "plugin:import/typescript",
-        "plugin:react/jsx-runtime"
+        "plugin:react/jsx-runtime",
+        "prettier"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -23,10 +24,11 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "react", 
+        "react",
         "react-hooks",
         "react-native",
-        "header"
+        "header",
+        "prettier"
     ],
     "settings": {
         "react": {
@@ -36,12 +38,11 @@
     },
     "ignorePatterns": ["node_modules/"],
     "rules": {
+        "prettier/prettier": "error",
         "react/jsx-filename-extension": [
             "error",
             { "extensions": [".ts", ".tsx"] }
         ],
-        "@typescript-eslint/quotes": "off",
-        "@typescript-eslint/semi": ["error", "never"],
         "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }],
         "@typescript-eslint/no-unused-expressions": ["error", { "allowTernary": true }]
     },

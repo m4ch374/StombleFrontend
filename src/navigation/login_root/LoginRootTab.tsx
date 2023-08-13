@@ -1,9 +1,9 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { useTheme } from 'native-base'
-import { LoginRootTabList } from '../../types/Navigation'
-import BackgroundColour from '../../components/styled_components/BackgroundColour'
-import TabBar from '../../components/TabBar'
-import Home from '../../screens/Home'
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { useTheme } from "native-base"
+import { LoginRootTabList } from "../../types/Navigation"
+import BackgroundColour from "../../components/styled_components/BackgroundColour"
+import TabBar from "../../components/TabBar"
+import Home from "../../screens/Home"
 
 const BottomTab = createBottomTabNavigator<LoginRootTabList>()
 
@@ -13,13 +13,13 @@ const LoginRootTab = () => {
   return (
     <BackgroundColour>
       <BottomTab.Navigator
-        initialRouteName='Home'
+        initialRouteName="Home"
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
             backgroundColor: color.tabBarBgColor,
             height: 83,
-            borderTopColor: 'transparent',
+            borderTopColor: "transparent",
           },
           tabBarIcon: ({ focused, size }) => TabBar({ focused, size }),
           // tabBarActiveTintColor: '#e67a15',
@@ -27,9 +27,9 @@ const LoginRootTab = () => {
         }}
       >
         <BottomTab.Screen
-          name='Home'
+          name="Home"
           component={Home}
-          options={{ title: '' }}
+          options={{ title: "" }}
         />
       </BottomTab.Navigator>
     </BackgroundColour>

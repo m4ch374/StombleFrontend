@@ -22,9 +22,7 @@ import { TCheckNum } from "../../../types/endpoints"
 
 // Breaking the rules a bit here again
 const Divider: React.FC = () => {
-  return (
-    <View className="border-t border-gray-300/10" />
-  )
+  return <View className="border-t border-gray-300/10" />
 }
 
 const VerifyPhone: React.FC = () => {
@@ -43,23 +41,25 @@ const VerifyPhone: React.FC = () => {
   }
 
   const handleBtnPress = () => {
-    (async () => {
+    ;(async () => {
       const resp = await Fetcher.init<TCheckNum>("POST", "/check-number")
         .withJsonPaylad({ phone: phone.countryCode + phone.number })
         .fetchData()
 
       // Ebic leetcode syntax right here
-      if (typeof resp === 'undefined') return
+      if (typeof resp === "undefined") return
 
       if (resp.exists) {
         togglePopup()
         return
       }
 
-      dispatch(tmpStoreAction.setItem({ 
-        key: "phone", 
-        item: phone.countryCode + phone.number, 
-      }))
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "phone",
+          item: phone.countryCode + phone.number,
+        }),
+      )
       navigation.navigate("Auth", { screen: "SignUpName" })
     })()
   }
@@ -110,7 +110,7 @@ const VerifyPhone: React.FC = () => {
             <View className=" mb-[16px] ">
               <FlatButton
                 text="CONTINUE"
-                disabled={phone.number === '' || !isValid}
+                disabled={phone.number === "" || !isValid}
                 onPress={handleBtnPress}
               />
             </View>
@@ -139,24 +139,30 @@ const VerifyPhone: React.FC = () => {
             <TouchableWithoutFeedback onPress={() => togglePopup()}>
               <View className="flex-1 justify-center items-center bg-black/30">
                 <View className="bg-[#2c2c2c] mx-2 rounded-md">
-
                   <View className="p-4 flex gap-2">
-                    <Text className="text-xl text-white text-center" style={{ fontFamily: 'Lato-700' }}>
+                    <Text
+                      className="text-xl text-white text-center"
+                      style={{ fontFamily: "Lato-700" }}
+                    >
                       This mobile number matches your existing account!
                     </Text>
-                    <Text className="text-md text-white text-center" style={{ fontFamily: 'Lato-700' }}>
+                    <Text
+                      className="text-md text-white text-center"
+                      style={{ fontFamily: "Lato-700" }}
+                    >
                       You already have an account with this contact info. Do you
-                      want to create another account with the same mobile number?
+                      want to create another account with the same mobile
+                      number?
                     </Text>
                   </View>
 
                   <Divider />
 
-                  <TouchableOpacity
-                    className="py-3"
-                    onPress={togglePopup}
-                  >
-                    <Text className="text-center text-blue-500 text-[16px]" style={{ fontFamily: 'Lato-700' }}>
+                  <TouchableOpacity className="py-3" onPress={togglePopup}>
+                    <Text
+                      className="text-center text-blue-500 text-[16px]"
+                      style={{ fontFamily: "Lato-700" }}
+                    >
                       Yes, use the same mobile number
                     </Text>
                   </TouchableOpacity>
@@ -164,7 +170,10 @@ const VerifyPhone: React.FC = () => {
                   <Divider />
 
                   <TouchableOpacity className="py-3" onPress={togglePopup}>
-                    <Text className="text-center text-[16px] text-white" style={{ fontFamily: 'Lato-700' }}>
+                    <Text
+                      className="text-center text-[16px] text-white"
+                      style={{ fontFamily: "Lato-700" }}
+                    >
                       No, use a different number
                     </Text>
                   </TouchableOpacity>
@@ -172,7 +181,6 @@ const VerifyPhone: React.FC = () => {
               </View>
             </TouchableWithoutFeedback>
           </Modal>
-
         </View>
       </TouchableWithoutFeedback>
     </BackgroundColour>

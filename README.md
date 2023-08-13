@@ -7,6 +7,7 @@ This is a temporary documentation written in haste, would be updated and maintai
 **:warning: There's a lot of peer dependency issues which are carried over by the legacy code that we are working with.**
 
 As per usual, clone and install deps
+
 ```sh
 $ git clone https://github.com/StombleOfficial/StombleFrontend.git
 $ cd StombleFrontend/
@@ -14,16 +15,19 @@ $ yarn # or npm install --legacy-peer-deps
 ```
 
 Then install pre-commit
+
 ```sh
 pip install pre-commit
 pre-commit install
 ```
 
 ### Setting up Android emulator and iOS Simulator
-* :point_right: Follow [this guide](https://docs.expo.dev/workflow/android-studio-emulator/) for Android emulators
-* :point_right: And [this guide](https://docs.expo.dev/workflow/ios-simulator/) for iOS simulators
+
+- :point_right: Follow [this guide](https://docs.expo.dev/workflow/android-studio-emulator/) for Android emulators
+- :point_right: And [this guide](https://docs.expo.dev/workflow/ios-simulator/) for iOS simulators
 
 ### Note:
+
 ```
 1. Henry is dirt poor and could only afford Apple juice as his only
 Apple product. If you're like me you need a vm to run iOS simulators.
@@ -54,10 +58,10 @@ $ npm run lint:fix # if they could be fixed automatically
 We are using a modification of the `airbnb` style guide.
 
 I won't be listing all rules, but here are the modifications that were made:
+
 ```
 String Quotations:
-    * No limit
-    * Both single and double quotes are fine
+    * Double quotations
 
 Semi-colon:
     * No semicolons (enjoyer)
@@ -74,13 +78,13 @@ No unused expressions:
 
 **FYI:** By file headers we meant a comment at the start of a file
 
-It is ***required*** to include a figma design reference for all `.tsx` files in `./src/screens`
+It is **_required_** to include a figma design reference for all `.tsx` files in `./src/screens`
 
 ```tsx
 // Reference REGISTER-47
 
 const MyScreen: React.FC = () => {
-    // ..... your code
+  // ..... your code
 }
 
 export default MyScreen
@@ -113,6 +117,7 @@ After you've finished a feature, make a `Pull Request`.
 ### 4.1. Storage and Redux scheme
 
 Async Storage:
+
 ```json
 {
     "token": "<string>",
@@ -121,20 +126,21 @@ Async Storage:
 ```
 
 Redux layout:
+
 ```json
 {
-    "tmpStore": {
-        // Literally a landfill of temp vars
-    },
-    "tokens": {
-        "currToken": "<string>",
-        // expanding soon to accomodate more features...
-    }
+  "tmpStore": {
+    // Literally a landfill of temp vars
+  },
+  "tokens": {
+    "currToken": "<string>"
+    // expanding soon to accomodate more features...
+  }
 }
 ```
 
 > :thinking: But wait theres token on both the async storage and the redux layout.
-Yeah, thats why I don't like using redux, it gets goofy when you try to use it outside React Components.
+> Yeah, thats why I don't like using redux, it gets goofy when you try to use it outside React Components.
 
 ### 4.2. Fetcher
 
@@ -143,37 +149,38 @@ Fetcher is a class wrapped around `axios` in hopes of providing an easier experi
 > :warning: The base url includes "/dev"
 
 **Usage: Getting Promises**
+
 ```tsx
 type MyType = TEndpoint<MyRequestType, MyResponseType>
 
 useEffect(() => {
-    const payload: MyType['requestType'] = {
-        phone: "fake number"
-    }
+  const payload: MyType["requestType"] = {
+    phone: "fake number",
+  }
 
-    const my_promise =
-        Fetcher.init<MyType>("POST", "/check-number")
-          .withJsonPayload(data)
-          .fetchPromise()
+  const my_promise = Fetcher.init<MyType>("POST", "/check-number")
+    .withJsonPayload(data)
+    .fetchPromise()
 
-    my_promise
-      .then(resp => console.log(resp.data.exists))
-      .catch(e => console.log(e))
+  my_promise
+    .then(resp => console.log(resp.data.exists))
+    .catch(e => console.log(e))
 }, [])
 ```
 
 **Usage: Getting Data with current Token**
+
 ```tsx
 useEffect(() => {
-    // Use IIFE to prevent loose promises
-    (async () => {
-        const my_data = Fetcher.init<MyType>("POST", "/sign-up")
-                          .withJsonPayload(payload)
-                          .withCurrentToken()
-                          .fetchData()
+  // Use IIFE to prevent loose promises
+  ;(async () => {
+    const my_data = Fetcher.init<MyType>("POST", "/sign-up")
+      .withJsonPayload(payload)
+      .withCurrentToken()
+      .fetchData()
 
-        console.log(my_data)
-    })()
+    console.log(my_data)
+  })()
 }, [])
 ```
 
@@ -182,6 +189,7 @@ useEffect(() => {
 ### 4.3. Navigating screens
 
 You might see code like:
+
 ```tsx
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, 'LoginWithAccount'>
@@ -194,10 +202,11 @@ const LoginWithAccount: React.FC<Props> = ({ navigation }) {
 ```
 
 These are legacy shit code, don't use it, use this instead:
+
 ```tsx
 const LoginWithAccount: React.FC = () => {
-    const navigation = useNavigation()
-    navigation.navigate("Auth", { screen: "FirstLanding" })
+  const navigation = useNavigation()
+  navigation.navigate("Auth", { screen: "FirstLanding" })
 }
 ```
 

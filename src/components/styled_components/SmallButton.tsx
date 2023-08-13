@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, GestureResponderEvent } from 'react-native'
+import { TouchableOpacity, Text, GestureResponderEvent } from "react-native"
 
 interface SmallButtonProps {
   width?: string | number | undefined
@@ -18,16 +18,16 @@ const SmallButton = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className='rounded-md justify-center items-center'
+      className="rounded-md justify-center items-center"
       style={{
-        backgroundColor: bgColor ? bgColor : 'rgba(199, 199, 199, 0.5)',
+        backgroundColor: bgColor ? bgColor : "rgba(199, 199, 199, 0.5)",
         width: width ? width : 52,
         height: height ? height : 32,
       }}
     >
       <Text
-        className='text-xs py-1.5 px-3 text-white'
-        style={{ fontFamily: 'Lato-400' }}
+        className="text-xs py-1.5 px-3 text-white"
+        style={{ fontFamily: "Lato-400" }}
       >
         {text}
       </Text>
