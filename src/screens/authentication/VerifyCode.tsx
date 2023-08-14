@@ -1,6 +1,6 @@
 // REFERENCE: Log in - Verfiy code
 
-import BackgroundColour from "../../components/styled_components/BackgroundColour"
+import BackgroundColour from "components/styled_components/BackgroundColour"
 import { useState, useEffect, useCallback } from "react"
 import {
   View,
@@ -17,10 +17,10 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field"
-import FlatButton from "../../components/styled_components/FlatButton"
-import { useAppSlector } from "../../redux/hooks"
-import Fetcher from "../../utils/Fetcher"
-import { TConfirm } from "../../types/endpoints"
+import FlatButton from "components/styled_components/FlatButton"
+import { useAppSlector } from "redux/hooks"
+import Fetcher from "utils/Fetcher"
+import { TConfirm } from "types/endpoints"
 import { useNavigation } from "@react-navigation/native"
 
 const VerifyCode = () => {

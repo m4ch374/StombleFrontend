@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from "react"
 import { TouchableWithoutFeedback, View, Text, Keyboard } from "react-native"
-import BackgroundColour from "../../components/styled_components/BackgroundColour"
-import PhoneNumberInput from "../../components/PhoneNumberInput"
-import BtnWithLoginRegister from "../../components/BtnWithLoginRegister"
-import PasswordInput from "../../components/passwordInput"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import PhoneNumberInput from "components/PhoneNumberInput"
+import BtnWithLoginRegister from "components/BtnWithLoginRegister"
+import PasswordInput from "components/passwordInput"
 import { useNavigation } from "@react-navigation/native"
-import Fetcher from "../../utils/Fetcher"
-import { TSignIn } from "../../types/endpoints"
-import { useAppDispatch } from "../../redux/hooks"
-import { tokenAction } from "../../redux/reducers/tokens.reducer"
-import { tmpStoreAction } from "../../redux/reducers/tmpStore.reducer"
+import Fetcher from "utils/Fetcher"
+import { TSignIn } from "types/endpoints"
+import { useAppDispatch } from "redux/hooks"
+import { tokenAction } from "redux/reducers/tokens.reducer"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 
 // This is the new way of navigating
 // We dont need to type as much hahahahahhahhahahha

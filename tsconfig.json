@@ -10,6 +10,19 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "noEmit": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "baseUrl": "./src",
+    // There could be auto path aliases i just dont know
+    "paths": {
+      "assets/*": ["assets/*"],
+      "components/*": ["components/*"],
+      "constants/*": ["constants/*"],
+      "hooks/*": ["hooks/*"],
+      "navigation/*": ["navigation/*"],
+      "redux/*": ["redux/*"],
+      "screens/*": ["screens/*"],
+      "types/*": ["types/*"],
+      "utils/*": ["utils/*"]
+    }
   }
 }

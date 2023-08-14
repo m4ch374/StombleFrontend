@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTheme } from "native-base"
-import { LoginRootTabList } from "../../types/Navigation"
-import BackgroundColour from "../../components/styled_components/BackgroundColour"
-import TabBar from "../../components/TabBar"
-import Home from "../../screens/Home"
+import { LoginRootTabList } from "types/Navigation"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import TabBar from "components/TabBar"
+import Home from "screens/Home"
 
 const BottomTab = createBottomTabNavigator<LoginRootTabList>()
 

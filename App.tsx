@@ -16,11 +16,11 @@ import MainNavigation from "./src/navigation/MainNavigation"
 // I mean yeah, disabling eslint on this block makes sense
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 const fontFamily = {
-  "Lato-400": require("./assets/fonts/Lato-Regular.ttf"),
-  "Lato-700": require("./assets/fonts/Lato-Bold.ttf"),
-  "Lato-900": require("./assets/fonts/Lato-Black.ttf"),
-  "Roboto-400": require("./assets/fonts/Roboto-Regular.ttf"),
-  AT: require("./assets/fonts/AnekTelugu-ExtraBold.ttf"),
+  "Lato-400": require("./src/assets/fonts/Lato-Regular.ttf"),
+  "Lato-700": require("./src/assets/fonts/Lato-Bold.ttf"),
+  "Lato-900": require("./src/assets/fonts/Lato-Black.ttf"),
+  "Roboto-400": require("./src/assets/fonts/Roboto-Regular.ttf"),
+  AT: require("./src/assets/fonts/AnekTelugu-ExtraBold.ttf"),
 }
 /* eslint-enable @typescript-eslint/no-unsafe-assignment */
 

@@ -2,20 +2,16 @@
 
 import { Text, View } from "react-native"
 import React from "react"
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { AuthStackList } from "../../../types/Navigation"
-import FlatButton from "../../../components/styled_components/FlatButton"
+import FlatButton from "components/styled_components/FlatButton"
 import { SelectList } from "react-native-dropdown-select-list"
 import { FontAwesome } from "@expo/vector-icons"
-import BackgroundColour from "../../../components/styled_components/BackgroundColour"
-import { useAppDispatch } from "../../../redux/hooks"
-import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import { useAppDispatch } from "redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import { useNavigation } from "@react-navigation/native"
 
-type Props = {
-  navigation: NativeStackNavigationProp<AuthStackList, "SignUpGender">
-}
-
-const SignUpGender = ({ navigation }: Props) => {
+const SignUpGender = () => {
+  const { navigate } = useNavigation()
   const [selected, setSelected] = React.useState("")
 
   // We are using whatever dob saved in our redux storage as default
@@ -105,7 +101,7 @@ const SignUpGender = ({ navigation }: Props) => {
                   item: false,
                 }),
               )
-              navigation.navigate("SetUpPassword")
+              navigate("Auth", { screen: "SetUpPassword" })
             }}
           />
         </View>

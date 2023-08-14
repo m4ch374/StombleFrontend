@@ -2,14 +2,14 @@
 
 import { View, Text, Pressable } from "react-native"
 import { useState } from "react"
-import FlatButton from "../../../components/styled_components/FlatButton"
+import FlatButton from "components/styled_components/FlatButton"
 import { Link, useNavigation } from "@react-navigation/native"
-import BackgroundColour from "../../../components/styled_components/BackgroundColour"
-import Fetcher from "../../../utils/Fetcher"
-import { TSignUp } from "../../../types/endpoints"
-import { useAppDispatch, useAppSlector } from "../../../redux/hooks"
-import { tokenAction } from "../../../redux/reducers/tokens.reducer"
-import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import Fetcher from "utils/Fetcher"
+import { TSignUp } from "types/endpoints"
+import { useAppDispatch, useAppSlector } from "redux/hooks"
+import { tokenAction } from "redux/reducers/tokens.reducer"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 
 type TSelection = "" | "business" | "personal"
 

@@ -2,12 +2,12 @@
 
 import { View, Text, Keyboard, TouchableWithoutFeedback } from "react-native"
 import { useEffect, useState } from "react"
-import PhoneNumberInput from "../../components/PhoneNumberInput"
-import BackgroundColour from "../../components/styled_components/BackgroundColour"
-import BtnWithLoginRegister from "../../components/BtnWithLoginRegister"
+import PhoneNumberInput from "components/PhoneNumberInput"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import BtnWithLoginRegister from "components/BtnWithLoginRegister"
 import { useNavigation } from "@react-navigation/native"
-import { tmpStoreAction } from "../../redux/reducers/tmpStore.reducer"
-import { useAppDispatch } from "../../redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import { useAppDispatch } from "redux/hooks"
 
 const ForgetPassword = () => {
   const navigation = useNavigation()

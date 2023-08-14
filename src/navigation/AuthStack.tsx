@@ -1,19 +1,19 @@
 // Code copied from shadow realm
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import FirstLanding from "../screens/authentication/FirstLanding"
-import { AuthStackList } from "../types/Navigation"
-import SignUpName from "../screens/authentication/SignUp/SignUpName"
-import SignUpDOB from "../screens/authentication/SignUp/SignUpDOB"
-import Login from "../screens/authentication/Login"
-import ForgetPassword from "../screens/authentication/ForgetPassword"
-import VerifyCode from "../screens/authentication/VerifyCode"
-import ChooseAccountType from "../screens/authentication/SignUp/ChooseAccountType"
-import VerifyPhone from "../screens/authentication/SignUp/VerifyPhone"
-import LoginWithAccount from "../screens/authentication/LoginWithAccount"
-import SignUpGender from "../screens/authentication/SignUp/SignUpGender"
-import SetUpPassword from "../screens/authentication/SignUp/SetUpPassword"
-import SignupBusinessName from "../screens/authentication/SignUp/SignUpBusinessName"
+import FirstLanding from "screens/authentication/FirstLanding"
+import { AuthStackList } from "types/Navigation"
+import SignUpName from "screens/authentication/SignUp/SignUpName"
+import SignUpDOB from "screens/authentication/SignUp/SignUpDOB"
+import Login from "screens/authentication/Login"
+import ForgetPassword from "screens/authentication/ForgetPassword"
+import VerifyCode from "screens/authentication/VerifyCode"
+import ChooseAccountType from "screens/authentication/SignUp/ChooseAccountType"
+import VerifyPhone from "screens/authentication/SignUp/VerifyPhone"
+import LoginWithAccount from "screens/authentication/LoginWithAccount"
+import SignUpGender from "screens/authentication/SignUp/SignUpGender"
+import SetUpPassword from "screens/authentication/SignUp/SetUpPassword"
+import SignupBusinessName from "screens/authentication/SignUp/SignUpBusinessName"
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
 

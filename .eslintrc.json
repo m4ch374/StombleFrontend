@@ -34,7 +34,12 @@
         "react": {
             "version": "detect"
         },
-        "import/core-modules": [ "react-native" ]
+        "import/core-modules": [ "react-native" ],
+        "import/resolver": {
+            "node": {
+                "moduleDirectory": ["node_modules", "src/"]
+            }
+        }
     },
     "ignorePatterns": ["node_modules/"],
     "rules": {

@@ -11,14 +11,14 @@ import {
   Keyboard,
 } from "react-native"
 import React, { useState } from "react"
-import BackgroundColour from "../../../components/styled_components/BackgroundColour"
+import BackgroundColour from "components/styled_components/BackgroundColour"
 import { Link, useNavigation } from "@react-navigation/native"
-import FlatButton from "../../../components/styled_components/FlatButton"
-import PhoneNumberInput from "../../../components/PhoneNumberInput"
-import { useAppDispatch } from "../../../redux/hooks"
-import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
-import Fetcher from "../../../utils/Fetcher"
-import { TCheckNum } from "../../../types/endpoints"
+import FlatButton from "components/styled_components/FlatButton"
+import PhoneNumberInput from "components/PhoneNumberInput"
+import { useAppDispatch } from "redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import Fetcher from "utils/Fetcher"
+import { TCheckNum } from "types/endpoints"
 
 // Breaking the rules a bit here again
 const Divider: React.FC = () => {

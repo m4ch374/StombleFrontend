@@ -1,7 +1,7 @@
 import { Text, View, Pressable } from "react-native"
 import React, { useState } from "react"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { AuthStackList } from "../types/Navigation"
+import { AuthStackList } from "types/Navigation"
 
 type Props = {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>

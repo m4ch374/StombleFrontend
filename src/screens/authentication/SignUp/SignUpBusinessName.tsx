@@ -10,14 +10,14 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native"
-import BackgroundColour from "../../../components/styled_components/BackgroundColour"
-import FlatButton from "../../../components/styled_components/FlatButton"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
-import Fetcher from "../../../utils/Fetcher"
-import { TSignUp } from "../../../types/endpoints"
-import { useAppDispatch, useAppSlector } from "../../../redux/hooks"
-import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
-import { tokenAction } from "../../../redux/reducers/tokens.reducer"
+import Fetcher from "utils/Fetcher"
+import { TSignUp } from "types/endpoints"
+import { useAppDispatch, useAppSlector } from "redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import { tokenAction } from "redux/reducers/tokens.reducer"
 
 const SignupBusinessName = () => {
   const navigation = useNavigation()

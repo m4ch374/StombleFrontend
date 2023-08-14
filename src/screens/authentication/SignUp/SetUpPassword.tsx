@@ -3,13 +3,13 @@
 import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native"
 import React, { useMemo, useState } from "react"
 import { useNavigation } from "@react-navigation/native"
-import FlatButton from "../../../components/styled_components/FlatButton"
-import BackgroundColour from "../../../components/styled_components/BackgroundColour"
-import PasswordInput from "../../../components/passwordInput"
-import { useAppDispatch, useAppSlector } from "../../../redux/hooks"
-import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
-import Fetcher from "../../../utils/Fetcher"
-import { TForgotPassword, TPreSignUp } from "../../../types/endpoints"
+import FlatButton from "components/styled_components/FlatButton"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import PasswordInput from "components/passwordInput"
+import { useAppDispatch, useAppSlector } from "redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import Fetcher from "utils/Fetcher"
+import { TForgotPassword, TPreSignUp } from "types/endpoints"
 
 // Breaking the rules here a bit
 type TPasswordCheck = {

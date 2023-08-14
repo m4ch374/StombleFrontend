@@ -1,18 +1,14 @@
 // REFERENCE: Landing page
 
 import { Text, View } from "react-native"
-import { Link } from "@react-navigation/native"
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import BackgroundColour from "../../components/styled_components/BackgroundColour"
-import FlatButton from "../../components/styled_components/FlatButton"
-import Copyright from "../../components/CopyRight"
-import { AuthStackList } from "../../types/Navigation"
+import { Link, useNavigation } from "@react-navigation/native"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import FlatButton from "components/styled_components/FlatButton"
+import Copyright from "components/CopyRight"
 
-interface Props {
-  navigation: NativeStackNavigationProp<AuthStackList, "FirstLanding">
-}
+const FirstLanding = () => {
+  const { navigate } = useNavigation()
 
-const FirstLanding = ({ navigation }: Props) => {
   return (
     <BackgroundColour>
       <View className="flex-1 px-4 relative mt-7">
@@ -40,7 +36,7 @@ const FirstLanding = ({ navigation }: Props) => {
           <View className=" mb-4 ">
             <FlatButton
               text="LOGIN"
-              onPress={() => navigation.navigate("Login")}
+              onPress={() => navigate("Auth", { screen: "Login" })}
             />
           </View>
           <View className="flex-row justify-center items-center align-middle mb-24">

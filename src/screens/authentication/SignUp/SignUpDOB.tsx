@@ -15,15 +15,15 @@ import {
 import { useState } from "react"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { MaterialIcons } from "@expo/vector-icons"
-import FlatButton from "../../../components/styled_components/FlatButton"
-import { AuthStackList } from "../../../types/Navigation"
+import FlatButton from "components/styled_components/FlatButton"
+import { AuthStackList } from "types/Navigation"
 
 // Issues with the library itself
 // eslint-disable-next-line import/no-named-as-default
 import DateTimePickerModal from "react-native-modal-datetime-picker"
-import BackgroundColour from "../../../components/styled_components/BackgroundColour"
-import { useAppDispatch, useAppSlector } from "../../../redux/hooks"
-import { tmpStoreAction } from "../../../redux/reducers/tmpStore.reducer"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import { useAppDispatch, useAppSlector } from "redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, "SignUpDOB">

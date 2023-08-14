@@ -4,11 +4,11 @@ import { View, Text, Modal, ScrollView, TouchableOpacity } from "react-native"
 import { useState } from "react"
 import { Ionicons, AntDesign } from "@expo/vector-icons"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { AuthStackList } from "../../types/Navigation"
-import BackgroundColour from "../../components/styled_components/BackgroundColour"
-import SmallButton from "../../components/styled_components/SmallButton"
-import AccountFileCard from "../../components/AccountFileCard"
-import AddAccountModal from "../../components/AddAccountModal"
+import { AuthStackList } from "types/Navigation"
+import BackgroundColour from "components/styled_components/BackgroundColour"
+import SmallButton from "components/styled_components/SmallButton"
+import AccountFileCard from "components/AccountFileCard"
+import AddAccountModal from "components/AddAccountModal"
 
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, "LoginWithAccount">

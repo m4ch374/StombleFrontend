@@ -1,5 +1,5 @@
 import axios, { CreateAxiosDefaults, AxiosInstance, AxiosError } from "axios"
-import { TEndpoint } from "../types/endpoints"
+import { TEndpoint } from "types/endpoints"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 /*
