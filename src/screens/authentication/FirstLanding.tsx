@@ -31,7 +31,7 @@ const FirstLanding = ({ navigation }: Props) => {
               </Link>
             </View>
           </View>
-          <Text className="text-white font-extrabold text-center text-[62px]">
+          <Text className="text-white font-AT text-center text-[62px]">
             stomble
           </Text>
         </View>
