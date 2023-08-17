@@ -18,6 +18,7 @@ import { TSignUp } from "types/endpoints"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { tokenAction } from "redux/reducers/tokens.reducer"
+import { authEP } from "constants/Endpoint"
 
 const SignupBusinessName = () => {
   const navigation = useNavigation()
@@ -28,7 +29,7 @@ const SignupBusinessName = () => {
 
   const handlePress = () => {
     ;(async () => {
-      const resp = await Fetcher.init<TSignUp>("POST", "/sign-up")
+      const resp = await Fetcher.init<TSignUp>("POST", authEP.SIGN_UP)
         .withJsonPaylad({
           businessName,
           isBusiness: true,

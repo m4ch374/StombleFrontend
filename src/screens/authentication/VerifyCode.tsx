@@ -22,6 +22,7 @@ import { useAppSlector } from "redux/hooks"
 import Fetcher from "utils/Fetcher"
 import { TConfirm } from "types/endpoints"
 import { useNavigation } from "@react-navigation/native"
+import { authEP } from "constants/Endpoint"
 
 const VerifyCode = () => {
   const CELL_COUNT = 6
@@ -60,8 +61,8 @@ const VerifyCode = () => {
     // Should we move endpoint to a constant file?
     // Yes -- Yume
     const endpoint = verifyWithPassword
-      ? "/confirm-code"
-      : "/confirm-pre-sign-up"
+      ? authEP.CONFIRM_CODE
+      : authEP.CONFIRM_PRE_SIGN_UP
     ;(async () => {
       const result = await Fetcher.init<TConfirm>("POST", endpoint)
         .withJsonPaylad({

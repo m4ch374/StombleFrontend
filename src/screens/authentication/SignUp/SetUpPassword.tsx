@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import Fetcher from "utils/Fetcher"
 import { TForgotPassword, TPreSignUp } from "types/endpoints"
+import { authEP } from "constants/Endpoint"
 
 // Breaking the rules here a bit
 type TPasswordCheck = {
@@ -61,8 +62,8 @@ const SetUpPassword = () => {
     ;(async () => {
       const fetcherInstance: Fetcher<TForgotPassword | TPreSignUp> =
         tmpVars.verifyWithPassword
-          ? Fetcher.init<TForgotPassword>("POST", "/forgot-password")
-          : Fetcher.init<TPreSignUp>("POST", "/pre-sign-up")
+          ? Fetcher.init<TForgotPassword>("POST", authEP.FORGOT_PASSWORD)
+          : Fetcher.init<TPreSignUp>("POST", authEP.PRE_SIGN_UP)
 
       const payload = {
         phone: tmpVars.phone,

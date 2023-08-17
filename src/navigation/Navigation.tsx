@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { RootStackList } from "../types/Navigation"
+import { RootStackList } from "types/Navigation"
 import AuthStackNavigator from "./AuthStack"
 import LoginRootTab from "./login_root/LoginRootTab"
 

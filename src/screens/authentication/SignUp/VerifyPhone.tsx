@@ -19,6 +19,7 @@ import { useAppDispatch } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import Fetcher from "utils/Fetcher"
 import { TCheckNum } from "types/endpoints"
+import { authEP } from "constants/Endpoint"
 
 // Breaking the rules a bit here again
 const Divider: React.FC = () => {
@@ -42,7 +43,10 @@ const VerifyPhone: React.FC = () => {
 
   const handleBtnPress = () => {
     ;(async () => {
-      const resp = await Fetcher.init<TCheckNum>("POST", "/check-number")
+      const resp = await Fetcher.init<TCheckNum>(
+        "POST",
+        authEP.CHECK_NUMBER,
+      )
         .withJsonPaylad({ phone: phone.countryCode + phone.number })
         .fetchData()
 

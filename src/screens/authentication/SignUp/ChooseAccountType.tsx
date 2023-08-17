@@ -10,6 +10,7 @@ import { TSignUp } from "types/endpoints"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import { authEP } from "constants/Endpoint"
 
 type TSelection = "" | "business" | "personal"
 
@@ -27,7 +28,7 @@ const ChooseAccountType = () => {
     }
 
     ;(async () => {
-      const resp = await Fetcher.init<TSignUp>("POST", "/sign-up")
+      const resp = await Fetcher.init<TSignUp>("POST", authEP.SIGN_UP)
         .withJsonPaylad({
           phone: tmp.phone,
           password: tmp.password,

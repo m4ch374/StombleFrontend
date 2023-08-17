@@ -12,6 +12,7 @@ import { TSignIn } from "types/endpoints"
 import { useAppDispatch } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import { authEP } from "constants/Endpoint"
 
 // This is the new way of navigating
 // We dont need to type as much hahahahahhahhahahha
@@ -38,7 +39,7 @@ const Login = () => {
     // Either this or wrap the whole thing in IIFE
 
     ;(async () => {
-      const resp = await Fetcher.init<TSignIn>("POST", "/sign-in")
+      const resp = await Fetcher.init<TSignIn>("POST", authEP.SIGN_IN)
         .withJsonPaylad({
           phone: phone.countryCode + phone.number,
           password: password,
