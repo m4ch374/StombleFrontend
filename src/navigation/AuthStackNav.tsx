@@ -17,7 +17,7 @@ import SignupBusinessName from "screens/authentication/SignUp/SignUpBusinessName
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
 
-const AuthStackNavigator = () => {
+const AuthStackNav = () => {
   return (
     <AuthStack.Navigator
       screenOptions={{
@@ -76,5 +76,8 @@ const AuthStackNavigator = () => {
   )
 }
 
-export default AuthStackNavigator
+export default AuthStackNav
+
+// Forgor why i needed this
+// Prolly legacy stuff from shadow realm
 export { AuthStack }

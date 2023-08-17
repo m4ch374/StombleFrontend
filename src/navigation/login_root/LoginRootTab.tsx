@@ -1,9 +1,12 @@
+// Code from shadow realm
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTheme } from "native-base"
 import { LoginRootTabList } from "types/Navigation"
 import BackgroundColour from "components/styled_components/BackgroundColour"
 import TabBar from "components/TabBar"
-import Home from "screens/Home"
+import Home from "screens/login_root/Home"
+import Profile from "screens/login_root/Profile"
 
 const BottomTab = createBottomTabNavigator<LoginRootTabList>()
 
@@ -22,13 +25,29 @@ const LoginRootTab = () => {
             borderTopColor: "transparent",
           },
           tabBarIcon: ({ focused, size }) => TabBar({ focused, size }),
-          // tabBarActiveTintColor: '#e67a15',
-          // tabBarInactiveTintColor: 'gray',
         }}
       >
         <BottomTab.Screen
           name="Home"
           component={Home}
+          options={{ title: "" }}
+        />
+
+        <BottomTab.Screen
+          name="Search"
+          component={Home}
+          options={{ title: "" }}
+        />
+
+        <BottomTab.Screen
+          name="Notification"
+          component={Home}
+          options={{ title: "" }}
+        />
+
+        <BottomTab.Screen
+          name="Profile"
+          component={Profile}
           options={{ title: "" }}
         />
       </BottomTab.Navigator>

@@ -1,3 +1,5 @@
+// From shadow realm
+
 import { View, Text } from "react-native"
 import { useRoute } from "@react-navigation/native"
 import {
@@ -23,7 +25,7 @@ const TabBar = (props: Props) => {
     Icon = Foundation
     iconName = "home"
     text = "Home"
-  } else if (route.name === "ProfileTab") {
+  } else if (route.name === "Profile") {
     Icon = EvilIcons
     iconName = "user"
     text = "Profile"
@@ -34,7 +36,7 @@ const TabBar = (props: Props) => {
   } else {
     Icon = MaterialCommunityIcons
     iconName = "professional-hexagon"
-    text = "Profession"
+    text = "Notification"
   }
   return (
     <View

@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { RootStackList } from "types/Navigation"
-import AuthStackNavigator from "./AuthStack"
+import { RootStackList } from "../types/Navigation"
+import AuthStackNav from "./AuthStackNav"
 import LoginRootTab from "./login_root/LoginRootTab"
+import SettingsStackNav from "./SettingStack"
 
 const RootStack = createNativeStackNavigator<RootStackList>()
 
@@ -13,7 +14,7 @@ export default function Navigation() {
     >
       {/* TODO: implement auth logic */}
       <RootStack.Screen
-        component={AuthStackNavigator}
+        component={AuthStackNav}
         name="Auth"
         options={{ headerShown: false }}
       />
@@ -24,7 +25,11 @@ export default function Navigation() {
         options={{ headerShown: false }}
       />
 
-      {/* TODO: add not found after refactor */}
+      <RootStack.Screen
+        name="Settings"
+        component={SettingsStackNav}
+        options={{ headerShown: false }}
+      />
     </RootStack.Navigator>
   )
 }

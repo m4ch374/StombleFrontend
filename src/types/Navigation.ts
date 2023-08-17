@@ -21,14 +21,17 @@ declare global {
 export type RootStackList = {
   Auth: NavigatorScreenParams<AuthStackList>
   LoginRoot: NavigatorScreenParams<LoginRootTabList>
-  NotFound: undefined
+  Settings: NavigatorScreenParams<SettingStackList>
 }
 
 export type RootStackScreenProps<Screen extends keyof RootStackList> =
   NativeStackScreenProps<RootStackList, Screen>
 
+// I am thinking about moving these to it's corresponding file
+
 // ===============================================
 // Authentication
+// ===============================================
 export type AuthStackList = {
   FirstLanding: undefined
 
@@ -50,7 +53,23 @@ export type AuthStackList = {
 
   SetUpPassword: undefined
 }
+// ===============================================
 
+// ===============================================
+// Root after login
+// ===============================================
 export type LoginRootTabList = {
   Home: undefined
+  Search: undefined
+  Notification: undefined
+  Profile: undefined // No props for profile yet
 }
+// ===============================================
+
+// ===============================================
+// Settings
+// ===============================================
+export type SettingStackList = {
+  SettingsIndex: undefined
+}
+// ===============================================
