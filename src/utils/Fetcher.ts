@@ -94,29 +94,54 @@ class Fetcher<T extends TEndpoint<any, any>> {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return resp.data
     } catch (e) {
-      const errorMeta = {
-        name: "Unknown",
-        message: "Unknown error",
-        code: "Unknown",
-      }
-
-      if (e instanceof AxiosError) {
-        errorMeta.name = e.name
-        errorMeta.code = e.code as string // ew, type casting
-        errorMeta.message = e.message
-      }
-
-      console.log()
-      // Adding newline fucks up the formatting from expo
-      console.log("====================================================")
-      console.log("An error has occurred!")
-      console.log(`\tName:    ${errorMeta.name}`) // I dont think js provides us anything w/ alligning stuff
-      console.log(`\tCode:    ${errorMeta.code}`)
-      console.log(`\tMessage: ${errorMeta.message}`)
-      console.log("====================================================")
+      this.logFetchError(e)
     }
 
     return undefined
+  }
+
+  // =============================================================
+  // Helpers
+  // =============================================================
+  private logFetchError(e: unknown) {
+    const errorMeta = {
+      name: "Unknown",
+      message: "Unknown error",
+      code: "Unknown",
+      config: "Unknown",
+    }
+
+    if (e instanceof AxiosError) {
+      errorMeta.name = e.name
+      errorMeta.code = e.code as string // ew, type casting
+      errorMeta.message = e.message
+      errorMeta.config = JSON.stringify(
+        {
+          baseURL: e.config?.baseURL,
+          endpoint: e.config?.url,
+          headers: e.config?.headers,
+          body: JSON.parse(e.config?.data as string) as object, // type cast again
+        },
+        undefined,
+        4,
+      ).slice(2, -1)
+    }
+
+    console.log()
+    // Adding newline fucks up the formatting from expo
+    console.log("============================================================")
+    console.log("An error has occurred!")
+    console.log(`\tName:    ${errorMeta.name}`) // I dont think js provides us anything w/ alligning stuff
+    console.log(`\tCode:    ${errorMeta.code}`)
+    console.log(`\tMessage: ${errorMeta.message}`)
+    console.log()
+    console.log("************************************************************")
+    console.log("*                       CONFIG                             *")
+    console.log("************************************************************")
+    errorMeta.config
+      .split("\n")
+      .forEach(l => console.log(l.replace(/ {4}/, "")))
+    console.log("============================================================")
   }
 }
 
