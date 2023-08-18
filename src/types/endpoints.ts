@@ -89,6 +89,14 @@ export type TPreSignUp = TEndpoint<PreSignUpReq, void>
 // ===================================================
 
 // ===================================================
+// /close-account
+// ===================================================
+type CloseAccountReq = {
+  businessId?: string
+}
+
+export type TCloseAccount = TEndpoint<CloseAccountReq, void>
+// ===================================================
 // /sign-out
 // ===================================================
 type SignOutReq = {

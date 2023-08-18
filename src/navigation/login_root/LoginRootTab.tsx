@@ -25,6 +25,7 @@ const LoginRootTab = () => {
             borderTopColor: "transparent",
           },
           tabBarIcon: ({ focused, size }) => TabBar({ focused, size }),
+          tabBarHideOnKeyboard: true,
         }}
       >
         <BottomTab.Screen

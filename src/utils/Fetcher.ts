@@ -21,6 +21,8 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   private payload: T["requestType"] | undefined
 
+  private useCurrentToken: boolean | undefined
+
   private constructor(method: Method) {
     let axiosConf: CreateAxiosDefaults = {
       baseURL: base,
@@ -47,6 +49,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
   ) {
     const fetcher = new Fetcher<T>(method)
     fetcher.endpoint = endpoint
+    fetcher.useCurrentToken = false
 
     return fetcher
   }
@@ -62,10 +65,7 @@ class Fetcher<T extends TEndpoint<any, any>> {
   }
 
   withCurrentToken() {
-    ;(async () => {
-      const token = await AsyncStorage.getItem("token")
-      this.withToken(token as string)
-    })()
+    this.useCurrentToken = true
     return this
   }
 
@@ -80,6 +80,11 @@ class Fetcher<T extends TEndpoint<any, any>> {
   // No error checking lets go
   async fetchData(): Promise<T["responseType"] | undefined> {
     try {
+      if (this.useCurrentToken) {
+        const token = `Bearer ${await AsyncStorage.getItem("token")}`
+        this.instance.defaults.headers.common.Authorization = token
+      }
+
       const resp = await this.instance.request({
         data: this.payload,
         url: this.endpoint,
