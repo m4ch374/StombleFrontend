@@ -24,14 +24,16 @@ export const accountEP = {
 
 // Manage profiles endpoints
 export const manageProfilesEP = {
-  GET_BUSINESS_ACCOUNT_RELATED_PROFILES: "/get-business-account-related-profiles"
+  GET_BUSINESS_ACCOUNT_RELATED_PROFILES:
+    "/get-business-account-related-profiles",
 }
 
 // Setting endpoints
 export const settingEP = {
   GET_USER_ACCOUNT_INFORMATION: "/get-user-account-information",
   GET_BUSINESS_ACCOUNT_INFORMATION: "/get-business-account-information",
-  GET_BUSINESS_ACCOUNT_RELATED_PROFILES: "/get-business-account-related-profiles",
+  GET_BUSINESS_ACCOUNT_RELATED_PROFILES:
+    "/get-business-account-related-profiles",
   BECOME_BUSINESS_ACCOUNT: "/become-business-account",
   CLOSE_ACCOUNT: "/close-account",
 }

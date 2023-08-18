@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import AccountInfo from "screens/settings/AccountInfo"
 import SettingsIndex from "screens/settings/SettingsIndex"
 import { SettingStackList } from "types/Navigation"
 
@@ -9,10 +10,21 @@ const SettingsStackNav: React.FC = () => {
     <SettingsStack.Navigator
       screenOptions={{
         headerTintColor: "#FFFFFF",
-        headerStyle: { backgroundColor: "#020235" },
+        headerStyle: { backgroundColor: "#05051F" },
       }}
+      initialRouteName="SettingsIndex"
     >
-      <SettingsStack.Screen name="SettingsIndex" component={SettingsIndex} />
+      <SettingsStack.Screen
+        name="SettingsIndex"
+        component={SettingsIndex}
+        options={{ title: "Settings" }}
+      />
+
+      <SettingsStack.Screen
+        name="AccountInfo"
+        component={AccountInfo}
+        options={{ title: "Account Information" }}
+      />
     </SettingsStack.Navigator>
   )
 }

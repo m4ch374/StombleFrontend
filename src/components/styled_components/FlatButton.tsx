@@ -1,6 +1,5 @@
 // Code copied elsewhere
 // TODO: lint code
-/* eslint-disable */
 
 import { Text, TouchableOpacity } from "react-native"
 
@@ -8,8 +7,9 @@ type FlatButtonProps = {
   height?: string | number | undefined
   bgColor?: string
   text: string
-  onPress: any
+  onPress: () => void
   disabled?: boolean
+  variation?: "filled" | "outlined"
 }
 
 const FlatButton = ({
@@ -18,20 +18,20 @@ const FlatButton = ({
   onPress,
   disabled,
   bgColor,
+  variation,
 }: FlatButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="rounded-[5px] justify-center items-center "
+      className={`rounded-[5px] justify-center items-center 
+      ${disabled ? "bg-btnDisabled" : bgColor || "bg-btnActive"} 
+      ${height ? height : "h-[48px]"} 
+      ${variation === "outlined" && "border border-textSec bg-transparent"}`}
       disabled={disabled}
-      style={{
-        backgroundColor: disabled ? "#454545" : bgColor || "#0B52BC",
-        height: height ? height : 48,
-      }}
     >
       <Text
-        className="text-[17px] text-white"
-        style={{ fontFamily: "Lato-700" }}
+        className={`text-[17px] 
+       ${variation === "outlined" ? " text-textSec " : "text-white"}`}
       >
         {text}
       </Text>

@@ -87,3 +87,12 @@ type PreSignUpReq = {
 
 export type TPreSignUp = TEndpoint<PreSignUpReq, void>
 // ===================================================
+
+// ===================================================
+// /sign-out
+// ===================================================
+type SignOutReq = {
+  token: string
+}
+
+export type TSignOut = TEndpoint<SignOutReq, void>

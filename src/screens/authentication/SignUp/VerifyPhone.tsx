@@ -43,10 +43,7 @@ const VerifyPhone: React.FC = () => {
 
   const handleBtnPress = () => {
     ;(async () => {
-      const resp = await Fetcher.init<TCheckNum>(
-        "POST",
-        authEP.CHECK_NUMBER,
-      )
+      const resp = await Fetcher.init<TCheckNum>("POST", authEP.CHECK_NUMBER)
         .withJsonPaylad({ phone: phone.countryCode + phone.number })
         .fetchData()
 

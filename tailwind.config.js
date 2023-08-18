@@ -32,7 +32,7 @@ module.exports = {
         settingCateg: "#ADADAD",
         // text field
         main: "#4F4F4F",
-        textSec: "#101035",
+        bgText: "#101035",
         stroke: "#808080",
         // background color
         bgProfile: "#02022F",
