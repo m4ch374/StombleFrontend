@@ -8,17 +8,16 @@ import BtnWithLoginRegister from "components/BtnWithLoginRegister"
 import PasswordInput from "components/passwordInput"
 import { useNavigation } from "@react-navigation/native"
 import Fetcher from "utils/Fetcher"
-import { TSignIn } from "types/endpoints"
+import { TGetUserInfo, TSignIn } from "types/endpoints"
 import { useAppDispatch } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { authEP } from "constants/Endpoint"
+import { accountEP, authEP } from "constants/Endpoint"
 
 // This is the new way of navigating
 // We dont need to type as much hahahahahhahhahahha
 const Login = () => {
   const navigate = useNavigation()
-
   const dispatch = useAppDispatch()
 
   const [isValid, setIsValid] = useState(true)
@@ -34,35 +33,65 @@ const Login = () => {
     setDisabled(!(phone.number.length > 0 && password.length > 0))
   }, [password, phone.number])
 
-  // TODO LATER: integrate endpoint then navigate (VerifyCode)
   const handleLogin = () => {
-    // Either this or wrap the whole thing in IIFE
-
     ;(async () => {
-      const resp = await Fetcher.init<TSignIn>("POST", authEP.SIGN_IN)
+      // To login in
+      // should we extract endpoint apis to a separate file - Yume
+      const loginResp = await Fetcher.init<TSignIn>("POST", authEP.SIGN_IN)
         .withJsonPaylad({
           phone: phone.countryCode + phone.number,
           password: password,
         })
-        .fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+        .fetchData()
 
-      if (typeof resp === "undefined") {
+      if (typeof loginResp === "undefined") {
         setLoginError(true)
         return
       }
 
-      console.log("resp:", resp)
+      dispatch(tokenAction.setToken(loginResp.AccessToken))
+      dispatch(
+        tmpStoreAction.setItem({ key: "pswLength", item: password.length }),
+      )
+      dispatch(
+        tmpStoreAction.setItem({ key: "verifyWithPassword", item: true }),
+      )
 
-      dispatch(tokenAction.setToken(resp.AccessToken))
+      // To get user info and store into tmpStore
+      const userResp = await Fetcher.init<TGetUserInfo>(
+        "GET",
+        accountEP.GET_USER_ACCOUNT_INFORMATION,
+      )
+        .withCurrentToken()
+        .fetchData()
+
+      if (typeof userResp?.result === "undefined") {
+        return
+      }
+
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "fullName",
+          item: userResp.result.fullName,
+        }),
+      )
       dispatch(
         tmpStoreAction.setItem({
           key: "phone",
-          item: phone.countryCode + phone.number,
+          item: userResp.result.phone,
         }),
       )
-      dispatch(tmpStoreAction.setItem({ key: "password", item: password }))
       dispatch(
-        tmpStoreAction.setItem({ key: "verifyWithPassword", item: true }),
+        tmpStoreAction.setItem({
+          key: "email",
+          item: userResp.result.email,
+        }),
+      )
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "link_icon",
+          item: userResp.result.link_icon,
+        }),
       )
 
       // Temporary navigate to Home screen directly (verifyCode not working yet)

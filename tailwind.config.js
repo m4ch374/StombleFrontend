@@ -36,7 +36,7 @@ module.exports = {
         stroke: "#808080",
         // background color
         bgProfile: "#02022F",
-        bgSetting: "#05051F",
+        bgSetting: "#080816",
         bgShareSheet: "#1C1C1E",
         bgTabBar: "#10102C",
         background: "#020230",

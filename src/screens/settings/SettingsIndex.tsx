@@ -1,6 +1,5 @@
 // REFERENCE: Setting - Personal
 
-import { SafeAreaView } from "react-native-safe-area-context"
 import SettingsNav from "components/SettingsNav"
 import { View } from "react-native"
 import FlatButton from "components/styled_components/FlatButton"
@@ -11,6 +10,7 @@ import { TSignOut } from "types/endpoints"
 import { authEP } from "constants/Endpoint"
 import { useNavigation } from "@react-navigation/native"
 import { tokenAction } from "redux/reducers/tokens.reducer"
+import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
 
 const SettingsIndex: React.FC = () => {
   const { navigate } = useNavigation()
@@ -37,7 +37,7 @@ const SettingsIndex: React.FC = () => {
   }
 
   return (
-    <SafeAreaView className=" bg-bgSetting flex-1 p-[16px] pt-[0] justify-between">
+    <SettingsScreenLayout>
       <View>
         {settingsNavData.map((section, index) => {
           return (
@@ -65,7 +65,7 @@ const SettingsIndex: React.FC = () => {
           />
         </View>
       </View>
-    </SafeAreaView>
+    </SettingsScreenLayout>
   )
 }
 

@@ -71,7 +71,12 @@ export type LoginRootTabList = {
 // ===============================================
 export type SettingStackList = {
   SettingsIndex: undefined
+
   AccountInfo: undefined
+  EditName: undefined
+  EditPhone: undefined
+  AddEmail: undefined
+
   ManageProfiles: undefined
   Security: undefined
   Notifications: undefined

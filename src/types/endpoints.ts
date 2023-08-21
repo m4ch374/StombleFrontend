@@ -97,6 +97,7 @@ type CloseAccountReq = {
 
 export type TCloseAccount = TEndpoint<CloseAccountReq, void>
 // ===================================================
+
 // /sign-out
 // ===================================================
 type SignOutReq = {
@@ -104,3 +105,26 @@ type SignOutReq = {
 }
 
 export type TSignOut = TEndpoint<SignOutReq, void>
+// ===================================================
+
+// /get-user-account-information
+// ===================================================
+type GetUserInfoReq = {
+  token: string
+}
+
+type GetUserInfoRes = {
+  // how should i deal with this 'result'
+  result: {
+    id: string // idk whether it's needed
+    phone: string
+    fullName: string
+    email: string
+    link_icon: string
+    fcmToken: string // idk what this is and whether it's needed
+    birthday: string
+    gender: string
+  }
+}
+
+export type TGetUserInfo = TEndpoint<GetUserInfoReq, GetUserInfoRes>

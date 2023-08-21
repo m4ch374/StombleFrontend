@@ -12,10 +12,6 @@ type Props = {
 }
 
 const SettingsNav = ({ title, data }: Props) => {
-  const separator = () => (
-    <View className="h-[0.8px] w-full bg-white opacity-10" />
-  )
-
   return (
     <View className="mb-8">
       <View>
@@ -30,7 +26,9 @@ const SettingsNav = ({ title, data }: Props) => {
           renderItem={({ item }) => (
             <SettingsNavItem settingText={item.navItem} navTo={item.navTo} />
           )}
-          ItemSeparatorComponent={separator}
+          ItemSeparatorComponent={() => (
+            <View className="h-[0.8px] w-full bg-white opacity-10" />
+          )}
         />
       </View>
     </View>
