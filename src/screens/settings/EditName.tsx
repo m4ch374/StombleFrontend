@@ -10,6 +10,9 @@ import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useDispatch } from "react-redux"
 import InputBlueBg from "components/InputBlueBg"
+import Fetcher from "utils/Fetcher"
+import { accountEP } from "constants/Endpoint"
+import { TUpdateUserInfo } from "types/endpoints"
 
 const EditName = () => {
   const navigate = useNavigation()
@@ -18,24 +21,46 @@ const EditName = () => {
   const [newName, setNewName] = useState(tmpUser.fullName)
 
   const handleSave = () => {
-    // TODO: update user name to backend
+    // endpoint: update user name to backend
+    ;(async () => {
+      const resp = await Fetcher.init<TUpdateUserInfo>(
+        "PUT",
+        accountEP.UPDATE_PERSONAL_INFO,
+      )
+        .withJsonPaylad({
+          attribute: "name",
+          userId: tmpUser.userId,
+          value: newName,
+        })
+        .withCurrentToken()
+        .fetchData()
 
-    // To update fullName in tmpStore
-    dispatch(
-      tmpStoreAction.setItem({
-        key: "fullName",
-        item: newName,
-      }),
-    )
+      if (typeof resp === "undefined") return
 
-    navigate.goBack()
+      // To update fullName in tmpStore
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "fullName",
+          item: newName,
+        }),
+      )
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "message",
+          item: "Name updated successfully",
+        }),
+      )
+
+      // TODO: need return a success message back to AccountInfo screen
+      navigate.goBack()
+    })()
   }
 
   return (
     <SettingsScreenLayout>
       <InputBlueBg title="Full Name">
         <TextInput
-          className="text-white text-[16px] w-auto"
+          className="text-white text-[16px] w-[270px]"
           value={newName}
           onChangeText={setNewName}
         />

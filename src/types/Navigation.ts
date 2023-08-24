@@ -75,7 +75,16 @@ export type SettingStackList = {
   AccountInfo: undefined
   EditName: undefined
   EditPhone: undefined
+  VerifyCodeForUpdate: {
+    phone?: string | undefined
+    email?: string | undefined
+  }
   AddEmail: undefined
+  ChangePassword: undefined
+
+  CloseAccountStepOne: undefined
+  CloseAccountStepTwo: undefined
+  CloseAccountStepThree: undefined
 
   ManageProfiles: undefined
   Security: undefined

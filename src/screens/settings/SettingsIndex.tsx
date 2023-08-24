@@ -1,4 +1,4 @@
-// REFERENCE: Setting - Personal
+// REFERENCE: Setting - Personal - Logout
 
 import SettingsNav from "components/SettingsNav"
 import { View } from "react-native"
@@ -20,12 +20,22 @@ const SettingsIndex: React.FC = () => {
   // TODO: Become a Business
   const handleBecomeBusiness = () => {}
 
-  // /sign-out not working
+  // TODO: logout from an active account
+  // ----------------------------------------------------------------
+  // logout workflow:
+  // 1. When log out, save info screen pops up if he hasn’t saved the login info earlier.
+  // 2. If user has multiple accounts, after logging out it returns back to this screen
+  //    If user has single account, after logging out it returns back to this screen
+  //----------------------------------------------------------------
   const handleLogout = () => {
+    // endpoint: simple log out directly
     ;(async () => {
       const resp = await Fetcher.init<TSignOut>("POST", authEP.SIGN_OUT)
         .withJsonPaylad({ token: token.currentToken })
+        .withCurrentToken()
         .fetchData()
+
+      console.log("sign out resp", resp)
 
       if (typeof resp === "undefined") {
         return

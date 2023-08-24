@@ -14,6 +14,8 @@ import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { accountEP, authEP } from "constants/Endpoint"
 
+const HOST_URL = "https://stomble-users.s3.ap-southeast-2.amazonaws.com/"
+
 // This is the new way of navigating
 // We dont need to type as much hahahahahhahhahahha
 const Login = () => {
@@ -65,10 +67,14 @@ const Login = () => {
         .withCurrentToken()
         .fetchData()
 
-      if (typeof userResp?.result === "undefined") {
-        return
-      }
+      if (typeof userResp?.result === "undefined") return
 
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "userId",
+          item: userResp.result.id,
+        }),
+      )
       dispatch(
         tmpStoreAction.setItem({
           key: "fullName",
@@ -90,7 +96,7 @@ const Login = () => {
       dispatch(
         tmpStoreAction.setItem({
           key: "link_icon",
-          item: userResp.result.link_icon,
+          item: HOST_URL + userResp.result.link_icon,
         }),
       )
 

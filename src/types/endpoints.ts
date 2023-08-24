@@ -104,7 +104,12 @@ type SignOutReq = {
   token: string
 }
 
-export type TSignOut = TEndpoint<SignOutReq, void>
+type SignOutRes = {
+  statusCode: string
+  message: string
+}
+
+export type TSignOut = TEndpoint<SignOutReq, SignOutRes>
 // ===================================================
 
 // /get-user-account-information
@@ -114,17 +119,69 @@ type GetUserInfoReq = {
 }
 
 type GetUserInfoRes = {
-  // how should i deal with this 'result'
   result: {
-    id: string // idk whether it's needed
+    id: string
     phone: string
     fullName: string
     email: string
     link_icon: string
-    fcmToken: string // idk what this is and whether it's needed
+    fcmToken: string
     birthday: string
     gender: string
   }
 }
 
 export type TGetUserInfo = TEndpoint<GetUserInfoReq, GetUserInfoRes>
+// ===================================================
+
+// /update-user-personal-info
+// ===================================================
+type UpdateUserInfoReq = {
+  attribute: "email" | "phone_number" | "name"
+  userId: string
+  value: string
+  code?: string
+}
+
+export type TUpdateUserInfo = TEndpoint<UpdateUserInfoReq, void>
+// ===================================================
+
+// /send-code-change-attribute
+// ===================================================
+type SendCodeChangeAttributeReq = {
+  attribute: "email" | "phone_number"
+  userId: string
+  value: string
+}
+
+export type TSendCodeChangeAttribute = TEndpoint<
+  SendCodeChangeAttributeReq,
+  void
+>
+// ===================================================
+
+// /update-icon
+// ===================================================
+type UpdateIconReq = {
+  iconFile: object
+  userId: string
+  businessId?: string
+}
+
+export type TUpdateIcon = TEndpoint<UpdateIconReq, void>
+// ===================================================
+
+// /update-icon
+// ===================================================
+type ChangePasswordReq = {
+  phone: string
+  previousPassword: string
+  proposedPassword: string
+}
+
+type ChangePasswordRes = {
+  statusCode: number
+  message: string
+}
+
+export type TChangePassword = TEndpoint<ChangePasswordReq, ChangePasswordRes>

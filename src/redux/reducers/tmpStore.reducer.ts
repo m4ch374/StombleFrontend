@@ -3,6 +3,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 type TTmpStore = {
+  userId: string
   phone: string
   password: string
   pswLength: number
@@ -13,9 +14,11 @@ type TTmpStore = {
   email: string
   link_icon: string
   verifyWithPassword: boolean
+  message: string
 }
 
 const init: TTmpStore = {
+  userId: "",
   phone: "",
   password: "",
   pswLength: 0,
@@ -26,6 +29,7 @@ const init: TTmpStore = {
   email: "",
   link_icon: "",
   verifyWithPassword: false,
+  message: "",
 }
 
 const tmpStoreSlice = createSlice({

@@ -4,7 +4,7 @@
 import { View, Text, Dimensions } from "react-native"
 import React, { FC, useEffect, useRef, useState } from "react"
 import PhoneInput from "react-native-phone-number-input"
-import { Ionicons } from "@expo/vector-icons"
+import { AntDesign, Ionicons } from "@expo/vector-icons"
 
 type Phone = {
   number: string
@@ -15,6 +15,7 @@ type PhoneNumberInputProps = {
   setPhone: React.Dispatch<React.SetStateAction<any>>
   isValid: boolean
   setIsValid: React.Dispatch<React.SetStateAction<any>>
+  noBorder?: boolean
 }
 const windowWidth = Dimensions.get("window").width
 
@@ -22,6 +23,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   setPhone,
   isValid,
   setIsValid,
+  noBorder,
 }) => {
   const phoneInput = useRef<PhoneInput>(null)
   const [countryObj, setCountryObj] = useState<any>()
@@ -51,7 +53,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   }
 
   return (
-    <View className="mb-8">
+    <View className="mb-8 relative">
       <PhoneInput
         withDarkTheme
         ref={phoneInput}
@@ -71,7 +73,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
           width: windowWidth - 32,
           borderRadius: 6,
           backgroundColor: "transparent",
-          borderColor: "#fff",
+          borderColor: `${noBorder ? "transparent" : "#FFFFFF"}`,
           borderWidth: 1,
         }}
         textContainerStyle={{
@@ -108,9 +110,12 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
         }
       />
       {value.length > 0 && !isValid && (
-        <Text className="text-[#FF0000] text-[14px] leading-[22px] text-start mt-2">
-          Please enter a valid phone number
-        </Text>
+        <View className="flex flex-row items-center absolute top-[52px]">
+          <AntDesign name="exclamationcircleo" size={24} color="#F4222F" />
+          <Text className="text-error mx-2">
+            Please enter a valid phone number
+          </Text>
+        </View>
       )}
     </View>
   )

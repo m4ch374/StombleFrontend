@@ -5,9 +5,14 @@ import { Ionicons } from "@expo/vector-icons"
 type PasswordInputProps = {
   password: string
   setPassword: React.Dispatch<React.SetStateAction<string>>
+  placeholder?: string
 }
 
-const PasswordInput = ({ password, setPassword }: PasswordInputProps) => {
+const PasswordInput = ({
+  password,
+  setPassword,
+  placeholder,
+}: PasswordInputProps) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true)
 
   return (
@@ -16,7 +21,7 @@ const PasswordInput = ({ password, setPassword }: PasswordInputProps) => {
         <TextInput
           className="text-white py-auto text-base leading-[16px] w-[280px] h-5"
           style={{ fontFamily: "Lato-700" }}
-          placeholder="Enter Password"
+          placeholder={placeholder || "Enter Password"}
           placeholderTextColor="#ABABAB"
           secureTextEntry={secureTextEntry}
           value={password}

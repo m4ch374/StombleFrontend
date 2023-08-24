@@ -16,7 +16,7 @@ module.exports = {
       colors: {
         // brand color
         primary: "#0B52BC",
-        secondary: "326FCB",
+        secondary: "#326FCB",
         // btn color
         btnRecording: "#FF6961",
         btnActive: "#0B52BC",
