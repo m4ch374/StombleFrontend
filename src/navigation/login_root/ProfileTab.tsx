@@ -5,6 +5,7 @@ import Following from "components/profile/Following"
 import VideosLiked from "components/profile/VideosLiked"
 import VideosSaved from "components/profile/VideosSaved"
 import ProfileTabIcon from "components/profile/ProfileTabIcon"
+import { View } from "react-native"
 
 const TopTab = createMaterialTopTabNavigator<ProfileTabList>()
 
@@ -14,6 +15,7 @@ const ProfileTab: React.FC = () => {
       initialRouteName="Following"
       screenOptions={({ route }) => ({
         lazy: true,
+        lazyPlaceholder: () => <View className="h-full bg-bgProfile" />,
         tabBarStyle: { backgroundColor: "02022F" },
         tabBarAndroidRipple: { radius: 0 },
         tabBarPressColor: "transparent",

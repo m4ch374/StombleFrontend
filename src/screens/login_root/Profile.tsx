@@ -53,7 +53,7 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     handleRefresh()
-  })
+  }, [handleRefresh])
   // =====================================================================
 
   return (
