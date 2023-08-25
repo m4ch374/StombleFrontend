@@ -53,7 +53,7 @@ const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
         base64: result.assets[0].base64,
         name: result.assets[0].fileName,
         type: result.assets[0].type,
-        size: result.assets[0].fileSize,
+        size: result.assets[0].fileSize?.toString(),
         ext: result.assets[0].fileName?.split(".").pop(),
       }
 
