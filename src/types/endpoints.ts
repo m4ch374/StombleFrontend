@@ -98,6 +98,45 @@ type CloseAccountReq = {
 export type TCloseAccount = TEndpoint<CloseAccountReq, void>
 // ===================================================
 
+// ===================================================
+// /get-followings
+// ===================================================
+type GetFollowingsReq = {
+  businessId: string
+  take: string
+  skip: string
+}
+
+type FollowingResItem = {
+  id: string
+  business_account_id: string
+  user_account_id: string
+  follow_business_account_id: string
+  follow_user_account_id: string
+  created_at: string
+  updated_at: string
+  business_account: {
+    id: string
+    businessName: string
+    email: string
+    link_icon: string
+    user_id: string
+    amount_following: number
+    amount_followers: number
+    amount_videos: number
+    status: string
+    created_at: string
+    updated_at: string
+  }
+}
+
+type GetFollowingsRes = {
+  result: FollowingResItem[]
+}
+
+export type TGetFollowings = TEndpoint<GetFollowingsReq, GetFollowingsRes>
+// ===================================================
+
 // /sign-out
 // ===================================================
 type SignOutReq = {

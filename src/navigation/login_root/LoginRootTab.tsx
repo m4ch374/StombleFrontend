@@ -3,66 +3,50 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useTheme } from "native-base"
 import { LoginRootTabList } from "types/Navigation"
-import BackgroundColour from "components/styled_components/BackgroundColour"
-import TabBar from "components/TabBar"
+import TabBarIcon from "components/TabBarIcon"
 import Home from "screens/login_root/Home"
 import Profile from "screens/login_root/Profile"
+import { Platform, SafeAreaView, StatusBar } from "react-native"
+import Notifications from "screens/login_root/Notifications"
 
 const BottomTab = createBottomTabNavigator<LoginRootTabList>()
 
+// The code quality was really bad before cleaning up.....
+// And git lens blames me for that lol why
 const LoginRootTab = () => {
-  const { color } = useTheme().colors
+  const { color } = useTheme().colors // Ok somehow we have dups
 
   return (
-    <BackgroundColour>
+    <SafeAreaView
+      className="h-full bg-bgProfile"
+      style={{
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      }}
+    >
       <BottomTab.Navigator
         initialRouteName="Home"
-        screenOptions={{
+        screenOptions={({ route }) => ({
           headerShown: false,
+          tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: color.tabBarBgColor,
-            height: 83,
+            height: 60,
             borderTopColor: "transparent",
           },
-          tabBarIcon: ({ focused, size }) => TabBar({ focused, size }),
+          tabBarIcon: props => TabBarIcon({ ...props, route }),
           tabBarHideOnKeyboard: true,
-        }}
+        })}
       >
-        <BottomTab.Screen
-          name="Home"
-          component={Home}
-          options={{ title: "" }}
-        />
+        <BottomTab.Screen name="Home" component={Home} />
 
-        <BottomTab.Screen
-          name="Search"
-          component={Home}
-          options={{ title: "" }}
-        />
+        <BottomTab.Screen name="Search" component={Home} />
 
-        <BottomTab.Screen
-          name="Notification"
-          component={Home}
-          options={{ title: "" }}
-        />
+        <BottomTab.Screen name="Notification" component={Notifications} />
 
-        <BottomTab.Screen
-          name="Profile"
-          component={Profile}
-          options={{ title: "" }}
-        />
+        <BottomTab.Screen name="Profile" component={Profile} />
       </BottomTab.Navigator>
-    </BackgroundColour>
+    </SafeAreaView>
   )
 }
 
 export default LoginRootTab
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-// function TabBarIcon(props: {
-//   name: React.ComponentProps<typeof FontAwesome>['name'];
-//   color: string;
-// }) {
-//   return <FontAwesome size={30} style={{marginBottom: -3}} {...props} />;
-// }

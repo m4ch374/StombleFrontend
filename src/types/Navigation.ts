@@ -67,6 +67,15 @@ export type LoginRootTabList = {
 // ===============================================
 
 // ===============================================
+// Swipable Tab on profile
+// ===============================================
+export type ProfileTabList = {
+  Following: undefined
+  VideosLiked: undefined
+  VideosSaved: undefined
+}
+
+// ===============================================
 // Settings
 // ===============================================
 export type SettingStackList = {
