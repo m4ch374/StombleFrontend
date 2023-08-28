@@ -1,16 +1,16 @@
 // REFERENCE: Setting - Personal - Logout
 
-import SettingsNav from "components/SettingsNav"
+import SettingsNav from "components/settings/SettingsNav"
 import { View } from "react-native"
 import FlatButton from "components/styled_components/FlatButton"
-import { settingsNavData } from "constants/SettingsNavData"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import Fetcher from "utils/Fetcher"
 import { TSignOut } from "types/endpoints"
 import { authEP } from "constants/Endpoint"
 import { useNavigation } from "@react-navigation/native"
 import { tokenAction } from "redux/reducers/tokens.reducer"
-import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
+import { settingsMenuItems } from "constants/SettingsMenuItems"
 
 const SettingsIndex: React.FC = () => {
   const { navigate } = useNavigation()
@@ -49,12 +49,12 @@ const SettingsIndex: React.FC = () => {
   return (
     <SettingsScreenLayout>
       <View>
-        {settingsNavData.map((section, index) => {
+        {settingsMenuItems.map((section, index) => {
           return (
             <SettingsNav
               key={index}
               title={section.title}
-              data={section.items}
+              data={section.menuList}
             />
           )
         })}

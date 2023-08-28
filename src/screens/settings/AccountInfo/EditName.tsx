@@ -1,15 +1,15 @@
 // REFERENCE: Setting - Personal - EditName
 
 import { useNavigation } from "@react-navigation/native"
-import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
-import SmButton from "components/styled_components/SmButton"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
+import SmButton from "components/settings/SmButton"
 import { useState } from "react"
 import { View, Text, TextInput } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useDispatch } from "react-redux"
-import InputBlueBg from "components/InputBlueBg"
+import InputBlueBg from "components/settings/InputBlueBg"
 import Fetcher from "utils/Fetcher"
 import { accountEP } from "constants/Endpoint"
 import { TUpdateUserInfo } from "types/endpoints"
@@ -51,7 +51,6 @@ const EditName = () => {
         }),
       )
 
-      // TODO: need return a success message back to AccountInfo screen
       navigate.goBack()
     })()
   }

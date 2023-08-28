@@ -1,7 +1,7 @@
 // REFERENCE: Setting - Personal - Change Password
 import { View, Text } from "react-native"
 import React from "react"
-import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import PasswordInput from "components/passwordInput"
 import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
@@ -45,7 +45,7 @@ const ChangePassword = () => {
           item: "Password changed successfully",
         }),
       )
-      navigate("Settings", { screen: "AccountInfo" })
+      navigate("Settings", { screen: "AccountInfoIndex" })
     })()
   }
 

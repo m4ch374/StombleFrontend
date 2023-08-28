@@ -10,17 +10,17 @@ import {
   useClearByFocusCell,
 } from "react-native-confirmation-code-field"
 import { useAppSlector } from "redux/hooks"
-import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import Fetcher from "utils/Fetcher"
 import { TUpdateUserInfo } from "types/endpoints"
 import { accountEP } from "constants/Endpoint"
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
-import { SettingStackList } from "types/Navigation"
-import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useDispatch } from "react-redux"
+import { AccountInfoList } from "types/Navigation"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 
 const VerifyCodeForUpdate = () => {
-  const route = useRoute<RouteProp<SettingStackList, "VerifyCodeForUpdate">>()
+  const route = useRoute<RouteProp<AccountInfoList, "VerifyCodeForUpdate">>()
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
   const tmpUser = useAppSlector(state => state.tmpStore)
@@ -79,7 +79,7 @@ const VerifyCodeForUpdate = () => {
             : "Mobile number updated successfully",
         }),
       )
-      navigate("Settings", { screen: "AccountInfo" })
+      navigate("Settings", { screen: "AccountInfoIndex" })
     })()
   }
 

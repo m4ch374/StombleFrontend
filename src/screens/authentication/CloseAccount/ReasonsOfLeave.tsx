@@ -1,11 +1,12 @@
 // REFERENCE: Setting - Personal - Close Account
+
 import { useNavigation } from "@react-navigation/native"
-import CircleButton from "components/styled_components/CircleButton"
+import CircleButton from "components/settings/CircleButton"
 import FlatButton from "components/styled_components/FlatButton"
 import LinearBgLayout from "components/styled_components/LinearBgLayout"
 import { Text, View } from "react-native"
 
-const CloseAccountStepOne = () => {
+const ReasonsOfLeave = () => {
   const { navigate } = useNavigation()
 
   return (
@@ -60,13 +61,11 @@ const CloseAccountStepOne = () => {
 
       <FlatButton
         text={"CONTINUE"}
-        onPress={() => {
-          navigate("Settings", { screen: "CloseAccountStepTwo" })
-        }}
+        onPress={() => navigate("Auth", { screen: "ConfirmOfLeave" })}
         disabled={false}
       />
     </LinearBgLayout>
   )
 }
 
-export default CloseAccountStepOne
+export default ReasonsOfLeave

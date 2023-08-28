@@ -21,7 +21,7 @@ declare global {
 export type RootStackList = {
   Auth: NavigatorScreenParams<AuthStackList>
   LoginRoot: NavigatorScreenParams<LoginRootTabList>
-  Settings: NavigatorScreenParams<SettingStackList>
+  Settings: NavigatorScreenParams<SettingsMenuList & AccountInfoList>
 }
 
 export type RootStackScreenProps<Screen extends keyof RootStackList> =
@@ -52,6 +52,11 @@ export type AuthStackList = {
   ChooseAccountType: undefined
 
   SetUpPassword: undefined
+
+  // Close Account
+  ReasonsOfLeave: undefined
+  ConfirmOfLeave: undefined
+  VerifyCodeForLeave: undefined
 }
 // ===============================================
 
@@ -76,29 +81,31 @@ export type ProfileTabList = {
 }
 
 // ===============================================
+
+// ===============================================
 // Settings
 // ===============================================
-export type SettingStackList = {
+export type SettingsMenuList = {
   SettingsIndex: undefined
-
-  AccountInfo: undefined
-  EditName: undefined
-  EditPhone: undefined
-  VerifyCodeForUpdate: {
-    phone?: string | undefined
-    email?: string | undefined
-  }
-  AddEmail: undefined
-  ChangePassword: undefined
-
-  CloseAccountStepOne: undefined
-  CloseAccountStepTwo: undefined
-  CloseAccountStepThree: undefined
-
+  AccountInfoIndex: NavigatorScreenParams<AccountInfoList> | undefined
   ManageProfiles: undefined
   Security: undefined
-  Notifications: undefined
+  NotificationSettings: undefined
   ContactUs: undefined
   TermsNConditions: undefined
 }
 // ===============================================
+
+// ===============================================
+// Settings -> Account Information Editing screen list
+// ===============================================
+export type AccountInfoList = {
+  EditName: undefined
+  EditPhone: undefined
+  VerifyCodeForUpdate: {
+    phone?: string
+    email?: string
+  }
+  AddEmail: undefined
+  ChangePassword: undefined
+}

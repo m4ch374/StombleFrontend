@@ -1,6 +1,6 @@
 // REFERENCE: Setting - Personal - Edit Phone
-import InputBlueBg from "components/InputBlueBg"
-import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
+import InputBlueBg from "components/settings/InputBlueBg"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { View, Text } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import PhoneNumberInput from "components/PhoneNumberInput"

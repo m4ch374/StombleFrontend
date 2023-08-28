@@ -5,15 +5,18 @@ import FirstLanding from "screens/authentication/FirstLanding"
 import { AuthStackList } from "types/Navigation"
 import SignUpName from "screens/authentication/SignUp/SignUpName"
 import SignUpDOB from "screens/authentication/SignUp/SignUpDOB"
-import Login from "screens/authentication/Login"
-import ForgetPassword from "screens/authentication/ForgetPassword"
-import VerifyCode from "screens/authentication/VerifyCode"
+import ForgetPassword from "screens/authentication/SignIn/ForgetPassword"
 import ChooseAccountType from "screens/authentication/SignUp/ChooseAccountType"
 import VerifyPhone from "screens/authentication/SignUp/VerifyPhone"
-import LoginWithAccount from "screens/authentication/LoginWithAccount"
 import SignUpGender from "screens/authentication/SignUp/SignUpGender"
 import SetUpPassword from "screens/authentication/SignUp/SetUpPassword"
 import SignupBusinessName from "screens/authentication/SignUp/SignUpBusinessName"
+import LoginWithAccount from "screens/authentication/SignIn/LoginWithAccount"
+import VerifyCode from "screens/authentication/SignIn/VerifyCode"
+import Login from "screens/authentication/SignIn/Login"
+import ReasonsOfLeave from "screens/authentication/CloseAccount/ReasonsOfLeave"
+import ConfirmOfLeave from "screens/authentication/CloseAccount/ConfirmOfLeave"
+import VerifyCodeForLeave from "screens/authentication/CloseAccount/VerifyCodeForLeave"
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
 
@@ -72,6 +75,23 @@ const AuthStackNav = () => {
       </AuthStack.Group>
 
       <AuthStack.Screen name="LoginWithAccount" component={LoginWithAccount} />
+
+      {/* Close Account Group */}
+      <AuthStack.Group
+        screenOptions={{
+          headerBackTitle: "Back",
+          headerBackTitleVisible: false,
+          title: "Close Account",
+          headerStyle: { backgroundColor: "#020235" },
+        }}
+      >
+        <AuthStack.Screen name="ReasonsOfLeave" component={ReasonsOfLeave} />
+        <AuthStack.Screen name="ConfirmOfLeave" component={ConfirmOfLeave} />
+        <AuthStack.Screen
+          name="VerifyCodeForLeave"
+          component={VerifyCodeForLeave}
+        />
+      </AuthStack.Group>
     </AuthStack.Navigator>
   )
 }

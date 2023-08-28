@@ -12,7 +12,7 @@ import {
 } from "react-native-confirmation-code-field"
 import { useAppSlector } from "redux/hooks"
 
-const CloseAccountStepThree = () => {
+const VerifyCodeForLeave = () => {
   const tmp = useAppSlector(state => state.tmpStore)
   const CELL_COUNT = 6
   const [timer, setTimer] = useState(60)
@@ -119,4 +119,4 @@ const CloseAccountStepThree = () => {
   )
 }
 
-export default CloseAccountStepThree
+export default VerifyCodeForLeave

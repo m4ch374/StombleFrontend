@@ -7,7 +7,7 @@ import LinearBgLayout from "components/styled_components/LinearBgLayout"
 import { View, Text } from "react-native"
 import { useAppSlector } from "redux/hooks"
 
-const CloseAccountStepTwo = () => {
+const ConfirmOfLeave = () => {
   const { navigate } = useNavigation()
   const tmpUser = useAppSlector(state => state.tmpStore)
 
@@ -58,7 +58,7 @@ const CloseAccountStepTwo = () => {
       <FlatButton
         text={"CONTINUE"}
         onPress={() => {
-          navigate("Settings", { screen: "CloseAccountStepThree" })
+          navigate("Auth", { screen: "VerifyCodeForLeave" })
         }}
         disabled={false}
       />
@@ -66,4 +66,4 @@ const CloseAccountStepTwo = () => {
   )
 }
 
-export default CloseAccountStepTwo
+export default ConfirmOfLeave

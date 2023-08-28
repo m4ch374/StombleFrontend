@@ -2,18 +2,18 @@
 
 import { View, Text } from "react-native"
 import React, { useState } from "react"
-import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import FlatButton from "components/styled_components/FlatButton"
-import SmButton from "components/styled_components/SmButton"
+import SmButton from "components/settings/SmButton"
 import { useNavigation } from "@react-navigation/native"
 import { useAppSlector } from "redux/hooks"
 import { AntDesign } from "@expo/vector-icons"
-import InputBlueBg from "components/InputBlueBg"
-import PopupMessage from "components/PopupMessage"
+import InputBlueBg from "components/settings/InputBlueBg"
+import PopupMessage from "components/settings/PopupMessage"
 import ChangeProfileModal from "components/ChangeProfileModal"
 import EditableProfileIcon from "components/EditableProfileIcon"
 
-const AccountInfo: React.FC = () => {
+const AccountInfoIndex: React.FC = () => {
   const { navigate } = useNavigation()
   const tmpUser = useAppSlector(state => state.tmpStore)
   const [visible, setVisible] = useState(false)
@@ -91,9 +91,7 @@ const AccountInfo: React.FC = () => {
         </View>
         <FlatButton
           text={"Close Account"}
-          onPress={() =>
-            navigate("Settings", { screen: "CloseAccountStepOne" })
-          }
+          onPress={() => navigate("Auth", { screen: "ReasonsOfLeave" })}
           variation="outlined"
         />
       </View>
@@ -103,4 +101,4 @@ const AccountInfo: React.FC = () => {
   )
 }
 
-export default AccountInfo
+export default AccountInfoIndex

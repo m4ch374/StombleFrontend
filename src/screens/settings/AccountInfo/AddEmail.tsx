@@ -2,9 +2,9 @@
 
 import { AntDesign } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
-import InputBlueBg from "components/InputBlueBg"
+import InputBlueBg from "components/settings/InputBlueBg"
 import FlatButton from "components/styled_components/FlatButton"
-import SettingsScreenLayout from "components/styled_components/SettingsScreenLayout"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { accountEP } from "constants/Endpoint"
 import { useState } from "react"
 import { View, TextInput, Text } from "react-native"
