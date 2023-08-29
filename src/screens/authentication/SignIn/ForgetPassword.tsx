@@ -8,12 +8,16 @@ import BtnWithLoginRegister from "components/BtnWithLoginRegister"
 import { useNavigation } from "@react-navigation/native"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useAppDispatch } from "redux/hooks"
+import Fetcher from "utils/Fetcher"
+import { TCheckNum } from "types/endpoints"
+import { authEP } from "constants/Endpoint"
 
 const ForgetPassword = () => {
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
   const [isValid, setIsValid] = useState(true)
   const [disable, setDisabled] = useState(true)
+  const [changeNumError, setChangeNumError] = useState(false)
   const [phone, setPhone] = useState({
     number: "",
     countryCode: "+61",
@@ -24,19 +28,35 @@ const ForgetPassword = () => {
   }, [isValid])
 
   const handleOnPress = () => {
-    dispatch(
-      tmpStoreAction.setItem({
-        key: "phone",
-        item: phone.countryCode + phone.number,
-      }),
-    )
-    dispatch(
-      tmpStoreAction.setItem({
-        key: "verifyWithPassword",
-        item: true,
-      }),
-    )
-    navigation.navigate("Auth", { screen: "SetUpPassword" })
+    ;(async () => {
+      const resp = await Fetcher.init<TCheckNum>("POST", authEP.CHECK_NUMBER)
+        .withJsonPaylad({
+          phone: phone.countryCode + phone.number,
+        })
+        .fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+
+      if (resp) {
+        if (resp.exists == false) {
+          setChangeNumError(true)
+          return
+        }
+      }
+
+      console.log("resp:", resp)
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "phone",
+          item: phone.countryCode + phone.number,
+        }),
+      )
+      dispatch(
+        tmpStoreAction.setItem({
+          key: "verifyWithPassword",
+          item: true,
+        }),
+      )
+      navigation.navigate("Auth", { screen: "SetUpPassword" })
+    })()
   }
 
   return (
@@ -64,6 +84,12 @@ const ForgetPassword = () => {
               isValid={isValid}
               setIsValid={setIsValid}
             />
+            {/* temporarily put here to indicate not existing phone number on screen, develop later */}
+            {changeNumError && (
+              <Text className="text-4 text-red-500">
+                Phone number does not exist
+              </Text>
+            )}
           </View>
           <BtnWithLoginRegister
             btnText={"CONTINUE"}

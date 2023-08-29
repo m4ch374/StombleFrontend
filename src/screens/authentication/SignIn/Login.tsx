@@ -6,7 +6,7 @@ import BackgroundColour from "components/styled_components/BackgroundColour"
 import PhoneNumberInput from "components/PhoneNumberInput"
 import BtnWithLoginRegister from "components/BtnWithLoginRegister"
 import PasswordInput from "components/passwordInput"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, CommonActions } from "@react-navigation/native"
 import Fetcher from "utils/Fetcher"
 import { TGetUserInfo, TSignIn } from "types/endpoints"
 import { useAppDispatch } from "redux/hooks"
@@ -102,6 +102,15 @@ const Login = () => {
 
       // Temporary navigate to Home screen directly (verifyCode not working yet)
       navigate.navigate("LoginRoot", { screen: "Home" })
+
+      // Clears stack once user logs in
+      // TODO: Haven't tested
+      dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "LoginRoot" }],
+        }),
+      )
     })()
   }
 
