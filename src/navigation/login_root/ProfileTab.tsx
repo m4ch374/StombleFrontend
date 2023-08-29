@@ -6,6 +6,7 @@ import VideosLiked from "components/profile/VideosLiked"
 import VideosSaved from "components/profile/VideosSaved"
 import ProfileTabIcon from "components/profile/ProfileTabIcon"
 import { View } from "react-native"
+import CustomColor from "constants/Colors"
 
 const TopTab = createMaterialTopTabNavigator<ProfileTabList>()
 
@@ -16,7 +17,7 @@ const ProfileTab: React.FC = () => {
       screenOptions={({ route }) => ({
         lazy: true,
         lazyPlaceholder: () => <View className="h-full bg-bgProfile" />,
-        tabBarStyle: { backgroundColor: "02022F" },
+        tabBarStyle: { backgroundColor: CustomColor.background },
         tabBarAndroidRipple: { radius: 0 },
         tabBarPressColor: "transparent",
         tabBarPressOpacity: 0,

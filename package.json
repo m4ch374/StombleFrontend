@@ -5,6 +5,8 @@
   "scripts": {
     "start": "expo start",
     "tunnel": "expo start --tunnel",
+    "no-cache": "expo start -c",
+    "no-cache-tunnel": "expo start --tunnel -c",
     "lint": "eslint --ext .ts,tsx .",
     "lint:fix": "eslint --ext .ts,.tsx --fix ."
   },

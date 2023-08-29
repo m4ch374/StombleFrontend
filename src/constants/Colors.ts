@@ -1,21 +1,38 @@
-const tintColorLight = "#2f95dc"
-const tintColorDark = "#fff"
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+const { colors } = require("../../style.config")
 
-export default {
-  light: {
-    text: "#000",
-    background: "#fff",
-    tint: tintColorLight,
-    tabIconDefault: "#ccc",
-    tabIconSelected: tintColorLight,
-    tabBarBgColor: "#10102C",
-  },
-  dark: {
-    text: "#fff",
-    background: "#000",
-    tint: tintColorDark,
-    tabIconDefault: "#ccc",
-    tabIconSelected: tintColorDark,
-    tabBarBgColor: "#10102C",
-  },
+// Excluding default tw colors
+type GrayScale = {
+  lightest: string
+  lighter: string
+  mid: string
+  darkest: string
+  "darkest-pro-max": string
 }
+
+type UtilColors = {
+  error: string
+  success: string
+  alert: string
+  banner: string
+}
+
+type ColorType = {
+  white: string
+  gray: GrayScale
+
+  background: string
+  navbar: string
+  primary: string
+  secondary: string
+
+  util: UtilColors
+}
+
+// The necessary evil
+const CustomColor: ColorType = { ...colors } as ColorType
+
+// Copy of the object
+export default CustomColor
+
+export type { ColorType }
