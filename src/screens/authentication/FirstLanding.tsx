@@ -5,6 +5,7 @@ import { Link, useNavigation } from "@react-navigation/native"
 import BackgroundColour from "components/styled_components/BackgroundColour"
 import FlatButton from "components/styled_components/FlatButton"
 import Copyright from "components/CopyRight"
+import LatoText from "components/styled_components/LatoText"
 
 const FirstLanding = () => {
   const { navigate } = useNavigation()
@@ -27,9 +28,7 @@ const FirstLanding = () => {
               </Link>
             </View>
           </View>
-          <Text className="text-white font-AT text-center text-[62px]">
-            stomble
-          </Text>
+          <LatoText classname="text-center text-31 font-AT">stomble</LatoText>
         </View>
 
         <View className="flex-1 justify-end">
