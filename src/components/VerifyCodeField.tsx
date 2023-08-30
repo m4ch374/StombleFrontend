@@ -23,7 +23,7 @@ export const VerifyCodeField = ({ value, setValue, setDisabled }: Props) => {
 
   useEffect(() => {
     setDisabled(value.length !== CELL_COUNT)
-  }, [value])
+  }, [setDisabled, value])
 
   return (
     <View className="w-[300px] ">

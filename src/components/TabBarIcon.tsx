@@ -5,6 +5,7 @@ import { RouteProp } from "@react-navigation/native"
 import { MaterialCommunityIcons, Ionicons, Entypo } from "@expo/vector-icons"
 import React from "react"
 import { LoginRootTabList } from "types/Navigation"
+import CustomColor from "constants/Colors"
 
 type TInfoMapping = {
   [Value in keyof LoginRootTabList]: {
@@ -47,14 +48,14 @@ const TabBar: React.FC<TTabBarIcon> = ({ focused, route }) => {
   return (
     <View className="flex h-full flex-col items-center justify-center">
       {InfoMapping[route.name].compoenent({
-        color: focused ? "white" : "gray",
+        color: focused ? CustomColor.white : CustomColor.gray.mid,
       })}
 
       <Text
         className={`
-          font-Lato
-          mt-1
-          ${focused ? "text-white" : "text-gray-400"}
+          font-lato
+          mt-2
+          ${focused ? "text-white" : "text-gray-mid"}
         `}
       >
         {InfoMapping[route.name].label}

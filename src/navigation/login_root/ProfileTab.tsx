@@ -16,21 +16,23 @@ const ProfileTab: React.FC = () => {
       initialRouteName="Following"
       screenOptions={({ route }) => ({
         lazy: true,
-        lazyPlaceholder: () => <View className="h-full bg-bgProfile" />,
+        lazyPlaceholder: () => <View className="h-full bg-background" />,
         tabBarStyle: { backgroundColor: CustomColor.background },
         tabBarAndroidRipple: { radius: 0 },
         tabBarPressColor: "transparent",
         tabBarPressOpacity: 0,
         tabBarShowLabel: false,
         tabBarIconStyle: { width: "auto" },
-        tabBarIcon: props => ProfileTabIcon({ ...props, route }),
+        tabBarIcon: ({ focused }) => (
+          <ProfileTabIcon focused={focused} route={route} />
+        ),
         tabBarIndicatorStyle: {
           backgroundColor: "white",
           borderRadius: 99, // I dont see any difference lol
         },
         tabBarIndicatorContainerStyle: {
           borderBottomWidth: 1,
-          borderColor: "rgba(255, 255, 255, 0.1)",
+          borderColor: "rgba(255, 255, 255, 0.1)", // idk if we need to change this
         },
       })}
     >

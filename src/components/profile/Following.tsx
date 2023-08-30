@@ -20,14 +20,14 @@ const Following: React.FC = () => {
   }, [token])
 
   return (
-    <ScrollRefreshChildScroll classname="bg-bgProfile">
+    <ScrollRefreshChildScroll classname="bg-background">
       <View>
         {typeof items !== "undefined" &&
           items.result.map(d => {
             return (
               <FollowingItem
                 key={d.id}
-                classname="my-2 px-2"
+                classname="my-sm px-sm"
                 businessName={d.business_account.businessName}
                 businessId={d.business_account_id}
               />
@@ -41,7 +41,7 @@ const Following: React.FC = () => {
           return (
             <FollowingItem
               key={idx}
-              classname="my-2 px-2"
+              classname="px-sm my-sm"
               businessName="Placeholder"
               businessId=""
             />

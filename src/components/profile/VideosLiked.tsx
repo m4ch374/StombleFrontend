@@ -5,7 +5,7 @@ import { ScrollRefreshChildScroll } from "components/styled_components/ScrollRef
 
 const VideosLiked: React.FC = () => {
   return (
-    <View className="h-full bg-bgProfile flex items-center">
+    <View className="h-full bg-background flex items-center">
       <ScrollRefreshChildScroll>
         {/* Extremely hacky lol */}
         <View className="flex-row flex-wrap justify-between">

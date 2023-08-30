@@ -1,7 +1,9 @@
 import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons"
 import { RouteProp } from "@react-navigation/native"
+import LatoText from "components/styled_components/LatoText"
+import CustomColor from "constants/Colors"
 import React from "react"
-import { View, Text } from "react-native"
+import { View } from "react-native"
 import { ProfileTabList } from "types/Navigation"
 
 // ======================================================
@@ -39,16 +41,17 @@ type TProfileTabIcon = {
 
 const ProfileTabIcon: React.FC<TProfileTabIcon> = ({ focused, route }) => {
   return (
-    <View className="w-full flex-row items-center justify-center gap-2">
-      {TabIconMapping[route.name].icon({ color: focused ? "white" : "grey" })}
-      <Text
-        className={`
-          ${focused ? "text-white" : "text-gray-500"}
-          font-LatoBold
-        `}
-      >
-        {TabIconMapping[route.name].label}
-      </Text>
+    <View className="w-full flex-row items-center justify-center gap-sm">
+      <View>
+        {TabIconMapping[route.name].icon({
+          color: focused ? CustomColor.white : CustomColor.gray.mid,
+        })}
+      </View>
+      <View>
+        <LatoText classname={`${focused ? "text-white" : "text-gray-mid"}`}>
+          {TabIconMapping[route.name].label}
+        </LatoText>
+      </View>
     </View>
   )
 }

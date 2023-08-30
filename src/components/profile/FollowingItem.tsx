@@ -1,9 +1,11 @@
 import AccountFileCard from "components/AccountFileCard"
+import LatoText from "components/styled_components/LatoText"
 import React, { useCallback, useState } from "react"
-import { View, Text, Pressable } from "react-native"
+import { View, Pressable, Text } from "react-native"
+import customTwMerge from "utils/CustomTwMerge"
 
 const followingStlye = "border border-white"
-const notFollowedStlye = "bg-blue-500"
+const notFollowedStlye = "bg-primary"
 
 type TFollowingItem = {
   classname?: string
@@ -31,9 +33,10 @@ const FollowingItem: React.FC<TFollowingItem> = ({
 
   return (
     <View
-      className={`
-        h-[50px] flex-row justify-between items-center ${classname}
-      `}
+      className={customTwMerge(
+        "h-25 flex-row justify-between items-center",
+        classname,
+      )}
     >
       <View className="h-full flex-row">
         <View>
@@ -45,10 +48,10 @@ const FollowingItem: React.FC<TFollowingItem> = ({
           />
         </View>
         <View className="h-full w-[155px]">
-          <Text className="font-LatoBold text-white">{businessName}</Text>
-          <Text className="font-Lato text-suggestive mt-1">
+          <Text className="lato-text font-lato-bold">{businessName}</Text>
+          <LatoText classname="text-6 text-gray-lighter">
             Subtext for the business goes here
-          </Text>
+          </LatoText>
         </View>
       </View>
 
@@ -66,9 +69,9 @@ const FollowingItem: React.FC<TFollowingItem> = ({
             ${following ? followingStlye : notFollowedStlye}
           `}
         >
-          <Text className="font-LatoBold text-white text-[12px]">
+          <LatoText classname="font-lato-bold text-6">
             {following ? "Following" : "Follow"}
-          </Text>
+          </LatoText>
         </Pressable>
       </View>
     </View>

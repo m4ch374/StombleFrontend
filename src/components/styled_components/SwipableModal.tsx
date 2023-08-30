@@ -31,17 +31,17 @@ const SwipableModal: React.FC<TSwipableModal> = ({
           <TouchableWithoutFeedback onPress={e => e.stopPropagation()}>
             <View
               className={`
-                bg-[#202020]
+                bg-gray-darkest-pro-max
                 min-h-[256px]
                 w-full
-                py-2
-                rounded-t-xl
+                py-sm
+                rounded-t-lg
                 flex
                 items-center
                 ${className}
               `}
             >
-              <View className="h-[4px] bg-[#ababab] my-2 w-[48px] rounded-full" />
+              <View className="h-2 bg-gray-lighter my-sm w-24 rounded-full" />
               {children}
             </View>
           </TouchableWithoutFeedback>

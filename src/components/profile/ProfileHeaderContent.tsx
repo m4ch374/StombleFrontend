@@ -1,7 +1,8 @@
 import ChangeProfileModal from "components/ChangeProfileModal"
 import EditableProfileIcon from "components/EditableProfileIcon"
+import LatoText from "components/styled_components/LatoText"
 import React, { useState } from "react"
-import { View, Text } from "react-native"
+import { View } from "react-native"
 
 type TProfileHeaderContent = {
   userName: string
@@ -21,7 +22,7 @@ const ProfileHeaderContent: React.FC<TProfileHeaderContent> = ({
           profile_link={profile_link}
           setModalVisible={setEditVisible}
         />
-        <Text className="text-white font-Lato">{userName}</Text>
+        <LatoText>{userName}</LatoText>
       </View>
 
       <ChangeProfileModal stateController={[editVisible, setEditVisible]} />

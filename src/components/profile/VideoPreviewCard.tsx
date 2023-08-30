@@ -1,6 +1,8 @@
 import React from "react"
-import { View, Text, Pressable } from "react-native"
+import { View, Pressable } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
+import customTwMerge from "utils/CustomTwMerge"
+import LatoText from "components/styled_components/LatoText"
 
 type TVideoPreviewCard = {
   classname?: string
@@ -9,30 +11,30 @@ type TVideoPreviewCard = {
 const VideoPreviewCard: React.FC<TVideoPreviewCard> = ({ classname = "" }) => {
   return (
     <Pressable
-      className={`
-        w-[124px]
-        h-[160px]
-        bg-gray-600
-        rounded-md
-        p-2
-        flex
-        justify-between
-        ${classname}
-      `}
+      className={customTwMerge(
+        "w-[124px] h-[160px] bg-gray-mid rounded-sm p-sm flex justify-between",
+        classname,
+      )}
     >
-      <View className="flex-row items-center gap-1">
-        <View className="bg-white rounded-full w-[16] aspect-square" />
-        <Text className="text-white font-Lato text-[8px]">Placeholder</Text>
+      <View className="flex-row items-center gap-sm">
+        <View className="bg-white rounded-full w-[16px] aspect-square" />
+        <View>
+          <LatoText classname="text-4">Placeholder</LatoText>
+        </View>
       </View>
 
       <View className="flex-row justify-between">
-        <View className="flex-row items-center gap-1">
+        <View className="flex-row items-center gap-2">
           <AntDesign name="caretright" size={8} color="white" />
-          <Text className="text-white font-Lato text-[8px]">10K</Text>
+          <View>
+            <LatoText classname="text-4">10K</LatoText>
+          </View>
         </View>
-        <View className="flex-row items-center gap-1">
+        <View className="flex-row items-center gap-2">
           <AntDesign name="heart" size={8} color="red" />
-          <Text className="text-white font-Lato text-[8px]">Placeholder</Text>
+          <View>
+            <LatoText classname="text-4">Placeholder</LatoText>
+          </View>
         </View>
       </View>
     </Pressable>

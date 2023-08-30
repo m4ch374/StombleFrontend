@@ -57,14 +57,14 @@ const Profile: React.FC = () => {
   // =====================================================================
 
   return (
-    <View className="bg-bgProfile h-full">
+    <View className="bg-background h-full">
       <ProfileHeader
         setModalVisible={setVisible}
         userName={tmpState.fullName}
       />
 
       <ScrollRefresh
-        classname="bg-bgProfile"
+        classname="bg-background"
         containerStyle={{ flexGrow: 1 }} // tailwind is not allowed for this attr.
         refresh={refresh}
         onRefresh={() => {

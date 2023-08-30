@@ -1,7 +1,9 @@
 import React from "react"
-import { View, Text, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity } from "react-native"
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
+import LatoText from "components/styled_components/LatoText"
+import CustomColor from "constants/Colors"
 
 type TProfileHeader = {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -15,13 +17,13 @@ const ProfileHeader: React.FC<TProfileHeader> = ({
   const navigation = useNavigation()
 
   return (
-    <View className="h-[26px] flex-row justify-between items-center px-4">
+    <View className="h-[26px] flex-row justify-between items-center px-sm">
       <TouchableOpacity
         className="flex-row items-center gap-1"
         onPress={() => setModalVisible(true)}
       >
-        <Text className="text-white font-LatoBold text-xl">{userName}</Text>
-        <Entypo name="chevron-down" size={20} color="white" />
+        <LatoText classname="font-lato-bold text-xl">{userName}</LatoText>
+        <Entypo name="chevron-down" size={20} color={CustomColor.white} />
       </TouchableOpacity>
 
       <View className="flex-row gap-4">
@@ -37,7 +39,7 @@ const ProfileHeader: React.FC<TProfileHeader> = ({
           <MaterialCommunityIcons
             name="dots-vertical"
             size={24}
-            color="white"
+            color={CustomColor.white}
           />
         </TouchableOpacity>
       </View>

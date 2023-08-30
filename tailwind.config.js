@@ -14,6 +14,8 @@ const {
   fontSize,
   fontFamily,
 } = require("./style.config")
+
+const plugin = require("tailwindcss/plugin")
 // =====================================================
 
 const maxStep = 41
@@ -44,5 +46,18 @@ module.exports = {
     },
   },
 
-  plugins: [],
+  plugins: [plugin(({ addUtilities }) => {
+    const confLineHeight = fontSize.defaultStaticLineHeight
+    const processedLineHeight = confLineHeight.replace(/[a-zA-Z]*/g, "")
+    const convertedLineHeight = confLineHeight.match("rem") ? processedLineHeight * 16 : processedLineHeight
+
+    addUtilities({
+      ".lato-text": {
+        fontSize: "16px",
+        fontFamily: "Lato-400",
+        color: colors.white,
+        lineHeight: convertedLineHeight
+      }
+    })
+  })],
 }
