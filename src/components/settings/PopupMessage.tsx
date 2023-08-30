@@ -1,8 +1,9 @@
-import { View, Text } from "react-native"
+import { View } from "react-native"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useAppSlector } from "redux/hooks"
+import LatoText from "components/styled_components/LatoText"
 
 const PopupMessage = () => {
   const [showPopup, setShowPopup] = useState(true)
@@ -26,13 +27,11 @@ const PopupMessage = () => {
   return (
     // TODO: add animation
     <View
-      className={`h-[41px] px-4 rounded-[5px] bg-[#232637] ${
-        showPopup ? "opacity-95 " : " opacity-0 "
+      className={`h-[41px] px-4 rounded-sm bg-util-banner ${
+        showPopup ? "opacity-100" : " opacity-0 "
       }justify-center items-center`}
     >
-      <Text className=" text-white font-LatoBold text-[14px]">
-        {tmpUser.message}
-      </Text>
+      <LatoText classname=" font-lato-bold text-sm">{tmpUser.message}</LatoText>
     </View>
   )
 }

@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import SmButton from "components/settings/SmButton"
 import { useState } from "react"
-import { View, Text, TextInput } from "react-native"
+import { View, TextInput } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
@@ -13,6 +13,8 @@ import InputBlueBg from "components/settings/InputBlueBg"
 import Fetcher from "utils/Fetcher"
 import { accountEP } from "constants/Endpoint"
 import { TUpdateUserInfo } from "types/endpoints"
+import LatoText from "components/styled_components/LatoText"
+import CustomColor from "constants/Colors"
 
 const EditName = () => {
   const navigate = useNavigation()
@@ -66,10 +68,14 @@ const EditName = () => {
         <SmButton text={"Save"} variation="filled" onPress={handleSave} />
         {!newName && (
           <View className="flex flex-row items-center">
-            <AntDesign name="exclamationcircleo" size={24} color="#F4222F" />
-            <Text className="text-error mx-2">
+            <AntDesign
+              name="exclamationcircleo"
+              size={24}
+              color={CustomColor.util.error}
+            />
+            <LatoText classname="text-util-error mx-2">
               Please enter your name to save changes
-            </Text>
+            </LatoText>
           </View>
         )}
       </InputBlueBg>

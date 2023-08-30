@@ -1,7 +1,6 @@
 // REFERENCE: Setting - Personal - Edit Phone
-import InputBlueBg from "components/settings/InputBlueBg"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
-import { View, Text } from "react-native"
+import { View } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import PhoneNumberInput from "components/PhoneNumberInput"
 import { useEffect, useState } from "react"
@@ -13,6 +12,8 @@ import { useDispatch } from "react-redux"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { accountEP, authEP } from "constants/Endpoint"
 import { useAppSlector } from "redux/hooks"
+import LatoText from "components/styled_components/LatoText"
+import CustomColor from "constants/Colors"
 
 const EditPhone = () => {
   const { navigate } = useNavigation()
@@ -82,28 +83,33 @@ const EditPhone = () => {
   return (
     <SettingsScreenLayout>
       <View>
-        <InputBlueBg title="Mobile Number">
-          <View className=" top-[18px] right-4">
-            <PhoneNumberInput
-              setPhone={setPhone}
-              isValid={isValid}
-              setIsValid={setIsValid}
-              noBorder={true}
-            />
-          </View>
-        </InputBlueBg>
+        <View>
+          <LatoText classname="text-gray-lightest text-sm mb-4">
+            Mobile Number
+          </LatoText>
+          <PhoneNumberInput
+            setPhone={setPhone}
+            isValid={isValid}
+            setIsValid={setIsValid}
+          />
+        </View>
 
-        <Text className="text-textTert">
+        <LatoText classname="text-gray-darkest text-[14px]">
           Changing your number changes the number for all the accounts
           associated with this phone number.
-        </Text>
-        {existed && (
+        </LatoText>
+        {/* TODO: extract error message out */}
+        {existed && !isValid && (
           <View className="flex flex-row items-center">
-            <AntDesign name="exclamationcircleo" size={24} color="#F4222F" />
-            <Text className="text-error mx-2">
+            <AntDesign
+              name="exclamationcircleo"
+              size={24}
+              color={CustomColor.util.error}
+            />
+            <LatoText classname="text-util-error mx-2 text-[14px] my-6">
               The number you entered is already registered to an account. Please
               enter another number to verify.
-            </Text>
+            </LatoText>
           </View>
         )}
       </View>

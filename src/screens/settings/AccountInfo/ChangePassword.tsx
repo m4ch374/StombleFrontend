@@ -1,8 +1,8 @@
 // REFERENCE: Setting - Personal - Change Password
-import { View, Text } from "react-native"
+import { View } from "react-native"
 import React from "react"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
-import PasswordInput from "components/passwordInput"
+import PasswordInput from "components/PasswordInput"
 import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
@@ -11,6 +11,7 @@ import Fetcher from "utils/Fetcher"
 import { TChangePassword } from "types/endpoints"
 import { authEP } from "constants/Endpoint"
 import { useAppSlector } from "redux/hooks"
+import LatoText from "components/styled_components/LatoText"
 
 const ChangePassword = () => {
   const tmpUser = useAppSlector(state => state.tmpStore)
@@ -52,15 +53,15 @@ const ChangePassword = () => {
   return (
     <SettingsScreenLayout>
       <View className="flex gap-4">
-        <Text className="text-white font-[16px]">
+        <LatoText>
           You’ll be logged out of all sessions expect this one for security
           purposes.
-        </Text>
+        </LatoText>
 
         <View className="mb-[8px]">
-          <Text className="text-[12px] text-textTert mb-2">
+          <LatoText classname="text-[12px] text-gray-lightest mb-2">
             Current Password
-          </Text>
+          </LatoText>
           <PasswordInput
             password={password}
             setPassword={setPassword}
@@ -69,7 +70,9 @@ const ChangePassword = () => {
         </View>
 
         <View className="mb-[8px]">
-          <Text className="text-[12px] text-textTert mb-2">New Password</Text>
+          <LatoText classname="text-[12px] text-gray-lightest mb-2">
+            New Password
+          </LatoText>
           <PasswordInput
             password={newPassword}
             setPassword={setNewPassword}

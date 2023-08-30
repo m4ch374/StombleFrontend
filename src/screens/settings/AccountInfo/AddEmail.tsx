@@ -13,6 +13,7 @@ import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { TSendCodeChangeAttribute } from "types/endpoints"
 import Fetcher from "utils/Fetcher"
+import CustomColor from "constants/Colors"
 
 const AddEmail = () => {
   const { navigate } = useNavigation()
@@ -62,18 +63,22 @@ const AddEmail = () => {
       <View>
         <InputBlueBg title="Email">
           <TextInput
-            className="text-white text-[16px] w-full"
+            className="text-white text-base w-full"
             value={email}
             onChangeText={setEmail}
             placeholder="Enter Email address"
-            placeholderTextColor="#8A8A8E"
+            placeholderTextColor={CustomColor.gray.lighter}
             textContentType="emailAddress"
           />
         </InputBlueBg>
         {email.length > 0 && !validateEmail(email) && (
           <View className="flex flex-row items-center">
-            <AntDesign name="exclamationcircleo" size={24} color="#F4222F" />
-            <Text className="text-error mx-2">
+            <AntDesign
+              name="exclamationcircleo"
+              size={24}
+              color={CustomColor.util.error}
+            />
+            <Text className="text-util-error mx-2">
               Please enter a valid email address
             </Text>
           </View>
@@ -82,7 +87,7 @@ const AddEmail = () => {
       <FlatButton
         text={"SEND CODE"}
         onPress={handleSendCode}
-        disabled={!email.length} // TODO: add email validation
+        disabled={!email.length}
       />
     </SettingsScreenLayout>
   )

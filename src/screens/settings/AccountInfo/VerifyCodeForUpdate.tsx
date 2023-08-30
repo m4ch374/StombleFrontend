@@ -3,12 +3,6 @@
 import { View, Text } from "react-native"
 import { useEffect, useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
-import {
-  CodeField,
-  Cursor,
-  useBlurOnFulfill,
-  useClearByFocusCell,
-} from "react-native-confirmation-code-field"
 import { useAppSlector } from "redux/hooks"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import Fetcher from "utils/Fetcher"
@@ -18,27 +12,18 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
 import { AccountInfoList } from "types/Navigation"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import LatoText from "components/styled_components/LatoText"
+import { VerifyCodeField } from "components/VerifyCodeField"
 
 const VerifyCodeForUpdate = () => {
   const route = useRoute<RouteProp<AccountInfoList, "VerifyCodeForUpdate">>()
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
   const tmpUser = useAppSlector(state => state.tmpStore)
-
-  const CELL_COUNT = 6
   const [timer, setTimer] = useState(60)
   const [sendCode, setSendCode] = useState(false)
   const [disable, setDisabled] = useState(true)
   const [value, setValue] = useState("")
-  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT })
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value,
-    setValue,
-  })
-
-  useEffect(() => {
-    setDisabled(value.length !== CELL_COUNT)
-  }, [value])
 
   useEffect(() => {
     let interval: NodeJS.Timer
@@ -94,40 +79,20 @@ const VerifyCodeForUpdate = () => {
       <View className="flex-1">
         <View className="p-12 flex justify-between h-full">
           <View className="h-[140px] flex justify-between">
-            <CodeField
-              ref={ref}
-              {...props}
-              value={value}
-              onChangeText={setValue}
-              cellCount={CELL_COUNT}
-              keyboardType="number-pad"
-              keyboardAppearance="dark"
-              textContentType="oneTimeCode"
-              renderCell={({ index, symbol, isFocused }) => (
-                <View
-                  key={index}
-                  className="w-[40px] h-[42px] flex justify-center rounded border border-solid border-white"
-                >
-                  <Text
-                    key={index}
-                    className={` text-center text-24 text-white text-[16px]`}
-                    style={{ fontFamily: "Lato-700" }}
-                    onLayout={getCellOnLayoutHandler(index)}
-                  >
-                    {symbol || (isFocused ? <Cursor /> : null)}
-                  </Text>
-                </View>
-              )}
-            />
-
             <View className="my-4">
-              <Text className="text-14 text-white text-center mb-1">
+              <LatoText classname="text-center mb-1">
                 Enter the 6 digit code we send to
-              </Text>
-              <Text className="text-14 text-white text-center">
+              </LatoText>
+              <LatoText classname="text-center">
                 {route.params.phone || route.params.email}
-              </Text>
+              </LatoText>
             </View>
+            {/* TODO: have new design */}
+            <VerifyCodeField
+              value={value}
+              setValue={setValue}
+              setDisabled={setDisabled}
+            />
             <View>
               {!sendCode ? (
                 <Text className="text-16 text-white text-center font">

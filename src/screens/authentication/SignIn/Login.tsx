@@ -5,7 +5,7 @@ import { TouchableWithoutFeedback, View, Text, Keyboard } from "react-native"
 import BackgroundColour from "components/styled_components/BackgroundColour"
 import PhoneNumberInput from "components/PhoneNumberInput"
 import BtnWithLoginRegister from "components/BtnWithLoginRegister"
-import PasswordInput from "components/passwordInput"
+import PasswordInput from "components/PasswordInput"
 import { useNavigation, CommonActions } from "@react-navigation/native"
 import Fetcher from "utils/Fetcher"
 import { TGetUserInfo, TSignIn } from "types/endpoints"
@@ -13,6 +13,7 @@ import { useAppDispatch } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { accountEP, authEP } from "constants/Endpoint"
+import LatoText from "components/styled_components/LatoText"
 
 const HOST_URL = "https://stomble-users.s3.ap-southeast-2.amazonaws.com/"
 
@@ -117,38 +118,41 @@ const Login = () => {
   return (
     <BackgroundColour>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="h-full flex justify-between">
-          <View className="p-4">
+        <View className="h-full w-full flex-1 justify-between items-center mt-8">
+          <View className="flex gap-6">
             <View>
-              <Text
-                className="text-white text-sm mb-2"
-                style={{ fontFamily: "Lato-400" }}
-              >
+              <LatoText classname="text-gray-lightest text-[14px] mb-4">
                 Mobile Number
+              </LatoText>
+              <PhoneNumberInput
+                setPhone={setPhone}
+                isValid={isValid}
+                setIsValid={setIsValid}
+              />
+            </View>
+
+            <View>
+              <LatoText classname="text-gray-lightest text-[14px] mb-4">
+                Password
+              </LatoText>
+              <PasswordInput password={password} setPassword={setPassword} />
+              {/* temporarily put here to indicate wrong login on screen, develop later */}
+              {loginError && (
+                <Text className="text-4 text-red-500">
+                  Wrong phone number or password
+                </Text>
+              )}
+              <Text
+                className="text-[14px] text-secondary font-lato-bold my-4"
+                onPress={() =>
+                  navigate.navigate("Auth", {
+                    screen: "ForgetPassword",
+                  })
+                }
+              >
+                Forgot Your Password?
               </Text>
             </View>
-            <PhoneNumberInput
-              setPhone={setPhone}
-              isValid={isValid}
-              setIsValid={setIsValid}
-            />
-            <PasswordInput password={password} setPassword={setPassword} />
-            <Text
-              className="text-4 text-[#FFFFFF]"
-              onPress={() =>
-                navigate.navigate("Auth", {
-                  screen: "ForgetPassword",
-                })
-              }
-            >
-              Forgot Your Password?
-            </Text>
-            {/* temporarily put here to indicate wrong login on screen, develop later */}
-            {loginError && (
-              <Text className="text-4 text-red-500">
-                Wrong phone number or password
-              </Text>
-            )}
           </View>
 
           <BtnWithLoginRegister

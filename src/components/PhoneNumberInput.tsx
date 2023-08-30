@@ -5,6 +5,7 @@ import { View, Text, Dimensions, TouchableWithoutFeedback } from "react-native"
 import React, { FC, useEffect, useRef, useState } from "react"
 import PhoneInput from "react-native-phone-number-input"
 import { AntDesign, Ionicons } from "@expo/vector-icons"
+import CustomColor from "constants/Colors"
 
 type Phone = {
   number: string
@@ -23,7 +24,6 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   setPhone,
   isValid,
   setIsValid,
-  noBorder,
 }) => {
   const phoneInput = useRef<PhoneInput>(null)
   const [countryObj, setCountryObj] = useState<any>()
@@ -70,7 +70,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
           onChangeText={onChangeText}
           onChangeCountry={onChangeCountry}
           textInputProps={{
-            placeholderTextColor: "#4F4F4F",
+            placeholderTextColor: "#ABABAB",
             selectionColor: "#FFFFFF",
             onFocus: () => setInputFocused(true), // Set focus on input
             onBlur: handleBlur,
@@ -80,7 +80,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
             width: windowWidth - 32,
             borderRadius: 6,
             backgroundColor: "transparent",
-            borderColor: "#fff",
+            borderColor: "#808080",
             borderWidth: 1,
           }}
           textContainerStyle={{
@@ -112,20 +112,24 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
                   : "AU"}{" "}
               </Text>
               <Ionicons name="md-chevron-down" size={20} color="white" />
-              <View className="w-0.5 h-6 bg-white ml-2 -mr-3"></View>
+              <View className="w-[0.5px] h-12 bg-white ml-2 -mr-3"></View>
             </View>
           }
         />
       </TouchableWithoutFeedback>
 
-      {value.length > 0 && !isValid && (
+      {/* {value.length > 0 && !isValid && (
         <View className="flex flex-row items-center absolute top-[52px]">
-          <AntDesign name="exclamationcircleo" size={24} color="#F4222F" />
-          <Text className="text-error mx-2">
+          <AntDesign
+            name="exclamationcircleo"
+            size={24}
+            color={CustomColor.util.error}
+          />
+          <Text className="text-util-error mx-2">
             Please enter a valid phone number
           </Text>
         </View>
-      )}
+      )} */}
     </View>
   )
 }

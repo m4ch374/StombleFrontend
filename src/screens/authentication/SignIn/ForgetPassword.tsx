@@ -11,6 +11,7 @@ import { useAppDispatch } from "redux/hooks"
 import Fetcher from "utils/Fetcher"
 import { TCheckNum } from "types/endpoints"
 import { authEP } from "constants/Endpoint"
+import LatoText from "components/styled_components/LatoText"
 
 const ForgetPassword = () => {
   const navigation = useNavigation()
@@ -72,12 +73,9 @@ const ForgetPassword = () => {
               account.
             </Text>
             <View>
-              <Text
-                className="text-white text-sm mb-2"
-                style={{ fontFamily: "Lato-400" }}
-              >
+              <LatoText classname="text-gray-lightest text-[14px] mb-4">
                 Mobile Number
-              </Text>
+              </LatoText>
             </View>
             <PhoneNumberInput
               setPhone={setPhone}

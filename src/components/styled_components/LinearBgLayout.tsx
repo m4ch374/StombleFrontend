@@ -1,8 +1,8 @@
 import {
   View,
   TouchableWithoutFeedback,
-  SafeAreaView,
   Keyboard,
+  SafeAreaView,
 } from "react-native"
 import React from "react"
 import { LinearGradient } from "expo-linear-gradient"
@@ -12,6 +12,7 @@ type Props = {
   children: React.ReactNode
 }
 
+// Waiting for new design, maybe this will be removed
 const LinearBgLayout = ({ children, y }: Props) => {
   return (
     <LinearGradient

@@ -1,6 +1,6 @@
 // REFERENCE: Setting - Personal
 
-import { View, Text } from "react-native"
+import { View } from "react-native"
 import React, { useState } from "react"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import FlatButton from "components/styled_components/FlatButton"
@@ -12,6 +12,7 @@ import InputBlueBg from "components/settings/InputBlueBg"
 import PopupMessage from "components/settings/PopupMessage"
 import ChangeProfileModal from "components/ChangeProfileModal"
 import EditableProfileIcon from "components/EditableProfileIcon"
+import LatoText from "components/styled_components/LatoText"
 
 const AccountInfoIndex: React.FC = () => {
   const { navigate } = useNavigation()
@@ -29,7 +30,7 @@ const AccountInfoIndex: React.FC = () => {
         </View>
 
         <InputBlueBg title="Full Name">
-          <Text className="text-white text-[16px]">{tmpUser.fullName}</Text>
+          <LatoText>{tmpUser.fullName}</LatoText>
           <SmButton
             text={"Edit"}
             onPress={() =>
@@ -41,7 +42,7 @@ const AccountInfoIndex: React.FC = () => {
         </InputBlueBg>
 
         <InputBlueBg title="Mobile Number">
-          <Text className="text-white text-[16px]">{tmpUser.phone}</Text>
+          <LatoText>{tmpUser.phone}</LatoText>
           <View className="flex flex-row items-center">
             <AntDesign
               name="checkcircleo"
@@ -57,14 +58,12 @@ const AccountInfoIndex: React.FC = () => {
         </InputBlueBg>
 
         <InputBlueBg title="Email">
-          <Text className="text-white text-[16px]">
-            {tmpUser.email || "Enter Email address"}
-          </Text>
+          <LatoText>{tmpUser.email || "Enter Email address"}</LatoText>
           <View className="flex flex-row items-center">
             <AntDesign
               name="checkcircleo"
               size={14}
-              color={tmpUser.email ? "#00CA23" : "transparent"}
+              color={tmpUser.email ? "green" : "transparent"}
               style={{ marginRight: 10 }}
             />
             <SmButton
@@ -75,9 +74,7 @@ const AccountInfoIndex: React.FC = () => {
         </InputBlueBg>
 
         <InputBlueBg title="Password">
-          <Text className="text-white text-[16px]">
-            {"*".repeat(tmpUser.pswLength)}
-          </Text>
+          <LatoText>{"*".repeat(tmpUser.pswLength)}</LatoText>
           <SmButton
             text={"Change"}
             onPress={() => navigate("Settings", { screen: "ChangePassword" })} // temporary navigate to ChangePassword screen, skip code verification

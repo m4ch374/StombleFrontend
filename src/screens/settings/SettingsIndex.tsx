@@ -59,7 +59,7 @@ const SettingsIndex: React.FC = () => {
           )
         })}
       </View>
-      <View className="flex flex-col space-y-4">
+      <View className="flex flex-col space-y-sm">
         <View>
           <FlatButton
             text={"Become a Business"}
@@ -71,7 +71,7 @@ const SettingsIndex: React.FC = () => {
           <FlatButton
             text={"Log Out"}
             onPress={handleLogout}
-            bgColor="bg-bgText"
+            bgColor="bg-navbar"
           />
         </View>
       </View>

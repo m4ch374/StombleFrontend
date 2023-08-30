@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction } from "react"
 import { TouchableOpacity, View } from "react-native"
 import AccountFileCard from "./AccountFileCard"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import CustomColor from "constants/Colors"
 
 type TEditableProfileicon = {
   profile_link: string
@@ -24,12 +25,12 @@ const EditableProfileIcon: React.FC<TEditableProfileicon> = ({
       />
       <TouchableOpacity
         onPress={() => setModalVisible(true)}
-        className="w-[18px] h-[18px] absolute bottom-0 right-0 bg-white rounded-2xl flex items-center justify-center border-[1px] border-bgSetting "
+        className="w-[18px] h-[18px] absolute bottom-0 right-0 bg-white rounded-lg flex items-center justify-center border-[1px] border-background "
       >
         <MaterialCommunityIcons
           name="square-edit-outline"
           size={12}
-          color="black"
+          color={CustomColor.background}
         />
       </TouchableOpacity>
     </View>

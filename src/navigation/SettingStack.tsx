@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import CustomColor from "constants/Colors"
 import AccountInfoIndex from "screens/settings/AccountInfo/AccountInfoIndex"
 import AddEmail from "screens/settings/AccountInfo/AddEmail"
 import ChangePassword from "screens/settings/AccountInfo/ChangePassword"
@@ -20,8 +21,8 @@ const SettingsStackNav: React.FC = () => {
   return (
     <SettingsStack.Navigator
       screenOptions={{
-        headerTintColor: "#FFFFFF",
-        headerStyle: { backgroundColor: "#080816" },
+        headerTintColor: CustomColor.white,
+        headerStyle: { backgroundColor: CustomColor.background },
       }}
       initialRouteName="SettingsIndex"
     >

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { View, TextInput, TouchableWithoutFeedback } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
+import CustomColor from "constants/Colors"
 
 type PasswordInputProps = {
   password: string
@@ -17,25 +18,23 @@ const PasswordInput = ({
 
   return (
     <View className="mb-2">
-      <View className="h-12 bg-transparent rounded-md flex-row items-center justify-between px-3 border border-solid border-white">
+      <View className="h-24 bg-transparent rounded-md flex-row items-center justify-between px-8 border border-solid border-gray-mid">
         <TextInput
-          className="text-white py-auto text-base leading-[16px] w-[280px] h-5"
-          style={{ fontFamily: "Lato-700" }}
+          className="text-white text-base w-[280px]"
           placeholder={placeholder || "Enter Password"}
-          placeholderTextColor="#ABABAB"
+          placeholderTextColor={CustomColor.gray.lighter}
           secureTextEntry={secureTextEntry}
           value={password}
-          onChangeText={text => setPassword(text)}
+          onChangeText={(text: string) => setPassword(text)}
         />
 
         <TouchableWithoutFeedback
-          className="flex-1"
           onPress={() => setSecureTextEntry(!secureTextEntry)}
         >
           <Ionicons
             name={secureTextEntry ? "eye-off-outline" : "eye-outline"}
             size={20}
-            color="#C1C1C1"
+            color={CustomColor.gray.lighter}
           />
         </TouchableWithoutFeedback>
       </View>

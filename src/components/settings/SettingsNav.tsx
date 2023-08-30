@@ -1,7 +1,8 @@
 import { MaterialIcons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
+import LatoText from "components/styled_components/LatoText"
 import { SettingsMenuListType } from "constants/SettingsMenuItems"
-import { View, Text, FlatList, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity, FlatList } from "react-native"
 
 type Props = {
   title: string
@@ -12,23 +13,23 @@ const SettingsNav = ({ title, data }: Props) => {
   const { navigate } = useNavigation()
 
   return (
-    <View className="mb-8">
+    <View className="mb-lg">
       <View>
-        <Text className="text-textTert">{title}</Text>
+        <LatoText classname="text-gray-lightest text-sm">{title}</LatoText>
       </View>
 
-      <View className="mt-2 rounded-[5px] bg-bgText">
+      <View className="mt-sm rounded-sm bg-navbar">
         <FlatList
           data={data}
           scrollEnabled={false}
           keyExtractor={item => item.key}
           renderItem={({ item }) => (
             <TouchableOpacity
-              className="flex flex-row justify-between items-center p-[12px]"
+              className="flex flex-row justify-between items-center px-8 py-6"
               activeOpacity={1.0}
               onPress={() => navigate("Settings", { screen: item.navTo })}
             >
-              <Text className="text-white font-[16px]">{item.navItem}</Text>
+              <LatoText>{item.navItem}</LatoText>
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={24}
@@ -37,7 +38,7 @@ const SettingsNav = ({ title, data }: Props) => {
             </TouchableOpacity>
           )}
           ItemSeparatorComponent={() => (
-            <View className="h-[0.8px] w-full bg-white opacity-10" />
+            <View className="h-[2px] w-full bg-background" />
           )}
         />
       </View>
