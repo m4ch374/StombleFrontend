@@ -46,18 +46,12 @@ type TTabBarIcon = {
 
 const TabBar: React.FC<TTabBarIcon> = ({ focused, route }) => {
   return (
-    <View className="flex h-full flex-col items-center justify-center">
+    <View className="h-full flex-col items-center justify-center">
       {InfoMapping[route.name].compoenent({
         color: focused ? CustomColor.white : CustomColor.gray.mid,
       })}
 
-      <Text
-        className={`
-          font-lato
-          mt-2
-          ${focused ? "text-white" : "text-gray-mid"}
-        `}
-      >
+      <Text className={`lato-text mt-2 ${!focused && "text-gray-mid"}`}>
         {InfoMapping[route.name].label}
       </Text>
     </View>

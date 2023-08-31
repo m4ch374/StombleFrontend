@@ -4,6 +4,7 @@ import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 import LatoText from "components/styled_components/LatoText"
 import CustomColor from "constants/Colors"
+import ThreeDotsVertical from "assets/icons/ThreeDotsVertical"
 
 type TProfileHeader = {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -36,11 +37,7 @@ const ProfileHeader: React.FC<TProfileHeader> = ({
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <MaterialCommunityIcons
-            name="dots-vertical"
-            size={24}
-            color={CustomColor.white}
-          />
+          <ThreeDotsVertical classname="h-13" />
         </TouchableOpacity>
       </View>
     </View>

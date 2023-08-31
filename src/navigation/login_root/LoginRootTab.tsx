@@ -31,10 +31,10 @@ const LoginRootTab = () => {
             height: 60,
             borderTopColor: "transparent",
             paddingBottom: 0,
-            padding: 0,
-            margin: 0,
           },
-          tabBarIcon: props => TabBarIcon({ ...props, route }),
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} route={route} />
+          ),
           tabBarHideOnKeyboard: true,
         })}
       >

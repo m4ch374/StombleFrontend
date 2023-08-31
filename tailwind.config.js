@@ -56,7 +56,7 @@ module.exports = {
         fontSize: "16px",
         fontFamily: "Lato-400",
         color: colors.white,
-        lineHeight: convertedLineHeight
+        lineHeight: `${convertedLineHeight}px`
       }
     })
   })],
