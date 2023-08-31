@@ -70,7 +70,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
           onChangeText={onChangeText}
           onChangeCountry={onChangeCountry}
           textInputProps={{
-            placeholderTextColor: "#ABABAB",
+            placeholderTextColor: CustomColor.gray.lighter,
             selectionColor: "#FFFFFF",
             onFocus: () => setInputFocused(true), // Set focus on input
             onBlur: handleBlur,
@@ -80,7 +80,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
             width: windowWidth - 32,
             borderRadius: 6,
             backgroundColor: "transparent",
-            borderColor: "#808080",
+            borderColor: "#fff",
             borderWidth: 1,
           }}
           textContainerStyle={{
@@ -112,13 +112,13 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
                   : "AU"}{" "}
               </Text>
               <Ionicons name="md-chevron-down" size={20} color="white" />
-              <View className="w-[0.5px] h-12 bg-white ml-2 -mr-3"></View>
+              <View className="w-0.5 h-6 bg-white ml-2 -mr-3"></View>
             </View>
           }
         />
       </TouchableWithoutFeedback>
 
-      {/* {value.length > 0 && !isValid && (
+      {value.length > 0 && !isValid && (
         <View className="flex flex-row items-center absolute top-[52px]">
           <AntDesign
             name="exclamationcircleo"
@@ -129,7 +129,7 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
             Please enter a valid phone number
           </Text>
         </View>
-      )} */}
+      )}
     </View>
   )
 }

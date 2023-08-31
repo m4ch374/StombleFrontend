@@ -17,10 +17,38 @@ import Login from "screens/authentication/SignIn/Login"
 import ReasonsOfLeave from "screens/authentication/CloseAccount/ReasonsOfLeave"
 import ConfirmOfLeave from "screens/authentication/CloseAccount/ConfirmOfLeave"
 import VerifyCodeForLeave from "screens/authentication/CloseAccount/VerifyCodeForLeave"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useNavigation } from "@react-navigation/native"
+import { useEffect } from "react"
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
 
 const AuthStackNav = () => {
+  const { navigate } = useNavigation()
+
+  useEffect(() => {
+    // Check if a token exists in AsyncStorage
+    // AsyncStorage.getItem("token").then(token => {
+    //   if (token) {
+    //     // Token exists, navigate to the home screen
+    //     navigate("LoginRoot", { screen: "Home" })
+    //   }
+    // })
+    // Check for the token in AsyncStorage
+    const checkToken = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token") // Replace with your actual token key
+        if (token) {
+          // Token exists, navigate to the home screen
+          navigate("LoginRoot", { screen: "Home" }) // Replace with your actual home screen name
+        }
+      } catch (error) {
+        console.error("Error checking token:", error)
+      }
+    }
+
+    void checkToken() // Mark the promise as ignored
+  }, [navigate])
   return (
     <AuthStack.Navigator
       screenOptions={{
