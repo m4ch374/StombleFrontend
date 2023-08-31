@@ -1,5 +1,8 @@
 // REFERENCE: Setting - Personal - Close Account
 
+//----------------------------------------------------------------
+// Waiting for new design
+//----------------------------------------------------------------
 import { View, Text } from "react-native"
 import { useEffect, useState } from "react"
 import LinearBgLayout from "components/styled_components/LinearBgLayout"

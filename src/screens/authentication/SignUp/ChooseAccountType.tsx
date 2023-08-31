@@ -5,12 +5,10 @@ import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { Link, useNavigation } from "@react-navigation/native"
 import BackgroundColour from "components/styled_components/BackgroundColour"
-import Fetcher from "utils/Fetcher"
-import { TSignUp } from "types/endpoints"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { authEP } from "constants/Endpoint"
+import { signUp } from "utils/services/auth"
 
 type TSelection = "" | "business" | "personal"
 
@@ -28,14 +26,14 @@ const ChooseAccountType = () => {
     }
 
     ;(async () => {
-      const resp = await Fetcher.init<TSignUp>("POST", authEP.SIGN_UP)
-        .withJsonPaylad({
-          phone: tmp.phone,
-          password: tmp.password,
-          businessName: "",
-          isBusiness: false,
-        })
-        .fetchData()
+      const payload = {
+        phone: tmp.phone,
+        password: tmp.password,
+        businessName: "",
+        isBusiness: false,
+      }
+
+      const resp = await signUp(payload)
 
       if (typeof resp === "undefined") return
 

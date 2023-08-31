@@ -4,13 +4,11 @@ import SettingsNav from "components/settings/SettingsNav"
 import { View } from "react-native"
 import FlatButton from "components/styled_components/FlatButton"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
-import Fetcher from "utils/Fetcher"
-import { TSignOut } from "types/endpoints"
-import { authEP } from "constants/Endpoint"
 import { useNavigation } from "@react-navigation/native"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { settingsMenuItems } from "constants/SettingsMenuItems"
+import { signOut } from "utils/services/auth"
 
 const SettingsIndex: React.FC = () => {
   const { navigate } = useNavigation()
@@ -30,16 +28,9 @@ const SettingsIndex: React.FC = () => {
   const handleLogout = () => {
     // endpoint: simple log out directly
     ;(async () => {
-      const resp = await Fetcher.init<TSignOut>("POST", authEP.SIGN_OUT)
-        .withJsonPaylad({ token: token.currentToken })
-        .withCurrentToken()
-        .fetchData()
+      const resp = await signOut({ token: token.currentToken })
 
-      console.log("sign out resp", resp)
-
-      if (typeof resp === "undefined") {
-        return
-      }
+      if (typeof resp === "undefined") return
 
       dispatch(tokenAction.clearToken())
       navigate("Auth", { screen: "FirstLanding" })

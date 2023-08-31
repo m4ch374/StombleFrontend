@@ -5,20 +5,17 @@ import { TouchableWithoutFeedback, View, Text, Keyboard } from "react-native"
 import BackgroundColour from "components/styled_components/BackgroundColour"
 import PhoneNumberInput from "components/PhoneNumberInput"
 import BtnWithLoginRegister from "components/BtnWithLoginRegister"
-import PasswordInput from "components/PasswordInput"
 import { useNavigation, CommonActions } from "@react-navigation/native"
-import Fetcher from "utils/Fetcher"
-import { TGetUserInfo, TSignIn } from "types/endpoints"
 import { useAppDispatch } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { accountEP, authEP } from "constants/Endpoint"
 import LatoText from "components/styled_components/LatoText"
+import { signIn } from "utils/services/auth"
+import { getUserAccountInformation } from "utils/services/accountInfo"
+import PasswordInput from "components/PasswordInput"
 
 const HOST_URL = "https://stomble-users.s3.ap-southeast-2.amazonaws.com/"
 
-// This is the new way of navigating
-// We dont need to type as much hahahahahhahhahahha
 const Login = () => {
   const navigate = useNavigation()
   const dispatch = useAppDispatch()
@@ -38,21 +35,18 @@ const Login = () => {
 
   const handleLogin = () => {
     ;(async () => {
-      // To login in
-      // should we extract endpoint apis to a separate file - Yume
-      const loginResp = await Fetcher.init<TSignIn>("POST", authEP.SIGN_IN)
-        .withJsonPaylad({
-          phone: phone.countryCode + phone.number,
-          password: password,
-        })
-        .fetchData()
+      // endpoint: sign in with phone number and password
+      const signInRes = await signIn({
+        phone: phone.countryCode + phone.number,
+        password: password,
+      })
 
-      if (typeof loginResp === "undefined") {
+      if (typeof signInRes === "undefined") {
         setLoginError(true)
         return
       }
 
-      dispatch(tokenAction.setToken(loginResp.AccessToken))
+      dispatch(tokenAction.setToken(signInRes.AccessToken))
       dispatch(
         tmpStoreAction.setItem({ key: "pswLength", item: password.length }),
       )
@@ -60,13 +54,8 @@ const Login = () => {
         tmpStoreAction.setItem({ key: "verifyWithPassword", item: true }),
       )
 
-      // To get user info and store into tmpStore
-      const userResp = await Fetcher.init<TGetUserInfo>(
-        "GET",
-        accountEP.GET_USER_ACCOUNT_INFORMATION,
-      )
-        .withCurrentToken()
-        .fetchData()
+      // endpoint: get user info and store into tmpStore
+      const userResp = await getUserAccountInformation()
 
       if (typeof userResp?.result === "undefined") return
 
@@ -101,7 +90,7 @@ const Login = () => {
         }),
       )
 
-      // Temporary navigate to Home screen directly (verifyCode not working yet)
+      // TODO: need direct to verifyCode screen (endpoint under development)
       navigate.navigate("LoginRoot", { screen: "Home" })
 
       // Clears stack once user logs in

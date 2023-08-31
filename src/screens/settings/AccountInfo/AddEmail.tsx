@@ -5,15 +5,13 @@ import { useNavigation } from "@react-navigation/native"
 import InputBlueBg from "components/settings/InputBlueBg"
 import FlatButton from "components/styled_components/FlatButton"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
-import { accountEP } from "constants/Endpoint"
 import { useState } from "react"
 import { View, TextInput, Text } from "react-native"
 import { useDispatch } from "react-redux"
 import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { TSendCodeChangeAttribute } from "types/endpoints"
-import Fetcher from "utils/Fetcher"
 import CustomColor from "constants/Colors"
+import { sendCodeChangeAttribute } from "utils/services/accountInfo"
 
 const AddEmail = () => {
   const { navigate } = useNavigation()
@@ -30,18 +28,14 @@ const AddEmail = () => {
   const handleSendCode = () => {
     if (!validateEmail(email)) return
     ;(async () => {
-      // endpoint: send code change attribute - email
-      const sendCodeResp = await Fetcher.init<TSendCodeChangeAttribute>(
-        "POST",
-        accountEP.SEND_CODE_CHANGE_ATTRIBUTE,
-      )
-        .withJsonPaylad({
-          attribute: "email",
-          value: email,
-          userId: tmpUser.userId,
-        })
-        .withCurrentToken()
-        .fetchData()
+      // endpoint: /send-code-change-attribute - email
+      const payload = {
+        attribute: "email",
+        value: email,
+        userId: tmpUser.userId,
+      } as const
+
+      const sendCodeResp = await sendCodeChangeAttribute(payload)
 
       if (typeof sendCodeResp === "undefined") return
 

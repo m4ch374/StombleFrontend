@@ -5,15 +5,14 @@ import { AntDesign } from "@expo/vector-icons"
 import PhoneNumberInput from "components/PhoneNumberInput"
 import { useEffect, useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
-import Fetcher from "utils/Fetcher"
-import { TCheckNum, TSendCodeChangeAttribute } from "types/endpoints"
 import { useNavigation } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { accountEP, authEP } from "constants/Endpoint"
 import { useAppSlector } from "redux/hooks"
 import LatoText from "components/styled_components/LatoText"
 import CustomColor from "constants/Colors"
+import { checkNumber } from "utils/services/auth"
+import { sendCodeChangeAttribute } from "utils/services/accountInfo"
 
 const EditPhone = () => {
   const { navigate } = useNavigation()
@@ -32,14 +31,11 @@ const EditPhone = () => {
   }, [isValid])
 
   const handleSendCode = () => {
-    // To check if the phone number is already registered
     ;(async () => {
-      const checkExistResp = await Fetcher.init<TCheckNum>(
-        "POST",
-        authEP.CHECK_NUMBER,
-      )
-        .withJsonPaylad({ phone: phone.countryCode + phone.number })
-        .fetchData()
+      // endpoint: /check-number
+      const checkExistResp = await checkNumber({
+        phone: phone.countryCode + phone.number,
+      })
 
       if (typeof checkExistResp === "undefined") return
 
@@ -51,22 +47,18 @@ const EditPhone = () => {
         setExisted(checkExistResp.exists)
       }
 
-      // endpoint: send code change attribute - phone_number
-      const sendCodeResp = await Fetcher.init<TSendCodeChangeAttribute>(
-        "POST",
-        accountEP.SEND_CODE_CHANGE_ATTRIBUTE,
-      )
-        .withJsonPaylad({
-          attribute: "phone_number",
-          value: phone.countryCode + phone.number,
-          userId: tmpUser.userId,
-        })
-        .withCurrentToken()
-        .fetchData()
+      // endpoint: /send-code-change-attribute - phone_number
+      const payload = {
+        attribute: "phone_number",
+        value: phone.countryCode + phone.number,
+        userId: tmpUser.userId,
+      } as const
+
+      const sendCodeResp = await sendCodeChangeAttribute(payload)
 
       if (typeof sendCodeResp === "undefined") return
 
-      //If new phone number is not exist in db, allow to send code to the phone number to update phone number
+      // Should we check - If new phone number is not exist in db, allow to send code to the phone number to update phone number
       dispatch(
         tmpStoreAction.setItem({
           key: "phone",

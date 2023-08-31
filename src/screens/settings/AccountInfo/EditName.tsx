@@ -10,11 +10,9 @@ import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useDispatch } from "react-redux"
 import InputBlueBg from "components/settings/InputBlueBg"
-import Fetcher from "utils/Fetcher"
-import { accountEP } from "constants/Endpoint"
-import { TUpdateUserInfo } from "types/endpoints"
 import LatoText from "components/styled_components/LatoText"
 import CustomColor from "constants/Colors"
+import { updatePersonalInfo } from "utils/services/accountInfo"
 
 const EditName = () => {
   const navigate = useNavigation()
@@ -23,19 +21,15 @@ const EditName = () => {
   const [newName, setNewName] = useState(tmpUser.fullName)
 
   const handleSave = () => {
-    // endpoint: update user name to backend
     ;(async () => {
-      const resp = await Fetcher.init<TUpdateUserInfo>(
-        "PUT",
-        accountEP.UPDATE_PERSONAL_INFO,
-      )
-        .withJsonPaylad({
-          attribute: "name",
-          userId: tmpUser.userId,
-          value: newName,
-        })
-        .withCurrentToken()
-        .fetchData()
+      // endpoint: update user name to backend
+      const payload = {
+        attribute: "name",
+        userId: tmpUser.userId,
+        value: newName,
+      } as const
+
+      const resp = await updatePersonalInfo(payload)
 
       if (typeof resp === "undefined") return
 

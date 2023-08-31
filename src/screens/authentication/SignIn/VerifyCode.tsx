@@ -1,7 +1,7 @@
 // REFERENCE: Log in - Verfiy code
 
 import BackgroundColour from "components/styled_components/BackgroundColour"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import {
   View,
   Text,
@@ -12,16 +12,14 @@ import {
 } from "react-native"
 import FlatButton from "components/styled_components/FlatButton"
 import { useAppSlector } from "redux/hooks"
-import Fetcher from "utils/Fetcher"
-import { TConfirm } from "types/endpoints"
 import { useNavigation } from "@react-navigation/native"
-import { authEP } from "constants/Endpoint"
 import { VerifyCodeField } from "components/VerifyCodeField"
+import { confirmCode, confirmPreSignUp } from "utils/services/auth"
 
 const VerifyCode = () => {
   const [timer, setTimer] = useState(60)
   const [sendCode, setSendCode] = useState(false)
-  const [value, setValue] = useState("")
+  const [code, setCode] = useState("")
   const [disabled, setDisabled] = useState(true)
   const tmp = useAppSlector(state => state.tmpStore)
   const navigate = useNavigation()
@@ -38,35 +36,34 @@ const VerifyCode = () => {
     return () => clearInterval(interval)
   }, [sendCode, timer])
 
-  const handleOnPress = useCallback(() => {
-    const { phone, verifyWithPassword } = tmp
+  const handleOnPress = () => {
+    const { phone, verifyWithPassword, password } = tmp
 
-    // Should we move endpoint to a constant file?
-    // Yes -- Yume
-    const endpoint = verifyWithPassword
-      ? authEP.CONFIRM_CODE
-      : authEP.CONFIRM_PRE_SIGN_UP
     ;(async () => {
-      const result = await Fetcher.init<TConfirm>("POST", endpoint)
-        .withJsonPaylad({
-          code: value,
-          phone,
-          ...(verifyWithPassword && { password: tmp.password }),
-        })
-        .fetchData()
+      const payload = {
+        code,
+        phone,
+        ...(verifyWithPassword && { password }),
+      }
+
+      // endpoint: /confirm-code and /confirm-pre-sign-up
+      const resp = verifyWithPassword
+        ? await confirmCode(payload)
+        : await confirmPreSignUp(payload)
+
       // Unresolved promises will be undefined
-      if (typeof result === "undefined") return
+      if (typeof resp === "undefined") return
 
       verifyWithPassword
         ? navigate.navigate("LoginRoot", { screen: "Home" })
         : navigate.navigate("Auth", { screen: "ChooseAccountType" })
     })()
-  }, [navigate, tmp, value])
+  }
 
   const handleSendCode = () => {
     setSendCode(false)
     setTimer(60)
-    console.log("resend code") // CANNOT DO: /resend-code endpoint not working currently
+    console.log("resend code") // TODO: /re-send-code endpoint is ready
   }
 
   return (
@@ -88,8 +85,8 @@ const VerifyCode = () => {
               </View>
 
               <VerifyCodeField
-                value={value}
-                setValue={setValue}
+                value={code}
+                setValue={setCode}
                 setDisabled={setDisabled}
               />
 

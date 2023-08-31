@@ -8,10 +8,8 @@ import BtnWithLoginRegister from "components/BtnWithLoginRegister"
 import { useNavigation } from "@react-navigation/native"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useAppDispatch } from "redux/hooks"
-import Fetcher from "utils/Fetcher"
-import { TCheckNum } from "types/endpoints"
-import { authEP } from "constants/Endpoint"
 import LatoText from "components/styled_components/LatoText"
+import { checkNumber } from "utils/services/auth"
 
 const ForgetPassword = () => {
   const navigation = useNavigation()
@@ -30,11 +28,9 @@ const ForgetPassword = () => {
 
   const handleOnPress = () => {
     ;(async () => {
-      const resp = await Fetcher.init<TCheckNum>("POST", authEP.CHECK_NUMBER)
-        .withJsonPaylad({
-          phone: phone.countryCode + phone.number,
-        })
-        .fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+      const resp = await checkNumber({
+        phone: phone.countryCode + phone.number,
+      })
 
       if (resp) {
         if (resp.exists == false) {
@@ -43,7 +39,6 @@ const ForgetPassword = () => {
         }
       }
 
-      console.log("resp:", resp)
       dispatch(
         tmpStoreAction.setItem({
           key: "phone",

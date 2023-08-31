@@ -1,5 +1,8 @@
 // REFERENCE: Setting - Personal - Close Account
 
+//----------------------------------------------------------------
+// Waiting for new design
+//----------------------------------------------------------------
 import { useNavigation } from "@react-navigation/native"
 import AccountFileCard from "components/AccountFileCard"
 import FlatButton from "components/styled_components/FlatButton"

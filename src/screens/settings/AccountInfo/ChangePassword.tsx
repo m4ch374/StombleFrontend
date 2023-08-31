@@ -7,11 +7,9 @@ import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import Fetcher from "utils/Fetcher"
-import { TChangePassword } from "types/endpoints"
-import { authEP } from "constants/Endpoint"
 import { useAppSlector } from "redux/hooks"
 import LatoText from "components/styled_components/LatoText"
+import { changePassword } from "utils/services/auth"
 
 const ChangePassword = () => {
   const tmpUser = useAppSlector(state => state.tmpStore)
@@ -21,19 +19,14 @@ const ChangePassword = () => {
   const [newPassword, setNewPassword] = React.useState("")
 
   const handleChangePassword = () => {
-    // TODO: change password endpoint
     ;(async () => {
-      const resp = await Fetcher.init<TChangePassword>(
-        "POST",
-        authEP.CHANGE_PASSWORD,
-      )
-        .withJsonPaylad({
-          phone: tmpUser.phone,
-          previousPassword: password,
-          proposedPassword: newPassword,
-        })
-        .withCurrentToken()
-        .fetchData()
+      // endpoint: /change-password
+      const payload = {
+        phone: tmpUser.phone,
+        previousPassword: password,
+        proposedPassword: newPassword,
+      }
+      const resp = await changePassword(payload)
 
       if (resp?.statusCode !== 200) return
 

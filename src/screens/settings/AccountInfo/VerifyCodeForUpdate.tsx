@@ -5,15 +5,13 @@ import { useEffect, useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { useAppSlector } from "redux/hooks"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
-import Fetcher from "utils/Fetcher"
-import { TUpdateUserInfo } from "types/endpoints"
-import { accountEP } from "constants/Endpoint"
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
 import { AccountInfoList } from "types/Navigation"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import LatoText from "components/styled_components/LatoText"
 import { VerifyCodeField } from "components/VerifyCodeField"
+import { updatePersonalInfo } from "utils/services/accountInfo"
 
 const VerifyCodeForUpdate = () => {
   const route = useRoute<RouteProp<AccountInfoList, "VerifyCodeForUpdate">>()
@@ -40,18 +38,14 @@ const VerifyCodeForUpdate = () => {
   const handleVerifyCode = () => {
     // endpoint: update user name to backend
     ;(async () => {
-      const resp = await Fetcher.init<TUpdateUserInfo>(
-        "PUT",
-        accountEP.UPDATE_PERSONAL_INFO,
-      )
-        .withJsonPaylad({
-          attribute: route.params.email ? "email" : "phone_number",
-          userId: tmpUser.userId,
-          value: route.params.email ? tmpUser.email : tmpUser.phone,
-          code: value,
-        })
-        .withCurrentToken()
-        .fetchData()
+      const payload = {
+        attribute: route.params.email ? "email" : "phone_number",
+        userId: tmpUser.userId,
+        value: route.params.email ? tmpUser.email : tmpUser.phone,
+        code: value,
+      } as const
+
+      const resp = await updatePersonalInfo(payload)
 
       if (typeof resp === "undefined") return
 
@@ -71,7 +65,7 @@ const VerifyCodeForUpdate = () => {
   const handleSendCode = () => {
     setSendCode(false)
     setTimer(60)
-    console.log("resend code") // CANNOT DO: /resend-code endpoint not working currently
+    console.log("resend code") // TODO: /re-send-code is ready
   }
 
   return (

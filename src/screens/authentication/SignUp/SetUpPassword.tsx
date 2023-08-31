@@ -8,9 +8,7 @@ import BackgroundColour from "components/styled_components/BackgroundColour"
 import PasswordInput from "components/PasswordInput"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import Fetcher from "utils/Fetcher"
-import { TForgotPassword, TPreSignUp } from "types/endpoints"
-import { authEP } from "constants/Endpoint"
+import { forgotPassword, preSignUp } from "utils/services/auth"
 
 // Breaking the rules here a bit
 type TPasswordCheck = {
@@ -57,32 +55,21 @@ const SetUpPassword = () => {
   }, [testRegexp])
 
   const handleSetPassword = () => {
-    // TODO: i guess the pre-sign-up thing if i remember correctly? idk
-
     ;(async () => {
-      const fetcherInstance: Fetcher<TForgotPassword | TPreSignUp> =
-        tmpVars.verifyWithPassword
-          ? Fetcher.init<TForgotPassword>("POST", authEP.FORGOT_PASSWORD)
-          : Fetcher.init<TPreSignUp>("POST", authEP.PRE_SIGN_UP)
-
       const payload = {
         phone: tmpVars.phone,
-        ...(!tmpVars.verifyWithPassword && {
-          password: confirm,
-          fullName: tmpVars.fullName,
-          birthday: tmpVars.birthday,
-          gender: tmpVars.gender,
-        }),
+        password: confirm,
+        fullName: tmpVars.fullName,
+        birthday: tmpVars.birthday,
+        gender: tmpVars.gender,
       }
 
-      console.log(payload)
-
-      const resp = await fetcherInstance.withJsonPaylad(payload).fetchData() // Fetch data console.logs the error automatically (see ./utils/Fetcher.ts)
+      const resp = tmpVars.verifyWithPassword
+        ? await forgotPassword({ phone: tmpVars.phone })
+        : await preSignUp(payload)
 
       // Another ebic leetcode syntax
       if (typeof resp === "undefined") return
-
-      console.log("resp:", resp)
 
       dispatch(tmpStoreAction.setItem({ key: "password", item: confirm }))
       navigation.navigate("Auth", { screen: "VerifyCode" })

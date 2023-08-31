@@ -17,9 +17,7 @@ import FlatButton from "components/styled_components/FlatButton"
 import PhoneNumberInput from "components/PhoneNumberInput"
 import { useAppDispatch } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import Fetcher from "utils/Fetcher"
-import { TCheckNum } from "types/endpoints"
-import { authEP } from "constants/Endpoint"
+import { checkNumber } from "utils/services/auth"
 
 // Breaking the rules a bit here again
 const Divider: React.FC = () => {
@@ -43,11 +41,10 @@ const VerifyPhone: React.FC = () => {
 
   const handleBtnPress = () => {
     ;(async () => {
-      const resp = await Fetcher.init<TCheckNum>("POST", authEP.CHECK_NUMBER)
-        .withJsonPaylad({ phone: phone.countryCode + phone.number })
-        .fetchData()
+      const resp = await checkNumber({
+        phone: phone.countryCode + phone.number,
+      })
 
-      // Ebic leetcode syntax right here
       if (typeof resp === "undefined") return
 
       if (resp.exists) {

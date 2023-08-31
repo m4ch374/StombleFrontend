@@ -13,12 +13,10 @@ import {
 import BackgroundColour from "components/styled_components/BackgroundColour"
 import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
-import Fetcher from "utils/Fetcher"
-import { TSignUp } from "types/endpoints"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { tokenAction } from "redux/reducers/tokens.reducer"
-import { authEP } from "constants/Endpoint"
+import { signUp } from "utils/services/auth"
 
 const SignupBusinessName = () => {
   const navigation = useNavigation()
@@ -29,14 +27,15 @@ const SignupBusinessName = () => {
 
   const handlePress = () => {
     ;(async () => {
-      const resp = await Fetcher.init<TSignUp>("POST", authEP.SIGN_UP)
-        .withJsonPaylad({
-          businessName,
-          isBusiness: true,
-          password: tmp.password,
-          phone: tmp.phone,
-        })
-        .fetchData()
+      const payload = {
+        businessName,
+        isBusiness: true,
+        password: tmp.password,
+        phone: tmp.phone,
+      }
+
+      // endpoint: sign up
+      const resp = await signUp(payload)
 
       if (typeof resp === "undefined") return
 

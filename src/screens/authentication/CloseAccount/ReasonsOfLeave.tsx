@@ -1,5 +1,8 @@
 // REFERENCE: Setting - Personal - Close Account
 
+//----------------------------------------------------------------
+// Waiting for new design
+//----------------------------------------------------------------
 import { useNavigation } from "@react-navigation/native"
 import CircleButton from "components/settings/CircleButton"
 import FlatButton from "components/styled_components/FlatButton"
