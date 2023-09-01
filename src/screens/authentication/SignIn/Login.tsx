@@ -5,7 +5,7 @@ import { TouchableWithoutFeedback, View, Text, Keyboard } from "react-native"
 import BackgroundColour from "components/styled_components/BackgroundColour"
 import PhoneNumberInput from "components/PhoneNumberInput"
 import BtnWithLoginRegister from "components/BtnWithLoginRegister"
-import { useNavigation, CommonActions } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 import { useAppDispatch } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
@@ -92,15 +92,6 @@ const Login = () => {
 
       // TODO: need direct to verifyCode screen (endpoint under development)
       navigate.navigate("LoginRoot", { screen: "Home" })
-
-      // Clears stack once user logs in
-      // TODO: Haven't tested
-      dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: "LoginRoot" }],
-        }),
-      )
     })()
   }
 

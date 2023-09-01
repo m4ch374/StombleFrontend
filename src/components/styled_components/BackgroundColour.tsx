@@ -1,6 +1,5 @@
 // Code copied elsewhere
 
-import { StatusBar } from "expo-status-bar"
 import { LinearGradient } from "expo-linear-gradient"
 import React from "react"
 
@@ -17,7 +16,6 @@ const BackgroundColour: React.FC<TBackgroundColour> = ({ children }) => {
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
     >
-      <StatusBar style="light" />
       {children}
     </LinearGradient>
   )

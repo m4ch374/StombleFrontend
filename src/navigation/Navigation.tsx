@@ -3,33 +3,42 @@ import { RootStackList } from "../types/Navigation"
 import AuthStackNav from "./AuthStackNav"
 import LoginRootTab from "./login_root/LoginRootTab"
 import SettingsStackNav from "./SettingStack"
+import { useAppSlector } from "redux/hooks"
+import { View } from "react-native"
+import { StatusBar } from "expo-status-bar"
 
 const RootStack = createNativeStackNavigator<RootStackList>()
 
 export default function Navigation() {
+  const token = useAppSlector(state => state.tokens.currentToken)
+
   return (
-    <RootStack.Navigator
-      initialRouteName="Auth"
-      screenOptions={{ headerShown: false }}
-    >
-      {/* TODO: implement auth logic */}
-      <RootStack.Screen
-        component={AuthStackNav}
-        name="Auth"
-        options={{ headerShown: false }}
-      />
+    <View className="h-full bg-background">
+      <StatusBar style="light" />
+      <RootStack.Navigator
+        initialRouteName={token === "" ? "LoginRoot" : "Auth"}
+        screenOptions={{ headerShown: false }}
+      >
+        {token === "" && (
+          <RootStack.Screen
+            component={AuthStackNav}
+            name="Auth"
+            options={{ headerShown: false }}
+          />
+        )}
 
-      <RootStack.Screen
-        name="LoginRoot"
-        component={LoginRootTab}
-        options={{ headerShown: false }}
-      />
+        <RootStack.Screen
+          name="LoginRoot"
+          component={LoginRootTab}
+          options={{ headerShown: false }}
+        />
 
-      <RootStack.Screen
-        name="Settings"
-        component={SettingsStackNav}
-        options={{ headerShown: false }}
-      />
-    </RootStack.Navigator>
+        <RootStack.Screen
+          name="Settings"
+          component={SettingsStackNav}
+          options={{ headerShown: false }}
+        />
+      </RootStack.Navigator>
+    </View>
   )
 }
