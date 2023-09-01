@@ -48,10 +48,11 @@ const Login = () => {
 
       dispatch(tokenAction.setToken(signInRes.AccessToken))
       dispatch(
-        tmpStoreAction.setItem({ key: "pswLength", item: password.length }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({ key: "verifyWithPassword", item: true }),
+        tmpStoreAction.setState(state => {
+          state.pswLength = password.length
+          state.verifyWithPassword = true
+          return state
+        }),
       )
 
       // endpoint: get user info and store into tmpStore
@@ -60,33 +61,14 @@ const Login = () => {
       if (typeof userResp?.result === "undefined") return
 
       dispatch(
-        tmpStoreAction.setItem({
-          key: "userId",
-          item: userResp.result.id,
-        }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "fullName",
-          item: userResp.result.fullName,
-        }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "phone",
-          item: userResp.result.phone,
-        }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "email",
-          item: userResp.result.email,
-        }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "link_icon",
-          item: HOST_URL + userResp.result.link_icon,
+        tmpStoreAction.setState(state => {
+          const { result } = userResp
+          state.userId = result.id
+          state.fullName = result.fullName
+          state.phone = result.phone
+          state.email = result.email
+          state.link_icon = HOST_URL + result.link_icon
+          return state
         }),
       )
 

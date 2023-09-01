@@ -48,9 +48,10 @@ const EditPhone = () => {
       }
 
       // endpoint: /send-code-change-attribute - phone_number
+      const phoneNum = phone.countryCode + phone.number
       const payload = {
         attribute: "phone_number",
-        value: phone.countryCode + phone.number,
+        value: phoneNum,
         userId: tmpUser.userId,
       } as const
 
@@ -59,15 +60,10 @@ const EditPhone = () => {
       if (typeof sendCodeResp === "undefined") return
 
       // Should we check - If new phone number is not exist in db, allow to send code to the phone number to update phone number
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "phone",
-          item: phone.countryCode + phone.number,
-        }),
-      )
+      dispatch(tmpStoreAction.setItem("phone", phoneNum))
       navigate("Settings", {
         screen: "VerifyCodeForUpdate",
-        params: { phone: phone.countryCode + phone.number },
+        params: { phone: phoneNum },
       })
     })()
   }

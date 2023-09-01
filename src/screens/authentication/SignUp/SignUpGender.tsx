@@ -90,15 +90,10 @@ const SignUpGender = () => {
             disabled={selected === ""}
             onPress={() => {
               dispatch(
-                tmpStoreAction.setItem({
-                  key: "gender",
-                  item: getValueFromKey(selected),
-                }),
-              )
-              dispatch(
-                tmpStoreAction.setItem({
-                  key: "verifyWithPassword",
-                  item: false,
+                tmpStoreAction.setState(state => {
+                  state.gender = getValueFromKey(selected)
+                  state.verifyWithPassword = false
+                  return state
                 }),
               )
               navigate("Auth", { screen: "SetUpPassword" })

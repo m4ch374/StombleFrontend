@@ -51,11 +51,11 @@ const VerifyCodeForUpdate = () => {
 
       // TODO: need return a success message back to AccountInfo screen
       dispatch(
-        tmpStoreAction.setItem({
-          key: "message",
-          item: route.params.email
+        tmpStoreAction.setState({
+          ...tmpUser,
+          message: route.params.email
             ? "Email updated successfully"
-            : "Mobile number updated successfully",
+            : "Mobile Number updated successfully",
         }),
       )
       navigate("Settings", { screen: "AccountInfoIndex" })

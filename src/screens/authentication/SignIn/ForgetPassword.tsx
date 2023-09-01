@@ -40,15 +40,10 @@ const ForgetPassword = () => {
       }
 
       dispatch(
-        tmpStoreAction.setItem({
-          key: "phone",
-          item: phone.countryCode + phone.number,
-        }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "verifyWithPassword",
-          item: true,
+        tmpStoreAction.setState(state => {
+          state.phone = phone.countryCode + phone.number
+          state.verifyWithPassword = true
+          return state
         }),
       )
       navigation.navigate("Auth", { screen: "SetUpPassword" })

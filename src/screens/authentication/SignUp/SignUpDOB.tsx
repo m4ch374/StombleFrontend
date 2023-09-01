@@ -127,9 +127,7 @@ const SignUpDOB = ({ navigation }: Props) => {
             text="NEXT"
             disabled={dateofbirth === "" ? true : false}
             onPress={() => {
-              dispatch(
-                tmpStoreAction.setItem({ key: "birthday", item: dateofbirth }),
-              )
+              dispatch(tmpStoreAction.setItem("birthday", dateofbirth))
               navigation.navigate("SignUpGender")
             }}
           />

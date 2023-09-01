@@ -35,15 +35,10 @@ const EditName = () => {
 
       // To update fullName in tmpStore
       dispatch(
-        tmpStoreAction.setItem({
-          key: "fullName",
-          item: newName,
-        }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "message",
-          item: "Name updated successfully",
+        tmpStoreAction.setState({
+          ...tmpUser,
+          fullName: newName,
+          message: "Name updated successfully",
         }),
       )
 

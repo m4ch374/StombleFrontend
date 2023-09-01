@@ -54,15 +54,10 @@ const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
       if (typeof resp === "undefined") return
 
       dispatch(
-        tmpStoreAction.setItem({
-          key: "link_icon",
-          item: result.assets[0].uri,
-        }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "message",
-          item: "Profile picture changed successfully",
+        tmpStoreAction.setState({
+          ...tmpUser,
+          link_icon: result.assets[0].uri,
+          message: "Profile picture changed successfully",
         }),
       )
 

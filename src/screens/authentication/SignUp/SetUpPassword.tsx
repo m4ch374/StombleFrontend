@@ -71,7 +71,7 @@ const SetUpPassword = () => {
       // Another ebic leetcode syntax
       if (typeof resp === "undefined") return
 
-      dispatch(tmpStoreAction.setItem({ key: "password", item: confirm }))
+      dispatch(tmpStoreAction.setItem("password", confirm))
       navigation.navigate("Auth", { screen: "VerifyCode" })
     })()
   }

@@ -53,10 +53,7 @@ const VerifyPhone: React.FC = () => {
       }
 
       dispatch(
-        tmpStoreAction.setItem({
-          key: "phone",
-          item: phone.countryCode + phone.number,
-        }),
+        tmpStoreAction.setItem("phone", phone.countryCode + phone.number),
       )
       navigation.navigate("Auth", { screen: "SignUpName" })
     })()

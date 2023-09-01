@@ -63,7 +63,7 @@ const SignUpName = () => {
               disabled={fullname === "" ? true : false}
               onPress={() => {
                 dispatch(
-                  tmpStoreAction.setItem({ key: "fullName", item: fullname }),
+                  tmpStoreAction.setItem("fullName", fullname),
                 )
                 navigate("Auth", { screen: "SignUpDOB" })
               }}

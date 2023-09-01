@@ -37,19 +37,30 @@ const tmpStoreSlice = createSlice({
   initialState: init,
   reducers: {
     clearState: () => init,
-    setItem: (
+    setItem: {
+      prepare: (
+        ...args: [key: keyof TTmpStore, item: TTmpStore[keyof TTmpStore]]
+      ) => {
+        return { payload: args }
+      },
+      reducer: (
+        state,
+        action: PayloadAction<
+          [key: keyof TTmpStore, item: TTmpStore[keyof TTmpStore]]
+        >,
+      ) => {
+        const [key, item] = action.payload
+        return { ...state, [key]: item }
+      },
+    },
+    setState: (
       state,
-      action: PayloadAction<{
-        key: keyof TTmpStore
-        item: TTmpStore[keyof TTmpStore]
-      }>,
+      action: PayloadAction<TTmpStore | ((input: TTmpStore) => TTmpStore)>,
     ) => {
-      const { key, item } = action.payload
+      const { payload } = action
+      if (typeof payload === "object") return { ...payload }
 
-      return {
-        ...state,
-        [key]: item,
-      }
+      return payload(state)
     },
   },
 })

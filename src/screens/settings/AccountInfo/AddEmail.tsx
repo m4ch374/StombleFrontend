@@ -39,12 +39,7 @@ const AddEmail = () => {
 
       if (typeof sendCodeResp === "undefined") return
 
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "email",
-          item: email,
-        }),
-      )
+      dispatch(tmpStoreAction.setItem("email", email))
       navigate("Settings", {
         screen: "VerifyCodeForUpdate",
         params: { email: email },

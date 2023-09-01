@@ -13,12 +13,7 @@ const PopupMessage = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowPopup(false)
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "message",
-          item: "",
-        }),
-      )
+      dispatch(tmpStoreAction.setItem("message", ""))
     }, 3000)
 
     return () => clearTimeout(timeout)

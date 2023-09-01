@@ -31,12 +31,10 @@ const ChangePassword = () => {
       if (resp?.statusCode !== 200) return
 
       dispatch(
-        tmpStoreAction.setItem({ key: "pswLength", item: newPassword.length }),
-      )
-      dispatch(
-        tmpStoreAction.setItem({
-          key: "message",
-          item: "Password changed successfully",
+        tmpStoreAction.setState({
+          ...tmpUser,
+          pswLength: newPassword.length,
+          message: "Password changed successfully",
         }),
       )
       navigate("Settings", { screen: "AccountInfoIndex" })
