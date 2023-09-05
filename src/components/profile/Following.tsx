@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import FollowingItem from "./FollowingItem"
 import { ScrollRefreshChildScroll } from "components/styled_components/ScrollRefresh"
-import { DataContext } from "screens/login_root/Profile"
 import { View } from "react-native"
 import { useAppSlector } from "redux/hooks"
+import DataContext from "./ProfileDataContext"
 
 const Following: React.FC = () => {
   const data = useContext(DataContext)

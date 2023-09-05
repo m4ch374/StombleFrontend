@@ -13,7 +13,11 @@
 # *********************************************************
 unwanted_attributes=("xmlns")
 
-tags=("svg" "path" "circle" "rect" "ellipse" "line" "polyline" "polygon")
+tags=("svg" "path" "circle" "rect" "ellipse" "line" "polyline" "polygon" "g" "clipPath" "defs")
+
+default_tw_class="h-xl aspect-square"
+
+expected_root_folder="$(pwd)/src/assets/icons"
 
 # =========================================================
 # Syntax checking
@@ -125,16 +129,17 @@ do
     sed -i -E "
         s/^<svg(.*)width=\"[^\"]*\"(.*)$/<svg \1 \2/g;
         s/^<svg(.*)height=\"[^\"]*\"(.*)$/<svg \1 \2/g;
-        s/^<svg(.*)$/<svg className={customTwMerge(\"h-xl aspect-square\", classname)} \1/g
+        s/^<svg(.*)$/<svg className={customTwMerge(\"$default_tw_class\", classname)} \1/g
     " "$file"
     code_to_copy=$(cat "$file")
 
     tmp=$(mktemp)
 
+    import_relative_path=$(realpath --relative-to="$(dirname "$file")" "$expected_root_folder")
     # I forgot how to do multi-line lol
     {
         echo "import React from \"react\""
-        echo "import TIcon from \"./_IconType\""
+        echo "import TIcon from \"$import_relative_path/_IconType\""
         echo -e "import customTwMerge from \"utils/CustomTwMerge\"\n"
 
         echo -e "const $file_name: React.FC<TIcon> = ({ classname }) => {return ($code_to_copy)}\n"

@@ -1,5 +1,7 @@
-import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons"
 import { RouteProp } from "@react-navigation/native"
+import BookmarkSmall from "assets/icons/BookmarkSmall"
+import LikedVideo from "assets/icons/LikedVideo"
+import Store from "assets/icons/Store"
 import LatoText from "components/styled_components/LatoText"
 import CustomColor from "constants/Colors"
 import React from "react"
@@ -19,17 +21,15 @@ type TTabIconMapping = {
 const TabIconMapping: TTabIconMapping = {
   Following: {
     label: "Following",
-    icon: ({ color }) => (
-      <MaterialIcons name="storefront" size={24} color={color} />
-    ),
+    icon: ({ color }) => <Store classname="h-12" color={color} />,
   },
   VideosLiked: {
     label: "Liked videos",
-    icon: ({ color }) => <AntDesign name="hearto" size={24} color={color} />,
+    icon: ({ color }) => <LikedVideo classname="h-12" color={color} />,
   },
   VideosSaved: {
     label: "Saved videos",
-    icon: ({ color }) => <Feather name="bookmark" size={24} color={color} />,
+    icon: ({ color }) => <BookmarkSmall classname="h-12" color={color} />,
   },
 }
 // ======================================================

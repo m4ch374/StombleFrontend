@@ -2,7 +2,7 @@
 // idk what that meant lol
 
 import { useNavigation } from "@react-navigation/native"
-import React, { createContext, useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import SwipableModal from "components/styled_components/SwipableModal"
 import ModalSettingsBtn from "components/profile/ModalSettingsBtn"
 import ProfileHeader from "components/profile/ProfileHeader"
@@ -14,11 +14,7 @@ import { useAppSlector } from "redux/hooks"
 import Fetcher from "utils/Fetcher"
 import { TGetFollowings } from "types/endpoints"
 import { profileEP } from "constants/Endpoint"
-
-// To be removed
-export const DataContext = createContext<TGetFollowings["responseType"]>({
-  result: [],
-})
+import DataContext from "components/profile/ProfileDataContext"
 
 const Profile: React.FC = () => {
   const navigation = useNavigation()
