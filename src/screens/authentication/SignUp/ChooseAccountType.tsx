@@ -46,10 +46,7 @@ const ChooseAccountType = () => {
   return (
     <BackgroundColour>
       <View className="flex-1 p-[16px] flex-col h-full gap-8">
-        <Text
-          className="text-white text-[16px]"
-          style={{ fontFamily: "Lato-700" }}
-        >
+        <Text className="text-white text-[16px] font-lato-bold">
           Choose Account type
         </Text>
 
@@ -60,10 +57,7 @@ const ChooseAccountType = () => {
           }`}
         >
           <View className="flex-row justify-between">
-            <Text
-              className="text-[18px] text-white"
-              style={{ fontFamily: "Lato-700" }}
-            >
+            <Text className="text-[18px] text-white font-lato-bold">
               Business
             </Text>
             <View
@@ -81,10 +75,7 @@ const ChooseAccountType = () => {
               )}
             </View>
           </View>
-          <Text
-            className="text-[13px] text-[#C1C1C1] justify-start mt-[10px]"
-            style={{ fontFamily: "Lato-700" }}
-          >
+          <Text className="text-[13px] text-[#C1C1C1] justify-start mt-[10px] font-lato-bold">
             Best for local businesses, brands, organizations,startups and
             influencers.
           </Text>
@@ -97,10 +88,7 @@ const ChooseAccountType = () => {
           }`}
         >
           <View className="flex-row justify-between">
-            <Text
-              className="text-[18px] text-white"
-              style={{ fontFamily: "Lato-700" }}
-            >
+            <Text className="text-[18px] text-white font-lato-bold">
               Personal
             </Text>
             <View
@@ -118,10 +106,7 @@ const ChooseAccountType = () => {
               )}
             </View>
           </View>
-          <Text
-            className="text-[13px] text-[#C1C1C1] justify-start mt-[10px]"
-            style={{ fontFamily: "Lato-700" }}
-          >
+          <Text className="text-[13px] text-[#C1C1C1] justify-start mt-[10px] font-lato-bold">
             Best for exploring new trends in business and following your
             favourite accounts.
           </Text>

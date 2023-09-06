@@ -55,10 +55,7 @@ const ForgetPassword = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="p-[16px] flex justify-between h-full">
           <View>
-            <Text
-              className="text-[14px] text-white mb-4"
-              style={{ fontFamily: "Lato-700" }}
-            >
+            <Text className="text-[14px] text-white mb-4 font-bold lato-text">
               Please reset your password for restoring the security of the
               account.
             </Text>
@@ -74,7 +71,7 @@ const ForgetPassword = () => {
             />
             {/* temporarily put here to indicate not existing phone number on screen, develop later */}
             {changeNumError && (
-              <Text className="text-4 text-red-500">
+              <Text className="text-sm text-red-500">
                 Phone number does not exist
               </Text>
             )}

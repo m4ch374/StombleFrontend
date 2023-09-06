@@ -76,23 +76,17 @@ const SignUpDOB = ({ navigation }: Props) => {
         </View>
 
         <View className="mt-[34px]">
-          <Text
-            className="text-[16px] text-white"
-            style={{ fontFamily: "Lato-700" }}
-          >
+          <Text className="text-[16px] text-white font-lato-bold">
             Create your Stomble account
           </Text>
         </View>
 
         <View className="mt-[24px] mb-[16px]">
-          <Text
-            className="text-[14px] text-[#ffffff80]"
-            style={{ fontFamily: "Lato-400" }}
-          >
+          <Text className="text-[14px] text-[#ffffff80] font-lato">
             When is your date of birth?
           </Text>
         </View>
-        <View className="flex-1 p-[16px] flex-col h-full">
+        <View className="flex-1 flex-col h-full">
           <Pressable
             onPress={showDatePicker}
             className="flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] "
@@ -138,16 +132,10 @@ const SignUpDOB = ({ navigation }: Props) => {
             <View className="bg-black/30 w-full h-full flex justify-center items-center">
               <View className="bg-[#2c2c2c] rounded-md flex items-center justify-center w-[90%]">
                 <View className="p-5 flex gap-2">
-                  <Text
-                    className="text-white text-xl text-center"
-                    style={{ fontFamily: "Lato-700" }}
-                  >
+                  <Text className="text-white text-xl text-center font-lato-bold">
                     Sorry can&apos;t create an account
                   </Text>
-                  <Text
-                    className="text-gray-300/60 text-lg text-center"
-                    style={{ fontFamily: "Lato-700" }}
-                  >
+                  <Text className="text-gray-300/60 text-lg text-center font-lato-bold">
                     To create a Stomble account your minimum age must be 13
                     years or over
                   </Text>
@@ -159,12 +147,7 @@ const SignUpDOB = ({ navigation }: Props) => {
                   }}
                   className="py-2 border-t border-gray-300/10 w-full flex items-center justify-center"
                 >
-                  <Text
-                    className="text-white text-xl"
-                    style={{ fontFamily: "Lato-700" }}
-                  >
-                    OK
-                  </Text>
+                  <Text className="text-white text-xl font-lato-bold">OK</Text>
                 </TouchableOpacity>
               </View>
             </View>

@@ -82,19 +82,13 @@ const SetUpPassword = () => {
         <View className="px-4 pb-10 flex justify-between h-full">
           <View>
             <View className="mb-[24px]">
-              <Text
-                className="text-white text-[16px] font-semibold"
-                style={{ fontFamily: "Lato-400" }}
-              >
+              <Text className="text-white text-[16px] font-lato font-semibold">
                 Set up a password for extra security.
               </Text>
             </View>
 
             <View className="mb-[8px]">
-              <Text
-                className="text-[12px] text-[#FFFFFF60]"
-                style={{ fontFamily: "Lato-400" }}
-              >
+              <Text className="text-[12px] text-[#FFFFFF60] font-lato">
                 New Password
               </Text>
             </View>
@@ -149,10 +143,7 @@ const SetUpPassword = () => {
             </View>
 
             <View className="mb-[8px]">
-              <Text
-                className="text-[12px] text-[#FFFFFF60]"
-                style={{ fontFamily: "Lato-400" }}
-              >
+              <Text className="text-[12px] text-[#FFFFFF60] font-lato">
                 Confirm New Password
               </Text>
             </View>

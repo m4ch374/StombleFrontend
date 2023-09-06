@@ -92,7 +92,7 @@ const VerifyCode = () => {
 
               <View className="my-8">
                 {!sendCode ? (
-                  <Text className="text-[16px] text-white text-center font">
+                  <Text className="text-[16px] text-white text-center">
                     Resend code in {timer} seconds
                   </Text>
                 ) : (

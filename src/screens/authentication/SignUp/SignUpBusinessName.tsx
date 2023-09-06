@@ -54,26 +54,19 @@ const SignupBusinessName = () => {
         >
           <View className="flex-1">
             <View className="mb-2">
-              <Text
-                className="text-white text-sm"
-                style={{ fontFamily: "Lato-400" }}
-              >
+              <Text className="text-white text-sm font-lato">
                 What&apos;s your business name?
               </Text>
             </View>
             <View className="h-12 bg-transparent rounded-md flex-row items-center justify-between px-3 border border-solid border-white mt-3">
               <TextInput
-                className="text-white py-auto text-base leading-[16px] w-[280px] h-5"
-                style={{ fontFamily: "Lato-700" }}
+                className="text-white py-auto text-base leading-[16px] w-[280px] h-5 font-lato-bold"
                 placeholderTextColor="#ABABAB"
                 onChangeText={setBusinessName}
               />
             </View>
             <View className="mb-2">
-              <Text
-                className="text-white text-sm mt-3"
-                style={{ fontFamily: "Lato-400" }}
-              >
+              <Text className="text-white text-sm mt-3 font-lato">
                 This name will be displayed as your profile name.
               </Text>
             </View>

@@ -29,27 +29,21 @@ const SignUpName = () => {
         </View>
 
         <View className="mt-[34px]">
-          <Text
-            className="text-[16px] text-white"
-            style={{ fontFamily: "Lato-700" }}
-          >
+          <Text className="text-[16px] text-white font-semibold">
             Create your Stomble account
           </Text>
         </View>
 
         <View className="mt-[24px] mb-[16px]">
-          <Text
-            className="text-[14px] text-[#ffffff80]"
-            style={{ fontFamily: "Lato-400" }}
-          >
+          <Text className="text-[14px] text-[#ffffff80]">
             What's your Full Name?
           </Text>
         </View>
 
         <View className="flex-1 justify-between">
-          <View className="flex h-[48px] w-full pl-[12px] justify-center rounded-[5px] border-[1px] border-gray-500 ">
+          <View className="flex h-[48px] w-full pl-[12px] justify-center rounded-[5px] border-[1px] border-white">
             <TextInput
-              className="text-[16px] text-white "
+              className="text-[16px] text-white"
               onChangeText={setFullname}
               value={fullname}
               placeholder={fullname}
@@ -62,9 +56,7 @@ const SignUpName = () => {
               text="NEXT"
               disabled={fullname === "" ? true : false}
               onPress={() => {
-                dispatch(
-                  tmpStoreAction.setItem("fullName", fullname),
-                )
+                dispatch(tmpStoreAction.setItem("fullName", fullname))
                 navigate("Auth", { screen: "SignUpDOB" })
               }}
             />

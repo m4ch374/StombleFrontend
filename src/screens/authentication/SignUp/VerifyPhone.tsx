@@ -63,15 +63,12 @@ const VerifyPhone: React.FC = () => {
     <BackgroundColour>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="flex-1 gap-6 px-4">
-          <Text
-            className="text-white text-[16px]"
-            style={{ fontFamily: "Lato-700" }}
-          >
+          <Text className="text-white text-[16px] font-semibold lato-text">
             Verify your mobile number to get started
           </Text>
 
           <View className="flex-1">
-            <Text className="text-[#ffffff80] text-[14px] leading-[22px] text-start mb-[8px]">
+            <Text className="text-[#ffffff80] text-[14px] leading-[22px] mb-[8px]">
               Mobile Number
             </Text>
             <PhoneNumberInput
@@ -111,15 +108,12 @@ const VerifyPhone: React.FC = () => {
             </View>
 
             <View className="flex-row justify-center items-center align-middle">
-              <Text
-                className="text-[16px] text-white mb-[40px]"
-                style={{ fontFamily: "Lato-700" }}
-              >
+              <Text className="text-[16px] text-white mb-[40px] font-semibold lato-text">
                 Already have an account?
               </Text>
               <View className="ml-[2px] mb-[40px]">
                 <Link to={"/ChooseAccountType"}>
-                  <Text className="text-[#326FCB] font-semibold"> Log In</Text>
+                  <Text className="text-blue-500 font-semibold"> Log In</Text>
                 </Link>
               </View>
             </View>
@@ -135,16 +129,10 @@ const VerifyPhone: React.FC = () => {
               <View className="flex-1 justify-center items-center bg-black/30">
                 <View className="bg-[#2c2c2c] mx-2 rounded-md">
                   <View className="p-4 flex gap-2">
-                    <Text
-                      className="text-xl text-white text-center"
-                      style={{ fontFamily: "Lato-700" }}
-                    >
+                    <Text className="text-xl text-white text-center font-semibold lato-text">
                       This mobile number matches your existing account!
                     </Text>
-                    <Text
-                      className="text-md text-white text-center"
-                      style={{ fontFamily: "Lato-700" }}
-                    >
+                    <Text className="text-md text-white text-center font-semibold lato-text">
                       You already have an account with this contact info. Do you
                       want to create another account with the same mobile
                       number?
@@ -154,10 +142,7 @@ const VerifyPhone: React.FC = () => {
                   <Divider />
 
                   <TouchableOpacity className="py-3" onPress={togglePopup}>
-                    <Text
-                      className="text-center text-blue-500 text-[16px]"
-                      style={{ fontFamily: "Lato-700" }}
-                    >
+                    <Text className="text-center text-blue-500 text-[16px] lato-text font-semibold ">
                       Yes, use the same mobile number
                     </Text>
                   </TouchableOpacity>
@@ -165,10 +150,7 @@ const VerifyPhone: React.FC = () => {
                   <Divider />
 
                   <TouchableOpacity className="py-3" onPress={togglePopup}>
-                    <Text
-                      className="text-center text-[16px] text-white"
-                      style={{ fontFamily: "Lato-700" }}
-                    >
+                    <Text className="text-center text-[16px] text-white lato-text font-semibold ">
                       No, use a different number
                     </Text>
                   </TouchableOpacity>
