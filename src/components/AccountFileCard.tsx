@@ -54,7 +54,7 @@ const AccountFileCard: React.FC<Props> = ({
               style={{
                 height: height ? height : 48,
                 width: width ? width : 48,
-                resizeMode: "contain",
+                resizeMode: "cover",
               }}
             />
           </ImageBackground>

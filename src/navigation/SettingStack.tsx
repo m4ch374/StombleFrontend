@@ -5,6 +5,7 @@ import AddEmail from "screens/settings/AccountInfo/AddEmail"
 import ChangePassword from "screens/settings/AccountInfo/ChangePassword"
 import EditName from "screens/settings/AccountInfo/EditName"
 import EditPhone from "screens/settings/AccountInfo/EditPhone"
+import TakePhoto from "screens/settings/AccountInfo/TakePhoto"
 import VerifyCodeForUpdate from "screens/settings/AccountInfo/VerifyCodeForUpdate"
 import ContactUs from "screens/settings/ContactUs"
 import ManageProfiles from "screens/settings/ManageProfiles"
@@ -68,6 +69,12 @@ const SettingsStackNav: React.FC = () => {
           name="ChangePassword"
           component={ChangePassword}
           options={{ title: "Change password" }}
+        />
+
+        <AccountInfoStack.Screen
+          name="TakePhoto"
+          component={TakePhoto}
+          options={{ headerShown: false }}
         />
       </AccountInfoStack.Group>
 

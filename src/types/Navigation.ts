@@ -108,4 +108,6 @@ export type AccountInfoList = {
   }
   AddEmail: undefined
   ChangePassword: undefined
+
+  TakePhoto: undefined
 }

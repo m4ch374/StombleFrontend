@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { updateIcon } from "utils/services/accountInfo"
 import { TUpdateIcon } from "types/endpoints"
+import { useNavigation } from "@react-navigation/native"
 
 type TChangeProfileModal = {
   stateController: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
@@ -16,13 +17,16 @@ type TChangeProfileModal = {
 const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
   stateController,
 }) => {
+  const { navigate } = useNavigation()
   const [visible, setVisible] = stateController
 
   const tmpUser = useAppSlector(state => state.tmpStore)
   const dispatch = useAppDispatch()
 
-  // TODO: take photo
-  const handleTakePhoto = () => {}
+  const handleGotoTakePhoto = () => {
+    navigate("Settings", { screen: "TakePhoto" })
+    setVisible(false)
+  }
 
   const handleChoosePhoto = (): void => {
     ;(async () => {
@@ -70,7 +74,9 @@ const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
 
   return (
     <SwipableModal stateController={[visible, setVisible]}>
-      <ModalSettingsBtn onPress={handleTakePhoto}>Take photo</ModalSettingsBtn>
+      <ModalSettingsBtn onPress={handleGotoTakePhoto}>
+        Take photo
+      </ModalSettingsBtn>
 
       <ModalSettingsBtn onPress={handleChoosePhoto}>
         Choose photo
