@@ -1,7 +1,8 @@
 // Code copied elsewhere
 // TODO: lint code
 
-import { Text, TouchableOpacity } from "react-native"
+import { TouchableOpacity } from "react-native"
+import LatoText from "./LatoText"
 
 type FlatButtonProps = {
   height?: string | number | undefined
@@ -9,7 +10,6 @@ type FlatButtonProps = {
   text: string
   onPress: () => void
   disabled?: boolean
-  variation?: "filled" | "outlined"
 }
 
 const FlatButton = ({
@@ -18,23 +18,18 @@ const FlatButton = ({
   onPress,
   disabled,
   bgColor,
-  variation,
 }: FlatButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={`rounded-[5px] justify-center items-center 
-      ${disabled ? "bg-btnDisabled" : bgColor || "bg-btnActive"} 
-      ${height ? height : "h-[48px]"} 
-      ${variation === "outlined" && "border border-textSec bg-transparent"}`}
+      className={`rounded-[5px] justify-center items-center ${
+        disabled ? "bg-gray-darkest " : bgColor || "bg-primary"
+      } ${height ? height : "h-[48px]"}`}
       disabled={disabled}
     >
-      <Text
-        className={`text-[17px] 
-       ${variation === "outlined" ? " text-textSec " : "text-white"}`}
-      >
-        {text}
-      </Text>
+      <LatoText classname="text-[18px] font-lato-bold">
+        {text.toUpperCase()}
+      </LatoText>
     </TouchableOpacity>
   )
 }
