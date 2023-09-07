@@ -1,28 +1,23 @@
 import ChangeProfileModal from "components/ChangeProfileModal"
 import EditableProfileIcon from "components/EditableProfileIcon"
 import LatoText from "components/styled_components/LatoText"
-import React, { useState } from "react"
+import { useState } from "react"
 import { View } from "react-native"
+import { useAppSlector } from "redux/hooks"
 
-type TProfileHeaderContent = {
-  userName: string
-  profile_link: string
-}
-
-const ProfileHeaderContent: React.FC<TProfileHeaderContent> = ({
-  userName,
-  profile_link,
-}) => {
+const ProfileHeaderContent = () => {
   const [editVisible, setEditVisible] = useState(false)
+
+  const tmpUser = useAppSlector(state => state.tmpStore)
 
   return (
     <>
-      <View className="flex gap-2 px-4 py-4">
+      <View className="flex gap-2 px-4 my-4">
         <EditableProfileIcon
-          profile_link={profile_link}
+          profile_link={tmpUser.link_icon}
           setModalVisible={setEditVisible}
         />
-        <LatoText>{userName}</LatoText>
+        <LatoText>{tmpUser.fullName}</LatoText>
       </View>
 
       <ChangeProfileModal stateController={[editVisible, setEditVisible]} />

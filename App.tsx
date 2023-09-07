@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
-import { NativeBaseProvider } from "native-base"
 import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import * as Font from "expo-font"
 
-import customTheme from "./src/constants/Theme"
 import useColorScheme from "./src/hooks/useColorScheme"
 import { persistor, store } from "./src/redux/store"
 import MainNavigation from "./src/navigation/MainNavigation"
@@ -51,9 +49,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <NativeBaseProvider theme={customTheme}>
-          <MainNavigation colorScheme={colorScheme} />
-        </NativeBaseProvider>
+        <MainNavigation colorScheme={colorScheme} />
       </PersistGate>
     </Provider>
   )

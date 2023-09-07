@@ -1,56 +1,19 @@
-// REFERENCE: For Users - Business Profile
-// idk what that meant lol
+// REFERENCE: Personal profile
 
 import { useNavigation } from "@react-navigation/native"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useState } from "react"
 import SwipableModal from "components/styled_components/SwipableModal"
 import ModalSettingsBtn from "components/profile/ModalSettingsBtn"
 import ProfileHeader from "components/profile/ProfileHeader"
 import ProfileTab from "navigation/login_root/ProfileTab"
 import { View } from "react-native"
-import ProfileHeaderContent from "components/profile/ProfileHeaderContent"
-import ScrollRefresh from "components/styled_components/ScrollRefresh"
 import { useAppSlector } from "redux/hooks"
-import Fetcher from "utils/Fetcher"
-import { TGetFollowings } from "types/endpoints"
-import { profileEP } from "constants/Endpoint"
-import DataContext from "components/profile/ProfileDataContext"
 
 const Profile: React.FC = () => {
   const navigation = useNavigation()
   const tmpState = useAppSlector(state => state.tmpStore)
 
   const [visible, setVisible] = useState(false)
-
-  const [refresh, setRefresh] = useState(false)
-
-  // =====================================================================
-  // Crappy structure, moving them to its own individual components later
-  // =====================================================================
-  const [data, setData] = useState<TGetFollowings["responseType"]>({
-    result: [],
-  })
-
-  const handleRefresh = useCallback(() => {
-    ;(async () => {
-      const resp = await Fetcher.init<TGetFollowings>(
-        "GET",
-        profileEP.GET_FOLLOWINGS,
-      )
-        .withCurrentToken()
-        .fetchData()
-
-      if (typeof resp === "undefined") return
-
-      setData(resp)
-      setRefresh(false)
-    })()
-  }, [])
-
-  useEffect(() => {
-    handleRefresh()
-  }, [handleRefresh])
-  // =====================================================================
 
   return (
     <View className="bg-background h-full">
@@ -59,24 +22,7 @@ const Profile: React.FC = () => {
         userName={tmpState.fullName}
       />
 
-      <ScrollRefresh
-        classname="bg-background"
-        containerStyle={{ flexGrow: 1 }} // tailwind is not allowed for this attr.
-        refresh={refresh}
-        onRefresh={() => {
-          setRefresh(true)
-          handleRefresh()
-        }}
-      >
-        <ProfileHeaderContent
-          userName={tmpState.fullName}
-          profile_link={tmpState.link_icon}
-        />
-
-        <DataContext.Provider value={data}>
-          <ProfileTab />
-        </DataContext.Provider>
-      </ScrollRefresh>
+      <ProfileTab />
 
       <SwipableModal stateController={[visible, setVisible]}>
         <ModalSettingsBtn

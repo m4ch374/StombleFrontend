@@ -18,7 +18,7 @@ const ProfileHeader: React.FC<TProfileHeader> = ({
   const navigation = useNavigation()
 
   return (
-    <View className="h-[26px] flex-row justify-between items-center px-sm">
+    <View className="h-[26px] flex-row justify-between items-center px-sm z-50 bg-background">
       <TouchableOpacity
         className="flex-row items-center gap-1"
         onPress={() => setModalVisible(true)}

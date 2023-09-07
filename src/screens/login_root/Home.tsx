@@ -1,7 +1,6 @@
 // REFERENCE: PLACEHOLDER
 
 import React, { useState } from "react"
-import { Text } from "native-base"
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -9,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Text,
 } from "react-native"
 import { useAppDispatch } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
