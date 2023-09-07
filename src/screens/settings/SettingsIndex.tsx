@@ -2,13 +2,13 @@
 
 import SettingsNav from "components/settings/SettingsNav"
 import { View } from "react-native"
-import FlatButton from "components/styled_components/FlatButton"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { useNavigation } from "@react-navigation/native"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { settingsMenuItems } from "constants/SettingsMenuItems"
 import { signOut } from "utils/services/auth"
+import OutlinedButton from "components/settings/OutlinedButton"
 
 const SettingsIndex: React.FC = () => {
   const { navigate } = useNavigation()
@@ -50,19 +50,18 @@ const SettingsIndex: React.FC = () => {
           )
         })}
       </View>
-      <View className="flex flex-col space-y-sm">
+      <View className="flex flex-col space-y-md">
         <View>
-          <FlatButton
+          <OutlinedButton
             text={"Become a Business"}
             onPress={handleBecomeBusiness}
-            variation="outlined"
           />
         </View>
         <View>
-          <FlatButton
+          <OutlinedButton
             text={"Log Out"}
             onPress={handleLogout}
-            bgColor="bg-navbar"
+            colorTheme={"red"}
           />
         </View>
       </View>

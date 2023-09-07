@@ -117,19 +117,6 @@ const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
           }
         />
       </TouchableWithoutFeedback>
-
-      {value.length > 0 && !isValid && (
-        <View className="flex flex-row items-center absolute top-[52px]">
-          <AntDesign
-            name="exclamationcircleo"
-            size={24}
-            color={CustomColor.util.error}
-          />
-          <Text className="text-util-error mx-2">
-            Please enter a valid phone number
-          </Text>
-        </View>
-      )}
     </View>
   )
 }

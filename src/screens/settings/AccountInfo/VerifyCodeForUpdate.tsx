@@ -1,7 +1,7 @@
 // REFERENCE: settings - Verify code for updating phone number and email
 
-import { View, Text } from "react-native"
-import { useEffect, useState } from "react"
+import { View } from "react-native"
+import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { useAppSlector } from "redux/hooks"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
@@ -18,22 +18,8 @@ const VerifyCodeForUpdate = () => {
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
   const tmpUser = useAppSlector(state => state.tmpStore)
-  const [timer, setTimer] = useState(60)
-  const [sendCode, setSendCode] = useState(false)
-  const [disable, setDisabled] = useState(true)
+  const [disabled, setDisabled] = useState(true)
   const [value, setValue] = useState("")
-
-  useEffect(() => {
-    let interval: NodeJS.Timer
-    if (timer > 0 && !sendCode) {
-      interval = setInterval(() => {
-        setTimer(timer - 1)
-      }, 1000)
-    } else {
-      setSendCode(true)
-    }
-    return () => clearInterval(interval)
-  }, [sendCode, timer])
 
   const handleVerifyCode = () => {
     // endpoint: update user name to backend
@@ -49,7 +35,6 @@ const VerifyCodeForUpdate = () => {
 
       if (typeof resp === "undefined") return
 
-      // TODO: need return a success message back to AccountInfo screen
       dispatch(
         tmpStoreAction.setState({
           ...tmpUser,
@@ -62,18 +47,12 @@ const VerifyCodeForUpdate = () => {
     })()
   }
 
-  const handleSendCode = () => {
-    setSendCode(false)
-    setTimer(60)
-    console.log("resend code") // TODO: /re-send-code is ready
-  }
-
   return (
     <SettingsScreenLayout>
       <View className="flex-1">
         <View className="p-12 flex justify-between h-full">
-          <View className="h-[140px] flex justify-between">
-            <View className="my-4">
+          <View className="flex justify-between items-center">
+            <View className="mb-16">
               <LatoText classname="text-center mb-1">
                 Enter the 6 digit code we send to
               </LatoText>
@@ -81,26 +60,12 @@ const VerifyCodeForUpdate = () => {
                 {route.params.phone || route.params.email}
               </LatoText>
             </View>
-            {/* TODO: have new design */}
+
             <VerifyCodeField
               value={value}
               setValue={setValue}
               setDisabled={setDisabled}
             />
-            <View>
-              {!sendCode ? (
-                <Text className="text-16 text-white text-center font">
-                  Resend code in {timer} seconds
-                </Text>
-              ) : (
-                <Text
-                  className="text-16 text-white text-center font-bold"
-                  onPress={handleSendCode}
-                >
-                  Resend code
-                </Text>
-              )}
-            </View>
           </View>
         </View>
       </View>
@@ -108,7 +73,7 @@ const VerifyCodeForUpdate = () => {
       <FlatButton
         text={"VERIFY CODE"}
         onPress={handleVerifyCode}
-        disabled={disable}
+        disabled={disabled}
       />
     </SettingsScreenLayout>
   )

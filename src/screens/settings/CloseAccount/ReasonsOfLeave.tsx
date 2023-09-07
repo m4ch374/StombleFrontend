@@ -64,7 +64,7 @@ const ReasonsOfLeave = () => {
 
       <FlatButton
         text={"CONTINUE"}
-        onPress={() => navigate("Auth", { screen: "ConfirmOfLeave" })}
+        onPress={() => navigate("Settings", { screen: "ConfirmOfLeave" })}
         disabled={false}
       />
     </LinearBgLayout>

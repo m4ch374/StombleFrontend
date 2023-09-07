@@ -2,8 +2,7 @@
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { View } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
-import PhoneNumberInput from "components/PhoneNumberInput"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
@@ -11,44 +10,21 @@ import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useAppSlector } from "redux/hooks"
 import LatoText from "components/styled_components/LatoText"
 import CustomColor from "constants/Colors"
-import { checkNumber } from "utils/services/auth"
 import { sendCodeChangeAttribute } from "utils/services/accountInfo"
+import VerifyPhone from "components/VerifyPhone"
 
 const EditPhone = () => {
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
   const tmpUser = useAppSlector(state => state.tmpStore)
-  const [isValid, setIsValid] = useState(true)
-  const [disabled, setDisabled] = useState(true)
-  const [existed, setExisted] = useState(false)
-  const [phone, setPhone] = useState({
-    number: "",
-    countryCode: "+61",
-  })
-
-  useEffect(() => {
-    setDisabled(!isValid)
-  }, [isValid])
+  const [isValid, setIsValid] = useState(false)
+  const [isExists, setIsExists] = useState(true)
+  const [phone, setPhone] = useState("")
 
   const handleSendCode = () => {
     ;(async () => {
-      // endpoint: /check-number
-      const checkExistResp = await checkNumber({
-        phone: phone.countryCode + phone.number,
-      })
-
-      if (typeof checkExistResp === "undefined") return
-
-      // CHECK ON THIS LATER!!!
-      if (checkExistResp.exists) {
-        setExisted(checkExistResp.exists)
-        return
-      } else {
-        setExisted(checkExistResp.exists)
-      }
-
       // endpoint: /send-code-change-attribute - phone_number
-      const phoneNum = phone.countryCode + phone.number
+      const phoneNum = "+61" + phone
       const payload = {
         attribute: "phone_number",
         value: phoneNum,
@@ -59,7 +35,6 @@ const EditPhone = () => {
 
       if (typeof sendCodeResp === "undefined") return
 
-      // Should we check - If new phone number is not exist in db, allow to send code to the phone number to update phone number
       dispatch(tmpStoreAction.setItem("phone", phoneNum))
       navigate("Settings", {
         screen: "VerifyCodeForUpdate",
@@ -70,41 +45,38 @@ const EditPhone = () => {
 
   return (
     <SettingsScreenLayout>
-      <View>
-        <View>
-          <LatoText classname="text-gray-lightest text-sm mb-4">
-            Mobile Number
-          </LatoText>
-          <PhoneNumberInput
-            setPhone={setPhone}
-            isValid={isValid}
-            setIsValid={setIsValid}
-          />
-        </View>
+      <View className="flex flex-col">
+        <VerifyPhone
+          phone={phone}
+          setPhone={setPhone}
+          setIsValid={setIsValid}
+          setIsExists={setIsExists}
+        />
 
-        <LatoText classname="text-gray-darkest text-[14px]">
-          Changing your number changes the number for all the accounts
-          associated with this phone number.
-        </LatoText>
         {/* TODO: extract error message out */}
-        {existed && !isValid && (
-          <View className="flex flex-row items-center">
+        {isExists && isValid && (
+          <View className="flex flex-row items-center pr-8 ">
             <AntDesign
               name="exclamationcircleo"
               size={24}
               color={CustomColor.util.error}
             />
-            <LatoText classname="text-util-error mx-2 text-[14px] my-6">
+            <LatoText classname="text-util-error mx-4 text-[14px] my-6">
               The number you entered is already registered to an account. Please
               enter another number to verify.
             </LatoText>
           </View>
         )}
+
+        <LatoText classname="text-gray-lighter text-[14px] px-2">
+          Changing your number changes the number for all the accounts
+          associated with this phone number.
+        </LatoText>
       </View>
       <FlatButton
         text={"SEND CODE"}
         onPress={handleSendCode}
-        disabled={disabled}
+        disabled={!isValid || isExists}
       />
     </SettingsScreenLayout>
   )

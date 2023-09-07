@@ -2,7 +2,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import CustomColor from "constants/Colors"
 import AccountInfoIndex from "screens/settings/AccountInfo/AccountInfoIndex"
 import AddEmail from "screens/settings/AccountInfo/AddEmail"
-import ChangePassword from "screens/settings/AccountInfo/ChangePassword"
 import EditName from "screens/settings/AccountInfo/EditName"
 import EditPhone from "screens/settings/AccountInfo/EditPhone"
 import TakePhoto from "screens/settings/AccountInfo/TakePhoto"
@@ -14,23 +13,40 @@ import Security from "screens/settings/Security"
 import SettingsIndex from "screens/settings/SettingsIndex"
 import { AccountInfoList, SettingsMenuList } from "types/Navigation"
 import TermsConditions from "_shadow_realm/screens/stack/commonStacks/TermsConditions"
+import { MaterialIcons } from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/native"
+import { TouchableWithoutFeedback } from "react-native"
+import ChangePassword from "screens/settings/AccountInfo/ChangePassword"
+import ReasonsOfLeave from "screens/settings/CloseAccount/ReasonsOfLeave"
+import ConfirmOfLeave from "screens/settings/CloseAccount/ConfirmOfLeave"
+import VerifyCodeForLeave from "screens/settings/CloseAccount/VerifyCodeForLeave"
 
 const SettingsStack = createNativeStackNavigator<SettingsMenuList>()
 const AccountInfoStack = createNativeStackNavigator<AccountInfoList>()
 
 const SettingsStackNav: React.FC = () => {
+  const navigate = useNavigation()
   return (
     <SettingsStack.Navigator
       screenOptions={{
         headerTintColor: CustomColor.white,
         headerStyle: { backgroundColor: CustomColor.background },
+        headerTitleStyle: { fontSize: 18, fontWeight: "bold" },
+        headerBackTitleVisible: false,
       }}
       initialRouteName="SettingsIndex"
     >
       <SettingsStack.Screen
         name="SettingsIndex"
         component={SettingsIndex}
-        options={{ title: "Settings" }}
+        options={{
+          title: "Settings",
+          headerLeft: () => (
+            <TouchableWithoutFeedback onPress={() => navigate.goBack()}>
+              <MaterialIcons name="arrow-back-ios" size={24} color="white" />
+            </TouchableWithoutFeedback>
+          ),
+        }}
       />
 
       <SettingsStack.Screen
@@ -107,6 +123,29 @@ const SettingsStackNav: React.FC = () => {
         component={TermsConditions}
         options={{ title: "Terms and Conditions" }}
       />
+
+      {/* Close Account Group */}
+      <SettingsStack.Group
+        screenOptions={{
+          headerBackTitle: "Back",
+          headerBackTitleVisible: false,
+          title: "Close Account",
+          headerStyle: { backgroundColor: "#020235" },
+        }}
+      >
+        <SettingsStack.Screen
+          name="ReasonsOfLeave"
+          component={ReasonsOfLeave}
+        />
+        <SettingsStack.Screen
+          name="ConfirmOfLeave"
+          component={ConfirmOfLeave}
+        />
+        <SettingsStack.Screen
+          name="VerifyCodeForLeave"
+          component={VerifyCodeForLeave}
+        />
+      </SettingsStack.Group>
     </SettingsStack.Navigator>
   )
 }

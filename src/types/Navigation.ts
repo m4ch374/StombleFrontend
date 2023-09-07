@@ -52,11 +52,6 @@ export type AuthStackList = {
   ChooseAccountType: undefined
 
   SetUpPassword: undefined
-
-  // Close Account
-  ReasonsOfLeave: undefined
-  ConfirmOfLeave: undefined
-  VerifyCodeForLeave: undefined
 }
 // ===============================================
 
@@ -93,6 +88,11 @@ export type SettingsMenuList = {
   NotificationSettings: undefined
   ContactUs: undefined
   TermsNConditions: undefined
+
+  // Close Account
+  ReasonsOfLeave: undefined
+  ConfirmOfLeave: undefined
+  VerifyCodeForLeave: undefined
 }
 // ===============================================
 

@@ -12,18 +12,20 @@ import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import CustomColor from "constants/Colors"
 import { sendCodeChangeAttribute } from "utils/services/accountInfo"
+import { Type } from "types/variantStyle"
+
+// A simple email validation
+const validateEmail = (value: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(value)
+}
 
 const AddEmail = () => {
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
   const tmpUser = useAppSlector(state => state.tmpStore)
   const [email, setEmail] = useState("")
-
-  // A simple email validation
-  const validateEmail = (value: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(value)
-  }
+  const [isValid, setIsValid] = useState(false)
 
   const handleSendCode = () => {
     if (!validateEmail(email)) return
@@ -47,20 +49,30 @@ const AddEmail = () => {
     })()
   }
 
+  const handleOnblur = () => {
+    if (email.length > 0 && !validateEmail(email)) {
+      setIsValid(true)
+    } else {
+      setIsValid(false)
+    }
+  }
+
   return (
     <SettingsScreenLayout>
-      <View>
-        <InputBlueBg title="Email">
+      <View className="flex gap-2">
+        <InputBlueBg title="Email address" variant={Type.outlined}>
           <TextInput
-            className="text-white text-base w-full"
+            className="text-white text-base w-full h-full"
             value={email}
             onChangeText={setEmail}
-            placeholder="Enter Email address"
+            placeholder="Enter your email address"
             placeholderTextColor={CustomColor.gray.lighter}
             textContentType="emailAddress"
+            keyboardAppearance="dark"
+            onBlur={handleOnblur}
           />
         </InputBlueBg>
-        {email.length > 0 && !validateEmail(email) && (
+        {isValid && (
           <View className="flex flex-row items-center">
             <AntDesign
               name="exclamationcircleo"
@@ -76,7 +88,7 @@ const AddEmail = () => {
       <FlatButton
         text={"SEND CODE"}
         onPress={handleSendCode}
-        disabled={!email.length}
+        disabled={!validateEmail(email)}
       />
     </SettingsScreenLayout>
   )

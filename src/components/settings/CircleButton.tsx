@@ -11,7 +11,7 @@ const CircleButton = () => {
   return (
     <TouchableOpacity onPress={handleButtonClick}>
       <View className="relative">
-        <View className="w-[16px] h-[16px] rounded-full bg-transparent border-[1px] border-gray-300" />
+        <View className="w-[16px] h-[16px] rounded-full bg-transparent border-[1px] border-white" />
         <View
           className={`w-[10px] h-[10px] rounded-full ${
             onClicked ? "bg-primary" : "bg-transparent"

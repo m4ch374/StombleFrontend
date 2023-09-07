@@ -22,9 +22,9 @@ const PopupMessage = () => {
   return (
     // TODO: add animation
     <View
-      className={`h-[41px] px-4 rounded-sm bg-util-banner ${
+      className={`h-20 px-4 rounded-sm bg-util-banner ${
         showPopup ? "opacity-100" : " opacity-0 "
-      }justify-center items-center`}
+      } flex justify-center items-center shadow-md`}
     >
       <LatoText classname=" font-lato-bold text-sm">{tmpUser.message}</LatoText>
     </View>

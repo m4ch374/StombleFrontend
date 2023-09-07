@@ -3,16 +3,15 @@
 import { View } from "react-native"
 import React, { useState } from "react"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
-import FlatButton from "components/styled_components/FlatButton"
 import SmButton from "components/settings/SmButton"
 import { useNavigation } from "@react-navigation/native"
 import { useAppSlector } from "redux/hooks"
-import { AntDesign } from "@expo/vector-icons"
 import InputBlueBg from "components/settings/InputBlueBg"
 import PopupMessage from "components/settings/PopupMessage"
 import ChangeProfileModal from "components/ChangeProfileModal"
 import EditableProfileIcon from "components/EditableProfileIcon"
-import LatoText from "components/styled_components/LatoText"
+import OutlinedButton from "components/settings/OutlinedButton"
+import { Type } from "types/variantStyle"
 
 const AccountInfoIndex: React.FC = () => {
   const { navigate } = useNavigation()
@@ -22,17 +21,20 @@ const AccountInfoIndex: React.FC = () => {
   return (
     <SettingsScreenLayout>
       <View className="flex-1">
-        <View className="flex mb-8 justify-center items-center">
+        <View className="flex mb-16 justify-center items-center">
           <EditableProfileIcon
             profile_link={tmpUser.link_icon}
             setModalVisible={setVisible}
           />
         </View>
 
-        <InputBlueBg title="Full Name">
-          <LatoText>{tmpUser.fullName}</LatoText>
+        <InputBlueBg
+          title="Full Name"
+          userInfo={tmpUser.fullName}
+          variant={Type.filled}
+        >
           <SmButton
-            text={"Edit"}
+            text={"Change"}
             onPress={() =>
               navigate("Settings", {
                 screen: "EditName",
@@ -41,55 +43,50 @@ const AccountInfoIndex: React.FC = () => {
           />
         </InputBlueBg>
 
-        <InputBlueBg title="Mobile Number">
-          <LatoText>{tmpUser.phone}</LatoText>
-          <View className="flex flex-row items-center">
-            <AntDesign
-              name="checkcircleo"
-              size={14}
-              color="#00CA23"
-              style={{ marginRight: 10 }}
-            />
-            <SmButton
-              text={"Change"}
-              onPress={() => navigate("Settings", { screen: "EditPhone" })}
-            />
-          </View>
-        </InputBlueBg>
-
-        <InputBlueBg title="Email">
-          <LatoText>{tmpUser.email || "Enter Email address"}</LatoText>
-          <View className="flex flex-row items-center">
-            <AntDesign
-              name="checkcircleo"
-              size={14}
-              color={tmpUser.email ? "green" : "transparent"}
-              style={{ marginRight: 10 }}
-            />
-            <SmButton
-              text={tmpUser.email ? "Change" : "Add"}
-              onPress={() => navigate("Settings", { screen: "AddEmail" })}
-            />
-          </View>
-        </InputBlueBg>
-
-        <InputBlueBg title="Password">
-          <LatoText>{"*".repeat(tmpUser.pswLength)}</LatoText>
+        <InputBlueBg
+          title="Mobile Number"
+          userInfo={tmpUser.phone}
+          variant={Type.filled}
+        >
           <SmButton
             text={"Change"}
-            onPress={() => navigate("Settings", { screen: "ChangePassword" })} // temporary navigate to ChangePassword screen, skip code verification
+            onPress={() => navigate("Settings", { screen: "EditPhone" })}
+          />
+        </InputBlueBg>
+
+        <InputBlueBg
+          title="Email"
+          userInfo={tmpUser.email || "Not added yet!"}
+          variant={Type.filled}
+        >
+          <SmButton
+            text={tmpUser.email ? "Change" : "Add"}
+            onPress={() => navigate("Settings", { screen: "AddEmail" })}
+            variation={tmpUser.email ? Type.outlined : Type.filled}
+          />
+        </InputBlueBg>
+
+        <InputBlueBg
+          title="Password"
+          userInfo={"*".repeat(tmpUser.pswLength)}
+          variant={Type.filled}
+        >
+          <SmButton
+            text={"Change"}
+            // TODO: VerifyCode for changePassword endpoint is not ready, temporarily skip this step and navigate to ChangePassword screen
+            onPress={() => navigate("Settings", { screen: "ChangePassword" })}
           />
         </InputBlueBg>
       </View>
 
-      <View className="flex flex-col h-28 justify-between">
+      <View className="flex flex-col h-[110px] justify-between">
         <View className="flex-1 justify-start items-center ">
           {tmpUser.message && <PopupMessage />}
         </View>
-        <FlatButton
+        <OutlinedButton
           text={"Close Account"}
-          onPress={() => navigate("Auth", { screen: "ReasonsOfLeave" })}
-          variation="outlined"
+          onPress={() => navigate("Settings", { screen: "ReasonsOfLeave" })}
+          colorTheme="red"
         />
       </View>
 

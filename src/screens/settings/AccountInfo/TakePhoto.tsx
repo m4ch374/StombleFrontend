@@ -179,7 +179,7 @@ const TakePhoto = () => {
             <View className="flex flex-row justify-around items-center px-16 py-12 ">
               {/* TODO: open media library to select photo */}
               <TouchableOpacity
-                className="block invisiable"
+                className="block invisible"
                 onPress={handleOpenMediaLibrary}
               >
                 <Ionicons name="images-outline" size={30} color="transparent" />

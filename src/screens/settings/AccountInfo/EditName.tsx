@@ -2,17 +2,16 @@
 
 import { useNavigation } from "@react-navigation/native"
 import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
-import SmButton from "components/settings/SmButton"
 import { useState } from "react"
-import { View, TextInput } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
+import { TextInput } from "react-native"
 import { useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useDispatch } from "react-redux"
 import InputBlueBg from "components/settings/InputBlueBg"
-import LatoText from "components/styled_components/LatoText"
 import CustomColor from "constants/Colors"
 import { updatePersonalInfo } from "utils/services/accountInfo"
+import { Type } from "types/variantStyle"
+import FlatButton from "components/styled_components/FlatButton"
 
 const EditName = () => {
   const navigate = useNavigation()
@@ -48,26 +47,21 @@ const EditName = () => {
 
   return (
     <SettingsScreenLayout>
-      <InputBlueBg title="Full Name">
+      <InputBlueBg title="Full Name" variant={Type.outlined}>
         <TextInput
-          className="text-white text-[16px] w-[270px]"
+          className="text-white text-base w-full h-full"
           value={newName}
           onChangeText={setNewName}
+          placeholder="Enter your full name"
+          placeholderTextColor={CustomColor.gray.lighter}
+          keyboardAppearance="dark"
         />
-        <SmButton text={"Save"} variation="filled" onPress={handleSave} />
-        {!newName && (
-          <View className="flex flex-row items-center">
-            <AntDesign
-              name="exclamationcircleo"
-              size={24}
-              color={CustomColor.util.error}
-            />
-            <LatoText classname="text-util-error mx-2">
-              Please enter your name to save changes
-            </LatoText>
-          </View>
-        )}
       </InputBlueBg>
+      <FlatButton
+        text={"update name"}
+        onPress={handleSave}
+        disabled={!newName}
+      />
     </SettingsScreenLayout>
   )
 }

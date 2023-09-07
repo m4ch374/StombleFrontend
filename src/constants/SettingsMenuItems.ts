@@ -15,8 +15,8 @@ export const settingsMenuItems: SettingsMenuType[] = [
   {
     title: "Account Information",
     menuList: [
-      { key: "1", navItem: "Account Information", navTo: "AccountInfoIndex" },
-      { key: "2", navItem: "Manage Profiles", navTo: "ManageProfiles" },
+      { key: "1", navItem: "Account information", navTo: "AccountInfoIndex" },
+      { key: "2", navItem: "Manage login info", navTo: "ManageProfiles" },
       { key: "3", navItem: "Security", navTo: "Security" },
     ],
   },
@@ -29,10 +29,10 @@ export const settingsMenuItems: SettingsMenuType[] = [
   {
     title: "Support",
     menuList: [
-      { key: "1", navItem: "Contact Us", navTo: "ContactUs" },
+      { key: "1", navItem: "Contact us", navTo: "ContactUs" },
       {
         key: "2",
-        navItem: "Terms and Conditions",
+        navItem: "Terms & conditions",
         navTo: "TermsNConditions",
       },
     ],
