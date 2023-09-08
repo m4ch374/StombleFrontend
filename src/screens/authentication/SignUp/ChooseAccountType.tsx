@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { signUp } from "utils/services/auth"
+import ProgressBar from "components/ProgressBar"
 
 type TSelection = "" | "business" | "personal"
 
@@ -16,6 +17,7 @@ const ChooseAccountType = () => {
   const navigation = useNavigation()
   const tmp = useAppSlector(state => state.tmpStore)
   const dispatch = useAppDispatch()
+  const currentStep = 7 // Set the current step for this page
 
   const [selected, setSelected] = useState<TSelection>("") // ugly hack but works
 
@@ -46,6 +48,9 @@ const ChooseAccountType = () => {
   return (
     <BackgroundColour>
       <View className="flex-1 p-[16px] flex-col h-full gap-8">
+        <View>
+          <ProgressBar currentStep={currentStep} />
+        </View>
         <Text className="text-white text-[16px] font-lato-bold">
           Choose Account type
         </Text>

@@ -9,6 +9,7 @@ import PasswordInput from "components/PasswordInput"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { forgotPassword, preSignUp } from "utils/services/auth"
+import ProgressBar from "components/ProgressBar"
 
 // Breaking the rules here a bit
 type TPasswordCheck = {
@@ -33,6 +34,7 @@ const SetUpPassword = () => {
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
   const tmpVars = useAppSlector(state => state.tmpStore)
+  const currentStep = 5 // Set the current step for this page
 
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
@@ -82,6 +84,9 @@ const SetUpPassword = () => {
         <View className="px-4 pb-10 flex justify-between h-full">
           <View>
             <View className="mb-[24px]">
+              <ProgressBar currentStep={currentStep} />
+            </View>
+            <View className="mb-[10px]">
               <Text className="text-white text-[16px] font-lato font-semibold">
                 Set up a password for extra security.
               </Text>

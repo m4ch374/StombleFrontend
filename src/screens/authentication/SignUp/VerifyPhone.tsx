@@ -18,6 +18,7 @@ import PhoneNumberInput from "components/PhoneNumberInput"
 import { useAppDispatch } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { checkNumber } from "utils/services/auth"
+import ProgressBar from "components/ProgressBar"
 
 // Breaking the rules a bit here again
 const Divider: React.FC = () => {
@@ -27,6 +28,7 @@ const Divider: React.FC = () => {
 const VerifyPhone: React.FC = () => {
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
+  const currentStep = 1 // Set the current step for this page
 
   const [isValid, setIsValid] = useState(true)
   const [isPopupVisible, setPopupVisible] = useState(false)
@@ -63,6 +65,10 @@ const VerifyPhone: React.FC = () => {
     <BackgroundColour>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="flex-1 gap-6 px-4">
+          <View>
+            <ProgressBar currentStep={currentStep} />
+          </View>
+
           <Text className="text-white text-[16px] font-semibold lato-text">
             Verify your mobile number to get started
           </Text>
@@ -77,7 +83,6 @@ const VerifyPhone: React.FC = () => {
               setIsValid={setIsValid}
             />
           </View>
-
           <View className="flex-2 justify-end">
             <View className="flex-row justify-center items-center mb-[16px]">
               <Text className="text-[#C1C1C1] text-[10px]">
@@ -118,7 +123,6 @@ const VerifyPhone: React.FC = () => {
               </View>
             </View>
           </View>
-
           <Modal
             animationType="fade"
             transparent={true}

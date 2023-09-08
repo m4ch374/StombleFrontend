@@ -9,10 +9,12 @@ import BackgroundColour from "components/styled_components/BackgroundColour"
 import { useAppDispatch } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useNavigation } from "@react-navigation/native"
+import ProgressBar from "components/ProgressBar"
 
 const SignUpGender = () => {
   const { navigate } = useNavigation()
   const [selected, setSelected] = React.useState("")
+  const currentStep = 4 // Set the current step for this page
 
   // We are using whatever dob saved in our redux storage as default
   const dispatch = useAppDispatch()
@@ -35,8 +37,8 @@ const SignUpGender = () => {
       >
         <View className="flex-1">
           <View className="flex-1 px-[16px] mt-[34px]">
-            <View className="h-[8px] w-full bg-white rounded-[5px]">
-              <View className="h-[8px] w-full bg-[#0B52BC] rounded-[5px]"></View>
+            <View>
+              <ProgressBar currentStep={currentStep} />
             </View>
 
             <View className="mt-[34px]">

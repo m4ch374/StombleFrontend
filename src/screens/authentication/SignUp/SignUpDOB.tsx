@@ -24,6 +24,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker"
 import BackgroundColour from "components/styled_components/BackgroundColour"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import ProgressBar from "components/ProgressBar"
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, "SignUpDOB">
@@ -37,6 +38,7 @@ const SignUpDOB = ({ navigation }: Props) => {
   const dispatch = useAppDispatch()
   const dob = useAppSlector(state => state.tmpStore.birthday)
   const [dateofbirth, setDOB] = useState(dob)
+  const currentStep = 3 // Set the current step for this page
 
   const showDatePicker = () => {
     setDatePickerVisibility(true)
@@ -69,10 +71,8 @@ const SignUpDOB = ({ navigation }: Props) => {
   return (
     <BackgroundColour>
       <View className="flex-1 px-[16px] mt-[34px]">
-        <View className=" h-[8px] w-FULL bg-white rounded-[5px]">
-          <View className="h-[8px] w-2/3 bg-[#0B52BC] rounded-[5px] ">
-            <View className="h-full w-1 bg-black absolute right-0 top-0 straight-r-[5px]"></View>
-          </View>
+        <View>
+          <ProgressBar currentStep={currentStep} />
         </View>
 
         <View className="mt-[34px]">

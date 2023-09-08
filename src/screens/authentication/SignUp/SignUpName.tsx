@@ -7,12 +7,14 @@ import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { useState } from "react"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useNavigation } from "@react-navigation/native"
+import ProgressBar from "components/ProgressBar"
 
 // TODO: Lint
 /* eslint-disable */
 const SignUpName = () => {
   const { navigate } = useNavigation()
   const dispatch = useAppDispatch()
+  const currentStep = 2
 
   // We are using whatever name saved in our redux storage as default
   const name = useAppSlector(state => state.tmpStore.fullName)
@@ -22,10 +24,8 @@ const SignUpName = () => {
   return (
     <BackgroundColour>
       <View className="flex-1 px-[16px] mt-[34px]">
-        <View className=" h-[8px] w-FULL bg-white rounded-[5px]">
-          <View className="h-[8px] w-1/3 bg-[#0B52BC] rounded-[5px] ">
-            <View className="h-full w-1 bg-black absolute right-0 top-0 straight-r-[5px]"></View>
-          </View>
+        <View>
+          <ProgressBar currentStep={currentStep} />
         </View>
 
         <View className="mt-[34px]">

@@ -15,6 +15,7 @@ import { useAppSlector } from "redux/hooks"
 import { useNavigation } from "@react-navigation/native"
 import { VerifyCodeField } from "components/VerifyCodeField"
 import { confirmCode, confirmPreSignUp } from "utils/services/auth"
+import ProgressBar from "components/ProgressBar"
 
 const VerifyCode = () => {
   const [timer, setTimer] = useState(60)
@@ -23,6 +24,7 @@ const VerifyCode = () => {
   const [disabled, setDisabled] = useState(true)
   const tmp = useAppSlector(state => state.tmpStore)
   const navigate = useNavigation()
+  const currentStep = 6 // Set the current step for this page
 
   useEffect(() => {
     let interval: NodeJS.Timer
@@ -75,6 +77,9 @@ const VerifyCode = () => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View className="mt-16 p-12 flex-1 justify-between h-full">
             <View className="h-[250px] flex justify-evenly items-center">
+              <View className="w-full">
+                <ProgressBar currentStep={currentStep} />
+              </View>
               <View className="my-8">
                 <Text className="text-[14px] text-white text-center mb-1">
                   Enter the 6 digit code we send to
