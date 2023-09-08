@@ -128,9 +128,7 @@ const SettingsStackNav: React.FC = () => {
       <SettingsStack.Group
         screenOptions={{
           headerBackTitle: "Back",
-          headerBackTitleVisible: false,
           title: "Close Account",
-          headerStyle: { backgroundColor: "#020235" },
         }}
       >
         <SettingsStack.Screen

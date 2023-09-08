@@ -5,15 +5,15 @@
 //----------------------------------------------------------------
 import { useNavigation } from "@react-navigation/native"
 import CircleButton from "components/settings/CircleButton"
+import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import FlatButton from "components/styled_components/FlatButton"
-import LinearBgLayout from "components/styled_components/LinearBgLayout"
 import { Text, View } from "react-native"
 
 const ReasonsOfLeave = () => {
   const { navigate } = useNavigation()
 
   return (
-    <LinearBgLayout>
+    <SettingsScreenLayout>
       <View>
         <Text className="text-white text-[18px] mb-4">
           Why are you leaving Stomble?
@@ -67,7 +67,7 @@ const ReasonsOfLeave = () => {
         onPress={() => navigate("Settings", { screen: "ConfirmOfLeave" })}
         disabled={false}
       />
-    </LinearBgLayout>
+    </SettingsScreenLayout>
   )
 }
 
