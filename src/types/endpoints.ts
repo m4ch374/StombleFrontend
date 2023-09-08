@@ -310,3 +310,64 @@ type UpdateIconRes = {
 
 export type TUpdateIcon = TEndpoint<UpdateIconReq, UpdateIconRes>
 // ===================================================
+
+type GetSearchBusinessAndVideosReq = {
+  query: string
+  businessId: string
+  businessAccountSkip: string
+  businessAccountTake: string
+  videoSkip: string
+  videoTake: string
+}
+
+export type BusinessAccountsWithFollowStatusRes = {
+  id: string
+  businessName: string
+  email: string
+  link_icon: string
+  user_id: string
+  amount_following: number
+  amount_followers: number
+  amount_videos: number
+  status: string
+  created_at: Date
+  updated_at: Date
+  business_account_id_to_business_account_id: {
+    business_account_id: string
+  }[]
+}
+
+export type VideosWithBusinessAndLikedStatus = {
+  id: string
+  description: string
+  link_video: string
+  link_cover: string
+  user_id: string
+  business_account_id: string
+  amount_likes: number
+  amount_saves: number
+  status: string
+  date_posting: Date
+  created_at: Date
+  updated_at: Date
+  business_account: {
+    businessName: string
+    link_icon: string
+    amount_followers: string
+  }
+  videos_liked: {
+    videos_id: string
+  }[]
+}
+
+type SearchBusinessAndVideosRes = {
+  result: {
+    businessAccountsWithFollowStatus: BusinessAccountsWithFollowStatusRes[]
+    videosWithBusinessAndLikedStatus: VideosWithBusinessAndLikedStatus[]
+  }
+}
+
+export type TSearchBusinessAndVideos = TEndpoint<
+  GetSearchBusinessAndVideosReq,
+  SearchBusinessAndVideosRes
+>

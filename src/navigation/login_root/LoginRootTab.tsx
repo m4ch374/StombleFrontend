@@ -8,6 +8,7 @@ import Profile from "screens/login_root/Profile"
 import { Platform, SafeAreaView, StatusBar } from "react-native"
 import Notifications from "screens/login_root/Notifications"
 import CustomColor from "constants/Colors"
+import Search from "screens/login_root/Search"
 
 const BottomTab = createBottomTabNavigator<LoginRootTabList>()
 
@@ -40,7 +41,7 @@ const LoginRootTab = () => {
       >
         <BottomTab.Screen name="Home" component={Home} />
 
-        <BottomTab.Screen name="Search" component={Home} />
+        <BottomTab.Screen name="Search" component={Search} />
 
         <BottomTab.Screen name="Notification" component={Notifications} />
 

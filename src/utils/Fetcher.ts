@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
   Once we've done that then we'll use a .env file
 */
 const base = "https://9uq6c9v3ab.execute-api.ap-southeast-2.amazonaws.com/dev"
+// const base = "http://localhost:3000/dev"
 
 type Method = "GET" | "POST" | "PUT" | "DELETE"
 
@@ -78,14 +79,14 @@ class Fetcher<T extends TEndpoint<any, any>> {
 
   // Fuck it we ball bro
   // No error checking lets go
-  async fetchData(): Promise<T["responseType"] | undefined> {
+  async fetchData(): Promise<T["responseType"]> {
     try {
       if (this.useCurrentToken) {
         const token = `Bearer ${await AsyncStorage.getItem("token")}`
         this.instance.defaults.headers.common.Authorization = token
       }
 
-      const resp = await this.instance.request({
+      const resp: { data: T["responseType"] } = await this.instance.request({
         data: this.payload,
         url: this.endpoint,
       })
