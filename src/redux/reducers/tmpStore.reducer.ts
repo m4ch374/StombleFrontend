@@ -15,6 +15,9 @@ type TTmpStore = {
   link_icon: string
   verifyWithPassword: boolean
   message: string
+  numLiked: number
+  numShared: number
+  numFollowing: number
 }
 
 const init: TTmpStore = {
@@ -30,6 +33,9 @@ const init: TTmpStore = {
   link_icon: "",
   verifyWithPassword: false,
   message: "",
+  numLiked: 0,
+  numShared: 0,
+  numFollowing: 0,
 }
 
 const tmpStoreSlice = createSlice({

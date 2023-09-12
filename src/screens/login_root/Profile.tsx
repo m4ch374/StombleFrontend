@@ -8,6 +8,7 @@ import ProfileHeader from "components/profile/ProfileHeader"
 import ProfileTab from "navigation/login_root/ProfileTab"
 import { View } from "react-native"
 import { useAppSlector } from "redux/hooks"
+import FieldSeperator from "components/FieldSeperator"
 
 const Profile: React.FC = () => {
   const navigation = useNavigation()
@@ -34,9 +35,9 @@ const Profile: React.FC = () => {
           Settings
         </ModalSettingsBtn>
 
-        <ModalSettingsBtn>QR Code</ModalSettingsBtn>
+        <FieldSeperator />
 
-        <ModalSettingsBtn>Copy profile link</ModalSettingsBtn>
+        <ModalSettingsBtn>QR Code</ModalSettingsBtn>
       </SwipableModal>
     </View>
   )

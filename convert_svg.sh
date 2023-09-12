@@ -13,7 +13,7 @@
 # *********************************************************
 unwanted_attributes=("xmlns")
 
-tags=("svg" "path" "circle" "rect" "ellipse" "line" "polyline" "polygon" "g" "clipPath" "defs")
+tags=("svg" "path" "circle" "rect" "ellipse" "line" "polyline" "polygon" "g" "clipPath" "defs" "radialGradient")
 
 default_tw_class="h-xl aspect-square"
 

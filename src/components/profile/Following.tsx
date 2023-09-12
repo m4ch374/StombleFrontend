@@ -1,12 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import FollowingItem from "./FollowingItem"
-import { RefreshControl, View } from "react-native"
-import { useAppSlector } from "redux/hooks"
+import { RefreshControl } from "react-native"
+import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { Tabs } from "react-native-collapsible-tab-view"
 import { getFollowings } from "utils/services/profile"
 import { TGetFollowings } from "types/endpoints"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import FieldSeperator from "components/FieldSeperator"
 
 const Following: React.FC = () => {
+  const dispatch = useAppDispatch()
+
   const defaultData = useMemo(() => {
     return [...Array(20).keys()].map(() => {
       return {
@@ -54,6 +58,10 @@ const Following: React.FC = () => {
   }, [defaultData])
 
   useEffect(() => {
+    dispatch(tmpStoreAction.setItem("numFollowing", data.result.length))
+  }, [data.result, dispatch])
+
+  useEffect(() => {
     handleRefresh()
   }, [handleRefresh])
 
@@ -73,9 +81,7 @@ const Following: React.FC = () => {
           businessId={item.item.business_account_id}
         />
       )}
-      ItemSeparatorComponent={() => (
-        <View className="h-[1px] w-full border-t border-t-gray-lightest/10" />
-      )}
+      ItemSeparatorComponent={() => <FieldSeperator />}
       showsVerticalScrollIndicator={false}
       refreshControl={
         <RefreshControl

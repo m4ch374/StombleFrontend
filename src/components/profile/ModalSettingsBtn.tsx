@@ -1,8 +1,5 @@
 import React from "react"
-import { TouchableOpacity } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
-import CustomColor from "constants/Colors"
-import LatoText from "components/styled_components/LatoText"
+import { TouchableOpacity, Text } from "react-native"
 
 type TModalSettingsBtn = {
   children: string | JSX.Element | JSX.Element[]
@@ -16,10 +13,9 @@ const ModalSettingsBtn: React.FC<TModalSettingsBtn> = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="w-full px-md py-sm flex-row justify-between"
+      className="w-full py-md flex-row justify-center"
     >
-      <LatoText classname="text-xl">{children}</LatoText>
-      <AntDesign name="right" size={18} color={CustomColor.white} />
+      <Text className="lato-text font-lato-bold text-lg">{children}</Text>
     </TouchableOpacity>
   )
 }

@@ -47,10 +47,12 @@ const FollowingItem: React.FC<TFollowingItem> = ({
             borderRadius={50}
           />
         </View>
-        <View className="h-full w-[155px]">
-          <Text className="lato-text font-lato-bold">{businessName}</Text>
-          <LatoText classname="text-6 text-gray-lighter">
-            Subtext for the business goes here
+        <View className="flex-col justify-center h-ful">
+          <Text className="lato-text font-lato-bold text-sm">
+            {businessName}
+          </Text>
+          <LatoText classname="text-7 text-gray-lighter">
+            Subtext for the business goes here.
           </LatoText>
         </View>
       </View>
@@ -60,12 +62,12 @@ const FollowingItem: React.FC<TFollowingItem> = ({
         <Pressable
           onPress={handleToggle}
           className={`
-            w-[75px]
-            h-[24px]
+            w-[76px]
+            h-[32px]
             flex
             justify-center
             items-center
-            rounded-md
+            rounded-sm
             ${following ? followingStlye : notFollowedStlye}
           `}
         >

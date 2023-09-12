@@ -20,7 +20,7 @@ const SwipableModal: React.FC<TSwipableModal> = ({
       isVisible={visible}
       className="w-full m-0 p-0"
       statusBarTranslucent={true}
-      backdropOpacity={0.3}
+      backdropOpacity={0.7}
       onBackButtonPress={() => setVisible(false)}
       onSwipeComplete={() => setVisible(false)}
       swipeDirection="down"
@@ -32,12 +32,12 @@ const SwipableModal: React.FC<TSwipableModal> = ({
             <View
               className={`
                 bg-gray-darkest-pro-max
-                min-h-[256px]
                 w-full
                 py-sm
                 rounded-t-lg
                 flex
                 items-center
+                drop-shadow-lg
                 ${className}
               `}
             >

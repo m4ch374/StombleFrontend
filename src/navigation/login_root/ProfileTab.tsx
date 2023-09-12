@@ -26,7 +26,8 @@ const ProfileTab: React.FC = () => {
           activeColor={CustomColor.white}
           style={{
             borderBottomWidth: 1,
-            borderBottomColor: "rgba(255, 255, 255, 0.05)",
+            borderTopWidth: 1,
+            borderColor: "rgba(255, 255, 255, 0.05)",
           }}
           indicatorStyle={{
             backgroundColor: CustomColor.white,
@@ -37,6 +38,15 @@ const ProfileTab: React.FC = () => {
               {...cprops}
               pressColor={CustomColor.background}
               pressOpacity={1}
+              style={{
+                height: 42,
+              }}
+              labelStyle={{
+                fontFamily: "Lato-400",
+                lineHeight: 19.2,
+                fontSize: 16,
+              }}
+              label={cprops.name}
             />
           )}
         />
@@ -58,34 +68,6 @@ const ProfileTab: React.FC = () => {
         </Tabs.ScrollView>
       </Tabs.Tab>
     </Tabs.Container>
-    // <TopTab.Navigator
-    //   initialRouteName="Following"
-    //   screenOptions={({ route }) => ({
-    //     lazy: true,
-    //     lazyPlaceholder: () => <View className="h-full bg-background" />,
-    //     tabBarStyle: { backgroundColor: CustomColor.background },
-    //     tabBarAndroidRipple: { radius: 0 },
-    //     tabBarPressColor: "transparent",
-    //     tabBarPressOpacity: 0,
-    //     tabBarShowLabel: false,
-    //     tabBarIconStyle: { width: "auto" },
-    //     tabBarIcon: ({ focused }) => (
-    //       <ProfileTabIcon focused={focused} route={route} />
-    //     ),
-    //     tabBarIndicatorStyle: {
-    //       backgroundColor: "white",
-    //       borderRadius: 99, // I dont see any difference lol
-    //     },
-    //     tabBarIndicatorContainerStyle: {
-    //       borderBottomWidth: 1,
-    //       borderColor: "rgba(255, 255, 255, 0.1)", // idk if we need to change this
-    //     },
-    //   })}
-    // >
-    //   <TopTab.Screen name="Following" component={Following} />
-    //   <TopTab.Screen name="VideosLiked" component={VideosLiked} />
-    //   <TopTab.Screen name="VideosSaved" component={VideosSaved} />
-    // </TopTab.Navigator>
   )
 }
 
