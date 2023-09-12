@@ -52,7 +52,8 @@ const VerifyCodeForLeave = () => {
   return (
     <KeyboardAvoidingView
       className="flex-1"
-      behavior={Platform.OS === "ios" ? "padding" : "height"} //TODO: fix issue
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={90}
     >
       <SettingsScreenLayout>
         <View className="flex-1 items-center">

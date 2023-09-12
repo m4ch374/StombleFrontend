@@ -1,6 +1,6 @@
 // REFERENCE: settings - Verify code for updating phone number and email
 
-import { View } from "react-native"
+import { KeyboardAvoidingView, View, Platform } from "react-native"
 import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { useAppSlector } from "redux/hooks"
@@ -49,32 +49,38 @@ const VerifyCodeForUpdate = () => {
 
   return (
     <SettingsScreenLayout>
-      <View className="flex-1">
-        <View className="p-12 flex justify-between h-full">
-          <View className="flex justify-between items-center">
-            <View className="mb-16">
-              <LatoText classname="text-center mb-1">
-                Enter the 6 digit code we send to
-              </LatoText>
-              <LatoText classname="text-center">
-                {route.params.phone || route.params.email}
-              </LatoText>
-            </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        className="flex-1"
+        keyboardVerticalOffset={90}
+      >
+        <View className="flex-1">
+          <View className="p-12 flex justify-between h-full">
+            <View className="flex justify-between items-center">
+              <View className="mb-16">
+                <LatoText classname="text-center mb-1">
+                  Enter the 6 digit code we send to
+                </LatoText>
+                <LatoText classname="text-center">
+                  {route.params.phone || route.params.email}
+                </LatoText>
+              </View>
 
-            <VerifyCodeField
-              value={value}
-              setValue={setValue}
-              setDisabled={setDisabled}
-            />
+              <VerifyCodeField
+                value={value}
+                setValue={setValue}
+                setDisabled={setDisabled}
+              />
+            </View>
           </View>
         </View>
-      </View>
 
-      <FlatButton
-        text={"VERIFY CODE"}
-        onPress={handleVerifyCode}
-        disabled={disabled}
-      />
+        <FlatButton
+          text={"VERIFY CODE"}
+          onPress={handleVerifyCode}
+          disabled={disabled}
+        />
+      </KeyboardAvoidingView>
     </SettingsScreenLayout>
   )
 }

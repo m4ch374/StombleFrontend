@@ -73,6 +73,7 @@ const VerifyCode = () => {
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS == "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={90}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View className="mt-16 p-12 flex-1 justify-between h-full">
