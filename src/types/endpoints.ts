@@ -5,8 +5,77 @@ export type TEndpoint<Req, Res> = {
 }
 
 // ###################################################
-// # Your own types                                  #
+// # Shared types                                  #
 // ###################################################
+type UserAccountInformationItem = {
+  id: string
+  phone: string
+  fullName: string
+  email: string
+  link_icon: string
+  amount_following: number
+  amount_codes_sent: number
+  fcmToken: string
+  birthday: string
+  gender: string
+  status: string
+  created_at: string
+  updated_at: string
+}
+
+type BusinessAccountInformationItem = {
+  id: string
+  businessName: string
+  email: string
+  link_icon: string
+  user_id: string
+  amount_following: number
+  amount_followers: number
+  amount_videos: number
+  status: string
+  created_at: string
+  updated_at: string
+}
+
+type FollowingResItem = {
+  id: string
+  business_account_id: string
+  user_account_id: string
+  follow_business_account_id: string
+  follow_user_account_id: string
+  created_at: string
+  updated_at: string
+  business_account: BusinessAccountInformationItem
+}
+
+type VideosItem = {
+  id: string
+  description: string
+  link_video: string
+  link_cover: string
+  user_id: string
+  business_account_id: string
+  amount_likes: number
+  amount_saves: number
+  status: string
+  date_posting: string
+  created_at: string
+  updated_at: string
+}
+
+type VideosResItem = {
+  id: string
+  videos_id: string
+  user_id: string
+  business_account_id: string
+  created_at: string
+  updated_at: string
+  videos: VideosItem
+}
+
+type VideoPlayItem = VideosItem & {
+  business_account: BusinessAccountInformationItem
+}
 
 // ###################################################
 // # Auth                                            #
@@ -146,16 +215,6 @@ type PreSignUpRes = {
 export type TPreSignUp = TEndpoint<PreSignUpReq, PreSignUpRes>
 // ===================================================
 
-// ===================================================
-// /close-account
-// ===================================================
-type CloseAccountReq = {
-  businessId?: string
-}
-
-export type TCloseAccount = TEndpoint<CloseAccountReq, void>
-// ===================================================
-
 // ###################################################
 // # Profile                                        #
 // ###################################################
@@ -163,32 +222,9 @@ export type TCloseAccount = TEndpoint<CloseAccountReq, void>
 // /get-followings
 // ===================================================
 type GetFollowingsReq = {
-  businessId: string
-  take: string
-  skip: string
-}
-
-type FollowingResItem = {
-  id: string
-  business_account_id: string
-  user_account_id: string
-  follow_business_account_id: string
-  follow_user_account_id: string
-  created_at: string
-  updated_at: string
-  business_account: {
-    id: string
-    businessName: string
-    email: string
-    link_icon: string
-    user_id: string
-    amount_following: number
-    amount_followers: number
-    amount_videos: number
-    status: string
-    created_at: string
-    updated_at: string
-  }
+  businessId?: string
+  take: number
+  skip?: number
 }
 
 type GetFollowingsRes = {
@@ -198,63 +234,73 @@ type GetFollowingsRes = {
 export type TGetFollowings = TEndpoint<GetFollowingsReq, GetFollowingsRes>
 // ===================================================
 
+// ===================================================
+// /get-liked-videos
+// ===================================================
+
+type GetLikedVideosReq = {
+  businessId?: string
+  take: number
+  skip?: number
+}
+
+type GetLikedVideosRes = {
+  result: VideosResItem[]
+}
+
+export type TGetLikedVideos = TEndpoint<GetLikedVideosReq, GetLikedVideosRes>
+// ===================================================
+
+// ===================================================
+// /get-saved-videos
+// ===================================================
+type GetSavedVideosReq = {
+  businessId?: string
+  take: number
+  skip?: number
+}
+
+type GetSavedVideosRes = {
+  result: VideosResItem[]
+}
+
+export type TGetSavedVideos = TEndpoint<GetSavedVideosReq, GetSavedVideosRes>
+// ===================================================
+
 // ###################################################
 // # Account Information                             #
 // ###################################################
 // ===================================================
 // /get-user-account-information
 // ===================================================
-type GetUserInfoReq = {
-  token: string
+type GetUserAccountInformationRes = {
+  result: UserAccountInformationItem
 }
 
-type GetUserInfoRes = {
-  result: {
-    id: string
-    phone: string
-    fullName: string
-    email: string
-    link_icon: string
-    fcmToken: string
-    birthday: string
-    gender: string
-  }
-}
-
-export type TGetUserInfo = TEndpoint<GetUserInfoReq, GetUserInfoRes>
+export type TGetUserInfo = TEndpoint<void, GetUserAccountInformationRes>
 // ===================================================
 
 // ===================================================
 // /get-business-account-information
 // ===================================================
-type GetBusinessInfoReq = {
+type GetBusinessAccountInformationReq = {
   businessId: string
 }
 
-type GetBusinessInfoRes = {
-  result: {
-    id: string
-    businessName: string
-    email: string
-    link_icon: string
-    user_id: string
-    amount_following: number
-    amount_followers: number
-    amount_videos: number
-    status: string
-    created_at: string
-    updated_at: string
-  }
+type GetBusinessAccountInformationRes = {
+  result: BusinessAccountInformationItem
 }
 
-export type TGetBusinessInfo = TEndpoint<GetBusinessInfoReq, GetBusinessInfoRes>
+export type TGetBusinessInfo = TEndpoint<
+  GetBusinessAccountInformationReq,
+  GetBusinessAccountInformationRes
+>
 // ===================================================
 
 // /update-user-personal-info
 // ===================================================
 type UpdatePersonalInfoReq = {
   attribute: "email" | "phone_number" | "name"
-  userId: string
   value: string
   code?: string
 }
@@ -274,7 +320,6 @@ export type TUpdatePersonalInfo = TEndpoint<
 // ===================================================
 type SendCodeChangeAttributeReq = {
   attribute: "email" | "phone_number"
-  userId: string
   value: string
 }
 
@@ -299,7 +344,6 @@ type UpdateIconReq = {
     name: string
     size: string
   }
-  userId: string
   businessId?: string
 }
 
@@ -311,54 +355,49 @@ type UpdateIconRes = {
 export type TUpdateIcon = TEndpoint<UpdateIconReq, UpdateIconRes>
 // ===================================================
 
+// ===================================================
+// /close-account
+// ===================================================
+type CloseAccountReq = {
+  businessId?: string
+}
+
+export type TCloseAccount = TEndpoint<CloseAccountReq, void>
+// ===================================================
+
+// ###################################################
+// # Searching                                      #
+// ###################################################
+// ===================================================
+// /search-businesses-and-videos
+// ===================================================
 type GetSearchBusinessAndVideosReq = {
   query: string
-  businessId: string
-  businessAccountSkip: string
-  businessAccountTake: string
-  videoSkip: string
-  videoTake: string
+  businessId?: string
+  businessAccountSkip?: number
+  businessAccountTake?: number
+  videoSkip?: number
+  videoTake?: number
 }
 
-export type BusinessAccountsWithFollowStatusRes = {
-  id: string
-  businessName: string
-  email: string
-  link_icon: string
-  user_id: string
-  amount_following: number
-  amount_followers: number
-  amount_videos: number
-  status: string
-  created_at: Date
-  updated_at: Date
-  business_account_id_to_business_account_id: {
-    business_account_id: string
-  }[]
-}
-
-export type VideosWithBusinessAndLikedStatus = {
-  id: string
-  description: string
-  link_video: string
-  link_cover: string
-  user_id: string
-  business_account_id: string
-  amount_likes: number
-  amount_saves: number
-  status: string
-  date_posting: Date
-  created_at: Date
-  updated_at: Date
-  business_account: {
-    businessName: string
-    link_icon: string
-    amount_followers: string
+export type BusinessAccountsWithFollowStatusRes =
+  BusinessAccountInformationItem & {
+    business_account_id_to_business_account_id: {
+      business_account_id: string
+    }[]
   }
-  videos_liked: {
-    videos_id: string
-  }[]
-}
+
+export type VideosWithBusinessAndLikedStatus =
+  BusinessAccountInformationItem & {
+    business_account: {
+      businessName: string
+      link_icon: string
+      amount_followers: string
+    }
+    videos_liked: {
+      videos_id: string
+    }[]
+  }
 
 type SearchBusinessAndVideosRes = {
   result: {
@@ -371,3 +410,249 @@ export type TSearchBusinessAndVideos = TEndpoint<
   GetSearchBusinessAndVideosReq,
   SearchBusinessAndVideosRes
 >
+
+// ###################################################
+// # Settings                                        #
+// ###################################################
+// ===================================================
+// /become-business-account
+// ===================================================
+type BecomeBusinessAccountReq = {
+  businessName: string
+}
+
+type BecomeBusinessAccountRes = {
+  result: BusinessAccountInformationItem
+}
+
+export type TBecomeBusinessAccount = TEndpoint<
+  BecomeBusinessAccountReq,
+  BecomeBusinessAccountRes
+>
+// ===================================================
+
+// ###################################################
+// # Manage Profiles                                 #
+// ###################################################
+// ===================================================
+// /get-business-account-related-profiles
+// ===================================================
+type GetBusinessAccountRelatedProfilesRes = {
+  result: BusinessAccountInformationItem[]
+}
+
+export type TGetBusinessAccountRelatedProfiles = TEndpoint<
+  void,
+  GetBusinessAccountRelatedProfilesRes
+>
+
+// ###################################################
+// # Video Play                                      #
+// ###################################################
+// ===================================================
+// /get-videos-for-video-play
+// ===================================================
+type GetVideosForVideoPlayReq = {
+  businessId?: string
+  take: number
+  skip?: number
+}
+
+type GetVideosForVideoPlayRes = {
+  result: VideoPlayItem[]
+}
+
+export type TGetVideosForVideoPlay = TEndpoint<
+  GetVideosForVideoPlayReq,
+  GetVideosForVideoPlayRes
+>
+// ===================================================
+
+// ===================================================
+// /unlike-video
+// ===================================================
+type UnlikeVideoReq = {
+  videoId: string
+  businessId?: string
+}
+
+type UnlikeVideoRes = {
+  message: string
+  statusCode: number
+}
+
+export type TUnlikeVideo = TEndpoint<UnlikeVideoReq, UnlikeVideoRes>
+// ===================================================
+
+// ===================================================
+// /report-video
+// ===================================================
+type ReportVideoReq = {
+  reportId: string
+  videoId: string
+  businessId?: string
+  description: string
+}
+
+type ReportVideoRes = {
+  message: string
+  statusCode: number
+}
+
+export type TReportVideo = TEndpoint<ReportVideoReq, ReportVideoRes>
+// ===================================================
+
+// ===================================================
+// /follow-business
+// NOTICE:
+// businessId - it is the businessId if you are a business account
+// businessToFollowing - it is a businessId which you want to follow
+// ===================================================
+type FollowBusinessReq = {
+  businessId?: string
+  businessToFollowing: string
+}
+
+type FollowBusinessRes = {
+  message: string
+  statusCode: number
+}
+
+export type TFollowBusiness = TEndpoint<FollowBusinessReq, FollowBusinessRes>
+// ===================================================
+
+// ===================================================
+// /unfollow-business
+// ===================================================
+type UnFollowBusinessReq = {
+  businessId?: string
+  businessToFollowing: string
+}
+
+type UnFollowBusinessRes = {
+  message: string
+  statusCode: number
+}
+
+export type TUnFollowBusiness = TEndpoint<
+  UnFollowBusinessReq,
+  UnFollowBusinessRes
+>
+// ===================================================
+
+// ===================================================
+// /like-video
+// ===================================================
+type LikeVideoReq = {
+  videoId: string
+  businessId?: string
+}
+
+type LikeVideoRes = {
+  message: string
+  statusCode: number
+}
+
+export type TLikeVideo = TEndpoint<LikeVideoReq, LikeVideoRes>
+// ===================================================
+
+// ===================================================
+// /save-record-of-video-shared
+// ===================================================
+type SaveRecordOfVideoSharedReq = {
+  videoId: string
+  platform: string
+  otherPlatform: string
+  businessId?: string
+}
+
+type SaveRecordOfVideoSharedRes = {
+  message: string
+  statusCode: number
+}
+
+export type TSaveRecordOfVideoShared = TEndpoint<
+  SaveRecordOfVideoSharedReq,
+  SaveRecordOfVideoSharedRes
+>
+// ===================================================
+
+// ===================================================
+// /save-video
+// ===================================================
+type SaveVideoReq = {
+  videoId: string
+  businessId?: string
+}
+
+type SaveVideoRes = {
+  message: string
+  statusCode: number
+}
+
+export type TSaveVideo = TEndpoint<SaveVideoReq, SaveVideoRes>
+// ===================================================
+
+// ===================================================
+// /un-save-video
+// ===================================================
+type UnSaveVideoReq = {
+  videoId: string
+  businessId?: string
+}
+
+type UnSaveVideoRes = {
+  message: string
+  statusCode: number
+}
+
+export type TUnSaveVideo = TEndpoint<UnSaveVideoReq, UnSaveVideoRes>
+// ===================================================
+
+// ===================================================
+// /get-videos-new-business
+// ===================================================
+type GetVideosNewBusinessReq = {
+  amountVideos: number
+}
+
+type GetVideosNewBusinessRes = {
+  result: VideoPlayItem[]
+}
+
+export type TGetVideosNewBusiness = TEndpoint<
+  GetVideosNewBusinessReq,
+  GetVideosNewBusinessRes
+>
+// ===================================================
+
+// ===================================================
+// /get-new-videos-uploaded
+// ===================================================
+type GetNewVideosUploadedReq = {
+  businessId?: string
+  take: string
+  skip?: string
+}
+
+type GetNewVideosUploadedRes = {
+  result: {
+    id: string
+    business_account: BusinessAccountInformationItem
+    videos: VideoPlayItem[]
+  }[]
+}
+
+export type TGetNewVideosUploaded = TEndpoint<
+  GetNewVideosUploadedReq,
+  GetNewVideosUploadedRes
+>
+// ===================================================
+
+// ###################################################
+// # Data Visualization                              #
+// ###################################################
+
+// ===================================================
+// .................. adding more ....................
+// ===================================================

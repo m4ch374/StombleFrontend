@@ -60,6 +60,11 @@ class Fetcher<T extends TEndpoint<any, any>> {
     return this
   }
 
+  withParams(params: T["requestType"]) {
+    this.instance.defaults.params = params
+    return this
+  }
+
   withToken(token: string) {
     this.instance.defaults.headers.common.Authorization = `Bearer ${token}`
     return this

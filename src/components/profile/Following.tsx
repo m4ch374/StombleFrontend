@@ -46,16 +46,17 @@ const Following: React.FC = () => {
 
   const handleRefresh = useCallback(() => {
     ;(async () => {
-      const resp = await getFollowings()
+      const params = { take: 10 }
+      const resp = await getFollowings(params)
       setRefresh(false)
 
       if (typeof resp === "undefined") return
 
       setData({
-        result: [...resp.result, ...defaultData],
+        result: [...resp.result],
       })
     })()
-  }, [defaultData])
+  }, [])
 
   useEffect(() => {
     dispatch(tmpStoreAction.setItem("numFollowing", data.result.length))
@@ -72,7 +73,7 @@ const Following: React.FC = () => {
 
   return (
     <Tabs.FlatList
-      data={data.result}
+      data={data?.result}
       keyExtractor={(_, idx) => idx.toString()}
       renderItem={item => (
         <FollowingItem

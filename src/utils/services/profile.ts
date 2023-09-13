@@ -1,13 +1,33 @@
 import { profileEP } from "constants/Endpoint"
-import { TGetFollowings } from "types/endpoints"
+import {
+  TGetFollowings,
+  TGetLikedVideos,
+  TGetSavedVideos,
+} from "types/endpoints"
 import Fetcher from "utils/Fetcher"
 
-// i leave here blank
-// for some GET method, I feel maybe need to config params in Fetcher
+// NOTICE: only params "take" is required, others are optional
 
 // /get-followings
-export const getFollowings = () => {
+export const getFollowings = (params: TGetFollowings["requestType"]) => {
   return Fetcher.init<TGetFollowings>("GET", profileEP.GET_FOLLOWINGS)
+    .withParams(params)
+    .withCurrentToken()
+    .fetchData()
+}
+
+// /get-liked-videos
+export const getLikedVideos = (params: TGetLikedVideos["requestType"]) => {
+  return Fetcher.init<TGetLikedVideos>("GET", profileEP.GET_LIKED_VIDEOS)
+    .withParams(params)
+    .withCurrentToken()
+    .fetchData()
+}
+
+// /get-saved-videos
+export const getSavedVideos = (params: TGetSavedVideos["requestType"]) => {
+  return Fetcher.init<TGetSavedVideos>("GET", profileEP.GET_SAVED_VIDEOS)
+    .withParams(params)
     .withCurrentToken()
     .fetchData()
 }

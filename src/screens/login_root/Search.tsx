@@ -1,15 +1,14 @@
 // REFERENCE: PLACEHOLDER
 import { SearchInput } from "components/styled_components"
-import { searchingEP } from "constants/Endpoint"
 import { FollowItem } from "components/common"
 import React, { useState, useEffect, useCallback } from "react"
 import { View, Text, Pressable, ScrollView } from "react-native"
+
+import { searchBusinessesAndVideos } from "utils/services/searching"
 import {
   BusinessAccountsWithFollowStatusRes,
-  TSearchBusinessAndVideos,
   VideosWithBusinessAndLikedStatus,
 } from "types/endpoints"
-import Fetcher from "utils/Fetcher"
 
 const skipInitial = 0
 const takeInitial = 9
@@ -23,21 +22,22 @@ const Search: React.FC = () => {
   >([])
   const [videos, setVideos] = useState<VideosWithBusinessAndLikedStatus[]>([])
 
+  console.log("I have to log this to commit code:", videos.length)
+
   const fetchVideosOrBusiness = useCallback(
     (_query: string, _businessSkip: number) => {
-      const path = `${searchingEP.SEARCH_BUSINESSES_AND_VIDEOS}`
-      const query = `query=${_query}`
-      const businessAccountSkip = `businessAccountSkip=${_businessSkip}`
-      const businessAccountTake = `businessAccountTake=${businessTake}`
-      const url = `${path}?${query}&${businessAccountSkip}&${businessAccountTake}`
+      const params = {
+        query: _query,
+        businessAccountSkip: _businessSkip,
+        businessAccountTake: businessTake,
+      }
+
       ;(async () => {
-        const resp = await Fetcher.init<TSearchBusinessAndVideos>("GET", url)
-          .withCurrentToken()
-          .fetchData()
+        const resp = await searchBusinessesAndVideos(params)
 
         if (typeof resp === "undefined") return
 
-        if (_businessSkip !== skipInitial) {
+        if (_businessSkip !== +skipInitial) {
           setBusiness(state => [
             ...state,
             ...resp?.result?.businessAccountsWithFollowStatus,
@@ -58,7 +58,7 @@ const Search: React.FC = () => {
   useEffect(() => {
     const timeOutId = setTimeout(() => {
       setBusinessSkip(skipInitial)
-      fetchVideosOrBusiness(text, skipInitial)
+      fetchVideosOrBusiness(text, +skipInitial)
     }, 600)
     return () => clearTimeout(timeOutId)
   }, [fetchVideosOrBusiness, text])
@@ -73,7 +73,7 @@ const Search: React.FC = () => {
     setBusiness([])
   }
 
-  const isSeeMoreSeen = (business?.length || 0) % takeInitial
+  const isSeeMoreSeen = (business?.length || 0) % +takeInitial
 
   return (
     <View className="bg-background h-full p-6">

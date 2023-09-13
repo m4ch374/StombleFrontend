@@ -10,6 +10,15 @@ export const authEP = {
   RE_SEND_CODE: "/re-send-code",
   SIGN_OUT: "/sign-out",
   CHECK_NUMBER: "/check-number",
+  REFRESH_TOKEN: "/refresh-token",
+}
+
+// data visualization endpoints
+export const dataVisualizationEP = {
+  GET_SUMMARY_CONVERSION: "/get-summary-conversion",
+  GET_SUMMARY_AGE: "/get-summary-age",
+  GET_SUMMARY_GENDER: "/get-summary-gender",
+  GET_SUMMARY_VIDEOS_LIKED: "/get-summary-videos-liked",
 }
 
 // Account information endpoints
@@ -22,20 +31,22 @@ export const accountEP = {
   UPDATE_PERSONAL_INFO: "/update-personal-info",
 }
 
-// Manage profiles endpoints
-export const manageProfilesEP = {
-  GET_BUSINESS_ACCOUNT_RELATED_PROFILES:
-    "/get-business-account-related-profiles",
+// Profile endpoints
+export const profileEP = {
+  GET_SAVED_VIDEOS: "/get-saved-videos",
+  GET_FOLLOWINGS: "/get-followings",
+  GET_LIKED_VIDEOS: "/get-liked-videos",
 }
 
 // Setting endpoints
 export const settingEP = {
-  GET_USER_ACCOUNT_INFORMATION: "/get-user-account-information",
-  GET_BUSINESS_ACCOUNT_INFORMATION: "/get-business-account-information",
+  BECOME_BUSINESS_ACCOUNT: "/become-business-account",
+}
+
+// Manage profiles endpoints
+export const manageProfilesEP = {
   GET_BUSINESS_ACCOUNT_RELATED_PROFILES:
     "/get-business-account-related-profiles",
-  BECOME_BUSINESS_ACCOUNT: "/become-business-account",
-  CLOSE_ACCOUNT: "/close-account",
 }
 
 // Video play endpoints
@@ -48,7 +59,7 @@ export const videoPlayEP = {
   REPORT_VIDEO: "/report-video",
   SAVE_RECORD_OF_VIDEO_SHARED: "/save-record-of-video-shared",
   SAVE_VIDEO: "/save-video",
-  UNSAVE_VIDEO: "/un-save-video",
+  UN_SAVE_VIDEO: "/un-save-video",
   GET_VIDEOS_NEW_BUSINESS: "/get-videos-new-business",
   GET_NEW_VIDEOS_UPLOADED: "/get-new-videos-uploaded",
 }
@@ -56,18 +67,6 @@ export const videoPlayEP = {
 // Searching endpoints
 export const searchingEP = {
   SEARCH_BUSINESSES_AND_VIDEOS: "/search-businesses-and-videos",
-}
-
-// Profile endpoints
-export const profileEP = {
-  GET_SAVED_VIDEOS: "/get-saved-videos",
-  GET_FOLLOWINGS: "/get-followings",
-  GET_LIKED_VIDEOS: "/get-liked-videos",
-}
-
-// data visualization endpoints
-export const dataVisualizationEP = {
-  GET_SUMMARY_VIDEOS_SHARED: "/get-summary-videos-shared",
 }
 
 // more endpoints coming soon...

@@ -43,7 +43,7 @@ const AccountFileCard: React.FC<Props> = ({
           }}
         >
           <ImageBackground
-            // TODO: check out how to do image preload
+            // TODO: replace with a svg default icon
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             source={require("assets/user_icon.png")}
             resizeMode="cover"

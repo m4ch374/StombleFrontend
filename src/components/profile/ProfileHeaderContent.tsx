@@ -26,7 +26,7 @@ const ProfileHeaderContent = () => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             source={require("assets/user_icon.png")}
             resizeMode="cover"
-            className="rounded-full justify-center bg-slate-400 w-[70px] h-[70px]"
+            className="rounded-full justify-center bg-slate-400 w-[70px] h-[70px] overflow-hidden"
           >
             <Image
               source={{ uri: tmpUser.link_icon }}

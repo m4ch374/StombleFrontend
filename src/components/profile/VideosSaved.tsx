@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { View } from "react-native"
+import { getSavedVideos } from "utils/services/profile"
 import VideoPreviewCard from "./VideoPreviewCard"
 import VideoPreviewPopupGroup from "./VideoPreviewPopupGroup"
 
@@ -8,6 +9,18 @@ const VideosSaved: React.FC = () => {
   const previewCardController = useState(false)
   const shareModalController = useState(false)
   const removeModalController = useState(false)
+
+  // endpoint implementation check
+  useEffect(() => {
+    ;(async () => {
+      const params = { take: 10 }
+      const resp = await getSavedVideos(params)
+
+      if (typeof resp === "undefined") return
+
+      console.log("get saved videos:", resp)
+    })()
+  }, [])
 
   useEffect(() => {
     console.log(previewCardController[0])
