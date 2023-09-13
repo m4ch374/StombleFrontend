@@ -22,10 +22,6 @@ const VideosSaved: React.FC = () => {
     })()
   }, [])
 
-  useEffect(() => {
-    console.log(previewCardController[0])
-  }, [previewCardController])
-
   return (
     <>
       <View className="h-full bg-background flex items-center">

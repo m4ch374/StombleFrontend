@@ -9,12 +9,40 @@ import { Platform, SafeAreaView, StatusBar } from "react-native"
 import Notifications from "screens/login_root/Notifications"
 import CustomColor from "constants/Colors"
 import Search from "screens/login_root/Search"
+import { useEffect } from "react"
+import { getUserAccountInformation } from "utils/services/accountInfo"
+import { useAppDispatch } from "redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 
 const BottomTab = createBottomTabNavigator<LoginRootTabList>()
 
-// The code quality was really bad before cleaning up.....
-// And git lens blames me for that lol why
 const LoginRootTab = () => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    ;(async () => {
+      // endpoint: get user info and store into tmpStore
+      const userResp = await getUserAccountInformation()
+
+      if (typeof userResp === "undefined") return
+
+      dispatch(
+        tmpStoreAction.setState(state => {
+          const { result } = userResp
+          const HOST_URL =
+            "https://stomble-users.s3.ap-southeast-2.amazonaws.com/"
+
+          state.userId = result.id
+          state.fullName = result.fullName
+          state.phone = result.phone
+          state.email = result.email
+          state.link_icon = HOST_URL + result.link_icon
+          return state
+        }),
+      )
+    })()
+  }, [dispatch])
+
   return (
     <SafeAreaView
       className="h-full bg-background"

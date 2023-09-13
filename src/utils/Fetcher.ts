@@ -126,7 +126,10 @@ class Fetcher<T extends TEndpoint<any, any>> {
           baseURL: e.config?.baseURL,
           endpoint: e.config?.url,
           headers: e.config?.headers,
-          body: JSON.parse(e.config?.data as string) as object, // type cast again
+          body:
+            typeof e.config?.data === "undefined"
+              ? {}
+              : (JSON.parse(e.config?.data as string) as object), // type cast again
         },
         undefined,
         4,
