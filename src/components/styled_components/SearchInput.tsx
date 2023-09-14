@@ -21,6 +21,7 @@ const SearchInput: FC<TSearchInput> = props => {
         border-2
         rounded-md
         p-6
+        mb-3
       `}
     >
       <SearchIcon classname={`h-10`} />

@@ -1,6 +1,6 @@
+import React from "react"
 import AccountFileCard from "components/AccountFileCard"
 import LatoText from "components/styled_components/LatoText"
-import React, { useCallback } from "react"
 import { View, Pressable, Text } from "react-native"
 import customTwMerge from "utils/CustomTwMerge"
 
@@ -13,19 +13,16 @@ type TFollowItem = {
   businessId?: string
   amountFollowers?: string | number
   isFollowing?: boolean
+  onFollowBusiness: (follow: boolean) => void
 }
 
 const FollowItem: React.FC<TFollowItem> = ({
   classname = "",
   businessName,
-  businessId,
   amountFollowers,
   isFollowing,
+  onFollowBusiness,
 }) => {
-  const handleToggle = useCallback(() => {
-    console.log("-----> ~ businessId:", businessId)
-  }, [])
-
   const profileHeaderPlaceholder =
     "https://stomble-users.s3.ap-southeast-2.amazonaws.com/null"
 
@@ -55,7 +52,7 @@ const FollowItem: React.FC<TFollowItem> = ({
 
       <View>
         <Pressable
-          onPress={handleToggle}
+          onPress={() => onFollowBusiness(!isFollowing)}
           className={`
             w-[75px]
             h-[24px]

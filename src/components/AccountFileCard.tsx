@@ -20,6 +20,7 @@ type Props = {
   onPress?: () => void
   borderRadius?: number
   imageFit?: ImageResizeMode | undefined
+  style?: string
 }
 
 const AccountFileCard: React.FC<Props> = ({
@@ -30,10 +31,11 @@ const AccountFileCard: React.FC<Props> = ({
   onPress,
   category,
   borderRadius,
+  style,
 }) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={1.0} className="flex-1">
-      <View className="flex-row gap-[16px]">
+      <View className={style ? style : "flex-row gap-[16px]"}>
         <View
           className="justify-center items-center drop-shadow-3xl overflow-hidden"
           style={{
@@ -47,7 +49,7 @@ const AccountFileCard: React.FC<Props> = ({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             source={require("assets/user_icon.png")}
             resizeMode="cover"
-            className="flex-1 justify-center bg-slate-400 h-full w-full"
+            className="flex-1 justify-center bg-slate-400 h-full w-full "
           >
             <Image
               source={{ uri: uri }}
