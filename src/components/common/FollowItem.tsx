@@ -54,12 +54,12 @@ const FollowItem: React.FC<TFollowItem> = ({
         <Pressable
           onPress={() => onFollowBusiness(!isFollowing)}
           className={`
-            w-[75px]
-            h-[24px]
+            w-[76px]
+            h-[32px]
             flex
             justify-center
             items-center
-            rounded-md
+            rounded-sm
             ${isFollowing ? followingStlye : notFollowedStlye}
           `}
         >

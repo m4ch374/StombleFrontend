@@ -56,7 +56,7 @@ export const followBusiness = (data: TFollowBusiness["requestType"]) => {
 // /unfollow-business
 // NOTICE:
 // businessId - it is the businessId if you are a business account
-// businessToFollowing - it is a businessId which you want to follow
+// businessToFollowing - it is a businessId which you want to unfollow
 export const unfollowBusiness = (data: TUnFollowBusiness["requestType"]) => {
   return Fetcher.init<TUnFollowBusiness>("POST", videoPlayEP.UNFOLLOW_BUSINESS)
     .withCurrentToken()

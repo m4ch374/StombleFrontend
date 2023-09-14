@@ -16,7 +16,7 @@ export default function Navigation() {
     <View className="h-full bg-background">
       <StatusBar style="light" />
       <RootStack.Navigator
-        initialRouteName={token === "" ? "LoginRoot" : "Auth"}
+        initialRouteName={token === "" ? "Auth" : "LoginRoot"}
         screenOptions={{ headerShown: false }}
       >
         {token === "" && (
