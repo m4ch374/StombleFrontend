@@ -387,17 +387,16 @@ export type BusinessAccountsWithFollowStatusRes =
     }[]
   }
 
-export type VideosWithBusinessAndLikedStatus =
-  BusinessAccountInformationItem & {
-    business_account: {
-      businessName: string
-      link_icon: string
-      amount_followers: string
-    }
-    videos_liked: {
-      videos_id: string
-    }[]
+export type VideosWithBusinessAndLikedStatus = VideosItem & {
+  business_account: {
+    businessName: string
+    link_icon: string
+    amount_followers: string
   }
+  videos_liked: {
+    videos_id: string
+  }[]
+}
 
 type SearchBusinessAndVideosRes = {
   result: {
@@ -410,6 +409,18 @@ export type TSearchBusinessAndVideos = TEndpoint<
   GetSearchBusinessAndVideosReq,
   SearchBusinessAndVideosRes
 >
+
+type LikeVideoReq = {
+  videoId: string
+  businessId?: string
+}
+
+type LikeVideoRes = {
+  message: string
+  statusCode: number
+}
+
+export type TLikeVideo = TEndpoint<LikeVideoReq, LikeVideoRes>
 
 // ###################################################
 // # Settings                                        #
@@ -500,26 +511,18 @@ type ReportVideoRes = {
 }
 
 export type TReportVideo = TEndpoint<ReportVideoReq, ReportVideoRes>
-// ===================================================
-
-// ===================================================
-// /follow-business
-// NOTICE:
-// businessId - it is the businessId if you are a business account
-// businessToFollowing - it is a businessId which you want to follow
-// ===================================================
-type FollowBusinessReq = {
-  businessId?: string
-  businessToFollowing: string
-}
 
 type FollowBusinessRes = {
   message: string
   statusCode: number
 }
 
+type FollowBusinessReq = {
+  businessToFollowing: string
+  businessId?: string
+}
+
 export type TFollowBusiness = TEndpoint<FollowBusinessReq, FollowBusinessRes>
-// ===================================================
 
 // ===================================================
 // /unfollow-business
@@ -538,23 +541,6 @@ export type TUnFollowBusiness = TEndpoint<
   UnFollowBusinessReq,
   UnFollowBusinessRes
 >
-// ===================================================
-
-// ===================================================
-// /like-video
-// ===================================================
-type LikeVideoReq = {
-  videoId: string
-  businessId?: string
-}
-
-type LikeVideoRes = {
-  message: string
-  statusCode: number
-}
-
-export type TLikeVideo = TEndpoint<LikeVideoReq, LikeVideoRes>
-// ===================================================
 
 // ===================================================
 // /save-record-of-video-shared

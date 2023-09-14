@@ -9,7 +9,6 @@ import {
   TSaveRecordOfVideoShared,
   TSaveVideo,
   TUnFollowBusiness,
-  TUnlikeVideo,
   TUnSaveVideo,
 } from "types/endpoints"
 import Fetcher from "utils/Fetcher"
@@ -28,8 +27,8 @@ export const getVideosForVideoPlay = (
 }
 
 // /unlike-video
-export const unlikeVideo = (data: TUnlikeVideo["requestType"]) => {
-  return Fetcher.init<TUnlikeVideo>("POST", videoPlayEP.UNLIKE_VIDEO)
+export const unlikeVideo = (data: TLikeVideo["requestType"]) => {
+  return Fetcher.init<TLikeVideo>("POST", videoPlayEP.UNLIKE_VIDEO)
     .withCurrentToken()
     .withJsonPaylad(data)
     .fetchData()
