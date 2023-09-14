@@ -7,7 +7,7 @@ import ThreeDotsVertical from "assets/icons/ThreeDotsVertical"
 
 type TVideoPreviewCard = {
   classname?: string
-  setModalIndexVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setModalIndexVisible?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const VideoPreviewCard: React.FC<TVideoPreviewCard> = ({

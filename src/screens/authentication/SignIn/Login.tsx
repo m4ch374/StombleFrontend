@@ -11,10 +11,7 @@ import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import LatoText from "components/styled_components/LatoText"
 import { signIn } from "utils/services/auth"
-import { getUserAccountInformation } from "utils/services/accountInfo"
 import PasswordInput from "components/PasswordInput"
-
-const HOST_URL = "https://stomble-users.s3.ap-southeast-2.amazonaws.com/"
 
 const Login = () => {
   const navigate = useNavigation()
@@ -51,23 +48,6 @@ const Login = () => {
         tmpStoreAction.setState(state => {
           state.pswLength = password.length
           state.verifyWithPassword = true
-          return state
-        }),
-      )
-
-      // endpoint: get user info and store into tmpStore
-      const userResp = await getUserAccountInformation()
-
-      if (typeof userResp?.result === "undefined") return
-
-      dispatch(
-        tmpStoreAction.setState(state => {
-          const { result } = userResp
-          state.userId = result.id
-          state.fullName = result.fullName
-          state.phone = result.phone
-          state.email = result.email
-          state.link_icon = HOST_URL + result.link_icon
           return state
         }),
       )

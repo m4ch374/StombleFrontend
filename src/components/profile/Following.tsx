@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import FollowingItem from "./FollowingItem"
 import { RefreshControl } from "react-native"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
@@ -11,35 +11,38 @@ import FieldSeperator from "components/FieldSeperator"
 const Following: React.FC = () => {
   const dispatch = useAppDispatch()
 
-  const defaultData = useMemo(() => {
-    return [...Array(20).keys()].map(() => {
-      return {
-        business_account: {
-          id: "",
-          businessName: "Placeholder",
-          amount_followers: 0,
-          amount_following: 0,
-          amount_videos: 0,
-          created_at: "",
-          email: "",
-          link_icon: "a",
-          status: "",
-          updated_at: "",
-          user_id: "",
-        },
-        business_account_id: "",
-        created_at: "",
-        follow_business_account_id: "",
-        follow_user_account_id: "",
-        id: "",
-        updated_at: "",
-        user_account_id: "",
-      }
-    })
-  }, [])
+  // NOTE: keeping default data here for future placeholder purposes
+  // i.e. Testing out scrolling behaviour
+  //
+  // const defaultData = useMemo(() => {
+  //   return [...Array(20).keys()].map(() => {
+  //     return {
+  //       business_account: {
+  //         id: "",
+  //         businessName: "Placeholder",
+  //         amount_followers: 0,
+  //         amount_following: 0,
+  //         amount_videos: 0,
+  //         created_at: "",
+  //         email: "",
+  //         link_icon: "a",
+  //         status: "",
+  //         updated_at: "",
+  //         user_id: "",
+  //       },
+  //       business_account_id: "",
+  //       created_at: "",
+  //       follow_business_account_id: "",
+  //       follow_user_account_id: "",
+  //       id: "",
+  //       updated_at: "",
+  //       user_account_id: "",
+  //     }
+  //   })
+  // }, [])
 
   const [data, setData] = useState<TGetFollowings["responseType"]>({
-    result: [...defaultData],
+    result: [],
   })
 
   const [refresh, setRefresh] = useState(false)
@@ -52,15 +55,13 @@ const Following: React.FC = () => {
 
       if (typeof resp === "undefined") return
 
-      setData({
-        result: [...resp.result],
-      })
+      setData(resp)
     })()
   }, [])
 
   useEffect(() => {
     dispatch(tmpStoreAction.setItem("numFollowing", data.result.length))
-  }, [data.result, dispatch])
+  }, [data.result, data, dispatch])
 
   useEffect(() => {
     handleRefresh()
@@ -73,7 +74,7 @@ const Following: React.FC = () => {
 
   return (
     <Tabs.FlatList
-      data={data?.result}
+      data={data.result}
       keyExtractor={(_, idx) => idx.toString()}
       renderItem={item => (
         <FollowingItem

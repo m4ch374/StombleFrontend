@@ -39,8 +39,15 @@ const SignupBusinessName = () => {
 
       if (typeof resp === "undefined") return
 
-      dispatch(tmpStoreAction.clearState())
       dispatch(tokenAction.setToken(resp.AccessToken))
+      dispatch(
+        tmpStoreAction.setState(state => {
+          state.pswLength = tmp.password.length
+          state.verifyWithPassword = true
+          return state
+        }),
+      )
+
       navigation.navigate("LoginRoot", { screen: "Home" })
     })()
   }

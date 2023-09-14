@@ -3,6 +3,7 @@ import LatoText from "components/styled_components/LatoText"
 import React, { useCallback, useState } from "react"
 import { View, Pressable, Text } from "react-native"
 import customTwMerge from "utils/CustomTwMerge"
+import { followBusiness, unfollowBusiness } from "utils/services/videoPlay"
 
 const followingStlye = "border border-white"
 const notFollowedStlye = "bg-primary"
@@ -21,12 +22,17 @@ const FollowingItem: React.FC<TFollowingItem> = ({
   const [following, setFollowing] = useState(true)
 
   const handleToggle = useCallback(() => {
-    if (businessId) {
-      console.log(businessId)
-    }
+    ;(async () => {
+      const payload = { businessToFollowing: businessId }
+      const resp = following
+        ? await unfollowBusiness(payload)
+        : await followBusiness(payload)
 
-    setFollowing(state => !state)
-  }, [businessId])
+      if (typeof resp === "undefined") return
+
+      setFollowing(state => !state)
+    })()
+  }, [businessId, following])
 
   const profileHeaderPlaceholder =
     "https://stomble-users.s3.ap-southeast-2.amazonaws.com/null"
