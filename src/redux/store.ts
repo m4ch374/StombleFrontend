@@ -15,6 +15,7 @@ const persistConfig = {
   key: "stomble",
   storage: AsyncStorage,
   blacklist: ["tmpStore"],
+  timeout: 1000000,
 }
 
 const reducers = combineReducers({
