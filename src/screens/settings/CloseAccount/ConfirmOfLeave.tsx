@@ -5,8 +5,8 @@
 //----------------------------------------------------------------
 import { useNavigation } from "@react-navigation/native"
 import AccountFileCard from "components/AccountFileCard"
-import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import FlatButton from "components/styled_components/FlatButton"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 import { View, Text } from "react-native"
 import { useAppSlector } from "redux/hooks"
 
@@ -15,7 +15,7 @@ const ConfirmOfLeave = () => {
   const tmpUser = useAppSlector(state => state.tmpStore)
 
   return (
-    <SettingsScreenLayout>
+    <GeneralScreenLayout>
       <View className="flex-1">
         <View className="flex mb-8 justify-center items-center">
           <View className="w-[80px] h-[105px] relative">
@@ -65,7 +65,7 @@ const ConfirmOfLeave = () => {
         }}
         disabled={false}
       />
-    </SettingsScreenLayout>
+    </GeneralScreenLayout>
   )
 }
 

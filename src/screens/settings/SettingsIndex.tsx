@@ -5,10 +5,10 @@ import { View } from "react-native"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { useNavigation } from "@react-navigation/native"
 import { tokenAction } from "redux/reducers/tokens.reducer"
-import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { settingsMenuItems } from "constants/SettingsMenuItems"
 import { signOut } from "utils/services/auth"
 import OutlinedButton from "components/settings/OutlinedButton"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 const SettingsIndex: React.FC = () => {
   const { navigate } = useNavigation()
@@ -38,7 +38,7 @@ const SettingsIndex: React.FC = () => {
   }
 
   return (
-    <SettingsScreenLayout>
+    <GeneralScreenLayout>
       <View>
         {settingsMenuItems.map((section, index) => {
           return (
@@ -65,7 +65,7 @@ const SettingsIndex: React.FC = () => {
           />
         </View>
       </View>
-    </SettingsScreenLayout>
+    </GeneralScreenLayout>
   )
 }
 

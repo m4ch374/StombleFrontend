@@ -2,10 +2,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { RootStackList } from "../types/Navigation"
 import AuthStackNav from "./AuthStackNav"
 import LoginRootTab from "./login_root/LoginRootTab"
-import SettingsStackNav from "./SettingStack"
+import SettingsStackNav from "./SettingStackNav"
 import { useAppSlector } from "redux/hooks"
 import { View } from "react-native"
 import { StatusBar } from "expo-status-bar"
+import EditProfileStackNav from "./ProfileStackNav"
 
 const RootStack = createNativeStackNavigator<RootStackList>()
 
@@ -30,6 +31,12 @@ export default function Navigation() {
         <RootStack.Screen
           name="LoginRoot"
           component={LoginRootTab}
+          options={{ headerShown: false }}
+        />
+
+        <RootStack.Screen
+          name="EditProfile"
+          component={EditProfileStackNav}
           options={{ headerShown: false }}
         />
 

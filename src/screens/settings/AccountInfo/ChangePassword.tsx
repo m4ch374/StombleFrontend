@@ -3,7 +3,6 @@
 
 import { View, Text } from "react-native"
 import React, { useMemo } from "react"
-import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import PasswordInput from "components/PasswordInput"
 import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
@@ -12,6 +11,7 @@ import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useAppSlector } from "redux/hooks"
 import LatoText from "components/styled_components/LatoText"
 import { changePassword } from "utils/services/auth"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 // Breaking the rules here a bit
 type TPasswordCheck = {
@@ -85,7 +85,7 @@ const ChangePassword = () => {
   }
 
   return (
-    <SettingsScreenLayout>
+    <GeneralScreenLayout>
       <View className="flex gap-4">
         <View className="mb-[8px]">
           <LatoText classname="text-[12px] text-gray-lightest mb-2">
@@ -182,7 +182,7 @@ const ChangePassword = () => {
           !allMatches
         }
       />
-    </SettingsScreenLayout>
+    </GeneralScreenLayout>
   )
 }
 

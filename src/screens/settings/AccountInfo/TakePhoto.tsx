@@ -103,7 +103,6 @@ const TakePhoto = () => {
           type: "image",
           ext: userIcon.uri.split(".").pop(),
         },
-        userId: tmpUser.userId,
       } as TUpdateIcon["requestType"]
 
       // endpoint: upload photo to backend

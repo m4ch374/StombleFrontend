@@ -21,6 +21,7 @@ declare global {
 export type RootStackList = {
   Auth: NavigatorScreenParams<AuthStackList>
   LoginRoot: NavigatorScreenParams<LoginRootTabList>
+  EditProfile: NavigatorScreenParams<EditProfileStackList>
   Settings: NavigatorScreenParams<SettingsMenuList & AccountInfoList>
 }
 
@@ -73,6 +74,13 @@ export type ProfileTabList = {
   Following: undefined
   VideosLiked: undefined
   VideosSaved: undefined
+}
+
+export type EditProfileStackList = {
+  EditProfileIndex: undefined
+  ChangeLink: undefined
+  ChangeBio: undefined
+  AddGender: undefined
 }
 
 // ===============================================

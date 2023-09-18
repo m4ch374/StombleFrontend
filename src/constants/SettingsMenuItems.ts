@@ -17,7 +17,7 @@ export const settingsMenuItems: SettingsMenuType[] = [
     menuList: [
       { key: "1", navItem: "Account information", navTo: "AccountInfoIndex" },
       { key: "2", navItem: "Manage login info", navTo: "ManageProfiles" },
-      { key: "3", navItem: "Security", navTo: "Security" },
+      // { key: "3", navItem: "Security", navTo: "Security" },
     ],
   },
   {

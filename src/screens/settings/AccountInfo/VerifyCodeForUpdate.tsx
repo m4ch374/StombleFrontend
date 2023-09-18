@@ -4,7 +4,6 @@ import { KeyboardAvoidingView, View, Platform } from "react-native"
 import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { useAppSlector } from "redux/hooks"
-import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
 import { AccountInfoList } from "types/Navigation"
@@ -12,6 +11,7 @@ import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import LatoText from "components/styled_components/LatoText"
 import { VerifyCodeField } from "components/VerifyCodeField"
 import { updatePersonalInfo } from "utils/services/accountInfo"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 const VerifyCodeForUpdate = () => {
   const route = useRoute<RouteProp<AccountInfoList, "VerifyCodeForUpdate">>()
@@ -48,7 +48,7 @@ const VerifyCodeForUpdate = () => {
   }
 
   return (
-    <SettingsScreenLayout>
+    <GeneralScreenLayout>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
@@ -81,7 +81,7 @@ const VerifyCodeForUpdate = () => {
           disabled={disabled}
         />
       </KeyboardAvoidingView>
-    </SettingsScreenLayout>
+    </GeneralScreenLayout>
   )
 }
 

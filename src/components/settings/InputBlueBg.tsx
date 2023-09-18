@@ -15,8 +15,8 @@ const InputBlueBg = ({ title, userInfo, variant, children }: Props) => {
     <View>
       <LatoText classname="text-gray-lighter text-sm">{title}</LatoText>
       <View
-        className={`flex flex-row h-[48px] w-full justify-between items-center px-4 my-2 pb-2 rounded-md
-        ${variant === Type.filled ? "bg-navbar" : "border border-gray-lighter"}
+        className={`flex flex-row h-[48px] w-full justify-between items-center px-8 my-2 pb-2 rounded-md
+        ${variant === Type.filled ? "bg-navbar" : "border border-gray-mid"}
   `}
       >
         <LatoText classname="text-gray-lightest">{userInfo}</LatoText>

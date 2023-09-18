@@ -11,6 +11,11 @@ type TTmpStore = {
   fullName: string
   birthday: string
   gender: string
+  bio: string
+  link: {
+    url: string
+    text: string
+  } // link to user's url
   email: string
   link_icon: string
   verifyWithPassword: boolean
@@ -29,6 +34,11 @@ const init: TTmpStore = {
   fullName: "",
   birthday: "",
   gender: "",
+  bio: "",
+  link: {
+    url: "",
+    text: "",
+  },
   email: "",
   link_icon: "",
   verifyWithPassword: false,

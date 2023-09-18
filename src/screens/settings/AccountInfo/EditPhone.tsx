@@ -1,5 +1,4 @@
 // REFERENCE: Setting - Personal - Edit Phone
-import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { View } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import { useState } from "react"
@@ -12,6 +11,7 @@ import LatoText from "components/styled_components/LatoText"
 import CustomColor from "constants/Colors"
 import { sendCodeChangeAttribute } from "utils/services/accountInfo"
 import VerifyPhone from "components/VerifyPhone"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 const EditPhone = () => {
   const { navigate } = useNavigation()
@@ -44,7 +44,7 @@ const EditPhone = () => {
   }
 
   return (
-    <SettingsScreenLayout>
+    <GeneralScreenLayout>
       <View className="flex flex-col">
         <VerifyPhone
           phone={phone}
@@ -78,7 +78,7 @@ const EditPhone = () => {
         onPress={handleSendCode}
         disabled={!isValid || isExists}
       />
-    </SettingsScreenLayout>
+    </GeneralScreenLayout>
   )
 }
 

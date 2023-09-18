@@ -9,7 +9,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const SettingsScreenLayout = ({ children }: Props) => {
+const GeneralScreenLayout = ({ children }: Props) => {
   return (
     <SafeAreaView className="bg-background h-full">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -21,4 +21,4 @@ const SettingsScreenLayout = ({ children }: Props) => {
   )
 }
 
-export default SettingsScreenLayout
+export default GeneralScreenLayout

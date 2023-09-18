@@ -8,13 +8,13 @@ import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { VerifyCodeField } from "components/VerifyCodeField"
-import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import Fetcher from "utils/Fetcher"
 import { TCloseAccount } from "types/endpoints"
 import { accountEP } from "constants/Endpoint"
 import { useNavigation } from "@react-navigation/native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { tokenAction } from "redux/reducers/tokens.reducer"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 const VerifyCodeForLeave = () => {
   const navigation = useNavigation()
@@ -55,7 +55,7 @@ const VerifyCodeForLeave = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={90}
     >
-      <SettingsScreenLayout>
+      <GeneralScreenLayout>
         <View className="flex-1 items-center">
           <Text className="text-white font-lato text-base mb-4 text-center">
             Complete the SMS verification to confirm that this account belongs
@@ -78,7 +78,7 @@ const VerifyCodeForLeave = () => {
           disabled={disable}
           bgColor="bg-red-500"
         />
-      </SettingsScreenLayout>
+      </GeneralScreenLayout>
     </KeyboardAvoidingView>
   )
 }

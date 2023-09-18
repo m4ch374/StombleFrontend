@@ -63,7 +63,7 @@ const ProfileHeaderContent = () => {
         </Text>
 
         <Text className="lato-text font-lato-bold text-secondary text-sm">
-          Placeholder.com
+          {tmpUser.link.text ? tmpUser.link.text : tmpUser.link.url}
         </Text>
       </View>
 
@@ -77,7 +77,7 @@ const ProfileHeaderContent = () => {
           justify-center
           items-center"
         onPress={() => {
-          navigation.navigate("Settings", { screen: "AccountInfoIndex" })
+          navigation.navigate("EditProfile", { screen: "EditProfileIndex" })
         }}
       >
         <Text className="lato-text text-sm font-lato-bold text-secondary">

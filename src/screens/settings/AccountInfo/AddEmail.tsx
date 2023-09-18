@@ -4,7 +4,6 @@ import { AntDesign } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 import InputBlueBg from "components/settings/InputBlueBg"
 import FlatButton from "components/styled_components/FlatButton"
-import SettingsScreenLayout from "components/settings/SettingsScreenLayout"
 import { useState } from "react"
 import { View, TextInput, Text } from "react-native"
 import { useDispatch } from "react-redux"
@@ -13,6 +12,7 @@ import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import CustomColor from "constants/Colors"
 import { sendCodeChangeAttribute } from "utils/services/accountInfo"
 import { Type } from "types/variantStyle"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 // A simple email validation
 const validateEmail = (value: string) => {
@@ -58,7 +58,7 @@ const AddEmail = () => {
   }
 
   return (
-    <SettingsScreenLayout>
+    <GeneralScreenLayout>
       <View className="flex gap-2">
         <InputBlueBg title="Email address" variant={Type.outlined}>
           <TextInput
@@ -90,7 +90,7 @@ const AddEmail = () => {
         onPress={handleSendCode}
         disabled={!validateEmail(email)}
       />
-    </SettingsScreenLayout>
+    </GeneralScreenLayout>
   )
 }
 
