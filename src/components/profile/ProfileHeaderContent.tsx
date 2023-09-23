@@ -62,9 +62,11 @@ const ProfileHeaderContent = () => {
           Placehlder Consultant
         </Text>
 
-        <Text className="lato-text font-lato-bold text-secondary text-sm">
-          {tmpUser.link.text ? tmpUser.link.text : tmpUser.link.url}
-        </Text>
+        {tmpUser.link.url && (
+          <Text className="lato-text font-lato-bold text-secondary text-sm">
+            {tmpUser.link.text ? tmpUser.link.text : tmpUser.link.url}
+          </Text>
+        )}
       </View>
 
       <TouchableOpacity

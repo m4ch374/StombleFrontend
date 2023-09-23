@@ -44,6 +44,7 @@ const Login = () => {
       }
 
       dispatch(tokenAction.setToken(signInRes.AccessToken))
+      dispatch(tokenAction.setRefresh(signInRes.RefreshToken))
       dispatch(
         tmpStoreAction.setState(state => {
           state.pswLength = password.length

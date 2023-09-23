@@ -1,4 +1,4 @@
-import { FC, useState, useRef } from "react"
+import { FC, useState, useRef, LegacyRef } from "react"
 import AccountFileCard from "components/AccountFileCard"
 import { AntDesign } from "@expo/vector-icons"
 import { View, Text, Image, Pressable } from "react-native"
@@ -20,7 +20,7 @@ const VideoItemCard: FC<TVideoItem> = ({
   videosLiked,
   onLikeVideos,
 }) => {
-  const video: any = useRef(null);
+  const video: LegacyRef<Video> = useRef(null)
   const [change, setChange] = useState(false)
   const profileHeaderPlaceholder =
     "https://stomble-users.s3.ap-southeast-2.amazonaws.com/null"
@@ -32,12 +32,16 @@ const VideoItemCard: FC<TVideoItem> = ({
         mb-4
       `}
       onPressOut={() => {
-        setChange(false)
-        video?.current?.pauseAsync()
+        ;(async () => {
+          await video?.current?.pauseAsync()
+          setChange(false)
+        })()
       }}
       onLongPress={() => {
-        setChange(true)
-        video?.current?.playAsync()
+        ;(async () => {
+          await video?.current?.playAsync()
+          setChange(true)
+        })()
       }}
     >
       {change ? (
@@ -47,7 +51,7 @@ const VideoItemCard: FC<TVideoItem> = ({
           style={{
             height: 300,
             borderRadius: 8,
-            overflow: "hidden"
+            overflow: "hidden",
           }}
           isLooping
           resizeMode={ResizeMode.COVER}
@@ -71,7 +75,7 @@ const VideoItemCard: FC<TVideoItem> = ({
             width={30}
             borderRadius={50}
             style={`
-              flex-row                           
+              flex-row
               mr-4
             `}
           />

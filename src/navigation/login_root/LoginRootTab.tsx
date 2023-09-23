@@ -5,26 +5,34 @@ import { LoginRootTabList } from "types/Navigation"
 import TabBarIcon from "components/TabBarIcon"
 import Home from "screens/login_root/Home"
 import Profile from "screens/login_root/Profile"
-import { Platform, SafeAreaView, StatusBar } from "react-native"
 import Notifications from "screens/login_root/Notifications"
 import CustomColor from "constants/Colors"
 import Search from "screens/login_root/Search"
 import { useEffect } from "react"
 import { getUserAccountInformation } from "utils/services/accountInfo"
-import { useAppDispatch } from "redux/hooks"
+import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import { tokenAction } from "redux/reducers/tokens.reducer"
+import { refreshToken } from "utils/services/auth"
 
 const BottomTab = createBottomTabNavigator<LoginRootTabList>()
 
 const LoginRootTab = () => {
   const dispatch = useAppDispatch()
+  const refToken = useAppSlector(state => state.tokens.refreshToken)
 
   useEffect(() => {
     ;(async () => {
       // endpoint: get user info and store into tmpStore
-      const userResp = await getUserAccountInformation()
+      let userResp = await getUserAccountInformation()
 
-      if (typeof userResp === "undefined") return
+      if (typeof userResp === "undefined") {
+        const refreshResp = await refreshToken({ refreshToken: refToken })
+        if (typeof refreshResp === "undefined") return
+        dispatch(tokenAction.setToken(refreshResp.AccessToken))
+
+        userResp = await getUserAccountInformation()
+      }
 
       dispatch(
         tmpStoreAction.setState(state => {
@@ -41,41 +49,35 @@ const LoginRootTab = () => {
         }),
       )
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   return (
-    <SafeAreaView
-      className="h-full bg-background"
-      style={{
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-      }}
+    <BottomTab.Navigator
+      initialRouteName="Home"
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: CustomColor.navbar,
+          height: 60,
+          borderTopColor: "transparent",
+          paddingBottom: 0,
+        },
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon focused={focused} route={route} />
+        ),
+        tabBarHideOnKeyboard: true,
+      })}
     >
-      <BottomTab.Navigator
-        initialRouteName="Home"
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            backgroundColor: CustomColor.navbar,
-            height: 60,
-            borderTopColor: "transparent",
-            paddingBottom: 0,
-          },
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} route={route} />
-          ),
-          tabBarHideOnKeyboard: true,
-        })}
-      >
-        <BottomTab.Screen name="Home" component={Home} />
+      <BottomTab.Screen name="Home" component={Home} />
 
-        <BottomTab.Screen name="Search" component={Search} />
+      <BottomTab.Screen name="Search" component={Search} />
 
-        <BottomTab.Screen name="Notification" component={Notifications} />
+      <BottomTab.Screen name="Notification" component={Notifications} />
 
-        <BottomTab.Screen name="Profile" component={Profile} />
-      </BottomTab.Navigator>
-    </SafeAreaView>
+      <BottomTab.Screen name="Profile" component={Profile} />
+    </BottomTab.Navigator>
   )
 }
 

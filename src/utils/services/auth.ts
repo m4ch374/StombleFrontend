@@ -5,6 +5,7 @@ import {
   TConfirm,
   TForgotPassword,
   TPreSignUp,
+  TRefreshToken,
   TResendCode,
   TSignIn,
   TSignOut,
@@ -79,6 +80,14 @@ export const resendCode = (data: TResendCode["requestType"]) => {
 // /sigin-out
 export const signOut = (data: TSignOut["requestType"]) => {
   return Fetcher.init<TSignOut>("POST", authEP.SIGN_OUT)
+    .withCurrentToken()
+    .withJsonPaylad(data)
+    .fetchData()
+}
+
+// /refresh-token
+export const refreshToken = (data: TRefreshToken["requestType"]) => {
+  return Fetcher.init<TRefreshToken>("PUT", authEP.REFRESH_TOKEN)
     .withCurrentToken()
     .withJsonPaylad(data)
     .fetchData()

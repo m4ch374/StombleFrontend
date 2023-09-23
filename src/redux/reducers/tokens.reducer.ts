@@ -6,10 +6,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 type TTokens = {
   currentToken: string
+  refreshToken: string
 }
 
 const init: TTokens = {
   currentToken: "",
+  refreshToken: "",
 }
 
 const tokenSlice = createSlice({
@@ -22,6 +24,9 @@ const tokenSlice = createSlice({
       })()
 
       state.currentToken = action.payload
+    },
+    setRefresh: (state, action: PayloadAction<string>) => {
+      state.refreshToken = action.payload
     },
     clearToken: () => init,
   },

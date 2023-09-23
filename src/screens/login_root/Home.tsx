@@ -1,87 +1,136 @@
-// REFERENCE: PLACEHOLDER
+// REFERENCE: Home Page
 
-import React, { useState } from "react"
 import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Text,
-} from "react-native"
-import { useAppDispatch } from "redux/hooks"
-import { tokenAction } from "redux/reducers/tokens.reducer"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+  BottomTabNavigationProp,
+  useBottomTabBarHeight,
+} from "@react-navigation/bottom-tabs"
 import { useNavigation } from "@react-navigation/native"
-import Fetcher from "utils/Fetcher"
-import { TCloseAccount } from "types/endpoints"
-import { accountEP } from "constants/Endpoint"
+import VideoShareModal from "components/VideoShareModal"
+import HomeModalControllerContext from "components/home/HomeModalControllerContext"
+import HomeVideoCard from "components/home/HomeVideoCard"
+import ModalSettingsBtn from "components/profile/ModalSettingsBtn"
+import SwipableModal from "components/styled_components/SwipableModal"
+import { isDevice } from "expo-device"
+import useDebounceValue from "hooks/useDebounceValue"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
+import {
+  ScrollView,
+  useWindowDimensions,
+  Platform,
+  StatusBar,
+} from "react-native"
+import { LoginRootTabList } from "types/Navigation"
+import { TGetVideosForVideoPlay } from "types/endpoints"
+import { getVideosForVideoPlay } from "utils/services/videoPlay"
 
 const Home: React.FC = () => {
-  const navigation = useNavigation()
-  const dispatch = useAppDispatch()
+  const navigation = useNavigation<BottomTabNavigationProp<LoginRootTabList>>()
 
-  const [bId, setBId] = useState("")
+  const [videos, setVideos] = useState<
+    TGetVideosForVideoPlay["responseType"]["result"]
+  >([])
 
-  const handleFakeLogout = () => {
+  const [tabFocused, setTabFocused] = useState(false)
+
+  const tabFocusedHandler = useCallback(() => {
+    setTabFocused(true)
+  }, [])
+
+  const tabBlurredHandler = useCallback(() => {
+    setTabFocused(false)
+  }, [])
+
+  useEffect(() => {
     ;(async () => {
-      await AsyncStorage.setItem("token", "")
-      dispatch(tokenAction.clearToken())
-
-      navigation.navigate("Auth", { screen: "FirstLanding" })
-    })()
-  }
-
-  const handleRemove = () => {
-    ;(async () => {
-      const resp = await Fetcher.init<TCloseAccount>(
-        "DELETE",
-        accountEP.CLOSE_ACCOUNT,
-      )
-        .withJsonPaylad({ businessId: bId })
-        .withCurrentToken()
-        .fetchData()
+      const resp = await getVideosForVideoPlay({
+        take: 4,
+        skip: 0,
+      })
 
       if (typeof resp === "undefined") return
 
-      handleFakeLogout()
+      setVideos(resp.result)
     })()
-  }
+
+    navigation.addListener("focus", tabFocusedHandler)
+    navigation.addListener("blur", tabBlurredHandler)
+
+    return () => {
+      navigation.removeListener("focus", tabFocusedHandler)
+      navigation.removeListener("blur", tabBlurredHandler)
+    }
+  }, [navigation, tabBlurredHandler, tabFocusedHandler])
+
+  const { height } = useWindowDimensions()
+  const tabBarHeight = useBottomTabBarHeight()
+  const videoHeight = useMemo(() => {
+    // useWindowDimensions is kinda wacky, as in, sometimes it does not account for status bar height
+    // causing wierd rendering issues
+    //
+    // NOTE: requires more testing on ios devices
+    const additionalHeight =
+      Platform.OS === "android"
+        ? isDevice
+          ? StatusBar.currentHeight || 0
+          : 0
+        : 0
+
+    return Math.ceil(height) - tabBarHeight + additionalHeight
+  }, [height, tabBarHeight])
+
+  const [currIdx, setCurrIdx] = useDebounceValue(0)
+
+  const [shareModalVisible, setShareModalVisible] = useState(false)
+  const [moreModalVisible, setMoreModalVisible] = useState(false)
+
+  const [scrollEnable, setScrollEnable] = useState(true)
+
+  const controllerValue = useMemo(() => {
+    return {
+      shareModal: setShareModalVisible,
+      moreModal: setMoreModalVisible,
+    }
+  }, [])
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "android" ? "height" : "padding"}
-        className="flex justify-center items-center h-screen gap-5"
+    <HomeModalControllerContext.Provider value={controllerValue}>
+      <ScrollView
+        className="h-full"
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        overScrollMode="never"
+        snapToInterval={videoHeight}
+        disableIntervalMomentum={true}
+        scrollEnabled={scrollEnable}
+        onMomentumScrollEnd={event => {
+          const calcIdx = Math.round(
+            event.nativeEvent.contentOffset.y / videoHeight,
+          )
+          setCurrIdx(calcIdx)
+        }}
       >
-        <Text className="text-4xl">Lorem Ipsum</Text>
+        {videos.map((vid, idx) => {
+          return (
+            <HomeVideoCard
+              key={idx}
+              vidItem={vid}
+              videoHeight={videoHeight}
+              isFocused={tabFocused && idx === currIdx}
+              setScrollEnable={setScrollEnable}
+            />
+          )
+        })}
+      </ScrollView>
 
-        <TouchableOpacity
-          onPress={handleFakeLogout}
-          className="py-2 px-4 border-2 border-orange-600 rounded-md"
-        >
-          <Text className="text-2xl text-orange-600 font-Lato">
-            Fake Log out
-          </Text>
-        </TouchableOpacity>
+      <VideoShareModal
+        shareModalController={[shareModalVisible, setShareModalVisible]}
+      />
 
-        <TouchableOpacity
-          onPress={handleRemove}
-          className="py-2 px-4 border-2 border-red-600 rounded-md"
-        >
-          <Text className="text-2xl text-red-600 font-Lato">
-            Remove account
-          </Text>
-        </TouchableOpacity>
-
-        <TextInput
-          placeholder="Business Id (empty for delete user)"
-          onChangeText={setBId}
-          className="bg-slate-300 px-2 py-1 rounded-md"
-        />
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+      <SwipableModal stateController={[moreModalVisible, setMoreModalVisible]}>
+        <ModalSettingsBtn>QR Code</ModalSettingsBtn>
+        <ModalSettingsBtn>Report Video</ModalSettingsBtn>
+      </SwipableModal>
+    </HomeModalControllerContext.Provider>
   )
 }
 

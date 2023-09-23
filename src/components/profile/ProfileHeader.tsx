@@ -1,5 +1,5 @@
-import React from "react"
-import { View, TouchableOpacity } from "react-native"
+import React, { useMemo } from "react"
+import { View, TouchableOpacity, Platform, StatusBar } from "react-native"
 import LatoText from "components/styled_components/LatoText"
 import ThreeDotsVertical from "assets/icons/ThreeDotsVertical"
 import CheveronDown from "assets/icons/CheveronDown"
@@ -13,19 +13,33 @@ const ProfileHeader: React.FC<TProfileHeader> = ({
   setModalVisible,
   userName,
 }) => {
-  return (
-    <View className="h-[34px] flex-row justify-between items-center px-md z-50 bg-background">
-      <TouchableOpacity
-        className="flex-row items-center gap-1"
-        onPress={() => setModalVisible(true)}
-      >
-        <LatoText classname="font-lato-bold text-xl">{userName}</LatoText>
-        <CheveronDown classname="h-lg" />
-      </TouchableOpacity>
+  const headerHeight = useMemo(() => {
+    return (
+      34 +
+      Math.round(
+        Platform.OS === "android" ? (StatusBar.currentHeight as number) : 0,
+      )
+    )
+  }, [])
 
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <ThreeDotsVertical classname="h-13" />
-      </TouchableOpacity>
+  return (
+    <View
+      className="flex justify-end items-center px-md py-sm z-50 bg-background"
+      style={{ height: headerHeight }}
+    >
+      <View className="flex-row justify-between items-center w-full">
+        <TouchableOpacity
+          className="flex-row items-center gap-1"
+          onPress={() => setModalVisible(true)}
+        >
+          <LatoText classname="font-lato-bold text-xl">{userName}</LatoText>
+          <CheveronDown classname="h-lg" />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <ThreeDotsVertical classname="h-13" />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }

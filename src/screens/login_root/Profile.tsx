@@ -6,9 +6,9 @@ import SwipableModal from "components/styled_components/SwipableModal"
 import ModalSettingsBtn from "components/profile/ModalSettingsBtn"
 import ProfileHeader from "components/profile/ProfileHeader"
 import ProfileTab from "navigation/login_root/ProfileTab"
-import { View } from "react-native"
 import { useAppSlector } from "redux/hooks"
 import FieldSeperator from "components/FieldSeperator"
+import { SafeAreaView } from "react-native"
 
 const Profile: React.FC = () => {
   const navigation = useNavigation()
@@ -17,7 +17,7 @@ const Profile: React.FC = () => {
   const [visible, setVisible] = useState(false)
 
   return (
-    <View className="bg-background h-full">
+    <SafeAreaView className="h-full">
       <ProfileHeader
         setModalVisible={setVisible}
         userName={tmpState.fullName}
@@ -39,7 +39,7 @@ const Profile: React.FC = () => {
 
         <ModalSettingsBtn>QR Code</ModalSettingsBtn>
       </SwipableModal>
-    </View>
+    </SafeAreaView>
   )
 }
 

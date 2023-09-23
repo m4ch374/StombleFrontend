@@ -16,6 +16,7 @@ import {
   unfollowBusiness,
   unlikeVideo,
 } from "utils/services/videoPlay"
+import RootTabLayout from "components/styled_components/RootTabLayout"
 
 const skipInitial = 0
 const takeInitial = 8
@@ -201,7 +202,7 @@ const Search: React.FC = () => {
   const isSeeMoreVideosSeen = (videos?.length || 0) % takeInitial
 
   return (
-    <View className="bg-background h-full p-6">
+    <RootTabLayout classname="p-6">
       <SearchInput
         onChangeText={setText}
         value={text}
@@ -291,7 +292,7 @@ const Search: React.FC = () => {
           ) : null}
         </View>
       </ScrollView>
-    </View>
+    </RootTabLayout>
   )
 }
 

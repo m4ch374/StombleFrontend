@@ -40,6 +40,7 @@ const SignupBusinessName = () => {
       if (typeof resp === "undefined") return
 
       dispatch(tokenAction.setToken(resp.AccessToken))
+      dispatch(tokenAction.setRefresh(resp.RefreshToken))
       dispatch(
         tmpStoreAction.setState(state => {
           state.pswLength = tmp.password.length

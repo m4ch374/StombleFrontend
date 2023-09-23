@@ -215,6 +215,20 @@ type PreSignUpRes = {
 export type TPreSignUp = TEndpoint<PreSignUpReq, PreSignUpRes>
 // ===================================================
 
+// ===================================================
+// /pre-sign-up
+// ===================================================
+type RefreshTokenReq = {
+  refreshToken: string
+}
+
+type RefreshTokenRes = {
+  AccessToken: string
+}
+
+export type TRefreshToken = TEndpoint<RefreshTokenReq, RefreshTokenRes>
+// ===================================================
+
 // ###################################################
 // # Profile                                        #
 // ###################################################
