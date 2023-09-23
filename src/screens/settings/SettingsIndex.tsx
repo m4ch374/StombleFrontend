@@ -53,7 +53,7 @@ const SettingsIndex: React.FC = () => {
       <View className="flex flex-col space-y-md">
         <View>
           <OutlinedButton
-            text={"Become a Business"}
+            text={"Switch to Business Mode"}
             onPress={handleBecomeBusiness}
           />
         </View>

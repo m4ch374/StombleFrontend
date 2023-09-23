@@ -49,7 +49,7 @@ const EditName = () => {
     <GeneralScreenLayout>
       <InputBlueBg title="Full Name" variant={Type.outlined}>
         <TextInput
-          className="text-white text-base w-full h-full"
+          className="text-white text-base w-full h-full leading-[-2px]"
           value={newName}
           onChangeText={setNewName}
           placeholder="Enter your full name"

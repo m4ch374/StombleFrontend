@@ -62,7 +62,7 @@ const AddEmail = () => {
       <View className="flex gap-2">
         <InputBlueBg title="Email address" variant={Type.outlined}>
           <TextInput
-            className="text-white text-base w-full h-full"
+            className="text-white text-base w-full h-full leading-[-2px]"
             value={email}
             onChangeText={setEmail}
             placeholder="Enter your email address"

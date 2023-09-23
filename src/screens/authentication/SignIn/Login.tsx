@@ -52,6 +52,7 @@ const Login = () => {
         }),
       )
 
+      console.log("password", password.length)
       // TODO: need direct to verifyCode screen (endpoint under development)
       navigate.navigate("LoginRoot", { screen: "Home" })
     })()

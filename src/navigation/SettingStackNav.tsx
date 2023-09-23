@@ -20,6 +20,7 @@ import ChangePassword from "screens/settings/AccountInfo/ChangePassword"
 import ReasonsOfLeave from "screens/settings/CloseAccount/ReasonsOfLeave"
 import ConfirmOfLeave from "screens/settings/CloseAccount/ConfirmOfLeave"
 import VerifyCodeForLeave from "screens/settings/CloseAccount/VerifyCodeForLeave"
+import AddGender from "screens/settings/AccountInfo/AddGender"
 
 const SettingsStack = createNativeStackNavigator<SettingsMenuList>()
 const AccountInfoStack = createNativeStackNavigator<AccountInfoList>()
@@ -60,13 +61,19 @@ const SettingsStackNav: React.FC = () => {
         <AccountInfoStack.Screen
           name="EditName"
           component={EditName}
-          options={{ title: "Edit Name" }}
+          options={{ title: "Change name" }}
+        />
+
+        <AccountInfoStack.Screen
+          name="AddGender"
+          component={AddGender}
+          options={{ title: "Add gender" }}
         />
 
         <AccountInfoStack.Screen
           name="EditPhone"
           component={EditPhone}
-          options={{ title: "Edit Phone" }}
+          options={{ title: "Change mobile number" }}
         />
 
         <AccountInfoStack.Screen
@@ -78,7 +85,7 @@ const SettingsStackNav: React.FC = () => {
         <AccountInfoStack.Screen
           name="AddEmail"
           component={AddEmail}
-          options={{ title: "Add Email" }}
+          options={{ title: "Add email address" }}
         />
 
         <AccountInfoStack.Screen

@@ -9,6 +9,8 @@ import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { updateIcon } from "utils/services/accountInfo"
 import { TUpdateIcon } from "types/endpoints"
 import { useNavigation } from "@react-navigation/native"
+import { Divider } from "react-native-elements"
+import CustomColor from "constants/Colors"
 
 type TChangeProfileModal = {
   stateController: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
@@ -78,9 +80,13 @@ const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
         Take photo
       </ModalSettingsBtn>
 
+      <Divider className="w-full opacity-10" color={CustomColor.white} />
+
       <ModalSettingsBtn onPress={handleChoosePhoto}>
         Choose photo
       </ModalSettingsBtn>
+
+      <Divider className="w-full opacity-10" color={CustomColor.white} />
 
       <ModalSettingsBtn onPress={handleRemovePhoto}>
         Remove current picture

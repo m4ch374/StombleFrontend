@@ -21,7 +21,6 @@ declare global {
 export type RootStackList = {
   Auth: NavigatorScreenParams<AuthStackList>
   LoginRoot: NavigatorScreenParams<LoginRootTabList>
-  EditProfile: NavigatorScreenParams<EditProfileStackList>
   Settings: NavigatorScreenParams<SettingsMenuList & AccountInfoList>
 }
 
@@ -76,13 +75,6 @@ export type ProfileTabList = {
   VideosSaved: undefined
 }
 
-export type EditProfileStackList = {
-  EditProfileIndex: undefined
-  ChangeLink: undefined
-  ChangeBio: undefined
-  AddGender: undefined
-}
-
 // ===============================================
 
 // ===============================================
@@ -109,6 +101,7 @@ export type SettingsMenuList = {
 // ===============================================
 export type AccountInfoList = {
   EditName: undefined
+  AddGender: undefined
   EditPhone: undefined
   VerifyCodeForUpdate: {
     phone?: string

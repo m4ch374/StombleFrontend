@@ -20,7 +20,7 @@ const PasswordInput = ({
     <View className="mb-2">
       <View className="h-24 bg-transparent rounded-md flex-row items-center justify-between px-8 border border-solid border-gray-mid">
         <TextInput
-          className="text-white text-base w-[280px]"
+          className="text-white text-base w-[280px] leading-[-2px]"
           placeholder={placeholder || "Enter Password"}
           placeholderTextColor={CustomColor.gray.lighter}
           secureTextEntry={secureTextEntry}

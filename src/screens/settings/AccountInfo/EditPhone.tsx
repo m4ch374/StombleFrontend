@@ -1,39 +1,54 @@
 // REFERENCE: Setting - Personal - Edit Phone
-import { View } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
+import {
+  Modal,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native"
 import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { useNavigation } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { useAppSlector } from "redux/hooks"
 import LatoText from "components/styled_components/LatoText"
-import CustomColor from "constants/Colors"
 import { sendCodeChangeAttribute } from "utils/services/accountInfo"
 import VerifyPhone from "components/VerifyPhone"
 import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
+import { checkNumber } from "utils/services/auth"
 
 const EditPhone = () => {
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
-  const tmpUser = useAppSlector(state => state.tmpStore)
-  const [isValid, setIsValid] = useState(false)
-  const [isExists, setIsExists] = useState(true)
+  const [isPopupVisible, setPopupVisible] = useState(false)
+  const [isValid, setIsValid] = useState<boolean>(false)
   const [phone, setPhone] = useState("")
 
   const handleSendCode = () => {
     ;(async () => {
-      // endpoint: /send-code-change-attribute - phone_number
       const phoneNum = "+61" + phone
+      const resp = await checkNumber({
+        phone: phoneNum,
+      })
+
+      if (typeof resp === "undefined") return
+
+      if (resp.exists) {
+        setIsValid(false)
+        setPopupVisible(true)
+        return
+      }
+
+      // endpoint: /send-code-change-attribute - phone_number
       const payload = {
         attribute: "phone_number",
         value: phoneNum,
-        userId: tmpUser.userId,
       } as const
 
       const sendCodeResp = await sendCodeChangeAttribute(payload)
 
       if (typeof sendCodeResp === "undefined") return
+
+      console.log(sendCodeResp)
 
       dispatch(tmpStoreAction.setItem("phone", phoneNum))
       navigate("Settings", {
@@ -43,6 +58,10 @@ const EditPhone = () => {
     })()
   }
 
+  const togglePopup = () => {
+    setPopupVisible(false)
+  }
+
   return (
     <GeneralScreenLayout>
       <View className="flex flex-col">
@@ -50,25 +69,9 @@ const EditPhone = () => {
           phone={phone}
           setPhone={setPhone}
           setIsValid={setIsValid}
-          setIsExists={setIsExists}
         />
 
-        {/* TODO: extract error message out */}
-        {isExists && isValid && (
-          <View className="flex flex-row items-center pr-8 ">
-            <AntDesign
-              name="exclamationcircleo"
-              size={24}
-              color={CustomColor.util.error}
-            />
-            <LatoText classname="text-util-error mx-4 text-[14px] my-6">
-              The number you entered is already registered to an account. Please
-              enter another number to verify.
-            </LatoText>
-          </View>
-        )}
-
-        <LatoText classname="text-gray-lighter text-[14px] px-2">
+        <LatoText classname="text-gray-lighter text-[14px] px-2 mt-4">
           Changing your number changes the number for all the accounts
           associated with this phone number.
         </LatoText>
@@ -76,8 +79,40 @@ const EditPhone = () => {
       <FlatButton
         text={"SEND CODE"}
         onPress={handleSendCode}
-        disabled={!isValid || isExists}
+        disabled={!isValid}
       />
+
+      {/* TODO: extract popUp Modal component for shared use */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isPopupVisible}
+        onRequestClose={togglePopup}
+      >
+        <TouchableWithoutFeedback>
+          <View className="flex-1 justify-center items-center bg-black/70">
+            <View className="w-[300px] flex justify-items-center bg-gray-darkest pt-12 rounded-[10px]">
+              <LatoText classname="text-lg font-lato-bold text-white text-center pb-8">
+                Sorry, can&apos;t update number
+              </LatoText>
+
+              <View className="w-full px-8 pb-8">
+                <LatoText classname=" text-gray-lighter text-[16px] text-center">
+                  The number you entered is already registered to an account.
+                  Please enter another number to verify.
+                </LatoText>
+              </View>
+
+              <TouchableOpacity
+                className="py-4 border-t-[0.5px] border-white/20 "
+                onPress={togglePopup}
+              >
+                <LatoText classname="text-center font-lato-bold">OK</LatoText>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </GeneralScreenLayout>
   )
 }

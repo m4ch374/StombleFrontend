@@ -42,7 +42,7 @@ const AddGender = () => {
       }),
     )
 
-    navigate("EditProfile", { screen: "EditProfileIndex" })
+    navigate("Settings", { screen: "AccountInfoIndex" })
   }
 
   return (
@@ -57,16 +57,15 @@ const AddGender = () => {
           <InputBlueBg
             title="Gender"
             variant={Type.outlined}
-            userInfo={
-              selectedGender.length ? selectedGender : "Select your gender"
-            }
+            userInfo={selectedGender}
+            placeholder="Select your gender"
           >
             <Arrow classname="w-6 h-4" />
           </InputBlueBg>
         </TouchableOpacity>
 
         {visible && (
-          <View className=" top-[-4px] flex border-[1px] border-solid border-gray-mid rounded-md bg-navbar overflow-hidden">
+          <View className="flex border-[1px] border-solid border-gray-mid rounded-md bg-navbar overflow-hidden">
             <FlatList
               data={data}
               scrollEnabled={false}

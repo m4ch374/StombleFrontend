@@ -15,12 +15,14 @@ const validateMobileNumber = (number: string) => {
 type Props = {
   phone: string
   setPhone: (phone: string) => void
-  setIsValid: (isValid: boolean) => void
-  setIsExists: (isExists: boolean) => void
+  setIsValid?: (isValid: boolean) => void
+  setIsExists?: (isExists: boolean) => void
 }
 
 const VerifyPhone = ({ phone, setPhone, setIsValid, setIsExists }: Props) => {
+  // TODO: workflow changed, need to update this component later
   const handleOnBlur = () => {
+    if (!setIsValid) return
     if (validateMobileNumber(phone)) {
       setIsValid(true)
     } else {
@@ -28,6 +30,7 @@ const VerifyPhone = ({ phone, setPhone, setIsValid, setIsExists }: Props) => {
       return
     }
 
+    if (!setIsExists) return
     ;(async () => {
       // endpoint: /check-number
       const resp = await checkNumber({
@@ -48,16 +51,17 @@ const VerifyPhone = ({ phone, setPhone, setIsValid, setIsExists }: Props) => {
   return (
     <View>
       <InputBlueBg title={"Mobile number"} variant={Type.outlined}>
-        <View className="flex flex-row w-[90px] h-full justify-around items-center top-1">
+        <View className="flex flex-row w-[90px] h-full justify-around items-center ">
           <AuFlag />
-          <LatoText classname="top-1">+61</LatoText>
-          <View className="h-[23px] w-1 bg-white" />
+          <LatoText classname="bottom-[1px]">+61</LatoText>
+          <View className="h-[24px] w-[1px] bg-white" />
         </View>
 
         <TextInput
-          className="text-white text-base flex-1 items-center justify-center w-full h-full pl-4"
+          className="text-white text-base flex-1 items-center justify-center w-full h-full pl-4 leading-[-2px] "
           keyboardType="phone-pad"
           keyboardAppearance="dark"
+          cursorColor={CustomColor.gray.lighter}
           value={phone}
           onChangeText={setPhone}
           placeholderTextColor={CustomColor.gray.lighter}

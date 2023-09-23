@@ -6,7 +6,6 @@ import SettingsStackNav from "./SettingStackNav"
 import { useAppSlector } from "redux/hooks"
 import { View } from "react-native"
 import { StatusBar } from "expo-status-bar"
-import EditProfileStackNav from "./ProfileStackNav"
 
 const RootStack = createNativeStackNavigator<RootStackList>()
 
@@ -31,12 +30,6 @@ export default function Navigation() {
         <RootStack.Screen
           name="LoginRoot"
           component={LoginRootTab}
-          options={{ headerShown: false }}
-        />
-
-        <RootStack.Screen
-          name="EditProfile"
-          component={EditProfileStackNav}
           options={{ headerShown: false }}
         />
 

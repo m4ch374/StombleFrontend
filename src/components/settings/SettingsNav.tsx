@@ -15,10 +15,10 @@ const SettingsNav = ({ title, data }: Props) => {
   return (
     <View className="mb-lg">
       <View>
-        <LatoText classname="text-gray-lightest text-sm">{title}</LatoText>
+        <LatoText classname="text-gray-lighter text-sm mb-4">{title}</LatoText>
       </View>
 
-      <View className="mt-sm rounded-sm bg-navbar">
+      <View className="rounded-sm bg-navbar">
         <FlatList
           data={data}
           scrollEnabled={false}

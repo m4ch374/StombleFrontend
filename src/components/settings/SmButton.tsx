@@ -11,7 +11,7 @@ type SmButtonProps = {
 const SmButton = ({ text, variation, onPress }: SmButtonProps) => {
   return (
     <TouchableOpacity
-      className={`h-[30px] w-[63px] rounded-sm border border-white bg-transparent justify-center items-center ${
+      className={`h-[30px] w-[72px] rounded-sm border border-white bg-transparent justify-center items-center ${
         variation === Type.filled && "bg-primary border-transparent"
       }`}
       onPress={onPress}

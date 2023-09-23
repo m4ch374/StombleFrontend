@@ -23,8 +23,8 @@ const PasswordCheck: React.FC<TPasswordCheck> = ({ children, criteria }) => {
   return (
     <Text
       className={`${
-        criteria() ? "text-green-500/90" : "text-[#ABABAB]"
-      } text-[14px]`}
+        criteria() ? "text-green-500/90" : "text-gray-mid"
+      } text-sm`}
     >
       <Text>{criteria() ? "✔ " : "• "}</Text>
       <Text>{children}</Text>
@@ -87,9 +87,9 @@ const ChangePassword = () => {
   return (
     <GeneralScreenLayout>
       <View className="flex gap-4">
-        <View className="mb-[8px]">
-          <LatoText classname="text-[12px] text-gray-lightest mb-2">
-            Current Password
+        <View className="mb-6">
+          <LatoText classname="text-sm text-gray-lightest mb-4">
+            Current password
           </LatoText>
           <PasswordInput
             password={password}
@@ -98,9 +98,9 @@ const ChangePassword = () => {
           />
         </View>
 
-        <View className="mb-[8px]">
-          <LatoText classname="text-[12px] text-gray-lightest mb-2">
-            New Password
+        <View className="mb-6">
+          <LatoText classname="text-sm text-gray-lightest mb-4">
+            New password
           </LatoText>
           <PasswordInput
             password={newPassword}
@@ -109,7 +109,7 @@ const ChangePassword = () => {
           />
         </View>
 
-        <LatoText classname="text-gray-lighter text-[12px] pl-4">
+        <LatoText classname="text-gray-mid text-sm pl-4">
           Password must contain:
         </LatoText>
 
@@ -118,7 +118,7 @@ const ChangePassword = () => {
               But im too lazy for that now im in the middle of developing it
               We could always go back and fix right..... ? - time capsule (9/8/2023)
             */}
-        <View className="flex pl-4 pb-10">
+        <View className="flex pl-4 pb-6">
           <PasswordCheck
             criteria={() => {
               return testRegexp(regexpCollection.charNum)
@@ -157,13 +157,13 @@ const ChangePassword = () => {
         </View>
 
         <View className="mb-[8px]">
-          <LatoText classname="text-[12px] text-gray-lightest mb-2">
-            New Password
+          <LatoText classname="text-sm text-gray-lightest mb-4">
+            Current new password
           </LatoText>
           <PasswordInput
             password={confirmPassword}
             setPassword={setConfirmPassword}
-            placeholder="Enter your new password"
+            placeholder="Re-enter your new password"
           />
         </View>
         {confirmPassword === newPassword && allMatches && (
