@@ -4,6 +4,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 type TTmpStore = {
   userId: string
+  businessId: string
   phone: string
   password: string
   pswLength: number
@@ -27,6 +28,7 @@ type TTmpStore = {
 
 const init: TTmpStore = {
   userId: "",
+  businessId: "",
   phone: "",
   password: "",
   pswLength: 0,

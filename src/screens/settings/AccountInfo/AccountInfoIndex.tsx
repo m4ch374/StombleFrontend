@@ -9,7 +9,7 @@ import {
 } from "react-native"
 import SmButton from "components/settings/SmButton"
 import { useNavigation } from "@react-navigation/native"
-import { useAppSlector } from "redux/hooks"
+import { useAppDispatch, useAppSlector } from "redux/hooks"
 import InputBlueBg from "components/settings/InputBlueBg"
 import PopupMessage from "components/settings/PopupMessage"
 import OutlinedButton from "components/settings/OutlinedButton"
@@ -18,13 +18,26 @@ import EditableProfileIcon from "components/EditableProfileIcon"
 import LatoText from "components/styled_components/LatoText"
 import { useState } from "react"
 import ChangeProfileModal from "components/ChangeProfileModal"
+import { signOut } from "utils/services/auth"
+import { tokenAction } from "redux/reducers/tokens.reducer"
 
 const AccountInfoIndex: React.FC = () => {
   const { navigate } = useNavigation()
+  const dispatch = useAppDispatch()
   const tmpUser = useAppSlector(state => state.tmpStore)
+  const token = useAppSlector(state => state.tokens.currentToken)
   const [visible, setVisible] = useState(false)
 
-  const handleLogout = () => {}
+  // TODO: logout workflow
+  const handleLogout = () => {
+    ;(async () => {
+      const resp = await signOut({ token })
+      if (resp.statusCode !== 200) return
+
+      dispatch(tokenAction.clearToken())
+      navigate("Auth", { screen: "FirstLanding" })
+    })()
+  }
 
   return (
     <SafeAreaView className="bg-background h-full">

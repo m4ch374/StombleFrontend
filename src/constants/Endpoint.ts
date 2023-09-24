@@ -27,6 +27,7 @@ export const accountEP = {
   GET_BUSINESS_ACCOUNT_INFORMATION: "/get-business-account-information",
   SEND_CODE_CHANGE_ATTRIBUTE: "/send-code-change-attribute",
   UPDATE_ICON: "/update-icon",
+  DELETE_ICON: "/delete-icon",
   CLOSE_ACCOUNT: "/close-account",
   UPDATE_PERSONAL_INFO: "/update-personal-info",
 }

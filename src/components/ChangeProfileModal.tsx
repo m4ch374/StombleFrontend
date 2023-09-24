@@ -6,7 +6,7 @@ import ModalSettingsBtn from "./profile/ModalSettingsBtn"
 import * as ImagePicker from "expo-image-picker"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { updateIcon } from "utils/services/accountInfo"
+import { deleteIcon, updateIcon } from "utils/services/accountInfo"
 import { TUpdateIcon } from "types/endpoints"
 import { useNavigation } from "@react-navigation/native"
 import { Divider } from "react-native-elements"
@@ -36,7 +36,6 @@ const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [1, 1],
         quality: 0.3,
         base64: true,
       })
@@ -71,8 +70,27 @@ const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
     })()
   }
 
-  // TODO: remove photo
-  const handleRemovePhoto = () => {}
+  // endpoint: /delete-icon
+  const handleRemovePhoto = () => {
+    ;(async () => {
+      const payload = {
+        businessId: tmpUser.businessId || undefined,
+      }
+
+      const resp = await deleteIcon(payload)
+
+      if (resp.statusCode !== 200) return
+
+      dispatch(
+        tmpStoreAction.setState({
+          ...tmpUser,
+          link_icon: "",
+          message: resp.message,
+        }),
+      )
+      setVisible(false)
+    })()
+  }
 
   return (
     <SwipableModal stateController={[visible, setVisible]}>

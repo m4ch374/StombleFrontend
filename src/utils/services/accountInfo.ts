@@ -1,6 +1,7 @@
 import { accountEP } from "constants/Endpoint"
 import {
   TCloseAccount,
+  TDeleteIcon,
   TGetUserInfo,
   TSendCodeChangeAttribute,
   TUpdateIcon,
@@ -31,6 +32,14 @@ export const getBusinessAccountInformation = () => {
 // /update-icon
 export const updateIcon = (data: TUpdateIcon["requestType"]) => {
   return Fetcher.init<TUpdateIcon>("POST", accountEP.UPDATE_ICON)
+    .withCurrentToken()
+    .withJsonPaylad(data)
+    .fetchData()
+}
+
+// /delete-icon
+export const deleteIcon = (data: TDeleteIcon["requestType"]) => {
+  return Fetcher.init<TDeleteIcon>("DELETE", accountEP.DELETE_ICON)
     .withCurrentToken()
     .withJsonPaylad(data)
     .fetchData()

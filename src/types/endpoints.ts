@@ -104,7 +104,7 @@ type SignOutReq = {
 }
 
 type SignOutRes = {
-  statusCode: string
+  statusCode: number
   message: string
 }
 
@@ -367,6 +367,20 @@ type UpdateIconRes = {
 }
 
 export type TUpdateIcon = TEndpoint<UpdateIconReq, UpdateIconRes>
+// ===================================================
+
+// /delete-icon
+// ===================================================
+type DeleteIconReq = {
+  businessId?: string
+}
+
+type DeleteIconRes = {
+  message: string
+  statusCode: number
+}
+
+export type TDeleteIcon = TEndpoint<DeleteIconReq, DeleteIconRes>
 // ===================================================
 
 // ===================================================

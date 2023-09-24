@@ -18,13 +18,7 @@ const SettingsIndex: React.FC = () => {
   // TODO: Become a Business
   const handleBecomeBusiness = () => {}
 
-  // TODO: logout from an active account
-  // ----------------------------------------------------------------
-  // logout workflow:
-  // 1. When log out, save info screen pops up if he hasn’t saved the login info earlier.
-  // 2. If user has multiple accounts, after logging out it returns back to this screen
-  //    If user has single account, after logging out it returns back to this screen
-  //----------------------------------------------------------------
+  // TODO: logout workflow
   const handleLogout = () => {
     // endpoint: simple log out directly
     ;(async () => {
