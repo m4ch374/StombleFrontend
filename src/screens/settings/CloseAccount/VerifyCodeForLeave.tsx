@@ -1,8 +1,5 @@
 // REFERENCE: Setting - Personal - Close Account
 
-//----------------------------------------------------------------
-// Waiting for new design
-//----------------------------------------------------------------
 import { View, Text, KeyboardAvoidingView, Platform } from "react-native"
 import { useState } from "react"
 import FlatButton from "components/styled_components/FlatButton"
@@ -17,50 +14,51 @@ import { tokenAction } from "redux/reducers/tokens.reducer"
 import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 const VerifyCodeForLeave = () => {
-  const navigation = useNavigation()
+  const navigate = useNavigation()
   const dispatch = useAppDispatch()
   const tmp = useAppSlector(state => state.tmpStore)
   const [disable, setDisabled] = useState(true)
   const [value, setValue] = useState("")
 
-  // Alert: close account needs some changes
+  // TODO: endpoint for sms to close account is ready. Need to rewrite this function
   const handleCloseAccount = () => {
     ;(async () => {
       const resp = await Fetcher.init<TCloseAccount>(
         "DELETE",
         accountEP.CLOSE_ACCOUNT,
       )
-        .withJsonPaylad({ businessId: tmp.userId })
+        .withJsonPaylad({})
         .withCurrentToken()
         .fetchData()
 
       //the user can't be removed if it has any business. In that case the users have to execute close-account sending the businessId
-      if (typeof resp === "undefined") {
-        alert("something went wrong")
-      }
+      if (typeof resp === "undefined") return
 
-      // fake logout
-      ;(async () => {
-        await AsyncStorage.setItem("token", "")
-        dispatch(tokenAction.clearToken())
+      await AsyncStorage.setItem("token", "")
+      dispatch(tokenAction.clearToken())
 
-        navigation.navigate("Auth", { screen: "FirstLanding" })
-      })()
+      navigate.reset({
+        index: 0,
+        routes: [{ name: "Auth", params: { screen: "FirstLanding" } }],
+      })
     })()
   }
 
   return (
-    <KeyboardAvoidingView
-      className="flex-1"
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={90}
-    >
-      <GeneralScreenLayout>
+    <GeneralScreenLayout>
+      <KeyboardAvoidingView
+        className="flex-1"
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={90}
+      >
         <View className="flex-1 items-center">
-          <Text className="text-white font-lato text-base mb-4 text-center">
+          <Text className="text-white font-lato text-7 mb-4 text-center">
             Complete the SMS verification to confirm that this account belongs
-            to you. Tapping “Close Account” will delete account {tmp.fullName}.
-            Enter the 6 digit code we send to {tmp.phone}.
+            to you. Tapping “Close Account” will delete account{" "}
+            <Text className="text-white text-7 font-lato-bold">
+              {tmp.fullName}
+            </Text>{" "}
+            . Enter the 6 digit code we send to {tmp.phone}.
           </Text>
 
           <View className="p-12 flex justify-between h-full">
@@ -78,8 +76,8 @@ const VerifyCodeForLeave = () => {
           disabled={disable}
           bgColor="bg-red-500"
         />
-      </GeneralScreenLayout>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </GeneralScreenLayout>
   )
 }
 
