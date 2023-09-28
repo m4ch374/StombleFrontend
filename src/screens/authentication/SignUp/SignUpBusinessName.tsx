@@ -3,92 +3,62 @@
 // Copied from shadow realm
 
 import { useState } from "react"
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native"
-import BackgroundColour from "components/styled_components/BackgroundColour"
+import { View, TextInput } from "react-native"
 import FlatButton from "components/styled_components/FlatButton"
-import { useNavigation } from "@react-navigation/native"
-import { useAppDispatch, useAppSlector } from "redux/hooks"
-import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
-import { tokenAction } from "redux/reducers/tokens.reducer"
-import { signUp } from "utils/services/auth"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
+import ProgressBar from "components/ProgressBar"
+import Disclaimer from "components/Disclaimer"
+import InputBlueBg from "components/settings/InputBlueBg"
+import { Type } from "types/variantStyle"
+import CustomColor from "constants/Colors"
+import LatoText from "components/styled_components/LatoText"
 
 const SignupBusinessName = () => {
-  const navigation = useNavigation()
-  const dispatch = useAppDispatch()
-  const tmp = useAppSlector(state => state.tmpStore)
-
+  const currentStep = 8
   const [businessName, setBusinessName] = useState("")
 
+  // TODO: connect apps, then /sign-up for business account and direct to Home
   const handlePress = () => {
-    ;(async () => {
-      const payload = {
-        businessName,
-        isBusiness: true,
-        password: tmp.password,
-        phone: tmp.phone,
-      }
-
-      // endpoint: sign up
-      const resp = await signUp(payload)
-
-      if (typeof resp === "undefined") return
-
-      dispatch(tokenAction.setToken(resp.AccessToken))
-      dispatch(tokenAction.setRefresh(resp.RefreshToken))
-      dispatch(
-        tmpStoreAction.setState(state => {
-          state.pswLength = tmp.password.length
-          state.verifyWithPassword = true
-          return state
-        }),
-      )
-
-      navigation.navigate("LoginRoot", { screen: "Home" })
-    })()
+    alert("Business set up for next step is under development")
   }
 
   return (
-    <BackgroundColour>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View
-          className="flex-1 p-[16px]"
-          style={{ flexDirection: "column", height: "100%" }}
-        >
-          <View className="flex-1">
-            <View className="mb-2">
-              <Text className="text-white text-sm font-lato">
-                What&apos;s your business name?
-              </Text>
-            </View>
-            <View className="h-12 bg-transparent rounded-md flex-row items-center justify-between px-3 border border-solid border-white mt-3">
-              <TextInput
-                className="text-white py-auto text-base leading-[16px] w-[280px] h-5 font-lato-bold"
-                placeholderTextColor="#ABABAB"
-                onChangeText={setBusinessName}
-              />
-            </View>
-            <View className="mb-2">
-              <Text className="text-white text-sm mt-3 font-lato">
-                This name will be displayed as your profile name.
-              </Text>
-            </View>
-          </View>
-          <View className="flex-2 justify-end mb-10">
-            <FlatButton
-              text="SIGN UP"
-              disabled={businessName === ""}
-              onPress={handlePress}
-            />
-          </View>
+    <GeneralScreenLayout marginTop="0">
+      <View className="pt-8 flex-1 flex-col">
+        <View className="mb-15">
+          <ProgressBar totalSteps={8} currentStep={currentStep} />
         </View>
-      </TouchableWithoutFeedback>
-    </BackgroundColour>
+        <View className="mb-4">
+          <InputBlueBg
+            title="What’s your business name?"
+            variant={Type.outlined}
+          >
+            <TextInput
+              className="text-white text-base w-full h-full leading-[-2px]"
+              value={businessName}
+              onChangeText={setBusinessName}
+              placeholder="Enter your business name"
+              placeholderTextColor={CustomColor.gray.lighter}
+              keyboardAppearance="dark"
+            />
+          </InputBlueBg>
+        </View>
+        <View className="mb-2">
+          <LatoText classname="text-gray-lighter text-7">
+            This name will be displayed as your profile name.
+          </LatoText>
+        </View>
+      </View>
+
+      <View>
+        <Disclaimer />
+        <FlatButton
+          text="SIGN UP"
+          disabled={businessName === ""}
+          onPress={handlePress}
+        />
+      </View>
+    </GeneralScreenLayout>
   )
 }
 export default SignupBusinessName

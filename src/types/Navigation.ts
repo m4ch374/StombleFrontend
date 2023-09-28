@@ -52,6 +52,8 @@ export type AuthStackList = {
   ChooseAccountType: undefined
 
   SetUpPassword: undefined
+
+  FollowTopics: undefined
 }
 // ===============================================
 

@@ -14,6 +14,9 @@ import SignupBusinessName from "screens/authentication/SignUp/SignUpBusinessName
 import LoginWithAccount from "screens/authentication/SignIn/LoginWithAccount"
 import VerifyCode from "screens/authentication/SignIn/VerifyCode"
 import Login from "screens/authentication/SignIn/Login"
+import FollowTopics from "screens/authentication/SignUp/FollowTopics"
+import CustomColor from "constants/Colors"
+import { Button } from "react-native"
 
 const AuthStack = createNativeStackNavigator<AuthStackList>()
 
@@ -22,7 +25,8 @@ const AuthStackNav = () => {
     <AuthStack.Navigator
       screenOptions={{
         headerTintColor: "#FFFFFF",
-        headerStyle: { backgroundColor: "#020235" },
+        headerStyle: { backgroundColor: CustomColor.background },
+        headerBackTitleVisible: false,
       }}
       initialRouteName="FirstLanding"
     >
@@ -72,6 +76,17 @@ const AuthStackNav = () => {
       </AuthStack.Group>
 
       <AuthStack.Screen name="LoginWithAccount" component={LoginWithAccount} />
+
+      <AuthStack.Screen
+        name="FollowTopics"
+        component={FollowTopics}
+        options={() => ({
+          title: "Follow Topics",
+          headerLeft: () => false,
+          gestureEnabled: false,
+          headerRight: () => <Button title="Skip" />,
+        })}
+      />
     </AuthStack.Navigator>
   )
 }
