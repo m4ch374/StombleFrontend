@@ -6,16 +6,11 @@ import SettingsStackNav from "./SettingStackNav"
 import { useAppSlector } from "redux/hooks"
 import { View } from "react-native"
 import { StatusBar } from "expo-status-bar"
-import { useEffect } from "react"
 
 const RootStack = createNativeStackNavigator<RootStackList>()
 
 export default function Navigation() {
   const token = useAppSlector(state => state.tokens.currentToken)
-
-  useEffect(() => {
-    console.log(token)
-  }, [token])
 
   return (
     <View className="h-full bg-background">
