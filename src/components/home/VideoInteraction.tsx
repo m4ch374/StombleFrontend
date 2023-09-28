@@ -5,6 +5,12 @@ import IconShare from "assets/icons/IconShare"
 import React, { useCallback, useContext, useState } from "react"
 import { Pressable, View, Text } from "react-native"
 import HomeModalControllerContext from "./HomeModalControllerContext"
+import {
+  likeVideo,
+  saveVideo,
+  unSaveVideo,
+  unlikeVideo,
+} from "utils/services/videoPlay"
 
 type TVideoInteraction = {
   vidId: string
@@ -18,14 +24,26 @@ const VideoInteraction: React.FC<TVideoInteraction> = ({ vidId, numLiked }) => {
   const [saved, setSaved] = useState(false)
 
   const handleLike = useCallback(() => {
-    console.log(vidId)
-    setLiked(state => !state)
-  }, [vidId])
+    ;(async () => {
+      const payload = { videoId: vidId }
+      const resp = liked ? await unlikeVideo(payload) : await likeVideo(payload)
+
+      if (typeof resp === "undefined") return
+
+      setLiked(state => !state)
+    })()
+  }, [liked, vidId])
 
   const handleSaved = useCallback(() => {
-    console.log(vidId)
-    setSaved(state => !state)
-  }, [vidId])
+    ;(async () => {
+      const payload = { videoId: vidId }
+      const resp = saved ? await unSaveVideo(payload) : await saveVideo(payload)
+
+      if (typeof resp === "undefined") return
+
+      setSaved(state => !state)
+    })()
+  }, [saved, vidId])
 
   return (
     <View className="w-[50px] flex-col gap-y-[36px]">

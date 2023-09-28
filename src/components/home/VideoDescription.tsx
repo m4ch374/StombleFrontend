@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react"
 import { View, Text, Image, ImageBackground, Pressable } from "react-native"
+import { followBusiness } from "utils/services/videoPlay"
 
 type TVideoDescription = {
   businessId: string
@@ -17,8 +18,13 @@ const VideoDescription: React.FC<TVideoDescription> = ({
   const [followed, setFollowed] = useState(false)
 
   const handleFollow = useCallback(() => {
-    console.log(businessId)
-    setFollowed(state => !state)
+    ;(async () => {
+      const resp = await followBusiness({ businessToFollowing: businessId })
+
+      if (typeof resp === "undefined") return
+
+      setFollowed(state => !state)
+    })()
   }, [businessId])
 
   return (
