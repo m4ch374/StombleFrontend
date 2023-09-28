@@ -1,8 +1,12 @@
 import { View } from "react-native"
 
-const ProgressBar = (props: { currentStep: number }) => {
-  const totalSteps = 7
-  const progress = (props.currentStep / totalSteps) * 100
+type Props = {
+  totalSteps?: number
+  currentStep: number
+}
+
+const ProgressBar = ({ totalSteps = 7, currentStep }: Props) => {
+  const progress = (currentStep / totalSteps) * 100
   const segmentWidth = 100 / totalSteps
 
   const segments = []

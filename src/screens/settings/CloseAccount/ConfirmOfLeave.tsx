@@ -25,9 +25,9 @@ const ConfirmOfLeave = () => {
   const tmpUser = useAppSlector(state => state.tmpStore)
 
   return (
-    <GeneralScreenLayout>
-      <View className="mt-[-40px]">
-        <View className="w-full flex my-20 items-center">
+    <GeneralScreenLayout marginTop="0">
+      <View>
+        <View className="w-full flex my-16 items-center">
           <View className="w-[80px] h-[80px] flex justify-center mb-4">
             <AccountFileCard
               uri={tmpUser.link_icon}

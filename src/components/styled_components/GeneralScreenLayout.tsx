@@ -7,13 +7,23 @@ import {
 
 type Props = {
   children: React.ReactNode
+  paddingX?: string
+  marginTop?: string
+  marginBottom?: string
 }
 
-const GeneralScreenLayout = ({ children }: Props) => {
+const GeneralScreenLayout = ({
+  children,
+  paddingX = "8",
+  marginTop = "24",
+  marginBottom = "20",
+}: Props) => {
   return (
     <SafeAreaView className="bg-background h-full">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="h-full flex justify-between px-8 pt-24 pb-20">
+        <View
+          className={`h-full flex-1 justify-between px-${paddingX} mt-${marginTop} mb-${marginBottom}`}
+        >
           {children}
         </View>
       </TouchableWithoutFeedback>
