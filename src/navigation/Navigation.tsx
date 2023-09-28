@@ -6,11 +6,16 @@ import SettingsStackNav from "./SettingStackNav"
 import { useAppSlector } from "redux/hooks"
 import { View } from "react-native"
 import { StatusBar } from "expo-status-bar"
+import { useEffect } from "react"
 
 const RootStack = createNativeStackNavigator<RootStackList>()
 
 export default function Navigation() {
   const token = useAppSlector(state => state.tokens.currentToken)
+
+  useEffect(() => {
+    console.log(token)
+  }, [token])
 
   return (
     <View className="h-full bg-background">
@@ -19,11 +24,13 @@ export default function Navigation() {
         initialRouteName={token === "" ? "Auth" : "LoginRoot"}
         screenOptions={{ headerShown: false }}
       >
-        <RootStack.Screen
-          component={AuthStackNav}
-          name="Auth"
-          options={{ headerShown: false }}
-        />
+        {token === "" && (
+          <RootStack.Screen
+            component={AuthStackNav}
+            name="Auth"
+            options={{ headerShown: false }}
+          />
+        )}
 
         <RootStack.Screen
           name="LoginRoot"

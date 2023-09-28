@@ -8,6 +8,7 @@ import { tokenAction } from "redux/reducers/tokens.reducer"
 import { settingsMenuItems } from "constants/SettingsMenuItems"
 import OutlinedButton from "components/settings/OutlinedButton"
 import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
+import { useCallback } from "react"
 
 const SettingsIndex: React.FC = () => {
   const navigate = useNavigation()
@@ -15,6 +16,15 @@ const SettingsIndex: React.FC = () => {
 
   // TODO: Become a Business
   const handleBecomeBusiness = () => {}
+
+  const waitForTokenClear = useCallback(
+    () =>
+      new Promise<void>(resolve => {
+        dispatch(tokenAction.clearToken())
+        resolve()
+      }),
+    [dispatch],
+  )
 
   // TODO: logout workflow
   const handleLogout = () => {
@@ -24,11 +34,11 @@ const SettingsIndex: React.FC = () => {
 
       // if (typeof resp === "undefined") return
 
+      await waitForTokenClear()
       navigate.reset({
         index: 0,
         routes: [{ name: "Auth" }],
       })
-      dispatch(tokenAction.clearToken())
     })()
   }
 
