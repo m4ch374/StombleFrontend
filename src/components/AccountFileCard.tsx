@@ -49,7 +49,7 @@ const AccountFileCard: React.FC<Props> = ({
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             source={require("assets/user_icon.png")}
             resizeMode="cover"
-            className="flex-1 justify-center bg-slate-400 h-full w-full "
+            className="flex-1 justify-center h-full w-full "
           >
             <Image
               source={{ uri: uri }}

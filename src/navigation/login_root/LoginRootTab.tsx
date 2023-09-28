@@ -37,19 +37,15 @@ const LoginRootTab = () => {
       dispatch(
         tmpStoreAction.setState(state => {
           const { result } = userResp
-          const HOST_URL =
-            "https://stomble-users.s3.ap-southeast-2.amazonaws.com/"
-
           state.userId = result.id
           state.fullName = result.fullName
           state.phone = result.phone
           state.email = result.email
-          state.link_icon = HOST_URL + result.link_icon
+          state.link_icon = result.link_icon
           return state
         }),
       )
     })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   return (
