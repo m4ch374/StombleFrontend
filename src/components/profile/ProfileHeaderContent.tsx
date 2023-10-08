@@ -1,17 +1,8 @@
-import { useNavigation } from "@react-navigation/native"
-import {
-  View,
-  Text,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-} from "react-native"
+import { View, Text, ImageBackground, Image } from "react-native"
 import { useAppSlector } from "redux/hooks"
 
 const ProfileHeaderContent = () => {
   const tmpUser = useAppSlector(state => state.tmpStore)
-
-  const navigation = useNavigation()
 
   return (
     <View className="m-md">
@@ -57,35 +48,17 @@ const ProfileHeaderContent = () => {
         </View>
       </View>
 
-      <View className="mb-md">
+      <View>
         <Text className="lato-text text-gray-lighter text-sm mt-sm">
           Placehlder Consultant
         </Text>
 
         {tmpUser.link.url && (
           <Text className="lato-text font-lato-bold text-secondary text-sm">
-            {tmpUser.link.text ? tmpUser.link.text : tmpUser.link.url}
+            {tmpUser.link.text || tmpUser.link.url}
           </Text>
         )}
       </View>
-
-      <TouchableOpacity
-        className="
-          border-2
-          border-secondary
-          rounded-sm
-          h-[34px]
-          w-[50%]
-          justify-center
-          items-center"
-        onPress={() => {
-          navigation.navigate("EditProfile", { screen: "EditProfileIndex" })
-        }}
-      >
-        <Text className="lato-text text-sm font-lato-bold text-secondary">
-          Edit Profile
-        </Text>
-      </TouchableOpacity>
     </View>
   )
 }

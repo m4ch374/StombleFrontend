@@ -57,15 +57,11 @@ const ProfileTab: React.FC = () => {
       </Tabs.Tab>
 
       <Tabs.Tab name="Liked videos">
-        <Tabs.ScrollView>
-          <VideosLiked />
-        </Tabs.ScrollView>
+        <VideosLiked />
       </Tabs.Tab>
 
       <Tabs.Tab name="Saved videos">
-        <Tabs.ScrollView>
-          <VideosSaved />
-        </Tabs.ScrollView>
+        <VideosSaved />
       </Tabs.Tab>
     </Tabs.Container>
   )
