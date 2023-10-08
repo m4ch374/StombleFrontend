@@ -30,12 +30,8 @@ const VerifyPhoneInput = ({
   // TODO: workflow changed, need to update this component later
   const handleOnBlur = () => {
     if (!setIsValid) return
-    if (validateMobileNumber(phone)) {
-      setIsValid(true)
-    } else {
-      setIsValid(false)
-      return
-    }
+
+    setIsValid(validateMobileNumber(phone))
 
     if (!setIsExists) return
     ;(async () => {
@@ -46,12 +42,7 @@ const VerifyPhoneInput = ({
 
       if (typeof resp === "undefined") return
 
-      if (resp.exists) {
-        setIsExists(true)
-        return
-      } else {
-        setIsExists(false)
-      }
+      setIsExists(resp.exists)
     })()
   }
 
@@ -65,8 +56,8 @@ const VerifyPhoneInput = ({
         </View>
 
         <TextInput
-          className="text-white text-base flex-1 items-center justify-center w-full h-full pl-4 leading-[-2px] "
-          keyboardType="phone-pad"
+          className="text-white text-base flex-1 items-center justify-center w-full h-full pl-4" // leading-[-2px]" (I presum its an ios thing?)
+          keyboardType="number-pad"
           keyboardAppearance="dark"
           cursorColor={CustomColor.gray.lighter}
           value={phone}
