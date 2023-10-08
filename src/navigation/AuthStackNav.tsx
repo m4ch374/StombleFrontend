@@ -8,7 +8,6 @@ import SignUpDOB from "screens/authentication/SignUp/SignUpDOB"
 import ForgetPassword from "screens/authentication/SignIn/ForgetPassword"
 import ChooseAccountType from "screens/authentication/SignUp/ChooseAccountType"
 import VerifyPhone from "screens/authentication/SignUp/VerifyPhone"
-import SignUpGender from "screens/authentication/SignUp/SignUpGender"
 import SetUpPassword from "screens/authentication/SignUp/SetUpPassword"
 import SignupBusinessName from "screens/authentication/SignUp/SignUpBusinessName"
 import LoginWithAccount from "screens/authentication/SignIn/LoginWithAccount"
@@ -61,7 +60,7 @@ const AuthStackNav = () => {
 
         <AuthStack.Screen name="SignUpDOB" component={SignUpDOB} />
 
-        <AuthStack.Screen name="SignUpGender" component={SignUpGender} />
+        {/* <AuthStack.Screen name="SignUpGender" component={SignUpGender} /> */}
         <AuthStack.Screen
           name="ChooseAccountType"
           component={ChooseAccountType}

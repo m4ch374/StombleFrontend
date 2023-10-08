@@ -107,7 +107,7 @@ const FollowTopics = () => {
   }
 
   return (
-    <GeneralScreenLayout paddingX="0" marginTop="8">
+    <GeneralScreenLayout paddingX="px-0" marginTop="mt-8">
       <View className="flex-1">
         <View className="flex px-8 my-8">
           <LatoText classname="font-lato-bold">

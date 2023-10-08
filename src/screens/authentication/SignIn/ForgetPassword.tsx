@@ -77,11 +77,11 @@ const ForgetPassword = () => {
             )}
           </View>
           <BtnWithLoginRegister
+            action="signup"
             btnText={"CONTINUE"}
             disabled={disable}
             setDisabled={setDisabled}
             onPress={handleOnPress}
-            ableToLogin={false}
           />
         </View>
       </TouchableWithoutFeedback>

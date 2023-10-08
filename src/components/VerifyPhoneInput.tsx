@@ -13,13 +13,20 @@ const validateMobileNumber = (number: string) => {
 }
 
 type Props = {
+  title?: string
   phone: string
   setPhone: (phone: string) => void
   setIsValid?: (isValid: boolean) => void
   setIsExists?: (isExists: boolean) => void
 }
 
-const VerifyPhone = ({ phone, setPhone, setIsValid, setIsExists }: Props) => {
+const VerifyPhoneInput = ({
+  title = "Mobile number",
+  phone,
+  setPhone,
+  setIsValid,
+  setIsExists,
+}: Props) => {
   // TODO: workflow changed, need to update this component later
   const handleOnBlur = () => {
     if (!setIsValid) return
@@ -50,7 +57,7 @@ const VerifyPhone = ({ phone, setPhone, setIsValid, setIsExists }: Props) => {
 
   return (
     <View>
-      <InputBlueBg title={"Mobile number"} variant={Type.outlined}>
+      <InputBlueBg title={title} variant={Type.outlined}>
         <View className="flex flex-row w-[90px] h-full justify-around items-center ">
           <AuFlag />
           <LatoText classname="bottom-[1px]">+61</LatoText>
@@ -72,4 +79,4 @@ const VerifyPhone = ({ phone, setPhone, setIsValid, setIsExists }: Props) => {
   )
 }
 
-export default VerifyPhone
+export default VerifyPhoneInput

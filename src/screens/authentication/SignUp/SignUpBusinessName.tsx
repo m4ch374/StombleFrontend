@@ -23,7 +23,7 @@ const SignupBusinessName = () => {
   }
 
   return (
-    <GeneralScreenLayout marginTop="0">
+    <GeneralScreenLayout marginTop="mt-0">
       <View className="pt-8 flex-1 flex-col">
         <View className="mb-15">
           <ProgressBar totalSteps={8} currentStep={currentStep} />

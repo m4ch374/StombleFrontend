@@ -12,9 +12,9 @@ import { useDispatch } from "react-redux"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import LatoText from "components/styled_components/LatoText"
 import { sendCodeChangeAttribute } from "utils/services/accountInfo"
-import VerifyPhone from "components/VerifyPhone"
 import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 import { checkNumber } from "utils/services/auth"
+import VerifyPhoneInput from "components/VerifyPhoneInput"
 
 const EditPhone = () => {
   const { navigate } = useNavigation()
@@ -65,7 +65,7 @@ const EditPhone = () => {
   return (
     <GeneralScreenLayout>
       <View className="flex flex-col">
-        <VerifyPhone
+        <VerifyPhoneInput
           phone={phone}
           setPhone={setPhone}
           setIsValid={setIsValid}

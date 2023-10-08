@@ -1,60 +1,39 @@
 // REFERENCE: Landing page
 
-import { Text, View } from "react-native"
-import { Link, useNavigation } from "@react-navigation/native"
-import BackgroundColour from "components/styled_components/BackgroundColour"
-import FlatButton from "components/styled_components/FlatButton"
-import Copyright from "components/CopyRight"
+import { Pressable, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import LatoText from "components/styled_components/LatoText"
+import BtnWithLoginRegister from "components/BtnWithLoginRegister"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 const FirstLanding = () => {
   const { navigate } = useNavigation()
 
+  // TODO: Skip before signing up workflow
+  const handleSkip = () => {
+    alert("Skip to home screen before signing up workflow is under development")
+  }
+
   return (
-    <BackgroundColour>
-      <View className="flex-1 px-4 relative mt-7">
-        <View className="flex-1 justify-end">
-          <View className="absolute top-10 right-0">
-            <View
-              className={`rounded-md justify-center items-center flex`}
-              style={{
-                backgroundColor: "rgba(199, 199, 199, 0.3)",
-                width: 54,
-                height: 32,
-              }}
-            >
-              <Link to={"/HomeScreen"}>
-                <Text className="text-white font-semibold">Skip</Text>
-              </Link>
-            </View>
-          </View>
-          <LatoText classname="text-center text-31 font-AT">stomble</LatoText>
-        </View>
-
-        <View className="flex-1 justify-end">
-          <View className=" mb-4 ">
-            <FlatButton
-              text="LOGIN"
-              onPress={() => navigate("Auth", { screen: "Login" })}
-            />
-          </View>
-          <View className="flex-row justify-center items-center align-middle mb-24">
-            <Text className="text-sm text-white">
-              Don&apos;t have an account?
-            </Text>
-            <View className="ml-0.5">
-              <Link to={"/VerifyPhone"}>
-                <Text className="text-white font-semibold"> Register Now</Text>
-              </Link>
-            </View>
-          </View>
-
-          <View className="mx-auto mb-8">
-            <Copyright />
-          </View>
-        </View>
+    <GeneralScreenLayout marginTop="mt-0">
+      <View className="flex-1 relative">
+        <Pressable className="absolute top-10 right-0" onPress={handleSkip}>
+          <LatoText classname="text-secondary font-lato-bold">Skip</LatoText>
+        </Pressable>
       </View>
-    </BackgroundColour>
+
+      <LatoText classname="flex-1 text-center text-31 font-AT">
+        stomble
+      </LatoText>
+
+      <BtnWithLoginRegister
+        action="signup"
+        btnText="log in"
+        disabled={false}
+        setDisabled={() => {}}
+        onPress={() => navigate("Auth", { screen: "Login" })}
+      />
+    </GeneralScreenLayout>
   )
 }
 
