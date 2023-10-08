@@ -5,11 +5,11 @@ import React from "react"
 import FlatButton from "components/styled_components/FlatButton"
 import { SelectList } from "react-native-dropdown-select-list"
 import { FontAwesome } from "@expo/vector-icons"
-import BackgroundColour from "components/styled_components/BackgroundColour"
 import { useAppDispatch } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { useNavigation } from "@react-navigation/native"
 import ProgressBar from "components/ProgressBar"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 
 const SignUpGender = () => {
   const { navigate } = useNavigation()
@@ -30,7 +30,7 @@ const SignUpGender = () => {
     return data.filter(d => d.key === key)[0].value.toLocaleLowerCase()
   }
   return (
-    <BackgroundColour>
+    <GeneralScreenLayout>
       <View
         className="flex-1 p-[16px]"
         style={{ flexDirection: "column", height: "100%" }}
@@ -103,7 +103,7 @@ const SignUpGender = () => {
           />
         </View>
       </View>
-    </BackgroundColour>
+    </GeneralScreenLayout>
   )
 }
 

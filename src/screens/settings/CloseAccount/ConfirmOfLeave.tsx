@@ -25,7 +25,7 @@ const ConfirmOfLeave = () => {
   const tmpUser = useAppSlector(state => state.tmpStore)
 
   return (
-    <GeneralScreenLayout marginTop="0">
+    <GeneralScreenLayout marginTop="mt-0">
       <View>
         <View className="w-full flex my-16 items-center">
           <View className="w-[80px] h-[80px] flex justify-center mb-4">

@@ -1,4 +1,4 @@
-// REFERENCE: REGISTER-46
+// REFERENCE: SignUp3
 
 // From shadow realm
 // TODO: Lint
@@ -21,10 +21,12 @@ import { AuthStackList } from "types/Navigation"
 // Issues with the library itself
 // eslint-disable-next-line import/no-named-as-default
 import DateTimePickerModal from "react-native-modal-datetime-picker"
-import BackgroundColour from "components/styled_components/BackgroundColour"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import ProgressBar from "components/ProgressBar"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
+import InputBlueBg from "components/settings/InputBlueBg"
+import { Type } from "types/variantStyle"
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, "SignUpDOB">
@@ -69,44 +71,36 @@ const SignUpDOB = ({ navigation }: Props) => {
   }
 
   return (
-    <BackgroundColour>
-      <View className="flex-1 px-[16px] mt-[34px]">
-        <View>
+    <GeneralScreenLayout marginTop="mt-8">
+      <View className="flex-1">
+        <View className="mb-16">
           <ProgressBar currentStep={currentStep} />
         </View>
 
-        <View className="mt-[34px]">
-          <Text className="text-[16px] text-white font-lato-bold">
-            Create your Stomble account
-          </Text>
-        </View>
-
-        <View className="mt-[24px] mb-[16px]">
-          <Text className="text-[14px] text-[#ffffff80] font-lato">
-            When is your date of birth?
-          </Text>
-        </View>
-        <View className="flex-1 flex-col h-full">
-          <Pressable
-            onPress={showDatePicker}
-            className="flex-row justify-between items-center px-[8px] h-[48px] w-full rounded-[5px] border-[#ffffff70] border-[1px] "
-          >
-            <TextInput
-              className="text-[16px] text-white"
-              editable={false}
-              selectTextOnFocus={false}
-              value={dateofbirth}
-              placeholder={"1/1/2023"}
-              placeholderTextColor="#ffffff"
-            />
-            <View>
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={24}
-                color="white"
+        <View className="flex-1">
+          <InputBlueBg title="What is your full name?" variant={Type.outlined}>
+            <Pressable
+              onPress={showDatePicker}
+              className="flex-row justify-between items-center w-full h-full"
+            >
+              <TextInput
+                className="text-[16px] text-white"
+                editable={false}
+                selectTextOnFocus={false}
+                value={dateofbirth}
+                placeholder={"1/1/2023"}
+                placeholderTextColor="#ffffff"
               />
-            </View>
-          </Pressable>
+              <View>
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={24}
+                  color="white"
+                />
+              </View>
+            </Pressable>
+          </InputBlueBg>
+
           <View>
             <DateTimePickerModal
               isVisible={isDatePickerVisible}
@@ -116,17 +110,17 @@ const SignUpDOB = ({ navigation }: Props) => {
             />
           </View>
         </View>
-        <View className="flex-2 justify-end mb-10">
-          <FlatButton
-            text="NEXT"
-            disabled={dateofbirth === "" ? true : false}
-            onPress={() => {
-              dispatch(tmpStoreAction.setItem("birthday", dateofbirth))
-              navigation.navigate("SignUpGender")
-            }}
-          />
-        </View>
 
+        <FlatButton
+          text="NEXT"
+          disabled={dateofbirth === "" ? true : false}
+          onPress={() => {
+            dispatch(tmpStoreAction.setItem("birthday", dateofbirth))
+            navigation.navigate("SetUpPassword")
+          }}
+        />
+
+        {/* TODO: need UI refactor to this popup component*/}
         <Modal animationType="fade" visible={showModal} transparent={true}>
           <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
             <View className="bg-black/30 w-full h-full flex justify-center items-center">
@@ -154,7 +148,7 @@ const SignUpDOB = ({ navigation }: Props) => {
           </TouchableWithoutFeedback>
         </Modal>
       </View>
-    </BackgroundColour>
+    </GeneralScreenLayout>
   )
 }
 export default SignUpDOB

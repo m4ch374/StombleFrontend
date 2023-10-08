@@ -21,7 +21,7 @@ const ProgressBar = ({ totalSteps = 7, currentStep }: Props) => {
   }
 
   return (
-    <View className="h-6 rounded-md bg-white overflow-hidden relative">
+    <View className="h-4 rounded-md bg-white overflow-hidden relative">
       <View
         className="h-full bg-blue-700 absolute"
         style={[{ width: `${progress}%` }]}

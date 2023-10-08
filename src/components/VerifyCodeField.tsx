@@ -6,15 +6,22 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field"
+import { resendCode } from "utils/services/auth"
 import LatoText from "./styled_components/LatoText"
 
 type Props = {
+  phone: string
   value: string
   setValue: React.Dispatch<React.SetStateAction<string>>
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const VerifyCodeField = ({ value, setValue, setDisabled }: Props) => {
+export const VerifyCodeField = ({
+  value,
+  setValue,
+  setDisabled,
+  phone,
+}: Props) => {
   const CELL_COUNT = 6
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT })
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -25,7 +32,7 @@ export const VerifyCodeField = ({ value, setValue, setDisabled }: Props) => {
   const [sendCode, setSendCode] = useState(false)
 
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval> | undefined
+    let interval: ReturnType<typeof setInterval>
     if (timer > 0 && !sendCode) {
       interval = setInterval(() => {
         setTimer(timer - 1)
@@ -47,12 +54,19 @@ export const VerifyCodeField = ({ value, setValue, setDisabled }: Props) => {
   const handleSendCode = () => {
     setSendCode(false)
     setTimer(60)
-    console.log("on click send code")
+    ;(async () => {
+      const resp = await resendCode({ phone })
+
+      if (typeof resp === "undefined") {
+        alert("Something wrong happened. Please try again later.")
+        return
+      }
+    })()
   }
 
   return (
     <View className="">
-      <View className="w-[300px] mb-16 ">
+      <View className="w-[300px] mb-20 ">
         <CodeField
           ref={ref}
           {...props}
@@ -80,7 +94,7 @@ export const VerifyCodeField = ({ value, setValue, setDisabled }: Props) => {
       </View>
       <View className="flex flex-row justify-center items-center">
         <Text className="text-7 text-white text-center font-lato-bold">
-          Code expires in {timer} seconds.
+          {sendCode ? "Code has expired." : `Code expires in ${timer} seconds.`}
         </Text>
         <TouchableOpacity disabled={!sendCode} onPress={handleSendCode}>
           <LatoText

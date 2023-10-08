@@ -1,15 +1,18 @@
 // REFERENCE: Set Up Password
 
-import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native"
+import { View, Text } from "react-native"
 import React, { useMemo, useState } from "react"
 import { useNavigation } from "@react-navigation/native"
 import FlatButton from "components/styled_components/FlatButton"
-import BackgroundColour from "components/styled_components/BackgroundColour"
 import PasswordInput from "components/PasswordInput"
 import { useAppDispatch, useAppSlector } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { forgotPassword, preSignUp } from "utils/services/auth"
 import ProgressBar from "components/ProgressBar"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
+import LatoText from "components/styled_components/LatoText"
+import IconCheck from "assets/icons/InconCheck"
+import IconCircleCheck from "assets/icons/IconCircleCheck"
 
 // Breaking the rules here a bit
 type TPasswordCheck = {
@@ -21,10 +24,10 @@ const PasswordCheck: React.FC<TPasswordCheck> = ({ children, criteria }) => {
   return (
     <Text
       className={`${
-        criteria() ? "text-green-500/90" : "text-[#ABABAB]"
+        criteria() ? "text-green-500/90" : "text-gray-mid"
       } text-[14px]`}
     >
-      <Text>{criteria() ? "✔ " : "• "}</Text>
+      <Text>{criteria() ? <IconCheck /> : "• "}</Text>
       <Text>{children}</Text>
     </Text>
   )
@@ -79,97 +82,108 @@ const SetUpPassword = () => {
   }
 
   return (
-    <BackgroundColour>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="px-4 pb-10 flex justify-between h-full">
+    <GeneralScreenLayout marginTop="mt-8">
+      <View className="flex-1">
+        <View className="mb-16">
+          <ProgressBar currentStep={currentStep} />
+        </View>
+
+        <View className="flex gap-4">
           <View>
-            <View className="mb-[24px]">
-              <ProgressBar currentStep={currentStep} />
+            <LatoText classname="text-sm text-gray-lightest mb-4">
+              New password
+            </LatoText>
+
+            <View className="relative">
+              <PasswordInput
+                password={password}
+                setPassword={setPassword}
+                placeholder="Enter your password"
+              />
+
+              {allMatches && (
+                <IconCircleCheck
+                  classname={"absolute right-24 top-7 w-10 h-10"}
+                />
+              )}
             </View>
-            <View className="mb-[10px]">
-              <Text className="text-white text-[16px] font-lato font-semibold">
-                Set up a password for extra security.
-              </Text>
-            </View>
+          </View>
 
-            <View className="mb-[8px]">
-              <Text className="text-[12px] text-[#FFFFFF60] font-lato">
-                New Password
-              </Text>
-            </View>
+          <Text className="text-[#ABABAB] text-[14px]">
+            Password must contain:
+          </Text>
 
-            <PasswordInput password={password} setPassword={setPassword} />
-
-            <Text className="text-[#ABABAB] text-[14px]">
-              Password must contain:
-            </Text>
-
-            {/*
+          {/*
               Uhhhhhh...... in hindsight i shouldve just mapped them with an array or something
               But im too lazy for that now im in the middle of developing it
               We could always go back and fix right..... ? - time capsule (9/8/2023)
             */}
-            <View className="flex pl-4 pb-10">
-              <PasswordCheck
-                criteria={() => {
-                  return testRegexp(regexpCollection.charNum)
-                }}
-              >
-                At least 8 characters
-              </PasswordCheck>
-              <PasswordCheck
-                criteria={() => {
-                  return testRegexp(regexpCollection.hasUpper)
-                }}
-              >
-                An uppercase character
-              </PasswordCheck>
-              <PasswordCheck
-                criteria={() => {
-                  return testRegexp(regexpCollection.hasLower)
-                }}
-              >
-                A lowercase character
-              </PasswordCheck>
-              <PasswordCheck
-                criteria={() => {
-                  return testRegexp(regexpCollection.hasNum)
-                }}
-              >
-                A number
-              </PasswordCheck>
-              <PasswordCheck
-                criteria={() => {
-                  return testRegexp(regexpCollection.hasSpecChar)
-                }}
-              >
-                A special character
-              </PasswordCheck>
-            </View>
-
-            <View className="mb-[8px]">
-              <Text className="text-[12px] text-[#FFFFFF60] font-lato">
-                Confirm New Password
-              </Text>
-            </View>
-
-            <PasswordInput password={confirm} setPassword={setConfirm} />
-
-            {password === confirm && allMatches && (
-              <Text className="text-[#ABABAB] text-[14px] text-green-500/90">
-                ✔ Password match
-              </Text>
-            )}
+          <View className="flex pl-4 pb-10">
+            <PasswordCheck
+              criteria={() => {
+                return testRegexp(regexpCollection.charNum)
+              }}
+            >
+              At least 8 characters
+            </PasswordCheck>
+            <PasswordCheck
+              criteria={() => {
+                return testRegexp(regexpCollection.hasUpper)
+              }}
+            >
+              An uppercase character
+            </PasswordCheck>
+            <PasswordCheck
+              criteria={() => {
+                return testRegexp(regexpCollection.hasLower)
+              }}
+            >
+              A lowercase character
+            </PasswordCheck>
+            <PasswordCheck
+              criteria={() => {
+                return testRegexp(regexpCollection.hasNum)
+              }}
+            >
+              A number
+            </PasswordCheck>
+            <PasswordCheck
+              criteria={() => {
+                return testRegexp(regexpCollection.hasSpecChar)
+              }}
+            >
+              A special character
+            </PasswordCheck>
           </View>
 
-          <FlatButton
-            text={"VERIFY CODE"}
-            disabled={password !== confirm || !allMatches}
-            onPress={handleSetPassword}
-          />
+          <View>
+            <LatoText classname="text-sm text-gray-lightest mb-4">
+              Current new password
+            </LatoText>
+            <PasswordInput
+              password={confirm}
+              setPassword={setConfirm}
+              placeholder="Re-enter your password"
+            />
+          </View>
+
+          {password === confirm && allMatches && (
+            <View className="flex flex-row items-center">
+              <IconCircleCheck />
+              <Text className="tex-base text-green-500/90 ml-4">
+                Password match
+              </Text>
+            </View>
+          )}
         </View>
-      </TouchableWithoutFeedback>
-    </BackgroundColour>
+      </View>
+
+      <FlatButton
+        text={"next"}
+        disabled={password !== confirm || !allMatches}
+        onPress={handleSetPassword}
+      />
+    </GeneralScreenLayout>
   )
 }
 

@@ -47,7 +47,7 @@ const ChooseAccountType = () => {
   }
 
   return (
-    <GeneralScreenLayout marginTop="8">
+    <GeneralScreenLayout marginTop="mt-8">
       <View className="flex flex-col gap-8">
         <View className="mb-15">
           <ProgressBar

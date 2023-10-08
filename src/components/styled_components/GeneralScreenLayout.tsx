@@ -14,15 +14,15 @@ type Props = {
 
 const GeneralScreenLayout = ({
   children,
-  paddingX = "8",
-  marginTop = "24",
-  marginBottom = "20",
+  paddingX = "px-8",
+  marginTop = "mt-24",
+  marginBottom = "mb-20",
 }: Props) => {
   return (
     <SafeAreaView className="bg-background h-full">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View
-          className={`h-full flex-1 justify-between px-${paddingX} mt-${marginTop} mb-${marginBottom}`}
+          className={`h-full flex-1 justify-between ${paddingX} ${marginTop} ${marginBottom}`}
         >
           {children}
         </View>

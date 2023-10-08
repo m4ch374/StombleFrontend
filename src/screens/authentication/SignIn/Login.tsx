@@ -1,9 +1,7 @@
 // REFERENCE: Log in - Login with Mobile Number and Password
 
 import { useEffect, useState } from "react"
-import { TouchableWithoutFeedback, View, Text, Keyboard } from "react-native"
-import BackgroundColour from "components/styled_components/BackgroundColour"
-import PhoneNumberInput from "components/PhoneNumberInput"
+import { View, Text } from "react-native"
 import BtnWithLoginRegister from "components/BtnWithLoginRegister"
 import { useNavigation } from "@react-navigation/native"
 import { useAppDispatch } from "redux/hooks"
@@ -12,29 +10,31 @@ import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import LatoText from "components/styled_components/LatoText"
 import { signIn } from "utils/services/auth"
 import PasswordInput from "components/PasswordInput"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
+import ErrorMessage from "components/ErrorMessage"
+import VerifyPhoneInput from "components/VerifyPhoneInput"
 
 const Login = () => {
   const navigate = useNavigation()
   const dispatch = useAppDispatch()
-
-  const [isValid, setIsValid] = useState(true)
+  const [isValid, setIsValid] = useState(false)
   const [disabled, setDisabled] = useState(true)
   const [loginError, setLoginError] = useState(false)
-  const [phone, setPhone] = useState({
-    number: "",
-    countryCode: "+61",
-  })
+  const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
 
   useEffect(() => {
-    setDisabled(!(phone.number.length > 0 && password.length > 0))
-  }, [password, phone.number])
+    setDisabled(
+      !(phone.length > 0 && password.length > 0 && isValid && !loginError),
+    )
+  }, [password, phone, isValid, loginError])
 
   const handleLogin = () => {
     ;(async () => {
+      const phoneNum = "+61" + phone
       // endpoint: sign in with phone number and password
       const signInRes = await signIn({
-        phone: phone.countryCode + phone.number,
+        phone: phoneNum,
         password: password,
       })
 
@@ -60,55 +60,57 @@ const Login = () => {
   }
 
   return (
-    <BackgroundColour>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="h-full w-full flex-1 justify-between items-center mt-8">
-          <View className="flex gap-6">
-            <View>
-              <LatoText classname="text-gray-lightest text-sm mb-4">
-                Mobile Number
-              </LatoText>
-              <PhoneNumberInput
-                setPhone={setPhone}
-                isValid={isValid}
-                setIsValid={setIsValid}
-              />
-            </View>
-
-            <View>
-              <LatoText classname="text-gray-lightest text-sm mb-4">
-                Password
-              </LatoText>
-              <PasswordInput password={password} setPassword={setPassword} />
-              {/* temporarily put here to indicate wrong login on screen, develop later */}
-              {loginError && (
-                <Text className="text-sm text-red-500">
-                  Wrong phone number or password
-                </Text>
-              )}
-              <Text
-                className="text-sm text-secondary font-lato-bold my-4 cursor-pointer"
-                onPress={() =>
-                  navigate.navigate("Auth", {
-                    screen: "ForgetPassword",
-                  })
-                }
-              >
-                Forgot Your Password?
-              </Text>
-            </View>
-          </View>
-
-          <BtnWithLoginRegister
-            btnText="LOG IN"
-            ableToLogin={false}
-            disabled={disabled}
-            setDisabled={setDisabled}
-            onPress={handleLogin}
+    <GeneralScreenLayout>
+      <View className="flex gap-8">
+        <View>
+          <VerifyPhoneInput
+            phone={phone}
+            setPhone={setPhone}
+            setIsValid={setIsValid}
           />
         </View>
-      </TouchableWithoutFeedback>
-    </BackgroundColour>
+
+        <View>
+          <LatoText classname="text-sm text-gray-lightest mb-4">
+            Password
+          </LatoText>
+          <PasswordInput
+            password={password}
+            setPassword={setPassword}
+            placeholder="Enter your password"
+          />
+
+          <Text
+            className="text-sm text-secondary font-lato-bold my-2 cursor-pointer"
+            onPress={() =>
+              navigate.navigate("Auth", {
+                screen: "ForgetPassword",
+              })
+            }
+          >
+            Forgot Your Password?
+          </Text>
+        </View>
+      </View>
+
+      <View>
+        <BtnWithLoginRegister
+          action="signup"
+          btnText="next"
+          disabled={disabled}
+          setDisabled={setDisabled}
+          onPress={handleLogin}
+        />
+
+        {loginError && (
+          <ErrorMessage
+            setLoginError={setLoginError}
+            setPhone={setPhone}
+            setPassword={setPassword}
+          />
+        )}
+      </View>
+    </GeneralScreenLayout>
   )
 }
 export default Login

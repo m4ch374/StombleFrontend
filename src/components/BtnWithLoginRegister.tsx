@@ -1,12 +1,11 @@
-import { View, Text } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { View, Text, Pressable } from "react-native"
 import FlatButton from "./styled_components/FlatButton"
-import { Link } from "@react-navigation/native"
 import LatoText from "./styled_components/LatoText"
 
-// TODO: based on new design, will refactor later
 interface Props {
   btnText: string
-  ableToLogin: boolean
+  action?: "login" | "signup"
   disabled: boolean
   setDisabled: (disabled: boolean) => void
   onPress: () => void
@@ -15,27 +14,34 @@ const BtnWithLoginRegister = ({
   btnText,
   disabled,
   onPress,
-  ableToLogin,
+  action = "login",
 }: Props) => {
+  const { navigate } = useNavigation()
+
   return (
-    <View className="mx-sm">
-      <View className=" mb-md ">
+    <View>
+      <View className="mb-md">
         <FlatButton text={btnText} disabled={disabled} onPress={onPress} />
       </View>
 
       <View className="flex-row justify-center items-center align-middle mb-5">
         <LatoText classname="text-[14px]">
-          {ableToLogin ? "Don't have an account?" : "Already have an account?"}
+          {action === "login"
+            ? "Already have an account?"
+            : "Don't have an account?"}
         </LatoText>
 
-        <View className="ml-[2px]">
-          {/* TODO: direct to SignUp screen */}
-          <Link to={ableToLogin ? "/Login" : "/Login"}>
-            <Text className="text-sm text-primary">
-              {ableToLogin ? "Log In" : "Register"}
-            </Text>
-          </Link>
-        </View>
+        <Pressable
+          onPress={() => {
+            action === "login"
+              ? navigate("Auth", { screen: "Login" })
+              : navigate("Auth", { screen: "VerifyPhone" })
+          }}
+        >
+          <Text className="text-sm text-secondary font-lato-bold">
+            {action === "login" ? " Log in" : " Sign up now"}
+          </Text>
+        </Pressable>
       </View>
     </View>
   )
