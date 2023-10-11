@@ -30,6 +30,7 @@ export const accountEP = {
   DELETE_ICON: "/delete-icon",
   CLOSE_ACCOUNT: "/close-account",
   UPDATE_PERSONAL_INFO: "/update-personal-info",
+  GET_REASONS_TO_CLOSE_ACCOUNT: "/get-reasons-to-close-account",
 }
 
 // Profile endpoints
