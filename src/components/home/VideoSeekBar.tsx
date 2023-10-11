@@ -16,6 +16,7 @@ type TVideoSeekBar = {
   currMillis: number
   totalDuration: number
   setScrollEnable: Dispatch<SetStateAction<boolean>>
+  setPause: Dispatch<SetStateAction<boolean>>
 }
 
 const VideoSeekBar: React.FC<TVideoSeekBar> = ({
@@ -24,25 +25,28 @@ const VideoSeekBar: React.FC<TVideoSeekBar> = ({
   currMillis,
   totalDuration,
   setScrollEnable,
+  setPause,
 }) => {
   const { width } = useWindowDimensions()
 
   const [seekMillis, setSeekMillis] = useDebounceValue(0)
   const [progPercent, setProgPercent] = useState(0)
 
+  const [seeking, setSeeking] = useState(false)
+
   useEffect(() => {
+    if (seeking) return
+
     setProgPercent(totalDuration === 0 ? 0 : (currMillis / totalDuration) * 100)
-  }, [currMillis, totalDuration])
+  }, [currMillis, seeking, totalDuration])
 
   return (
     <Pressable
-      className="w-full bg-gray-darkest"
+      className="w-full justify-end absolute bottom-0 left-0"
       style={{ height: seekBarHeight }}
       onPressIn={() => {
-        ;(async () => {
-          setScrollEnable(false)
-          await (vidRef as { current: Playback }).current.pauseAsync()
-        })()
+        setScrollEnable(false)
+        setSeeking(true)
       }}
       onTouchMove={event => {
         const seekPercentage = event.nativeEvent.locationX / width
@@ -52,16 +56,20 @@ const VideoSeekBar: React.FC<TVideoSeekBar> = ({
       onPressOut={() => {
         ;(async () => {
           setScrollEnable(true)
+          setPause(false)
+          setSeeking(false)
           await (vidRef as { current: Playback }).current.playFromPositionAsync(
             seekMillis || 0,
           )
         })()
       }}
     >
-      <View
-        className="w-[50%] bg-gray-lighter"
-        style={{ height: seekBarHeight, width: `${progPercent}%` }}
-      />
+      <View className="w-full h-2 bg-gray-darkest">
+        <View
+          className="bg-gray-lighter"
+          style={{ height: seekBarHeight, width: `${progPercent}%` }}
+        />
+      </View>
     </Pressable>
   )
 }

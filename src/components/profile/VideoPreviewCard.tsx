@@ -22,37 +22,42 @@ const VideoPreviewCard: React.FC<TVideoPreviewCard> = ({
   const navigation = useNavigation()
 
   return (
-    <>
+    <ImageBackground
+      source={{ uri: coverUri }}
+      className="w-[33%] h-[160px]"
+      imageStyle={{
+        resizeMode: "cover",
+        width: "100%",
+      }}
+    >
       <Pressable
         className={customTwMerge(
-          "w-[33%] h-[160px] bg-gray-mid p-sm flex justify-between",
+          "w-full h-full p-sm flex justify-between",
           classname,
         )}
         onPress={() => {
           navigation.navigate("LoginRoot", { screen: "Home" })
         }}
       >
-        <ImageBackground source={{ uri: coverUri }}>
-          <View className="flex-row justify-between items-center">
-            <View className="flex-row items-center gap-sm">
-              <View className="bg-white rounded-full w-[16px] aspect-square" />
-              <View>
-                <LatoText classname="text-4">Placeholder</LatoText>
-              </View>
+        <View className="flex-row justify-between items-center">
+          <View className="flex-row items-center gap-sm">
+            <View className="bg-white rounded-full w-[16px] aspect-square" />
+            <View>
+              <LatoText classname="text-4">Placeholder</LatoText>
             </View>
-
-            {typeof setModalIndexVisible !== "undefined" && (
-              <Pressable
-                onPress={e => {
-                  e.stopPropagation()
-                  setModalIndexVisible(true)
-                }}
-              >
-                <ThreeDotsVertical classname="h-10" />
-              </Pressable>
-            )}
           </View>
-        </ImageBackground>
+
+          {typeof setModalIndexVisible !== "undefined" && (
+            <Pressable
+              onPress={e => {
+                e.stopPropagation()
+                setModalIndexVisible(true)
+              }}
+            >
+              <ThreeDotsVertical classname="h-10" />
+            </Pressable>
+          )}
+        </View>
 
         <View className="flex-row justify-between">
           <View className="flex-row items-center gap-2">
@@ -69,7 +74,7 @@ const VideoPreviewCard: React.FC<TVideoPreviewCard> = ({
           </View>
         </View>
       </Pressable>
-    </>
+    </ImageBackground>
   )
 }
 
