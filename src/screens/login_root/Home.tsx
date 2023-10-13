@@ -110,7 +110,7 @@ const Home: React.FC = () => {
         }}
       >
         {videos.map((vid, idx) => {
-          return (
+          return vid?.link_video ? (
             <HomeVideoCard
               key={idx}
               vidItem={vid}
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
               isFocused={tabFocused && idx === currIdx}
               setScrollEnable={setScrollEnable}
             />
-          )
+          ) : null
         })}
       </ScrollView>
 
