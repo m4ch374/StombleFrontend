@@ -2,6 +2,7 @@ import { accountEP } from "constants/Endpoint"
 import {
   TCloseAccount,
   TDeleteIcon,
+  TGetReasonsToCloseAccount,
   TGetUserInfo,
   TSendCodeChangeAttribute,
   TUpdateIcon,
@@ -76,5 +77,15 @@ export const closeAccount = (data: TCloseAccount["requestType"]) => {
   return Fetcher.init<TCloseAccount>("DELETE", accountEP.CLOSE_ACCOUNT)
     .withCurrentToken()
     .withJsonPaylad(data)
+    .fetchData()
+}
+
+// /get-reasons-to-close-account
+export const getReasonsToCloseAccount = () => {
+  return Fetcher.init<TGetReasonsToCloseAccount>(
+    "GET",
+    accountEP.GET_REASONS_TO_CLOSE_ACCOUNT,
+  )
+    .withCurrentToken()
     .fetchData()
 }

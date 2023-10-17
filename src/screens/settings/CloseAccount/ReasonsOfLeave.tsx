@@ -5,52 +5,32 @@ import CircleDot from "components/settings/CircleButton"
 import FlatButton from "components/styled_components/FlatButton"
 import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 import LatoText from "components/styled_components/LatoText"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FlatList, TouchableOpacity, View } from "react-native"
-
-// TODO: waiting for backend to rewrite this part
-type ReasonsOfLeaveType = {
-  id: string
-  reason: string
-}[]
-
-const reasons: ReasonsOfLeaveType = [
-  {
-    id: "spend_too_much_time",
-    reason: "I spend too much time on Stomble",
-  },
-
-  {
-    id: "concerns",
-    reason: "Safety or privacy concerns",
-  },
-  {
-    id: "irrelevant_ads",
-    reason: "Too many irrelevant ads",
-  },
-  {
-    id: "trouble_getting_started",
-    reason: "Trouble getting started",
-  },
-  {
-    id: "multiple_accounts",
-    reason: "I have multiple accounts",
-  },
-  {
-    id: "another_reason",
-    reason: "Another reason",
-  },
-]
+import { ReasonsOfCloseAccount } from "types/endpoints"
+import { getReasonsToCloseAccount } from "utils/services/accountInfo"
 
 const ReasonsOfLeave = () => {
   const { navigate } = useNavigation()
   const [clickedReasons, setClickedReasons] = useState<string[]>([])
+  const [reasons, setReasons] = useState<ReasonsOfCloseAccount[]>([])
 
   const handleReasonClick = (reasonKey: string) => {
     clickedReasons.includes(reasonKey)
       ? setClickedReasons(clickedReasons.filter(key => key !== reasonKey))
       : setClickedReasons([...clickedReasons, reasonKey])
   }
+
+  useEffect(() => {
+    ;(async () => {
+      // endpoint: /get-reasons-to-close-account
+      const resp = await getReasonsToCloseAccount()
+
+      if (typeof resp === "undefined") return
+
+      setReasons(resp.reasons)
+    })()
+  }, [])
 
   return (
     <GeneralScreenLayout>
@@ -65,25 +45,27 @@ const ReasonsOfLeave = () => {
         </LatoText>
 
         <View className="w-full flex my-8">
-          <FlatList
-            scrollEnabled={false}
-            data={reasons}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  key={item.id}
-                  onPress={() => handleReasonClick(item.id)}
-                  className="w-full flex flex-row justify-between mb-8"
-                  activeOpacity={0.8}
-                >
-                  <LatoText classname="text-7 font-lato-bold">
-                    {item.reason}
-                  </LatoText>
-                  <CircleDot onClicked={clickedReasons.includes(item.id)} />
-                </TouchableOpacity>
-              )
-            }}
-          />
+          {reasons && (
+            <FlatList
+              scrollEnabled={false}
+              data={reasons}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    onPress={() => handleReasonClick(item.id)}
+                    className="w-full flex flex-row justify-between mb-8"
+                    activeOpacity={0.8}
+                  >
+                    <LatoText classname="text-7 font-lato-bold">
+                      {item.description}
+                    </LatoText>
+                    <CircleDot onClicked={clickedReasons.includes(item.id)} />
+                  </TouchableOpacity>
+                )
+              }}
+            />
+          )}
         </View>
       </View>
 
