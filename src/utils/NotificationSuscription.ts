@@ -31,7 +31,10 @@ export async function registerForPushNotificationsAsync() {
     // token = await Notifications.getExpoPushTokenAsync({
     //   projectId: Constants?.expoConfig?.extra?.eas.projectId,
     // });
-    token = await Notifications.getExpoPushTokenAsync()
+    // token = await Notifications.getExpoPushTokenAsync()
+    token = await Notifications.getExpoPushTokenAsync({
+      projectId: "b442ae90-ef8e-4334-9422-e485ff7b0e0c",
+    })
     return token
   } else {
     alert("Must use physical device for Push Notifications")

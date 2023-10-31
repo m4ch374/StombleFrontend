@@ -1,10 +1,11 @@
-import { View, TextInput } from "react-native"
+import { View, TextInput, Platform } from "react-native"
 import InputBlueBg from "./settings/InputBlueBg"
 import { Type } from "types/variantStyle"
 import AuFlag from "assets/icons/AuFlag"
 import LatoText from "./styled_components/LatoText"
 import CustomColor from "constants/Colors"
 import { checkNumber } from "utils/services/auth"
+import { useMemo } from "react"
 
 // Australian mobile numbers
 const validateMobileNumber = (number: string) => {
@@ -55,6 +56,10 @@ const VerifyPhoneInput = ({
     })()
   }
 
+  const isAndroid = useMemo(() => {
+    return Platform.OS === "android"
+  }, [])
+
   return (
     <View>
       <InputBlueBg title={title} variant={Type.outlined}>
@@ -65,7 +70,8 @@ const VerifyPhoneInput = ({
         </View>
 
         <TextInput
-          className="text-white text-base flex-1 items-center justify-center w-full h-full pl-4 leading-[-2px] "
+          className={`text-white text-base flex-1 items-center justify-center w-full h-full pl-4
+          ${!isAndroid && "leading-[-2px]"}`}
           keyboardType="phone-pad"
           keyboardAppearance="dark"
           cursorColor={CustomColor.gray.lighter}

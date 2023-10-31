@@ -35,7 +35,7 @@ const init: TTmpStore = {
   businessName: "",
   fullName: "",
   birthday: "",
-  gender: "",
+  gender: "others",
   bio: "",
   link: {
     url: "",
