@@ -1,9 +1,9 @@
 import { View, TouchableOpacity, Pressable } from "react-native"
-import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler"
+import { Swipeable } from "react-native-gesture-handler"
 import AccountFileCard from "components/AccountFileCard"
 import LatoText from "components/styled_components/LatoText"
 import { NotificationsItem } from "types/endpoints"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   deleteOneNotification,
   readOneNotification,
@@ -19,6 +19,11 @@ const SwipeableNotice = ({
   const [isNotificationRead, setIsNoticationRead] = useState(
     notification.isRead,
   )
+
+  useEffect(() => {
+    onRefresh()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isNotificationRead])
 
   const handleOnRead = () => {
     const payload = {
@@ -64,7 +69,7 @@ const SwipeableNotice = ({
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <>
       <Swipeable
         containerStyle={{ backgroundColor: "bg-navbar", marginBottom: 2 }}
         renderRightActions={renderRightActions}
@@ -92,7 +97,7 @@ const SwipeableNotice = ({
           </View>
         </Pressable>
       </Swipeable>
-    </GestureHandlerRootView>
+    </>
   )
 }
 
