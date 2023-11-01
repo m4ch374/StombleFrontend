@@ -4,10 +4,24 @@ import SettingIcon from "assets/icons/Setting"
 import SwipeableNotice from "components/notification/SwipeableNotice"
 import LatoText from "components/styled_components/LatoText"
 import RootTabLayout from "components/styled_components/RootTabLayout"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { SafeAreaView, ScrollView, View } from "react-native"
+import { NotificationsItem } from "types/endpoints"
+import { getNotifications } from "utils/services/notifications"
 
 const Notifications: React.FC = () => {
+  const [notifications, setNotifications] = useState<NotificationsItem[]>([])
+
+  useEffect(() => {
+    ;(async () => {
+      const resp = await getNotifications({ take: "10", skip: "0" })
+
+      if (typeof resp === "undefined") return
+
+      setNotifications(resp.result)
+    })()
+  }, [])
+
   return (
     <RootTabLayout>
       <SafeAreaView className="bg-background h-full">
@@ -25,9 +39,20 @@ const Notifications: React.FC = () => {
           </View>
         </View>
         <ScrollView className={"w-full"}>
-          {[1, 2, 3].map((item, index) => {
-            return <SwipeableNotice key={index} />
-          })}
+          {notifications.length > 0 ? (
+            notifications.map(notification => {
+              return (
+                <SwipeableNotice
+                  key={notification.id}
+                  notification={notification}
+                />
+              )
+            })
+          ) : (
+            <View className="flex-row justify-center items-center h-full">
+              <LatoText classname="text-lg">No notifications yet ...</LatoText>
+            </View>
+          )}
         </ScrollView>
       </SafeAreaView>
     </RootTabLayout>

@@ -697,6 +697,37 @@ export type TGetNewVideosUploaded = TEndpoint<
 // ===================================================
 
 // ###################################################
+// # Notifications                                   #
+// ###################################################
+// ===================================================
+// /get-notifications
+// ===================================================
+type GetNotificationsReq = {
+  take: string
+  skip: string
+}
+type GetNotificationsRes = {
+  result: NotificationsItem[]
+}
+
+export type NotificationsItem = {
+  id: string
+  title: string
+  msg: string
+  isRead: boolean
+  business_id: string
+  user_id: string
+  redirect_url: string
+  created_at: string
+  updated_at: string
+}
+
+export type TGetNotifications = TEndpoint<
+  GetNotificationsReq,
+  GetNotificationsRes
+>
+
+// ###################################################
 // # Data Visualization                              #
 // ###################################################
 
