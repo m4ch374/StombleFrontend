@@ -71,4 +71,13 @@ export const searchingEP = {
   SEARCH_BUSINESSES_AND_VIDEOS: "/search-businesses-and-videos",
 }
 
+// Notifications endpoints
+export const notificationsEP = {
+  GET_NOTIFICATIONS: "/get-notifications",
+  READ_ONE_NOTIFICATION: "/read-one-notification",
+  READ_ALL_NOTIFICATIONS: "/read-all-notifications",
+  DELETE_ONE_NOTIFICATION: "/delete-one-notification",
+  DELETE_ALL_NOTIFICATIONS: "/delete-all-notifications",
+}
+
 // more endpoints coming soon...
