@@ -1,5 +1,5 @@
 import { notificationsEP } from "constants/Endpoint"
-import { TGetNotifications } from "types/endpoints"
+import { TGetNotifications, TReadOneNotification } from "types/endpoints"
 import Fetcher from "utils/Fetcher"
 
 // /get-notifications
@@ -13,5 +13,18 @@ export const getNotifications = ({
   )
     .withCurrentToken()
     .withParams({ take, skip })
+    .fetchData()
+}
+
+// /read-one-notification
+export const readOneNotification = (
+  data: TReadOneNotification["requestType"],
+) => {
+  return Fetcher.init<TReadOneNotification>(
+    "PUT",
+    notificationsEP.READ_ONE_NOTIFICATION,
+  )
+    .withCurrentToken()
+    .withJsonPaylad(data)
     .fetchData()
 }

@@ -714,6 +714,24 @@ export type TGetNotifications = TEndpoint<
   GetNotificationsRes
 >
 
+// ===================================================
+// ===================================================
+// /read-one-notification
+// ===================================================
+type ReadOneNotificationReq = {
+  notificationId: string
+  isRead: boolean
+}
+
+type ReadOneNotificationRes = {
+  msg: string
+}
+
+export type TReadOneNotification = TEndpoint<
+  ReadOneNotificationReq,
+  ReadOneNotificationRes
+>
+
 // ###################################################
 // # Data Visualization                              #
 // ###################################################

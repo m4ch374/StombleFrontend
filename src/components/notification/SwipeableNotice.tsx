@@ -1,16 +1,37 @@
-import { View, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity, Pressable } from "react-native"
 import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler"
 import AccountFileCard from "components/AccountFileCard"
 import LatoText from "components/styled_components/LatoText"
 import { NotificationsItem } from "types/endpoints"
+import { useState } from "react"
+import { readOneNotification } from "utils/services/notifications"
 
 const SwipeableNotice = ({
   notification,
 }: {
   notification: NotificationsItem
 }) => {
-  const handleOnRead = () => {}
+  const [isNotificationRead, setIsNoticationRead] = useState(
+    notification.isRead,
+  )
+
+  const handleOnRead = () => {
+    const payload = {
+      notificationId: notification.id,
+      isRead: notification.isRead,
+    }
+
+    ;(async () => {
+      const resp = await readOneNotification(payload)
+
+      if (typeof resp === "undefined") return
+
+      setIsNoticationRead(true)
+    })()
+  }
   const handleOnDelete = () => {}
+
+  const handleOnView = () => {}
 
   const renderRightActions = () => {
     return (
@@ -20,9 +41,9 @@ const SwipeableNotice = ({
             <LatoText>Delete</LatoText>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleOnRead}>
+        <TouchableOpacity onPress={handleOnView}>
           <View className="h-full w-30 bg-secondary flex-row justify-center items-center">
-            <LatoText>Read</LatoText>
+            <LatoText>View</LatoText>
           </View>
         </TouchableOpacity>
       </>
@@ -36,25 +57,27 @@ const SwipeableNotice = ({
         renderRightActions={renderRightActions}
         dragOffsetFromRightEdge={100}
       >
-        <View
-          className={` ${
-            notification.isRead ? "bg-background" : "bg-navbar "
-          } flex-row py-6 px-8 justify-center `}
-        >
-          <View className="w-[42px] h-[42px] mr-8">
-            {/* TODO: endpoint missing Link_icon, leave empty for now */}
-            <AccountFileCard uri={undefined} width={42} height={42} />
-          </View>
+        <Pressable onPress={handleOnRead}>
+          <View
+            className={` ${
+              isNotificationRead ? "bg-background" : "bg-navbar "
+            } flex-row py-6 px-8 justify-center `}
+          >
+            <View className="w-[42px] h-[42px] mr-8">
+              {/* TODO: endpoint missing Link_icon, leave empty for now */}
+              <AccountFileCard uri={undefined} width={42} height={42} />
+            </View>
 
-          <View className="flex-1">
-            <LatoText classname=" text-[14px] self-center ">
-              {notification.title}
-            </LatoText>
-            <LatoText classname=" text-[14px] self-center ">
-              {notification.msg}
-            </LatoText>
+            <View className="flex-1">
+              <LatoText classname=" text-[14px] self-center ">
+                {notification.title}
+              </LatoText>
+              <LatoText classname=" text-[14px] self-center ">
+                {notification.msg}
+              </LatoText>
+            </View>
           </View>
-        </View>
+        </Pressable>
       </Swipeable>
     </GestureHandlerRootView>
   )
