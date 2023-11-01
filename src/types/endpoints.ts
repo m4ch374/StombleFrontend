@@ -77,6 +77,13 @@ type VideoPlayItem = VideosItem & {
   business_account: BusinessAccountInformationItem
 }
 
+export type ReasonsOfCloseAccount = {
+  id: string
+  description: string
+  created_at: string
+  updated_at: string
+}
+
 // ###################################################
 // # Auth                                            #
 // ###################################################
@@ -391,6 +398,19 @@ type CloseAccountReq = {
 }
 
 export type TCloseAccount = TEndpoint<CloseAccountReq, void>
+// ===================================================
+
+// ===================================================
+// /get-reasons-to-close-account
+// ===================================================
+type GetReasonsToCloseAccountRes = {
+  reasons: ReasonsOfCloseAccount[]
+}
+
+export type TGetReasonsToCloseAccount = TEndpoint<
+  void,
+  GetReasonsToCloseAccountRes
+>
 // ===================================================
 
 // ###################################################

@@ -32,16 +32,12 @@ const VideoItemCard: FC<TVideoItem> = ({
         mb-4
       `}
       onPressOut={() => {
-        ;(async () => {
-          await video?.current?.pauseAsync()
-          setChange(false)
-        })()
+        setChange(false)
+        void video?.current?.pauseAsync()
       }}
       onLongPress={() => {
-        ;(async () => {
-          await video?.current?.playAsync()
-          setChange(true)
-        })()
+        setChange(true)
+        void video?.current?.playAsync()
       }}
     >
       {change ? (

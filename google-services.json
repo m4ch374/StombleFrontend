@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "346721657475",
+    "project_id": "stomble-app",
+    "storage_bucket": "stomble-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346721657475:android:d540679e4e4b13c6b3f1b6",
+        "android_client_info": {
+          "package_name": "com.adminstomble.stomble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346721657475-aa8fb87thbqt4h5jeal11m6nrs66bncf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_B4l0PipMPB-vKnAn9lUoB-AlIDfFqok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346721657475-aa8fb87thbqt4h5jeal11m6nrs66bncf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "346721657475-sp0mfsl409od4htaqtef3b970o228j5p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.stomble.pushNotification"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
