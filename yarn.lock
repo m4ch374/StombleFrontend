@@ -3034,6 +3034,14 @@
     "@typescript-eslint/types" "5.62.0"
     "@typescript-eslint/visitor-keys" "5.62.0"
 
+"@typescript-eslint/scope-manager@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-6.2.0.tgz#412a710d8fa20bc045533b3b19f423810b24f87a"
+  integrity sha512-1ZMNVgm5nnHURU8ZSJ3snsHzpFeNK84rdZjluEVBGNu7jDymfqceB3kdIZ6A4xCfEFFhRIB6rF8q/JIqJd2R0Q==
+  dependencies:
+    "@typescript-eslint/types" "6.2.0"
+    "@typescript-eslint/visitor-keys" "6.2.0"
+
 "@typescript-eslint/scope-manager@6.9.1":
   version "6.9.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-6.9.1.tgz#e96afeb9a68ad1cd816dba233351f61e13956b75"
@@ -3057,6 +3065,11 @@
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-5.62.0.tgz#258607e60effa309f067608931c3df6fed41fd2f"
   integrity sha512-87NVngcbVXUahrRTqIK27gD2t5Cu1yuCXxbLcFtCzZGlfyVWWh8mLHkoxzjsB6DDNnvdL+fW8MiwPEJyGJQDgQ==
 
+"@typescript-eslint/types@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-6.2.0.tgz#b341a4e6d5f609267306b07afc6f62bcf92b1495"
+  integrity sha512-1nRRaDlp/XYJQLvkQJG5F3uBTno5SHPT7XVcJ5n1/k2WfNI28nJsvLakxwZRNY5spuatEKO7d5nZWsQpkqXwBA==
+
 "@typescript-eslint/types@6.9.1":
   version "6.9.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-6.9.1.tgz#a6cfc20db0fcedcb2f397ea728ef583e0ee72459"
@@ -3074,6 +3087,19 @@
     is-glob "^4.0.3"
     semver "^7.3.7"
     tsutils "^3.21.0"
+
+"@typescript-eslint/typescript-estree@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-6.2.0.tgz#4969944b831b481996aa4fbd73c7164ca683b8ef"
+  integrity sha512-Mts6+3HQMSM+LZCglsc2yMIny37IhUgp1Qe8yJUYVyO6rHP7/vN0vajKu3JvHCBIy8TSiKddJ/Zwu80jhnGj1w==
+  dependencies:
+    "@typescript-eslint/types" "6.2.0"
+    "@typescript-eslint/visitor-keys" "6.2.0"
+    debug "^4.3.4"
+    globby "^11.1.0"
+    is-glob "^4.0.3"
+    semver "^7.5.4"
+    ts-api-utils "^1.0.1"
 
 "@typescript-eslint/typescript-estree@6.9.1":
   version "6.9.1"
@@ -3108,6 +3134,14 @@
   dependencies:
     "@typescript-eslint/types" "5.62.0"
     eslint-visitor-keys "^3.3.0"
+
+"@typescript-eslint/visitor-keys@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-6.2.0.tgz#71943f42fdaa2ec86dc3222091f41761a49ae71a"
+  integrity sha512-QbaYUQVKKo9bgCzpjz45llCfwakyoxHetIy8CAvYCtd16Zu1KrpzNHofwF8kGkpPOxZB2o6kz+0nqH8ZkIzuoQ==
+  dependencies:
+    "@typescript-eslint/types" "6.2.0"
+    eslint-visitor-keys "^3.4.1"
 
 "@typescript-eslint/visitor-keys@6.9.1":
   version "6.9.1"
@@ -8765,10 +8799,10 @@ react-native-tab-view@^3.5.2:
   dependencies:
     use-latest-callback "^0.1.5"
 
-react-native@0.72.6:
-  version "0.72.6"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.72.6.tgz#9f8d090694907e2f83af22e115cc0e4a3d5fa626"
-  integrity sha512-RafPY2gM7mcrFySS8TL8x+TIO3q7oAlHpzEmC7Im6pmXni6n1AuufGaVh0Narbr1daxstw7yW7T9BKW5dpVc2A==
+react-native@0.72.5:
+  version "0.72.5"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.72.5.tgz#2c343fa6f3ead362cf07376634a33a4078864357"
+  integrity sha512-oIewslu5DBwOmo7x5rdzZlZXCqDIna0R4dUwVpfmVteORYLr4yaZo5wQnMeR+H7x54GaMhmgeqp0ZpULtulJFg==
   dependencies:
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "11.3.7"
