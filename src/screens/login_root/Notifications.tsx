@@ -10,6 +10,7 @@ import { NotificationsItem } from "types/endpoints"
 import { getNotifications } from "utils/services/notifications"
 
 const Notifications: React.FC = () => {
+  const [refreshNotifications, setRefreshNotifications] = useState(false)
   const [notifications, setNotifications] = useState<NotificationsItem[]>([])
 
   useEffect(() => {
@@ -18,9 +19,12 @@ const Notifications: React.FC = () => {
 
       if (typeof resp === "undefined") return
 
+      console.log("notifications", resp.result)
       setNotifications(resp.result)
     })()
-  }, [])
+
+    setRefreshNotifications(false)
+  }, [refreshNotifications])
 
   return (
     <RootTabLayout>
@@ -45,6 +49,7 @@ const Notifications: React.FC = () => {
                 <SwipeableNotice
                   key={notification.id}
                   notification={notification}
+                  onRefresh={() => setRefreshNotifications(true)}
                 />
               )
             })

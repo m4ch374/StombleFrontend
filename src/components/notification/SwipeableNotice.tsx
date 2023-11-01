@@ -4,12 +4,17 @@ import AccountFileCard from "components/AccountFileCard"
 import LatoText from "components/styled_components/LatoText"
 import { NotificationsItem } from "types/endpoints"
 import { useState } from "react"
-import { readOneNotification } from "utils/services/notifications"
+import {
+  deleteOneNotification,
+  readOneNotification,
+} from "utils/services/notifications"
 
 const SwipeableNotice = ({
   notification,
+  onRefresh,
 }: {
   notification: NotificationsItem
+  onRefresh: () => void
 }) => {
   const [isNotificationRead, setIsNoticationRead] = useState(
     notification.isRead,
@@ -20,16 +25,24 @@ const SwipeableNotice = ({
       notificationId: notification.id,
       isRead: notification.isRead,
     }
-
     ;(async () => {
       const resp = await readOneNotification(payload)
-
       if (typeof resp === "undefined") return
-
       setIsNoticationRead(true)
     })()
   }
-  const handleOnDelete = () => {}
+
+  const handleOnDelete = () => {
+    ;(async () => {
+      const resp = await deleteOneNotification({
+        notificationId: notification.id,
+      })
+      if (typeof resp === "undefined") return
+
+      // TODO: trigger a refresh of the notifications list
+      onRefresh()
+    })()
+  }
 
   const handleOnView = () => {}
 
