@@ -726,8 +726,8 @@ export type TGetNotifications = TEndpoint<
   GetNotificationsReq,
   GetNotificationsRes
 >
-
 // ===================================================
+
 // ===================================================
 // /read-one-notification
 // ===================================================
@@ -743,6 +743,28 @@ type ReadOneNotificationRes = {
 export type TReadOneNotification = TEndpoint<
   ReadOneNotificationReq,
   ReadOneNotificationRes
+>
+// ===================================================
+
+// ===================================================
+// /read-all-notifications
+// ===================================================
+type ReadAllNotificationsRes = { msg: string }
+
+export type TReadAllNotifications = TEndpoint<void, ReadAllNotificationsRes>
+// ===================================================
+
+// ===================================================
+// /delete-one-notifications
+// ===================================================
+type DeleteOneNotificationReq = {
+  notificationId: string
+}
+type DeleteOneNotificationRes = { msg: string }
+
+export type TDeleteOneNotification = TEndpoint<
+  DeleteOneNotificationReq,
+  DeleteOneNotificationRes
 >
 
 // ###################################################
