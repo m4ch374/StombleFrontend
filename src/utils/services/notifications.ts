@@ -8,16 +8,13 @@ import {
 import Fetcher from "utils/Fetcher"
 
 // /get-notifications
-export const getNotifications = ({
-  take,
-  skip,
-}: TGetNotifications["requestType"]) => {
+export const getNotifications = (data: TGetNotifications["requestType"]) => {
   return Fetcher.init<TGetNotifications>(
     "GET",
     notificationsEP.GET_NOTIFICATIONS,
   )
     .withCurrentToken()
-    .withParams({ take, skip })
+    .withParams(data)
     .fetchData()
 }
 

@@ -3,53 +3,68 @@ import { Swipeable } from "react-native-gesture-handler"
 import AccountFileCard from "components/AccountFileCard"
 import LatoText from "components/styled_components/LatoText"
 import { NotificationsItem } from "types/endpoints"
-import { useEffect, useState } from "react"
+import { useCallback } from "react"
 import {
   deleteOneNotification,
   readOneNotification,
 } from "utils/services/notifications"
 import { Helper } from "utils/helpers"
+import { useDispatch } from "react-redux"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import { useAppSlector } from "redux/hooks"
 
 const SwipeableNotice = ({
   notification,
-  onRefresh,
+  setNotifications,
 }: {
   notification: NotificationsItem
-  onRefresh: () => void
+  setNotifications: React.Dispatch<React.SetStateAction<NotificationsItem[]>>
 }) => {
-  const [isNotificationRead, setIsNoticationRead] = useState(
-    notification.isRead,
-  )
+  const dispatch = useDispatch()
+  const tmpUser = useAppSlector(state => state.tmpStore)
 
-  useEffect(() => {
-    onRefresh()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isNotificationRead])
-
-  const handleOnRead = () => {
+  const handleOnRead = useCallback(() => {
     const payload = {
       notificationId: notification.id,
       isRead: notification.isRead,
     }
     ;(async () => {
       const resp = await readOneNotification(payload)
-      if (typeof resp === "undefined") return
-      setIsNoticationRead(true)
-    })()
-  }
 
-  const handleOnDelete = () => {
+      if (typeof resp === "undefined") return
+
+      notification.isRead = !notification.isRead
+
+      dispatch(
+        tmpStoreAction.setState({
+          ...tmpUser,
+          message: resp.msg,
+        }),
+      )
+    })()
+  }, [notification.id, notification.isRead])
+
+  const handleOnDelete = useCallback(() => {
     ;(async () => {
       const resp = await deleteOneNotification({
         notificationId: notification.id,
       })
       if (typeof resp === "undefined") return
 
-      // refresh of the notifications list
-      onRefresh()
-    })()
-  }
+      setNotifications(prevNotifications =>
+        prevNotifications.filter(item => item.id !== notification.id),
+      )
 
+      dispatch(
+        tmpStoreAction.setState({
+          ...tmpUser,
+          message: resp.msg,
+        }),
+      )
+    })()
+  }, [notification.id])
+
+  // TODO: goes to view content
   const handleOnView = () => {}
 
   const renderRightActions = () => {
@@ -72,14 +87,14 @@ const SwipeableNotice = ({
   return (
     <>
       <Swipeable
-        containerStyle={{ backgroundColor: "bg-navbar", marginBottom: 2 }}
+        containerStyle={{ backgroundColor: "bg-navbar" }}
         renderRightActions={renderRightActions}
         dragOffsetFromRightEdge={100}
       >
         <Pressable onPress={handleOnRead}>
           <View
             className={` ${
-              isNotificationRead ? "bg-background" : "bg-navbar "
+              notification.isRead ? "bg-background" : "bg-navbar "
             } flex-row py-6 px-8 `}
           >
             <View className="w-[42px] h-[42px] mr-8">
