@@ -14,10 +14,10 @@ import { isDevice } from "expo-device"
 import useDebounceValue from "hooks/useDebounceValue"
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import {
-  ScrollView,
   useWindowDimensions,
   Platform,
   StatusBar,
+  FlatList,
 } from "react-native"
 import { LoginRootTabList } from "types/Navigation"
 import { TGetVideosForVideoPlay } from "types/endpoints"
@@ -94,7 +94,7 @@ const Home: React.FC = () => {
 
   return (
     <HomeModalControllerContext.Provider value={controllerValue}>
-      <ScrollView
+      <FlatList
         className="h-full"
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -108,19 +108,21 @@ const Home: React.FC = () => {
           )
           setCurrIdx(calcIdx)
         }}
-      >
-        {videos.map((vid, idx) => {
-          return vid?.link_video ? (
+        data={videos}
+        keyExtractor={item => item.id}
+        renderItem={item => {
+          console.log(item)
+          return (
             <HomeVideoCard
-              key={idx}
-              vidItem={vid}
+              vidItem={item.item}
               videoHeight={videoHeight}
-              isFocused={tabFocused && idx === currIdx}
+              isFocused={tabFocused && item.index === currIdx}
               setScrollEnable={setScrollEnable}
             />
-          ) : null
-        })}
-      </ScrollView>
+          )
+        }}
+        initialNumToRender={5}
+      />
 
       <VideoShareModal
         shareModalController={[shareModalVisible, setShareModalVisible]}

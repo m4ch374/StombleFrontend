@@ -31,12 +31,8 @@ const VerifyPhoneInput = ({
   // TODO: workflow changed, need to update this component later
   const handleOnBlur = () => {
     if (!setIsValid) return
-    if (validateMobileNumber(phone)) {
-      setIsValid(true)
-    } else {
-      setIsValid(false)
-      return
-    }
+
+    setIsValid(validateMobileNumber(phone))
 
     if (!setIsExists) return
     ;(async () => {
@@ -47,12 +43,7 @@ const VerifyPhoneInput = ({
 
       if (typeof resp === "undefined") return
 
-      if (resp.exists) {
-        setIsExists(true)
-        return
-      } else {
-        setIsExists(false)
-      }
+      setIsExists(resp.exists)
     })()
   }
 

@@ -19,11 +19,13 @@ export default function Navigation() {
         initialRouteName={token === "" ? "Auth" : "LoginRoot"}
         screenOptions={{ headerShown: false }}
       >
-        <RootStack.Screen
-          component={AuthStackNav}
-          name="Auth"
-          options={{ headerShown: false }}
-        />
+        {token === "" && (
+          <RootStack.Screen
+            component={AuthStackNav}
+            name="Auth"
+            options={{ headerShown: false }}
+          />
+        )}
 
         <RootStack.Screen
           name="LoginRoot"
