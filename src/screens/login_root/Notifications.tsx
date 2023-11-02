@@ -33,7 +33,6 @@ const Notifications: React.FC = () => {
   const dispatch = useDispatch()
   const tmpUser = useAppSlector(state => state.tmpStore)
   const [refreshing, setRefreshing] = useState(true)
-  // const [refreshNotifications, setRefreshNotifications] = useState(false)
   const [notifications, setNotifications] = useState<NotificationsItem[]>([])
 
   const loadNotificationData = () => {
@@ -43,8 +42,6 @@ const Notifications: React.FC = () => {
       const resp = await getNotifications(payload)
 
       if (typeof resp === "undefined") return
-
-      // console.log("see me", notifications[0].isRead)
 
       setRefreshing(false)
       setNotifications(resp.result)
@@ -74,6 +71,17 @@ const Notifications: React.FC = () => {
           message: resp.msg,
         }),
       )
+    })()
+  }
+
+  const handleReadMore = () => {
+    ;(async () => {
+      const payload = { take: (notifications.length + 5).toString(), skip: "0" }
+      const resp = await getNotifications(payload)
+
+      if (typeof resp === "undefined") return
+
+      setNotifications(resp.result)
     })()
   }
 
@@ -111,25 +119,29 @@ const Notifications: React.FC = () => {
           <View className={"w-full flex-1 "}>
             {refreshing ? <ActivityIndicator /> : null}
             {notifications.length > 0 ? (
-              <FlatList
-                data={notifications}
-                keyExtractor={notification => notification.id}
-                renderItem={({ item }) => (
-                  <SwipeableNotice
-                    notification={item}
-                    setNotifications={setNotifications}
-                  />
-                )}
-                ItemSeparatorComponent={() => (
-                  <View className="h-[1px] w-full bg-gray-darkest/40" />
-                )}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={loadNotificationData}
-                  />
-                }
-              />
+              <>
+                <FlatList
+                  data={notifications}
+                  keyExtractor={notification => notification.id}
+                  renderItem={({ item }) => (
+                    <SwipeableNotice
+                      notification={item}
+                      setNotifications={setNotifications}
+                    />
+                  )}
+                  ItemSeparatorComponent={() => (
+                    <View className="h-[1px] w-full bg-gray-darkest/40" />
+                  )}
+                  refreshControl={
+                    <RefreshControl
+                      refreshing={refreshing}
+                      onRefresh={loadNotificationData}
+                    />
+                  }
+                  onEndReached={handleReadMore}
+                  onEndReachedThreshold={0.1}
+                />
+              </>
             ) : (
               <View className="flex-row justify-center items-center h-full">
                 <LatoText classname="text-lg">

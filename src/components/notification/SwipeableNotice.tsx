@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Pressable } from "react-native"
+import { View, TouchableOpacity, Pressable, Text } from "react-native"
 import { Swipeable } from "react-native-gesture-handler"
 import AccountFileCard from "components/AccountFileCard"
 import LatoText from "components/styled_components/LatoText"
@@ -42,7 +42,7 @@ const SwipeableNotice = ({
         }),
       )
     })()
-  }, [notification.id, notification.isRead])
+  }, [notification.id])
 
   const handleOnDelete = useCallback(() => {
     ;(async () => {
@@ -106,11 +106,14 @@ const SwipeableNotice = ({
               <LatoText classname=" text-[14px] font-lato-bold ">
                 {notification.title}
               </LatoText>
-              <View className="flex-row">
-                <LatoText classname=" text-[14px]">{notification.msg}</LatoText>
-                <LatoText classname="text-[14px] ml-2 text-gray-mid">
-                  {Helper.formatToHoursOrDays(notification.created_at)}
-                </LatoText>
+              <View className="">
+                <Text className="font-lato text-white text-[14px]">
+                  {notification.msg}
+                  {"  "}
+                  <LatoText classname="text-[14px] text-gray-mid">
+                    {Helper.formatToHoursOrDays(notification.created_at)}
+                  </LatoText>
+                </Text>
               </View>
             </View>
           </View>
