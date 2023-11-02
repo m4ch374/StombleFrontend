@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 interface IObjectMapper {
-  [key: string]: string | number;
+  [key: string]: string | number
 }
 
 const detectDayLight = () => {
@@ -18,12 +18,12 @@ const detectDayLight = () => {
 }
 
 const checkAllValues = (objectEntries: any) => {
-  return Object.values(objectEntries).every((value) => value)
+  return Object.values(objectEntries).every(value => value)
 }
 
 const omitAnObjectKey = (obj: any, ...props: any[]) => {
   const result = { ...obj }
-  props.forEach((prop) => {
+  props.forEach(prop => {
     delete result[prop]
   })
   return result
@@ -83,6 +83,29 @@ const formatDateAndTime = (date: string) => {
   return `${month} ${day}, ${year} ${strTime}`
 }
 
+const formatToHoursOrDays = (date: string) => {
+  const dateTime = new Date(date).getTime()
+  const currentTime = new Date().getTime()
+
+  const timeDifference = currentTime - dateTime
+
+  const minutes = Math.floor(timeDifference / (1000 * 60))
+  const hours = Math.floor(timeDifference / (1000 * 60 * 60))
+  const days = Math.floor(timeDifference / (24 * 60 * 60 * 1000))
+  const years = Math.floor(timeDifference / (365 * 24 * 60 * 60 * 1000))
+
+  if (minutes < 60) {
+    return `${minutes}m`
+  }
+  if (hours < 24) {
+    return `${hours}h`
+  }
+  if (days < 365) {
+    return `${days}d`
+  }
+  return `${years}y`
+}
+
 export const Helper = {
   detectDayLight,
   checkAllValues,
@@ -91,4 +114,5 @@ export const Helper = {
   calculatePerc,
   formatToDays,
   formatDateAndTime,
+  formatToHoursOrDays,
 }

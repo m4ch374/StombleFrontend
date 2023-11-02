@@ -8,6 +8,7 @@ import {
   deleteOneNotification,
   readOneNotification,
 } from "utils/services/notifications"
+import { Helper } from "utils/helpers"
 
 const SwipeableNotice = ({
   notification,
@@ -44,7 +45,7 @@ const SwipeableNotice = ({
       })
       if (typeof resp === "undefined") return
 
-      // TODO: trigger a refresh of the notifications list
+      // refresh of the notifications list
       onRefresh()
     })()
   }
@@ -79,20 +80,23 @@ const SwipeableNotice = ({
           <View
             className={` ${
               isNotificationRead ? "bg-background" : "bg-navbar "
-            } flex-row py-6 px-8 justify-center `}
+            } flex-row py-6 px-8 `}
           >
             <View className="w-[42px] h-[42px] mr-8">
               {/* TODO: endpoint missing Link_icon, leave empty for now */}
               <AccountFileCard uri={undefined} width={42} height={42} />
             </View>
 
-            <View className="flex-1">
-              <LatoText classname=" text-[14px] self-center ">
+            <View className="flex-1 self-center ">
+              <LatoText classname=" text-[14px] font-lato-bold ">
                 {notification.title}
               </LatoText>
-              <LatoText classname=" text-[14px] self-center ">
-                {notification.msg}
-              </LatoText>
+              <View className="flex-row">
+                <LatoText classname=" text-[14px]">{notification.msg}</LatoText>
+                <LatoText classname="text-[14px] ml-2 text-gray-mid">
+                  {Helper.formatToHoursOrDays(notification.created_at)}
+                </LatoText>
+              </View>
             </View>
           </View>
         </Pressable>
