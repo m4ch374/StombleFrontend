@@ -3,14 +3,25 @@
 import { useNavigation } from "@react-navigation/native"
 import SettingIcon from "assets/icons/Setting"
 import SwipeableNotice from "components/notification/SwipeableNotice"
+import PopupMessage from "components/settings/PopupMessage"
 import LatoText from "components/styled_components/LatoText"
 import RootTabLayout from "components/styled_components/RootTabLayout"
 import React, { useEffect, useState } from "react"
-import { Pressable, SafeAreaView, ScrollView, View } from "react-native"
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  RefreshControl,
+  SafeAreaView,
+  View,
+} from "react-native"
 import {
   GestureHandlerRootView,
   TouchableOpacity,
 } from "react-native-gesture-handler"
+import { useDispatch } from "react-redux"
+import { useAppSlector } from "redux/hooks"
+import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import { NotificationsItem } from "types/endpoints"
 import {
   getNotifications,
@@ -19,21 +30,30 @@ import {
 
 const Notifications: React.FC = () => {
   const { navigate } = useNavigation()
-  const [refreshNotifications, setRefreshNotifications] = useState(false)
+  const dispatch = useDispatch()
+  const tmpUser = useAppSlector(state => state.tmpStore)
+  const [refreshing, setRefreshing] = useState(true)
+  // const [refreshNotifications, setRefreshNotifications] = useState(false)
   const [notifications, setNotifications] = useState<NotificationsItem[]>([])
 
-  useEffect(() => {
+  const loadNotificationData = () => {
+    setRefreshing(true)
     ;(async () => {
-      const resp = await getNotifications({ take: "10", skip: "0" })
+      const payload = { take: "10", skip: "0" }
+      const resp = await getNotifications(payload)
 
       if (typeof resp === "undefined") return
 
-      console.log("notifications", resp.result)
+      // console.log("see me", notifications[0].isRead)
+
+      setRefreshing(false)
       setNotifications(resp.result)
     })()
+  }
 
-    setRefreshNotifications(false)
-  }, [refreshNotifications])
+  useEffect(() => {
+    loadNotificationData()
+  }, [])
 
   const handleReadAll = () => {
     ;(async () => {
@@ -45,6 +65,13 @@ const Notifications: React.FC = () => {
         notifications.map(notification => {
           notification.isRead = true
           return notification
+        }),
+      )
+
+      dispatch(
+        tmpStoreAction.setState({
+          ...tmpUser,
+          message: resp.msg,
         }),
       )
     })()
@@ -80,17 +107,29 @@ const Notifications: React.FC = () => {
               </Pressable>
             </View>
           </View>
-          <ScrollView className={"w-full"}>
+
+          <View className={"w-full flex-1 "}>
+            {refreshing ? <ActivityIndicator /> : null}
             {notifications.length > 0 ? (
-              notifications.map(notification => {
-                return (
+              <FlatList
+                data={notifications}
+                keyExtractor={notification => notification.id}
+                renderItem={({ item }) => (
                   <SwipeableNotice
-                    key={notification.id}
-                    notification={notification}
-                    onRefresh={() => setRefreshNotifications(true)}
+                    notification={item}
+                    setNotifications={setNotifications}
                   />
-                )
-              })
+                )}
+                ItemSeparatorComponent={() => (
+                  <View className="h-[1px] w-full bg-gray-darkest/40" />
+                )}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={loadNotificationData}
+                  />
+                }
+              />
             ) : (
               <View className="flex-row justify-center items-center h-full">
                 <LatoText classname="text-lg">
@@ -98,7 +137,11 @@ const Notifications: React.FC = () => {
                 </LatoText>
               </View>
             )}
-          </ScrollView>
+          </View>
+
+          <View className="w-full flex justify-center items-center absolute bottom-16 ">
+            {tmpUser.message && <PopupMessage />}
+          </View>
         </SafeAreaView>
       </GestureHandlerRootView>
     </RootTabLayout>
