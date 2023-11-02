@@ -298,6 +298,19 @@ type GetUserAccountInformationRes = {
   result: UserAccountInformationItem
 }
 
+type SetNotificationTokenReq = {
+  notificationToken: string
+}
+
+type SetNotificationTokenRes = {
+  result: UserAccountInformationItem[]
+}
+
+export type TSetNotificationToken = TEndpoint<
+  SetNotificationTokenReq,
+  SetNotificationTokenRes
+>
+
 export type TGetUserInfo = TEndpoint<void, GetUserAccountInformationRes>
 // ===================================================
 
