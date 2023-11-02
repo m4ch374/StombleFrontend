@@ -143,10 +143,15 @@ const Notifications: React.FC = () => {
                 />
               </>
             ) : (
-              <View className="flex-row justify-center items-center h-full">
+              <View className="flex-1 flex-col justify-center items-center">
                 <LatoText classname="text-lg">
                   No notifications yet ...
                 </LatoText>
+                <TouchableOpacity onPress={() => loadNotificationData()}>
+                  <LatoText classname="text-lg text-secondary font-lato-bold">
+                    refresh
+                  </LatoText>
+                </TouchableOpacity>
               </View>
             )}
           </View>
