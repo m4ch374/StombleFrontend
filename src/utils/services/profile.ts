@@ -3,6 +3,7 @@ import {
   TGetFollowings,
   TGetLikedVideos,
   TGetSavedVideos,
+  TSetNotificationToken,
 } from "types/endpoints"
 import Fetcher from "utils/Fetcher"
 
@@ -29,5 +30,18 @@ export const getSavedVideos = (params: TGetSavedVideos["requestType"]) => {
   return Fetcher.init<TGetSavedVideos>("GET", profileEP.GET_SAVED_VIDEOS)
     .withParams(params)
     .withCurrentToken()
+    .fetchData()
+}
+
+// /get-saved-videos
+export const setNotificationToken = (
+  data: TSetNotificationToken["requestType"],
+) => {
+  return Fetcher.init<TSetNotificationToken>(
+    "PUT",
+    profileEP.SET_NOTIFICATION_TOKEN,
+  )
+    .withCurrentToken()
+    .withJsonPaylad(data)
     .fetchData()
 }

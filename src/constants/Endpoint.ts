@@ -38,6 +38,7 @@ export const profileEP = {
   GET_SAVED_VIDEOS: "/get-saved-videos",
   GET_FOLLOWINGS: "/get-followings",
   GET_LIKED_VIDEOS: "/get-liked-videos",
+  SET_NOTIFICATION_TOKEN: "set-notification-token",
 }
 
 // Setting endpoints
