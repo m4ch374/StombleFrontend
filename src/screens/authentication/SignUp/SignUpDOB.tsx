@@ -13,7 +13,7 @@ import ProgressBar from "components/ProgressBar"
 import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 import InputBlueBg from "components/settings/InputBlueBg"
 import { Type } from "types/variantStyle"
-import SimplePopupAlert from "components/PopupAlert"
+import SimplePopupAlert from "components/SimplePopupAlert"
 
 type Props = {
   navigation: NativeStackNavigationProp<AuthStackList, "SignUpDOB">

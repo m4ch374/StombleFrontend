@@ -21,9 +21,9 @@ const SimplePopupAlert = ({ showModal, setShowModal, alertMsg }: Props) => {
             <View className="z-100 bg-gray-darkest rounded-md flex items-center justify-center w-[300px] pt-12">
               <View className="flex">
                 <LatoText classname="pb-8 text-[18px] text-center font-lato-bold ">
-                  Sorry can&apos;t create an account
+                  Sorry, can&apos;t create an account
                 </LatoText>
-                <LatoText classname="text-gray-lighter text-center pb-8 px-2">
+                <LatoText classname="text-gray-lighter text-center pb-8 px-8">
                   {alertMsg}
                 </LatoText>
               </View>

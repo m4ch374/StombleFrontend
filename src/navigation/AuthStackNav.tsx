@@ -27,7 +27,7 @@ const AuthStackNav = () => {
         headerStyle: { backgroundColor: CustomColor.background },
         headerBackTitleVisible: false,
       }}
-      initialRouteName="SignUpDOB"
+      initialRouteName="FirstLanding"
     >
       <AuthStack.Screen
         name="FirstLanding"
