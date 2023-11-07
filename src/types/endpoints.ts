@@ -697,6 +697,77 @@ export type TGetNewVideosUploaded = TEndpoint<
 // ===================================================
 
 // ###################################################
+// # Notifications                                   #
+// ###################################################
+// ===================================================
+// /get-notifications
+// ===================================================
+type GetNotificationsReq = {
+  take: string
+  skip: string
+}
+type GetNotificationsRes = {
+  result: NotificationsItem[]
+}
+
+export type NotificationsItem = {
+  id: string
+  title: string
+  msg: string
+  isRead: boolean
+  business_id: string
+  user_id: string
+  redirect_url: string
+  created_at: string
+  updated_at: string
+}
+
+export type TGetNotifications = TEndpoint<
+  GetNotificationsReq,
+  GetNotificationsRes
+>
+// ===================================================
+
+// ===================================================
+// /read-one-notification
+// ===================================================
+type ReadOneNotificationReq = {
+  notificationId: string
+  isRead: boolean
+}
+
+type ReadOneNotificationRes = {
+  msg: string
+}
+
+export type TReadOneNotification = TEndpoint<
+  ReadOneNotificationReq,
+  ReadOneNotificationRes
+>
+// ===================================================
+
+// ===================================================
+// /read-all-notifications
+// ===================================================
+type ReadAllNotificationsRes = { msg: string }
+
+export type TReadAllNotifications = TEndpoint<void, ReadAllNotificationsRes>
+// ===================================================
+
+// ===================================================
+// /delete-one-notifications
+// ===================================================
+type DeleteOneNotificationReq = {
+  notificationId: string
+}
+type DeleteOneNotificationRes = { msg: string }
+
+export type TDeleteOneNotification = TEndpoint<
+  DeleteOneNotificationReq,
+  DeleteOneNotificationRes
+>
+
+// ###################################################
 // # Data Visualization                              #
 // ###################################################
 

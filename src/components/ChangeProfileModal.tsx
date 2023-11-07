@@ -45,7 +45,7 @@ const ChangeProfileModal: React.FC<TChangeProfileModal> = ({
       const payload = {
         iconFile: {
           base64: result.assets[0].base64,
-          name: result.assets[0].fileName,
+          name: result.assets[0].fileName || "profile_picture",
           type: "image",
           size: result.assets[0].fileSize?.toString(),
           ext: result.assets[0].uri.split(".").pop(),

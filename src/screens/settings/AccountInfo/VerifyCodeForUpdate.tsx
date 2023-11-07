@@ -67,6 +67,7 @@ const VerifyCodeForUpdate = () => {
               </View>
 
               <VerifyCodeField
+                phone={tmpUser.phone}
                 value={value}
                 setValue={setValue}
                 setDisabled={setDisabled}
