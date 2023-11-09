@@ -24,6 +24,7 @@ type TTmpStore = {
   numLiked: number
   numShared: number
   numFollowing: number
+  isLogged: boolean
 }
 
 const init: TTmpStore = {
@@ -48,6 +49,7 @@ const init: TTmpStore = {
   numLiked: 0,
   numShared: 0,
   numFollowing: 0,
+  isLogged: false,
 }
 
 const tmpStoreSlice = createSlice({

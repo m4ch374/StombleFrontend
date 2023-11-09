@@ -23,7 +23,7 @@ type UserAccountInformationItem = {
   updated_at: string
 }
 
-type BusinessAccountInformationItem = {
+export type BusinessAccountInformationItem = {
   id: string
   businessName: string
   email: string
@@ -295,7 +295,8 @@ export type TGetSavedVideos = TEndpoint<GetSavedVideosReq, GetSavedVideosRes>
 // /get-user-account-information
 // ===================================================
 type GetUserAccountInformationRes = {
-  result: UserAccountInformationItem
+  result: UserAccountInformationItem &
+    Partial<{ business: BusinessAccountInformationItem[] }>
 }
 
 type SetNotificationTokenReq = {

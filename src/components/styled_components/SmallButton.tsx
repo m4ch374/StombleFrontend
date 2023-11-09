@@ -26,7 +26,7 @@ const SmallButton = ({
       }}
     >
       <Text
-        className="text-xs py-1.5 px-3 text-white"
+        className="text-s py-1.5 px-3 text-white"
         style={{ fontFamily: "Lato-400" }}
       >
         {text}

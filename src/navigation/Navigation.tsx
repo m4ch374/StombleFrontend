@@ -11,21 +11,20 @@ const RootStack = createNativeStackNavigator<RootStackList>()
 
 export default function Navigation() {
   const token = useAppSlector(state => state.tokens.currentToken)
+  const isLogged = useAppSlector(state => state.tmpStore.isLogged)
 
   return (
     <View className="h-full bg-background">
       <StatusBar style="light" />
       <RootStack.Navigator
-        initialRouteName={token === "" ? "Auth" : "LoginRoot"}
+        initialRouteName={token.length && isLogged ? "LoginRoot" : "Auth"}
         screenOptions={{ headerShown: false }}
       >
-        {token === "" && (
-          <RootStack.Screen
-            component={AuthStackNav}
-            name="Auth"
-            options={{ headerShown: false }}
-          />
-        )}
+        <RootStack.Screen
+          component={AuthStackNav}
+          name="Auth"
+          options={{ headerShown: false }}
+        />
 
         <RootStack.Screen
           name="LoginRoot"
