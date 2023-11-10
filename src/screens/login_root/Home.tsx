@@ -111,7 +111,6 @@ const Home: React.FC = () => {
         data={videos}
         keyExtractor={item => item.id}
         renderItem={item => {
-          console.log(item)
           return (
             <HomeVideoCard
               vidItem={item.item}

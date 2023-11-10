@@ -8,11 +8,12 @@ import { useAppDispatch } from "redux/hooks"
 import { tokenAction } from "redux/reducers/tokens.reducer"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
 import LatoText from "components/styled_components/LatoText"
-import { signIn } from "utils/services/auth"
+import { refreshToken, signIn } from "utils/services/auth"
 import PasswordInput from "components/PasswordInput"
 import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
 import ErrorMessage from "components/ErrorMessage"
 import VerifyPhoneInput from "components/VerifyPhoneInput"
+import { getUserAccountInformation } from "utils/services/accountInfo"
 
 const Login = () => {
   const navigate = useNavigation()
@@ -53,9 +54,44 @@ const Login = () => {
         }),
       )
 
-      console.log("password", password.length)
+      let userResp = await getUserAccountInformation()
       // TODO: need direct to verifyCode screen (endpoint under development)
-      navigate.navigate("LoginRoot", { screen: "Home" })
+      if (typeof userResp === "undefined") {
+        const refreshResp = await refreshToken({
+          refreshToken: signInRes.RefreshToken,
+        })
+        if (typeof refreshResp === "undefined") return
+        dispatch(tokenAction.setToken(refreshResp.AccessToken))
+
+        userResp = await getUserAccountInformation()
+      }
+
+      dispatch(
+        tmpStoreAction.setState(state => {
+          const { result } = userResp
+          state.userId = result.id
+          state.fullName = result.fullName
+          state.phone = result.phone
+          state.email = result.email
+          state.link_icon = result.link_icon
+          return state
+        }),
+      )
+
+      if (userResp.result.business?.length) {
+        navigate.navigate("Auth", {
+          screen: "LoginWithAccount",
+          params: { business: userResp.result.business },
+        })
+      } else {
+        dispatch(
+          tmpStoreAction.setState(state => {
+            state.isLogged = true
+            return state
+          }),
+        )
+        navigate.navigate("LoginRoot", { screen: "Home" })
+      }
     })()
   }
 

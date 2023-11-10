@@ -74,7 +74,15 @@ const AuthStackNav = () => {
         />
       </AuthStack.Group>
 
-      <AuthStack.Screen name="LoginWithAccount" component={LoginWithAccount} />
+      <AuthStack.Screen
+        name="LoginWithAccount"
+        component={LoginWithAccount}
+        options={() => ({
+          title: "",
+          headerLeft: () => false,
+          gestureEnabled: false,
+        })}
+      />
 
       <AuthStack.Screen
         name="FollowTopics"

@@ -8,6 +8,7 @@
 // Code copied elsewhere
 import { NavigatorScreenParams } from "@react-navigation/native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { BusinessAccountInformationItem } from "./endpoints"
 
 // Default types for useNavigation, link, ref
 // Refer to react navigation
@@ -48,7 +49,9 @@ export type AuthStackList = {
   SignUpDOB: undefined
   SignUpGender: undefined
   ChooseAccount: undefined
-  LoginWithAccount: undefined
+  LoginWithAccount: {
+    business?: BusinessAccountInformationItem[]
+  }
   ChooseAccountType: undefined
 
   SetUpPassword: undefined
