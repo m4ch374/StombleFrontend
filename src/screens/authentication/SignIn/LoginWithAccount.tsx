@@ -2,10 +2,9 @@
 
 import { View, Text, Modal, ScrollView, TouchableOpacity } from "react-native"
 import { useState } from "react"
-import { Ionicons, AntDesign } from "@expo/vector-icons"
+import { AntDesign } from "@expo/vector-icons"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { AuthStackList } from "types/Navigation"
-import BackgroundColour from "components/styled_components/BackgroundColour"
 import SmallButton from "components/styled_components/SmallButton"
 import AccountFileCard from "components/AccountFileCard"
 import AddAccountModal from "components/AddAccountModal"
@@ -13,6 +12,8 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { BusinessAccountInformationItem } from "../../../types/endpoints"
 import { useAppDispatch } from "redux/hooks"
 import { tmpStoreAction } from "redux/reducers/tmpStore.reducer"
+import GeneralScreenLayout from "components/styled_components/GeneralScreenLayout"
+import LatoText from "components/styled_components/LatoText"
 
 interface Props {
   navigation: NativeStackNavigationProp<AuthStackList, "LoginWithAccount">
@@ -38,30 +39,17 @@ const LandingWithAccount = ({ navigation }: Props) => {
   }
 
   return (
-    <BackgroundColour>
-      <View className="flex-1 px-[16px]">
-        <TouchableOpacity className="self-end mr-6 mt-8">
-          <Ionicons
-            name="settings-outline"
-            size={20}
-            color="#ffffff"
-            onPress={() => {
-              console.log("pressed")
-            }} // TODO: navigate to settings
-          />
-        </TouchableOpacity>
-        <Text className="text-white font-extrabold text-center text-[36px] mt-20">
+    <GeneralScreenLayout marginTop="mt-12">
+      <View className="flex-1">
+        <LatoText classname="font-AT text-center text-[38px] mb-14">
           stomble
-        </Text>
+        </LatoText>
 
-        <Text
-          className="text-white text-[16px] mt-[32px] mb-[24px]"
-          style={{ fontFamily: "Lato-700" }}
-        >
-          Select the account you want to login
-        </Text>
+        <LatoText classname="text-[14px] mb-20 text-center">
+          Select the account you want to log in to.
+        </LatoText>
 
-        <ScrollView className="flex-1 gap-[20px]">
+        <ScrollView className="flex-1 gap-[20px] mt-4">
           {business.map((account, i) => (
             <View
               className="flex-1 flex-row justify-between"
@@ -114,7 +102,7 @@ const LandingWithAccount = ({ navigation }: Props) => {
           </View>
         </Modal>
       </View>
-    </BackgroundColour>
+    </GeneralScreenLayout>
   )
 }
 
